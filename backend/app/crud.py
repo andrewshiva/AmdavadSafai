@@ -3,6 +3,7 @@ from sqlalchemy import func
 from math import asin, cos, radians, sin, sqrt
 import uuid
 import models, schemas
+from image_storage import save_image_and_push_to_github
 
 # Wards crud
 def get_wards(db: Session):
@@ -68,6 +69,10 @@ def create_report(db: Session, report: schemas.ReportCreate):
             raise ValueError(f"Location ({report.lat}, {report.lng}) is outside the Ahmedabad municipal jurisdiction area ({dist/1000:.1f} km away).")
         ward_id = ward.id
 
+    # Process and save uploaded image into public/uploads and push to GitHub repository
+    saved_image_url = save_image_and_push_to_github(report.image_url) if report.image_url else None
+    saved_verified_url = save_image_and_push_to_github(report.verified_image_url) if report.verified_image_url else None
+
     db_report = models.Report(
         id=f"rpt_{uuid.uuid4().hex[:8]}",  # Generate short unique ID
         ward_id=ward_id,
@@ -76,8 +81,8 @@ def create_report(db: Session, report: schemas.ReportCreate):
         severity=report.severity,
         status=report.status,
         category=report.category or "mixed_waste",
-        image_url=report.image_url,
-        verified_image_url=report.verified_image_url,
+        image_url=saved_image_url,
+        verified_image_url=saved_verified_url,
         upvotes=0,
         flagged=0,
         lat=report.lat,
@@ -103,9 +108,12 @@ def verify_report_cleanup(db: Session, report_id: str, verified_image_url: str =
         return None
     report.status = "resolved"
     if verified_image_url:
-        report.verified_image_url = verified_image_url
+        saved_url = save_image_and_push_to_github(verified_image_url)
+        report.verified_image_url = saved_url
     db.commit()
     db.refresh(report)
+    return report
+
     return report
 
 def flag_report(db: Session, report_id: str, reason: str):
