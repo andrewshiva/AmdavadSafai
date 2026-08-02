@@ -1,0 +1,1285 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ward_01",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.6039,
+              23.0148
+            ],
+            [
+              72.61449,
+              23.01255
+            ],
+            [
+              72.61435,
+              23.0028
+            ],
+            [
+              72.61418,
+              22.99333
+            ],
+            [
+              72.6039,
+              22.99027
+            ],
+            [
+              72.5963,
+              22.9958
+            ],
+            [
+              72.5884,
+              23.0028
+            ],
+            [
+              72.59539,
+              23.01064
+            ],
+            [
+              72.6039,
+              23.0148
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_01",
+        "name_en": "Maninagar",
+        "name_gu": "મણિનગર",
+        "zone_en": "South Zone",
+        "zone_gu": "દક્ષિણ ઝોન",
+        "corporator_en": "Ramesh Patel",
+        "corporator_gu": "રમેશ પટેલ",
+        "lat": 23.0028,
+        "lng": 72.6039,
+        "total_reports": 3,
+        "unresolved_reports": 2,
+        "resolved_reports": 1,
+        "cleanliness_score": 74.5,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_02",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5594,
+              23.05368
+            ],
+            [
+              72.56853,
+              23.0453
+            ],
+            [
+              72.57466,
+              23.0369
+            ],
+            [
+              72.57174,
+              23.02555
+            ],
+            [
+              72.5594,
+              23.02569
+            ],
+            [
+              72.54737,
+              23.02583
+            ],
+            [
+              72.54356,
+              23.0369
+            ],
+            [
+              72.55051,
+              23.04508
+            ],
+            [
+              72.5594,
+              23.05368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_02",
+        "name_en": "Navrangpura",
+        "name_gu": "નવરંગપુરા",
+        "zone_en": "West Zone",
+        "zone_gu": "પશ્ચિમ ઝોન",
+        "corporator_en": "Priya Shah",
+        "corporator_gu": "પ્રિયા શાહ",
+        "lat": 23.0369,
+        "lng": 72.5594,
+        "total_reports": 2,
+        "unresolved_reports": 1,
+        "resolved_reports": 1,
+        "cleanliness_score": 93.5,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_03",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5107,
+              23.03768
+            ],
+            [
+              72.52164,
+              23.03257
+            ],
+            [
+              72.53152,
+              23.0225
+            ],
+            [
+              72.52111,
+              23.01292
+            ],
+            [
+              72.5107,
+              23.00639
+            ],
+            [
+              72.49663,
+              23.00955
+            ],
+            [
+              72.49678,
+              23.0225
+            ],
+            [
+              72.49692,
+              23.03518
+            ],
+            [
+              72.5107,
+              23.03768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_03",
+        "name_en": "Satellite",
+        "name_gu": "સેટેલાઈટ",
+        "zone_en": "West Zone",
+        "zone_gu": "પશ્ચિમ ઝોન",
+        "corporator_en": "Kiran Desai",
+        "corporator_gu": "કિરણ દેસાઈ",
+        "lat": 23.0225,
+        "lng": 72.5107,
+        "total_reports": 2,
+        "unresolved_reports": 2,
+        "resolved_reports": 0,
+        "cleanliness_score": 84.0,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_04",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.4635,
+              23.04388
+            ],
+            [
+              72.47438,
+              23.04411
+            ],
+            [
+              72.47583,
+              23.0341
+            ],
+            [
+              72.47173,
+              23.02653
+            ],
+            [
+              72.4635,
+              23.01973
+            ],
+            [
+              72.45571,
+              23.02694
+            ],
+            [
+              72.45033,
+              23.0341
+            ],
+            [
+              72.45297,
+              23.04379
+            ],
+            [
+              72.4635,
+              23.04388
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_04",
+        "name_en": "Bopal",
+        "name_gu": "બોપલ",
+        "zone_en": "South West Zone",
+        "zone_gu": "દક્ષિણ પશ્ચિમ ઝોન",
+        "corporator_en": "Mehul Joshi",
+        "corporator_gu": "મેહુલ જોશી",
+        "lat": 23.0341,
+        "lng": 72.4635,
+        "total_reports": 3,
+        "unresolved_reports": 2,
+        "resolved_reports": 1,
+        "cleanliness_score": 74.5,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_05",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5432,
+              23.11798
+            ],
+            [
+              72.55465,
+              23.11313
+            ],
+            [
+              72.55562,
+              23.1026
+            ],
+            [
+              72.55591,
+              23.09091
+            ],
+            [
+              72.5432,
+              23.08941
+            ],
+            [
+              72.53356,
+              23.09373
+            ],
+            [
+              72.52498,
+              23.1026
+            ],
+            [
+              72.53414,
+              23.11094
+            ],
+            [
+              72.5432,
+              23.11798
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_05",
+        "name_en": "Gota",
+        "name_gu": "ગોતા",
+        "zone_en": "North West Zone",
+        "zone_gu": "ઉત્તર પશ્ચિમ ઝોન",
+        "corporator_en": "Sneha Trivedi",
+        "corporator_gu": "સ્નેહા ત્રિવેદી",
+        "lat": 23.1026,
+        "lng": 72.5432,
+        "total_reports": 2,
+        "unresolved_reports": 1,
+        "resolved_reports": 1,
+        "cleanliness_score": 89.5,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_06",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5871,
+              23.12746
+            ],
+            [
+              72.59699,
+              23.11799
+            ],
+            [
+              72.60627,
+              23.1089
+            ],
+            [
+              72.60015,
+              23.0969
+            ],
+            [
+              72.5871,
+              23.09582
+            ],
+            [
+              72.57255,
+              23.09552
+            ],
+            [
+              72.57076,
+              23.1089
+            ],
+            [
+              72.57605,
+              23.11906
+            ],
+            [
+              72.5871,
+              23.12746
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_06",
+        "name_en": "Chandkheda",
+        "name_gu": "ચાંદખેડા",
+        "zone_en": "North Zone",
+        "zone_gu": "ઉત્તર ઝોન",
+        "corporator_en": "Vijay Solanki",
+        "corporator_gu": "વિજય સોલંકી",
+        "lat": 23.1089,
+        "lng": 72.5871,
+        "total_reports": 2,
+        "unresolved_reports": 2,
+        "resolved_reports": 0,
+        "cleanliness_score": 75.0,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_07",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.6571,
+              23.10372
+            ],
+            [
+              72.6662,
+              23.10177
+            ],
+            [
+              72.6722,
+              23.0934
+            ],
+            [
+              72.66451,
+              23.08658
+            ],
+            [
+              72.6571,
+              23.08014
+            ],
+            [
+              72.64735,
+              23.08443
+            ],
+            [
+              72.64642,
+              23.0934
+            ],
+            [
+              72.64618,
+              23.10345
+            ],
+            [
+              72.6571,
+              23.10372
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_07",
+        "name_en": "Naroda",
+        "name_gu": "નરોડા",
+        "zone_en": "North East Zone",
+        "zone_gu": "ઉત્તર પૂર્વ ઝોન",
+        "corporator_en": "Fatima Shaikh",
+        "corporator_gu": "ફાતિમા શેખ",
+        "lat": 23.0934,
+        "lng": 72.6571,
+        "total_reports": 3,
+        "unresolved_reports": 2,
+        "resolved_reports": 1,
+        "cleanliness_score": 74.5,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_08",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.68,
+              23.03227
+            ],
+            [
+              72.6929,
+              23.03188
+            ],
+            [
+              72.69305,
+              23.02
+            ],
+            [
+              72.69065,
+              23.0102
+            ],
+            [
+              72.68,
+              23.00382
+            ],
+            [
+              72.67137,
+              23.01205
+            ],
+            [
+              72.66315,
+              23.02
+            ],
+            [
+              72.66866,
+              23.03044
+            ],
+            [
+              72.68,
+              23.03227
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_08",
+        "name_en": "Vastral",
+        "name_gu": "વાસ્ત્રાલ",
+        "zone_en": "East Zone",
+        "zone_gu": "પૂર્વ ઝોન",
+        "corporator_en": "Amit Raval",
+        "corporator_gu": "અમિત રાવલ",
+        "lat": 23.02,
+        "lng": 72.68,
+        "total_reports": 2,
+        "unresolved_reports": 2,
+        "resolved_reports": 0,
+        "cleanliness_score": 84.0,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_09",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.6614,
+              23.06635
+            ],
+            [
+              72.67323,
+              23.05848
+            ],
+            [
+              72.67668,
+              23.0476
+            ],
+            [
+              72.67615,
+              23.03403
+            ],
+            [
+              72.6614,
+              23.03392
+            ],
+            [
+              72.64919,
+              23.03636
+            ],
+            [
+              72.64134,
+              23.0476
+            ],
+            [
+              72.65154,
+              23.05667
+            ],
+            [
+              72.6614,
+              23.06635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_09",
+        "name_en": "Nikol",
+        "name_gu": "નિકોલ",
+        "zone_en": "East Zone",
+        "zone_gu": "પૂર્વ ઝોન",
+        "corporator_en": "Darshan Bhatt",
+        "corporator_gu": "દર્શન ભટ્ટ",
+        "lat": 23.0476,
+        "lng": 72.6614,
+        "total_reports": 2,
+        "unresolved_reports": 2,
+        "resolved_reports": 0,
+        "cleanliness_score": 84.0,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_10",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.497,
+              23.06295
+            ],
+            [
+              72.50447,
+              23.05688
+            ],
+            [
+              72.5123,
+              23.05
+            ],
+            [
+              72.50584,
+              23.04187
+            ],
+            [
+              72.497,
+              23.03942
+            ],
+            [
+              72.48594,
+              23.03983
+            ],
+            [
+              72.48588,
+              23.05
+            ],
+            [
+              72.48781,
+              23.05846
+            ],
+            [
+              72.497,
+              23.06295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_10",
+        "name_en": "Thaltej",
+        "name_gu": "થલતેજ",
+        "zone_en": "West Zone",
+        "zone_gu": "પશ્ચિમ ઝોન",
+        "corporator_en": "Neha Mehta",
+        "corporator_gu": "નેહા મહેતા",
+        "lat": 23.05,
+        "lng": 72.497,
+        "total_reports": 2,
+        "unresolved_reports": 1,
+        "resolved_reports": 1,
+        "cleanliness_score": 96.5,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_11",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5285,
+              23.04131
+            ],
+            [
+              72.54019,
+              23.04076
+            ],
+            [
+              72.54487,
+              23.03
+            ],
+            [
+              72.53723,
+              23.02197
+            ],
+            [
+              72.5285,
+              23.01355
+            ],
+            [
+              72.51822,
+              23.02054
+            ],
+            [
+              72.51505,
+              23.03
+            ],
+            [
+              72.51561,
+              23.04187
+            ],
+            [
+              72.5285,
+              23.04131
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_11",
+        "name_en": "Vastrapur",
+        "name_gu": "વસ્ત્રાપુર",
+        "zone_en": "West Zone",
+        "zone_gu": "પશ્ચિમ ઝોન",
+        "corporator_en": "Ravi Kumar",
+        "corporator_gu": "રવિ કુમાર",
+        "lat": 23.03,
+        "lng": 72.5285,
+        "total_reports": 2,
+        "unresolved_reports": 1,
+        "resolved_reports": 1,
+        "cleanliness_score": 89.5,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_12",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.562,
+              23.03052
+            ],
+            [
+              72.57635,
+              23.02821
+            ],
+            [
+              72.57603,
+              23.015
+            ],
+            [
+              72.5754,
+              23.00267
+            ],
+            [
+              72.562,
+              22.99783
+            ],
+            [
+              72.55201,
+              23.00581
+            ],
+            [
+              72.54154,
+              23.015
+            ],
+            [
+              72.5503,
+              23.02577
+            ],
+            [
+              72.562,
+              23.03052
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_12",
+        "name_en": "Paldi",
+        "name_gu": "પાલડી",
+        "zone_en": "Central Zone",
+        "zone_gu": "મધ્ય ઝોન",
+        "corporator_en": "Geeta Parmar",
+        "corporator_gu": "ગીતા પરમાર",
+        "lat": 23.015,
+        "lng": 72.562,
+        "total_reports": 1,
+        "unresolved_reports": 1,
+        "resolved_reports": 0,
+        "cleanliness_score": 85.0,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_13",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5975,
+              23.0419
+            ],
+            [
+              72.60552,
+              23.03488
+            ],
+            [
+              72.61019,
+              23.0275
+            ],
+            [
+              72.60825,
+              23.01761
+            ],
+            [
+              72.5975,
+              23.01783
+            ],
+            [
+              72.58742,
+              23.01822
+            ],
+            [
+              72.58355,
+              23.0275
+            ],
+            [
+              72.59,
+              23.0344
+            ],
+            [
+              72.5975,
+              23.0419
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_13",
+        "name_en": "Kalupur",
+        "name_gu": "કાલુપુર",
+        "zone_en": "Central Zone",
+        "zone_gu": "મધ્ય ઝોન",
+        "corporator_en": "Irfan Qureshi",
+        "corporator_gu": "ઈરફાન કુરેશી",
+        "lat": 23.0275,
+        "lng": 72.5975,
+        "total_reports": 2,
+        "unresolved_reports": 2,
+        "resolved_reports": 0,
+        "cleanliness_score": 75.0,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_14",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5912,
+              23.0649
+            ],
+            [
+              72.60052,
+              23.05978
+            ],
+            [
+              72.60946,
+              23.0512
+            ],
+            [
+              72.60053,
+              23.04261
+            ],
+            [
+              72.5912,
+              23.03752
+            ],
+            [
+              72.57868,
+              23.03968
+            ],
+            [
+              72.57895,
+              23.0512
+            ],
+            [
+              72.57941,
+              23.06205
+            ],
+            [
+              72.5912,
+              23.0649
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_14",
+        "name_en": "Shahibaug",
+        "name_gu": "શાહીબાગ",
+        "zone_en": "North Zone",
+        "zone_gu": "ઉત્તર ઝોન",
+        "corporator_en": "Tushar Rana",
+        "corporator_gu": "તુષાર રાણા",
+        "lat": 23.0512,
+        "lng": 72.5912,
+        "total_reports": 1,
+        "unresolved_reports": 1,
+        "resolved_reports": 0,
+        "cleanliness_score": 94.0,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_15",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.631,
+              23.05169
+            ],
+            [
+              72.64532,
+              23.05198
+            ],
+            [
+              72.64795,
+              23.0388
+            ],
+            [
+              72.64168,
+              23.02897
+            ],
+            [
+              72.631,
+              23.0196
+            ],
+            [
+              72.62037,
+              23.02902
+            ],
+            [
+              72.61396,
+              23.0388
+            ],
+            [
+              72.61672,
+              23.05194
+            ],
+            [
+              72.631,
+              23.05169
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_15",
+        "name_en": "Bapunagar",
+        "name_gu": "બાપુનગર",
+        "zone_en": "East Zone",
+        "zone_gu": "પૂર્વ ઝોન",
+        "corporator_en": "Jayesh Solanki",
+        "corporator_gu": "જયેશ સોલંકી",
+        "lat": 23.0388,
+        "lng": 72.631,
+        "total_reports": 2,
+        "unresolved_reports": 1,
+        "resolved_reports": 1,
+        "cleanliness_score": 89.5,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_16",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5059,
+              23.00096
+            ],
+            [
+              72.51596,
+              22.99736
+            ],
+            [
+              72.51641,
+              22.9881
+            ],
+            [
+              72.51665,
+              22.9782
+            ],
+            [
+              72.5059,
+              22.97644
+            ],
+            [
+              72.49787,
+              22.98071
+            ],
+            [
+              72.49026,
+              22.9881
+            ],
+            [
+              72.49795,
+              22.99542
+            ],
+            [
+              72.5059,
+              23.00096
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_16",
+        "name_en": "Sarkhej",
+        "name_gu": "સરખેજ",
+        "zone_en": "South West Zone",
+        "zone_gu": "દક્ષિણ પશ્ચિમ ઝોન",
+        "corporator_en": "Nisha Prajapati",
+        "corporator_gu": "નિશા પ્રજાપતિ",
+        "lat": 22.9881,
+        "lng": 72.5059,
+        "total_reports": 1,
+        "unresolved_reports": 1,
+        "resolved_reports": 0,
+        "cleanliness_score": 94.0,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_17",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.6567,
+              23.01206
+            ],
+            [
+              72.66543,
+              23.00364
+            ],
+            [
+              72.67305,
+              22.9956
+            ],
+            [
+              72.6684,
+              22.98483
+            ],
+            [
+              72.6567,
+              22.9843
+            ],
+            [
+              72.64414,
+              22.98403
+            ],
+            [
+              72.64197,
+              22.9956
+            ],
+            [
+              72.6473,
+              23.00425
+            ],
+            [
+              72.6567,
+              23.01206
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_17",
+        "name_en": "Odhav",
+        "name_gu": "ઓઢવ",
+        "zone_en": "South East Zone",
+        "zone_gu": "દક્ષિણ પૂર્વ ઝોન",
+        "corporator_en": "Prakash Chauhan",
+        "corporator_gu": "પ્રકાશ ચૌહાણ",
+        "lat": 22.9956,
+        "lng": 72.6567,
+        "total_reports": 1,
+        "unresolved_reports": 1,
+        "resolved_reports": 0,
+        "cleanliness_score": 85.0,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_18",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.625,
+              23.00193
+            ],
+            [
+              72.63676,
+              22.99863
+            ],
+            [
+              72.64541,
+              22.9878
+            ],
+            [
+              72.63496,
+              22.97863
+            ],
+            [
+              72.625,
+              22.97055
+            ],
+            [
+              72.61166,
+              22.97552
+            ],
+            [
+              72.61095,
+              22.9878
+            ],
+            [
+              72.61062,
+              23.00104
+            ],
+            [
+              72.625,
+              23.00193
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_18",
+        "name_en": "Isanpur",
+        "name_gu": "ઈસનપુર",
+        "zone_en": "South East Zone",
+        "zone_gu": "દક્ષિણ પૂર્વ ઝોન",
+        "corporator_en": "Meera Thakor",
+        "corporator_gu": "મીરા ઠાકોર",
+        "lat": 22.9878,
+        "lng": 72.625,
+        "total_reports": 1,
+        "unresolved_reports": 1,
+        "resolved_reports": 0,
+        "cleanliness_score": 85.0,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_19",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5497,
+              23.03845
+            ],
+            [
+              72.56076,
+              23.03838
+            ],
+            [
+              72.56118,
+              23.0282
+            ],
+            [
+              72.55856,
+              23.02005
+            ],
+            [
+              72.5497,
+              23.01413
+            ],
+            [
+              72.54224,
+              23.02133
+            ],
+            [
+              72.5356,
+              23.0282
+            ],
+            [
+              72.53972,
+              23.03738
+            ],
+            [
+              72.5497,
+              23.03845
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_19",
+        "name_en": "Ambawadi",
+        "name_gu": "આંબાવાડી",
+        "zone_en": "West Zone",
+        "zone_gu": "પશ્ચિમ ઝોન",
+        "corporator_en": "Sunil Vyas",
+        "corporator_gu": "સુનિલ વ્યાસ",
+        "lat": 23.0282,
+        "lng": 72.5497,
+        "total_reports": 1,
+        "unresolved_reports": 1,
+        "resolved_reports": 0,
+        "cleanliness_score": 97.0,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_20",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.535,
+              23.01677
+            ],
+            [
+              72.54566,
+              23.01042
+            ],
+            [
+              72.54803,
+              23.0006
+            ],
+            [
+              72.5479,
+              22.98873
+            ],
+            [
+              72.535,
+              22.98832
+            ],
+            [
+              72.52464,
+              22.99106
+            ],
+            [
+              72.51719,
+              23.0006
+            ],
+            [
+              72.5263,
+              23.0086
+            ],
+            [
+              72.535,
+              23.01677
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_20",
+        "name_en": "Vejalpur",
+        "name_gu": "વેજલપુર",
+        "zone_en": "South West Zone",
+        "zone_gu": "દક્ષિણ પશ્ચિમ ઝોન",
+        "corporator_en": "Hetal Panchal",
+        "corporator_gu": "હેતલ પંચાલ",
+        "lat": 23.0006,
+        "lng": 72.535,
+        "total_reports": 1,
+        "unresolved_reports": 0,
+        "resolved_reports": 1,
+        "cleanliness_score": 99.5,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    }
+  ]
+}

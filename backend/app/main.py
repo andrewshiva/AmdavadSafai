@@ -1,0 +1,106 @@
+from fastapi import FastAPI, Depends, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
+from typing import List, Optional
+import models, schemas, crud, geojson_data, civic_data
+from database import engine, get_db
+
+# Create SQLAlchemy database tables automatically
+models.Base.metadata.create_all(bind=engine)
+
+app = FastAPI(
+    title="AmdavadSafai API",
+    description="Backend API for crowdsourced garbage reporting map of Ahmedabad",
+    version="1.0.0"
+)
+
+# CORS setup
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Adjust for production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# --- Endpoints ---
+
+@app.get("/api/wards", response_model=List[schemas.WardOut])
+def read_wards(db: Session = Depends(get_db)):
+    return crud.get_wards(db)
+
+@app.get("/api/wards/geojson")
+def read_wards_geojson(db: Session = Depends(get_db)):
+    return geojson_data.get_wards_geojson(db)
+
+@app.post("/api/wards/resolve", response_model=schemas.LocationResolveOut)
+def resolve_ward_for_location(location: schemas.LocationResolveRequest, db: Session = Depends(get_db)):
+    ward, distance_m = crud.get_nearest_ward(db, lat=location.lat, lng=location.lng)
+    if not ward:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Location ({location.lat:.4f}, {location.lng:.4f}) is outside Ahmedabad municipal jurisdiction area ({distance_m/1000:.1f} km away)."
+        )
+    return {"ward": ward, "distance_m": distance_m}
+
+@app.get("/api/civic-metrics")
+def read_civic_metrics(db: Session = Depends(get_db)):
+    return civic_data.get_amc_civic_metrics(db)
+
+@app.get("/api/reports", response_model=List[schemas.ReportOut])
+def read_reports(
+    severity: Optional[str] = Query('all', description="Filter reports by severity"),
+    status: Optional[str] = Query('all', description="Filter reports by status"),
+    db: Session = Depends(get_db)
+):
+    return crud.get_reports(db, severity=severity, status=status)
+
+@app.get("/api/reports/{report_id}", response_model=schemas.ReportOut)
+def read_report_by_id(report_id: str, db: Session = Depends(get_db)):
+    report = crud.get_report_by_id(db, report_id=report_id)
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return report
+
+@app.post("/api/reports", response_model=schemas.ReportOut)
+def create_report(report: schemas.ReportCreate, db: Session = Depends(get_db)):
+    # Manual ward selection remains supported; otherwise resolve from report coordinates.
+    ward = crud.get_ward_by_id(db, ward_id=report.ward_id) if report.ward_id else None
+    if report.ward_id and not ward:
+        raise HTTPException(status_code=400, detail="Specified ward_id does not exist")
+    try:
+        return crud.create_report(db=db, report=report)
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail=str(error)) from error
+
+@app.post("/api/reports/{report_id}/upvote", response_model=schemas.UpvoteOut)
+def upvote_report(report_id: str, db: Session = Depends(get_db)):
+    report = crud.upvote_report(db=db, report_id=report_id)
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return {"id": report.id, "upvotes": report.upvotes}
+
+@app.post("/api/reports/{report_id}/verify", response_model=schemas.ReportOut)
+def verify_cleanup(report_id: str, payload: schemas.VerifyCleanupRequest, db: Session = Depends(get_db)):
+    report = crud.verify_report_cleanup(db=db, report_id=report_id, verified_image_url=payload.verified_image_url)
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return report
+
+@app.post("/api/reports/{report_id}/flag", response_model=schemas.ReportOut)
+def flag_report(report_id: str, payload: schemas.FlagReportRequest, db: Session = Depends(get_db)):
+    report = crud.flag_report(db=db, report_id=report_id, reason=payload.reason)
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return report
+
+@app.get("/api/stats", response_model=schemas.StatsOut)
+def read_stats(db: Session = Depends(get_db)):
+    return crud.get_stats(db)
+
+@app.post("/api/subscribe", response_model=schemas.SubscriptionOut)
+def create_subscription(subscription: schemas.SubscriptionCreate, db: Session = Depends(get_db)):
+    db_sub = crud.get_subscription_by_email(db, email=subscription.email)
+    if db_sub:
+        raise HTTPException(status_code=400, detail="Email is already subscribed to Monday Digest")
+    return crud.create_subscription(db=db, subscription=subscription)

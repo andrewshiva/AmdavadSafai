@@ -1,0 +1,93 @@
+{
+  "app_name": "અમદાવાદ સફાઈ",
+  "tagline": "અમદાવાદમાં કચરાની ફરિયાદો ટ્રેક કરો",
+  "get_started": "શરૂ કરો",
+  "map": "નકશો",
+  "list": "યાદી",
+  "filter_all_severity": "બધી તીવ્રતા",
+  "filter_minor": "સામાન્ય",
+  "filter_moderate": "મધ્યમ",
+  "filter_severe": "ગંભીર",
+  "filter_critical": "અત્યંત ગંભીર",
+  "filter_all_status": "બધી સ્થિતિ",
+  "filter_unresolved": "અનિરાકૃત",
+  "filter_resolved": "નિરાકૃત",
+  "stats": "આંકડા",
+  "total_reports": "કુલ ફરિયાદો",
+  "unresolved_reports": "અનિરાકૃત ફરિયાદો",
+  "resolution_rate": "નિરાકરણ દર",
+  "worst_wards": "સૌથી નબળું પ્રદર્શન કરતા વોર્ડ",
+  "corporator": "નગરસેવક",
+  "subscribe_banner": "📧 સાપ્તાહિક અપડેટ્સ માટે સોમવાર ડાઇજેસ્ટ સબ્સ્ક્રાઇબ કરો",
+  "subscribe": "સબ્સ્ક્રાઇબ કરો",
+  "monday_digest": "સોમવાર ડાઇજેસ્ટ",
+  "monday_digest_desc": "દર સોમવારે સવારે તમારા વોર્ડમાં કચરાના પ્રશ્નો અને તેના નિરાકરણ અંગેની સાપ્તાહિક માહિતી મેળવો.",
+  "enter_email": "તમારું ઇમેઇલ એડ્રેસ દાખલ કરો",
+  "subscribe_success": "✅ સોમવાર ડાઇજેસ્ટ સફળતાપૂર્વક સબ્સ્ક્રાઇબ થયું!",
+  "email_invalid": "કૃપા કરીને સાચું ઇમેઇલ સરનામું દાખલ કરો.",
+  "changelog": "ચેન્જલોગ",
+  "close": "બંધ કરો",
+  "days_ago": "દિ પહેલાં",
+  "hours_ago": "કલાક પહેલાં",
+  "minutes_ago": "મિનિટ પહેલાં",
+  "resolved_badge": "નિરાકૃત",
+  "unresolved_badge": "અનિરાકૃત",
+  "reports_count": "ફરિયાદો",
+  "unresolved_count": "અનિરાકૃત",
+  "no_reports": "ફિલ્ટર્સ સાથે મેળ ખાતી કોઈ ફરિયાદ મળી નથી.",
+  "welcome_desc": "અમદાવાદને સ્વચ્છ રાખવામાં મદદ કરો. કચરાના હોટસ્પોટ્સ ટ્રેક કરો, ઉકેલનો સમય તપાસો અને જુઓ કે તમારા વોર્ડના કોર્પોરેટર કેવું પ્રદર્શન કરી રહ્યા છે."
+  ,"telegram": "Telegram"
+  ,"twitter": "Twitter / X"
+  ,"instagram": "Instagram"
+  ,"no_unresolved_reports": "No unresolved reports!"
+  ,"report_garbage": "ફરિયાદ કરો"
+  ,"report_desc": "તમારા વોર્ડમાં કચરાની ફરિયાદ નોંધાવો જેથી કોર્પોરેટર અને AMC અધિકારીઓને જાણ થાય."
+  ,"select_ward": "વોર્ડ પસંદ કરો"
+  ,"description_en": "વિગતો (અંગ્રેજીમાં)"
+  ,"description_gu": "વિગતો (ગુજરાતીમાં)"
+  ,"severity": "તીવ્રતા"
+  ,"location_coords": "સ્થાન કોઓર્ડિનેટ્સ (Lat, Lng)"
+  ,"click_map_hint": "💡 ટિપ: આ ફોર્મ ખુલ્લું હોય ત્યારે નકશા પર કોઈપણ જગ્યાએ ક્લિક કરીને આપોઆપ કોઓર્ડિનેટ્સ પસંદ કરો!"
+  ,"submitting": "સબમિટ થઈ રહ્યું છે..."
+  ,"submit_report": "ફરિયાદ સબમિટ કરો"
+  ,"report_success": "✅ ફરિયાદ સફળતાપૂર્વક નોંધાઈ ગઈ છે! નકશા પર માર્કર ઉમેરાયું છે."
+  ,"version_history": "વર્ઝન ઇતિહાસ અને અપડેટ્સ"
+  ,"changelog_desc": "અમદાવાદ સફાઈમાં ઉમેરાયેલા નવા ફીચર્સ, સુધારાઓ અને નાગરિક ડેટા અપડેટ્સ જુઓ."
+  ,"v1_0_0_title": "v1.0.0 — ફૂલ-સ્ટેક પાયથોન અને નાગરિક UI રિલીઝ"
+  ,"v1_0_0_desc": "FastAPI અને SQLite ડેટાબેઝ સાથે જોડાણ. સ્પષ્ટ નાગરિક UI ડિઝાઇન, GeoJSON વોર્ડ બાઉન્ડ્રી અને AMC સોલિડ વેસ્ટ ડેટા ઇન્ટિગ્રેટેડ."
+  ,"v0_9_0_title": "v0.9.0 — ઇન્ટરેક્ટિવ મેપ અને દ્વિભાષી સપોર્ટ"
+  ,"v0_9_0_desc": "Leaflet નકશો, કોર્પોરેટર ટ્રેકિંગ, સોમવાર ડાઇજેસ્ટ ન્યૂઝલેટર અને ગુજરાતી/અંગ્રેજી ભાષા સપોર્ટ ઉમેરાયો."
+  ,"zone_wise_breakdown": "ઝોન મુજબ અનિરાકૃત ફરિયાદો"
+  ,"severity_distribution": "તીવ્રતા મુજબ વિભાજન"
+  ,"amc_civic_feed": "AMC સોલિડ વેસ્ટ મેનેજમેન્ટ ડેટા"
+  ,"collection_vehicles": "સક્રિય કચરાના વાહનો"
+  ,"recycling_rate": "રિસાયક્લિંગ અને પ્રોસેસિંગ દર"
+  ,"category_label": "કચરાની શ્રેણી"
+  ,"cat_mixed_waste": "મશ્ર ઘરગથ્થુ કચરો"
+  ,"cat_construction_dump": "બાંધકામ અને મકાનનો મલબો"
+  ,"cat_overflowing_bin": "ઓવરફ્લો થતી કચરાપેટી"
+  ,"cat_roadside_garbage": "રોડ સાઇડ કચરાનો ઢગલો"
+  ,"cat_drainage_blockage": "ગટર અને ડ્રેનેજ બ્લોકેજ કચરો"
+  ,"upload_photo": "ફોટો અપલોડ કરો / કેમેરા"
+  ,"photo_preview": "ફોટો પ્રીવ્યૂ"
+  ,"remove_photo": "ફોટો હટાવો"
+  ,"mla_title": "વોર્ડ ધારાસભ્ય (MLA)"
+  ,"mp_title": "સાંસદ (MP)"
+  ,"corporator_title": "નગરસેવક (કોર્પોરેટર)"
+  ,"party_label": "પક્ષ"
+  ,"get_directions": "દિશા મેળવો (Google Maps)"
+  ,"ive_seen_this": "મેં પણ આ કચરો જોયો છે"
+  ,"people_seen_this": "રહેવાસીઓએ આ સમસ્યા ચકાસી છે"
+  ,"verify_cleanup": "સફાઈની ચકાસણી કરો"
+  ,"verify_cleanup_desc": "આ સ્થળ સાફ થઈ ગયું છે તે દર્શાવતો ફોટો અપલોડ કરીને ઉકેલાયેલ તરીકે માર્ક કરો."
+  ,"upload_clean_photo": "સાફ સ્થળનો ફોટો અપલોડ કરો"
+  ,"flag_incorrect": "ખોટી ફરિયાદ તરીકે ફ્લેગ કરો"
+  ,"flag_reason_prompt": "આ ફરિયાદ કેમ ખોટી છે તેનું કારણ આપો:"
+  ,"outside_city_title": "તમે અમદાવાદ બહાર છો"
+  ,"outside_city_desc": "અમદાવાદ સફાઈ પર ફરિયાદ માટે અમદાવાદ મહાનગરપાલિકા વિસ્તારમાં હોવું જરૂરી છે. મોબાઈલથી રિપોર્ટ કરવા QR કોડ સ્કેન કરો અથવા નકશા પર પિન મૂકો."
+  ,"scan_qr_hint": "મોબાઈલ પર રિપોર્ટ કરવા સ્કેન કરો"
+  ,"ward_leaderboard_title": "શહેર મુજબ વોર્ડ સફાઈ લીડરબોર્ડ"
+  ,"resolution_rate_rank": "નિરાકરણ દર %"
+  ,"share_report": "ફરિયાદ શેર કરો"
+  ,"link_copied": "લિંક ક્લિપબોર્ડ પર કોપી થઈ ગઈ!"
+}
