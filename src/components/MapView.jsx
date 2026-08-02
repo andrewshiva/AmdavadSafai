@@ -378,40 +378,14 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
           font-weight: 700;
           font-size: ${size > 50 ? 15 : 13}px;
           font-family: 'Inter', 'Google Sans Flex', sans-serif;
-          cursor: pointer;
+          cursor: default;
           box-shadow: 0 2px 8px rgba(127, 29, 29, 0.4);
-          transition: transform 0.15s ease, box-shadow 0.15s ease;
           user-select: none;
-          pointer-events: auto;
+          pointer-events: none;
         `;
         el.textContent = countText;
 
-        el.addEventListener('mouseenter', () => {
-          el.style.transform = 'scale(1.12)';
-          el.style.boxShadow = '0 4px 16px rgba(127, 29, 29, 0.6)';
-        });
-        el.addEventListener('mouseleave', () => {
-          el.style.transform = 'scale(1)';
-          el.style.boxShadow = '0 2px 8px rgba(127, 29, 29, 0.4)';
-        });
-
-        el.addEventListener('click', (e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          // Block the canvas-level map click from also firing
-          suppressNextMapClick.current = true;
-
-          if (count === 1 && onReportSelectRef.current && wardReports[0]) {
-            onReportSelectRef.current(wardReports[0]);
-            return; // Map stays 100% stationary — no zoom, no pan
-          }
-          // For multi-report clusters, ease into zoom 14.5
-          map.easeTo({
-            zoom: 14.5,
-            around: new maplibregl.LngLat(location[0], location[1]),
-            duration: 300
-          });
-        });
+        // No click action on ward circles — they are display-only indicators
 
 
         const marker = new maplibregl.Marker({ element: el })
