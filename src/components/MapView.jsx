@@ -385,9 +385,15 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
 
         el.addEventListener('click', (e) => {
           e.stopPropagation();
-          // Zoom into the ward
-          map.zoomTo(14.5, { around: centroid, duration: 1000 });
+          // Zoom into the ward keeping the centroid centered accurately
+          map.flyTo({
+            center: centroid,
+            zoom: 14.5,
+            duration: 800,
+            essential: true
+          });
         });
+
 
 
         const marker = new maplibregl.Marker({ element: el })
