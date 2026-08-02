@@ -1280,3 +1280,23 @@ button, select, input {
   bottom: 80px !important;
 }
 
+/* Ward Hover Tooltip Styling - Smooth & Fixed Centered */
+.ward-tooltip-popup {
+  pointer-events: none !important;
+  z-index: 1000 !important;
+}
+
+.ward-tooltip-popup .maplibregl-popup-content {
+  padding: 8px 12px !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--shadow-md) !important;
+  pointer-events: none !important;
+}
+
+.ward-tooltip-popup .maplibregl-popup-tip {
+  display: none !important;
+}
+
+

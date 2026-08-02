@@ -26,6 +26,13 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
   const circleMarkersRef = useRef([]);
   const individualPinsRef = useRef([]);
   const tempMarkerRef = useRef(null);
+  const onMapClickRef = useRef(onMapClick);
+  const onReportSelectRef = useRef(onReportSelect);
+  const suppressNextMapClick = useRef(false);
+
+  // Keep refs in sync with latest props without triggering map re-init
+  useEffect(() => { onMapClickRef.current = onMapClick; }, [onMapClick]);
+  useEffect(() => { onReportSelectRef.current = onReportSelect; }, [onReportSelect]);
 
   // Attach global listener for popup detail button clicks
   useEffect(() => {
@@ -166,8 +173,8 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
         closeButton: false,
         closeOnClick: false,
         className: 'ward-tooltip-popup',
-        anchor: 'bottom-left',
-        offset: [12, -12]
+        anchor: 'bottom',
+        offset: [0, -12]
       });
 
       map.on('mousemove', 'wards-fill', (e) => {
@@ -175,7 +182,8 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
         if (map.getZoom() < 13.5 && e.features.length > 0) {
           map.getCanvas().style.cursor = 'pointer';
           const feature = e.features[0];
-          const newHoveredId = feature.properties.id;
+          const newHoveredId = feature.properties?.id || feature.id;
+
 
           if (hoveredWardId !== newHoveredId) {
             hoveredWardId = newHoveredId;
@@ -228,8 +236,13 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
 
     // Map click selection handler for coordinate picker
     map.on('click', (e) => {
-      if (onMapClick) {
-        onMapClick({ lat: e.lngLat.lat, lng: e.lngLat.lng });
+      // Skip if a ward circle marker was just clicked
+      if (suppressNextMapClick.current) {
+        suppressNextMapClick.current = false;
+        return;
+      }
+      if (onMapClickRef.current) {
+        onMapClickRef.current({ lat: e.lngLat.lat, lng: e.lngLat.lng });
 
         if (tempMarkerRef.current) {
           tempMarkerRef.current.setLngLat(e.lngLat);
@@ -250,7 +263,7 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
       map.remove();
       mapRef.current = null;
     };
-  }, [onMapClick]);
+  }, []); // Empty deps — map initializes once and never re-creates
 
   // Update Ward boundaries source if data updates
   useEffect(() => {
@@ -384,9 +397,13 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
 
         el.addEventListener('click', (e) => {
           e.stopPropagation();
-          if (count === 1 && onReportSelect && wardReports[0]) {
-            onReportSelect(wardReports[0]);
-            return; // Map stays 100% stationary and fixed in place
+          e.preventDefault();
+          // Block the canvas-level map click from also firing
+          suppressNextMapClick.current = true;
+
+          if (count === 1 && onReportSelectRef.current && wardReports[0]) {
+            onReportSelectRef.current(wardReports[0]);
+            return; // Map stays 100% stationary — no zoom, no pan
           }
           // For multi-report clusters, ease into zoom 14.5
           map.easeTo({
