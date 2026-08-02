@@ -385,14 +385,14 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
 
         el.addEventListener('click', (e) => {
           e.stopPropagation();
-          // Zoom into the ward keeping the centroid centered accurately
-          map.flyTo({
-            center: centroid,
+          // Zoom in-place around the marker's centroid so it stays fixed on screen without moving left
+          map.easeTo({
             zoom: 14.5,
-            duration: 800,
-            essential: true
+            around: new maplibregl.LngLat(centroid[0], centroid[1]),
+            duration: 800
           });
         });
+
 
 
 
