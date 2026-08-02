@@ -154,14 +154,35 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
       }
     } catch {
       // Fallback behavior if static deployment
+      const newReport = {
+        id: `rpt_local_${Date.now()}`,
+        ward_id: wardId,
+        description_en: finalDescEn,
+        description_gu: finalDescGu,
+        severity: severity,
+        category: category,
+        status: 'unresolved',
+        image_url: photo,
+        upvotes: 0,
+        flagged: 0,
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+        reported_at: new Date().toISOString()
+      };
+      const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
+      localStorage.setItem('amdavad_safai_local_reports', JSON.stringify([newReport, ...stored]));
+
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
+        setDescEn('');
+        setDescGu('');
         setPhoto(null);
         if (onSuccess) onSuccess();
         onClose();
       }, 1800);
     } finally {
+
       setSubmitting(false);
     }
   };

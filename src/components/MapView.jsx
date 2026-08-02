@@ -383,21 +383,12 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
           el.style.boxShadow = '0 2px 8px rgba(127, 29, 29, 0.4)';
         });
 
-        const name = lang === 'gu'
-          ? feature.properties?.name_gu || feature.properties?.name_en
-          : feature.properties?.name_en;
-        const zone = lang === 'gu'
-          ? feature.properties?.zone_gu || feature.properties?.zone_en
-          : feature.properties?.zone_en;
-        const ward = wardsData.find((w) => w.id === wardId);
-        const corporator = ward ? (lang === 'gu' ? ward.corporator_gu : ward.corporator_en) : '';
-        const unresolved = reports.filter((r) => r.ward_id === wardId && r.status === 'unresolved').length;
-
         el.addEventListener('click', (e) => {
           e.stopPropagation();
-          // NammaKasa Bangalore style: zoom into the ward without panning left/right
+          // Zoom into the ward
           map.zoomTo(14.5, { around: centroid, duration: 1000 });
         });
+
 
         const marker = new maplibregl.Marker({ element: el })
           .setLngLat(centroid)

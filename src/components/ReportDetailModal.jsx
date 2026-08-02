@@ -234,11 +234,56 @@ export const ReportDetailModal = ({
               </div>
             </div>
 
-            <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', borderTop: '1px solid var(--glass-border)', paddingTop: '8px', display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', borderTop: '1px solid var(--glass-border)', paddingTop: '8px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '4px' }}>
               <span>{t('mp_title')}: <strong>{mpName}</strong></span>
-              <span>Constituency: Ahmedabad East / West</span>
+              <span>AMC Swachh Helpline: <a href="tel:155303" style={{ color: 'var(--color-primary)', fontWeight: 700, textDecoration: 'none' }}>155303</a></span>
+            </div>
+
+            <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+              <a
+                href="tel:155303"
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  background: 'var(--color-bg)',
+                  border: '1px solid var(--glass-border)',
+                  color: 'var(--color-text-primary)',
+                  padding: '6px 10px',
+                  borderRadius: '6px',
+                  fontSize: '11.5px',
+                  fontWeight: 600,
+                  textDecoration: 'none'
+                }}
+              >
+                📞 Call AMC Control Room (155303)
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Unresolved garbage complaint in Ward ${wardName}, Ahmedabad. Needs action @AHMAMC @AmdavadSafai ${window.location.origin}/#report=${report.id}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  background: '#000000',
+                  color: '#FFFFFF',
+                  padding: '6px 10px',
+                  borderRadius: '6px',
+                  fontSize: '11.5px',
+                  fontWeight: 600,
+                  textDecoration: 'none'
+                }}
+              >
+                🐦 Escalate on X / Twitter
+              </a>
             </div>
           </div>
+
 
           {/* Verification Photo Preview if Resolved */}
           {report.status === 'resolved' && report.verified_image_url && (

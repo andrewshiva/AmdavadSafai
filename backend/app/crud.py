@@ -37,13 +37,25 @@ def get_nearest_ward(db: Session, lat: float, lng: float):
     return nearest, round(dist, 1)
 
 # Reports crud
-def get_reports(db: Session, severity: str = None, status: str = None):
+def get_reports(db: Session, severity: str = None, status: str = None, category: str = None, ward_id: str = None, search: str = None):
     query = db.query(models.Report)
     if severity and severity != 'all':
         query = query.filter(models.Report.severity == severity)
     if status and status != 'all':
         query = query.filter(models.Report.status == status)
-    return query.all()
+    if category and category != 'all':
+        query = query.filter(models.Report.category == category)
+    if ward_id and ward_id != 'all':
+        query = query.filter(models.Report.ward_id == ward_id)
+    if search and search.strip():
+        term = f"%{search.strip()}%"
+        query = query.filter(
+            (models.Report.description_en.ilike(term)) |
+            (models.Report.description_gu.ilike(term)) |
+            (models.Report.id.ilike(term))
+        )
+    return query.order_by(models.Report.reported_at.desc()).all()
+
 
 def get_report_by_id(db: Session, report_id: str):
     return db.query(models.Report).filter(models.Report.id == report_id).first()

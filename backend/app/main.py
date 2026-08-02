@@ -1,9 +1,13 @@
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
 import models, schemas, crud, geojson_data, civic_data
 from database import engine, get_db
+
 
 # Create SQLAlchemy database tables automatically
 models.Base.metadata.create_all(bind=engine)
@@ -51,9 +55,13 @@ def read_civic_metrics(db: Session = Depends(get_db)):
 def read_reports(
     severity: Optional[str] = Query('all', description="Filter reports by severity"),
     status: Optional[str] = Query('all', description="Filter reports by status"),
+    category: Optional[str] = Query('all', description="Filter reports by waste category"),
+    ward_id: Optional[str] = Query('all', description="Filter reports by ward ID"),
+    search: Optional[str] = Query('', description="Search report description or ID"),
     db: Session = Depends(get_db)
 ):
-    return crud.get_reports(db, severity=severity, status=status)
+    return crud.get_reports(db, severity=severity, status=status, category=category, ward_id=ward_id, search=search)
+
 
 @app.get("/api/reports/{report_id}", response_model=schemas.ReportOut)
 def read_report_by_id(report_id: str, db: Session = Depends(get_db)):

@@ -32,8 +32,16 @@ export const App = () => {
     setSeverity,
     status,
     setStatus,
+    category,
+    setCategory,
+    wardId,
+    setWardId,
+    search,
+    setSearch,
     filteredReports,
     loading,
+    isFiltered,
+    resetFilters,
     refetch
   } = useFilter();
 
@@ -86,7 +94,16 @@ export const App = () => {
           setSeverity={setSeverity}
           status={status}
           setStatus={setStatus}
+          category={category}
+          setCategory={setCategory}
+          wardId={wardId}
+          setWardId={setWardId}
+          search={search}
+          setSearch={setSearch}
+          isFiltered={isFiltered}
+          resetFilters={resetFilters}
         />
+
 
         {/* Floating Report Garbage Action Button */}
         <button
