@@ -321,30 +321,29 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
 
     // 2. Render conditionally based on zoom level
     if (zoom < 13.5) {
-      // Zoom out: Render large aggregated circles at centroids
-      const wardReportCounts = {};
+      // Zoom out: Render aggregated circles at exact report coordinates (so pin and circle match 100%)
+      const wardReportsMap = {};
       reports.forEach((r) => {
-        wardReportCounts[r.ward_id] = (wardReportCounts[r.ward_id] || 0) + 1;
+        if (!wardReportsMap[r.ward_id]) wardReportsMap[r.ward_id] = [];
+        wardReportsMap[r.ward_id].push(r);
       });
 
-      const features = geoData?.features || [];
-      features.forEach((feature) => {
-        const wardId = feature.properties?.id || feature.id;
-        const count = wardReportCounts[wardId] || 0;
+      Object.entries(wardReportsMap).forEach(([wardId, wardReports]) => {
+        const count = wardReports.length;
         if (count === 0) return;
 
-        let centroid = null;
-        if (feature.geometry.type === 'Polygon') {
-          centroid = computeCentroid(feature.geometry.coordinates);
-        } else if (feature.geometry.type === 'MultiPolygon') {
-          centroid = computeCentroid(feature.geometry.coordinates[0]);
+        let location = null;
+        if (count === 1) {
+          // Position circle marker EXACTLY on top of the single report's coordinates
+          location = [wardReports[0].lng, wardReports[0].lat];
+        } else {
+          // Average coordinates of reports in this ward
+          const avgLng = wardReports.reduce((acc, r) => acc + r.lng, 0) / count;
+          const avgLat = wardReports.reduce((acc, r) => acc + r.lat, 0) / count;
+          location = [avgLng, avgLat];
         }
 
-        if (!centroid) {
-          const ward = wardsData.find((w) => w.id === wardId);
-          if (ward) centroid = [ward.lng, ward.lat];
-        }
-        if (!centroid) return;
+        if (!location || isNaN(location[0]) || isNaN(location[1])) return;
 
         const baseSize = 46;
         const scale = Math.min(1 + Math.log10(Math.max(count, 1)) * 0.4, 1.8);
@@ -385,23 +384,26 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
 
         el.addEventListener('click', (e) => {
           e.stopPropagation();
-          // Zoom in-place around the marker's centroid so it stays fixed on screen without moving left
+          if (count === 1 && onReportSelect && wardReports[0]) {
+            onReportSelect(wardReports[0]);
+            return; // Map stays 100% stationary and fixed in place
+          }
+          // For multi-report clusters, ease into zoom 14.5
           map.easeTo({
             zoom: 14.5,
-            around: new maplibregl.LngLat(centroid[0], centroid[1]),
-            duration: 800
+            around: new maplibregl.LngLat(location[0], location[1]),
+            duration: 300
           });
         });
 
 
-
-
         const marker = new maplibregl.Marker({ element: el })
-          .setLngLat(centroid)
+          .setLngLat(location)
           .addTo(map);
 
         circleMarkersRef.current.push(marker);
       });
+
     } else {
       // Zoom in: Render individual complaint pins at exact coordinates
       reports.forEach((report) => {
