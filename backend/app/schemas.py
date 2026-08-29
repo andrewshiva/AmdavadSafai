@@ -16,14 +16,18 @@ class SubscriptionOut(SubscriptionBase):
     class Config:
         from_attributes = True
 
-# --- Report Schemas ---
 class ReportBase(BaseModel):
     ward_id: Optional[str] = None
     description_en: str
     description_gu: str
+    description_hi: Optional[str] = ""
     severity: str = Field(pattern="^(minor|moderate|severe|critical)$")
     status: str = Field(default="unresolved", pattern="^(unresolved|resolved)$")
     category: Optional[str] = "mixed_waste"
+    amc_ticket_id: Optional[str] = None
+    amc_status: Optional[str] = "Assigned to SWM Inspector"
+    amc_department: Optional[str] = "Solid Waste Management (SWM)"
+    rwa_partner: Optional[str] = "Ahmedabad Citizen Network"
     image_url: Optional[str] = None
     verified_image_url: Optional[str] = None
     upvotes: Optional[int] = 0
@@ -38,6 +42,7 @@ class ReportCreate(ReportBase):
 class ReportOut(ReportBase):
     id: str
     reported_at: datetime.datetime
+    resolved_at: Optional[datetime.datetime] = None
 
     class Config:
         from_attributes = True

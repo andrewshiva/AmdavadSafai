@@ -35,9 +35,18 @@ def apply_sqlite_migrations():
         try:
             res = conn.execute(text("PRAGMA table_info(reports)")).fetchall()
             existing_cols = {row[1] for row in res}
-            if "description_hi" not in existing_cols:
-                conn.execute(text("ALTER TABLE reports ADD COLUMN description_hi VARCHAR DEFAULT ''"))
-                conn.commit()
+            cols_to_add = {
+                "description_hi": "VARCHAR DEFAULT ''",
+                "amc_ticket_id": "VARCHAR DEFAULT ''",
+                "amc_status": "VARCHAR DEFAULT 'Assigned to SWM Inspector'",
+                "amc_department": "VARCHAR DEFAULT 'Solid Waste Management (SWM)'",
+                "rwa_partner": "VARCHAR DEFAULT 'Ahmedabad Citizen Network'",
+                "resolved_at": "DATETIME"
+            }
+            for col, col_type in cols_to_add.items():
+                if col not in existing_cols:
+                    conn.execute(text(f"ALTER TABLE reports ADD COLUMN {col} {col_type}"))
+                    conn.commit()
         except Exception as e:
             print(f"Report migration notice: {e}")
 

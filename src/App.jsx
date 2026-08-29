@@ -15,6 +15,8 @@ import EventsModal from './components/EventsModal';
 import CreateEventModal from './components/CreateEventModal';
 import BadgesModal from './components/BadgesModal';
 import ShareCardModal from './components/ShareCardModal';
+import WallOfCleanedModal from './components/WallOfCleanedModal';
+import RWADashboardModal from './components/RWADashboardModal';
 import { useFilter } from './hooks/useFilter';
 import { Map, List, Loader2, Plus } from 'lucide-react';
 import wardsData from './data/wards.json';
@@ -33,6 +35,8 @@ export const App = () => {
   const [isEventsOpen, setIsEventsOpen] = useState(false);
   const [isCreateEventOpen, setIsCreateEventOpen] = useState(false);
   const [isBadgesOpen, setIsBadgesOpen] = useState(false);
+  const [isCleanedWallOpen, setIsCleanedWallOpen] = useState(false);
+  const [isRWAOpen, setIsRWAOpen] = useState(false);
   const [shareCardTarget, setShareCardTarget] = useState(null);
 
   const {
@@ -85,10 +89,12 @@ export const App = () => {
       {/* Welcome Screen */}
       <WelcomeOverlay />
 
-      {/* Header bar with Trilingual toggle, Drives trigger & Karma points */}
+      {/* Header bar with Trilingual toggle, Drives trigger, Cleaned Spots & Karma points */}
       <Header
         onOpenEvents={() => setIsEventsOpen(true)}
         onOpenBadges={() => setIsBadgesOpen(true)}
+        onOpenCleanedSpots={() => setIsCleanedWallOpen(true)}
+        onOpenRWA={() => setIsRWAOpen(true)}
       />
 
       {/* Main app body */}
@@ -267,6 +273,22 @@ export const App = () => {
         isOpen={isBadgesOpen}
         onClose={() => setIsBadgesOpen(false)}
         onOpenEvents={() => setIsEventsOpen(true)}
+      />
+
+      {/* Wall of Cleaned Spots (Before/After Transformations) */}
+      <WallOfCleanedModal
+        isOpen={isCleanedWallOpen}
+        onClose={() => setIsCleanedWallOpen(false)}
+        reports={filteredReports}
+        wards={wardsData}
+      />
+
+      {/* Ward RWA Pilot & Accountability Dashboard */}
+      <RWADashboardModal
+        isOpen={isRWAOpen}
+        onClose={() => setIsRWAOpen(false)}
+        reports={filteredReports}
+        wards={wardsData}
       />
 
       {/* Social Share Card Modal */}

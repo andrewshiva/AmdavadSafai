@@ -6,7 +6,7 @@ import SubscribeModal from './SubscribeModal';
 import ChangelogModal from './ChangelogModal';
 
 
-export const Header = ({ onOpenEvents, onOpenBadges }) => {
+export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenRWA }) => {
   const { t, lang, setLanguage } = useTranslation();
   const [isSocialOpen, setIsSocialOpen] = useState(false);
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
@@ -44,6 +44,28 @@ export const Header = ({ onOpenEvents, onOpenBadges }) => {
         >
           v1.1.0
         </button>
+
+        {/* Cleaned Spots Proof Showcase Button */}
+        {onOpenCleanedSpots && (
+          <button
+            className="header-action-btn cleaned-spots-btn"
+            onClick={onOpenCleanedSpots}
+            title={t('wall_of_cleaned_title') || 'Wall of Cleaned Spots'}
+          >
+            <span>✨ {t('cleaned_spots_short') || 'Cleaned Spots'}</span>
+          </button>
+        )}
+
+        {/* RWA & Ward Accountability Hub Button */}
+        {onOpenRWA && (
+          <button
+            className="header-action-btn rwa-btn"
+            onClick={onOpenRWA}
+            title={t('rwa_hub_title') || 'RWA & Ward Hub'}
+          >
+            <span>🏢 {t('rwa_hub_short') || 'RWA Hub'}</span>
+          </button>
+        )}
 
         {/* Community Cleanup Drives Button */}
         {onOpenEvents && (

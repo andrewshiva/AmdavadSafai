@@ -40,6 +40,10 @@ class Report(Base):
     severity = Column(String, nullable=False)  # minor, moderate, severe, critical
     status = Column(String, nullable=False)    # unresolved, resolved
     category = Column(String, nullable=False, default="mixed_waste") # mixed_waste, construction_dump, overflowing_bin, roadside_garbage, drainage_blockage
+    amc_ticket_id = Column(String, nullable=True, index=True) # e.g. AMC-CCRS-2026-88412
+    amc_status = Column(String, nullable=True, default="Assigned to SWM Inspector") # Registered, Assigned, In Progress, Resolved
+    amc_department = Column(String, nullable=True, default="Solid Waste Management (SWM)")
+    rwa_partner = Column(String, nullable=True, default="Ahmedabad Citizen Network")
     image_url = Column(String, nullable=True)
     verified_image_url = Column(String, nullable=True)
     upvotes = Column(Integer, default=0, nullable=False)
@@ -48,6 +52,7 @@ class Report(Base):
     lat = Column(Float, nullable=False)
     lng = Column(Float, nullable=False)
     reported_at = Column(DateTime, default=datetime.datetime.utcnow)
+    resolved_at = Column(DateTime, nullable=True)
 
     ward = relationship("Ward", back_populates="reports")
 

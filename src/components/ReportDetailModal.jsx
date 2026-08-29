@@ -15,6 +15,7 @@ import {
   Tag
 } from 'lucide-react';
 import wardsData from '../data/wards.json';
+import BeforeAfterSlider from './BeforeAfterSlider';
 
 export const ReportDetailModal = ({
   isOpen,
@@ -323,13 +324,61 @@ export const ReportDetailModal = ({
           </div>
 
 
-          {/* Verification Photo Preview if Resolved */}
-          {report.status === 'resolved' && report.verified_image_url && (
-            <div style={{ background: '#ECFDF5', border: '1px solid #6EE7B7', padding: '12px', borderRadius: '10px' }}>
-              <span style={{ fontSize: '12px', fontWeight: 700, color: '#065F46', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '6px' }}>
-                <CheckCircle2 size={14} /> {t('clean_spot_evidence')}
+          {/* Official AMC CCRS & 311 Ticket Integration Card */}
+          <div className="report-amc-ccrs-card">
+            <div className="amc-ccrs-header">
+              <div className="amc-ccrs-badge">
+                <span className="amc-logo-dot"></span>
+                <span>AMC CCRS 311 OFFICIAL TICKET</span>
+              </div>
+              <span className="amc-ticket-num">{report.amc_ticket_id || `AMC-CCRS-2026-${report.id?.slice(-5) || '88412'}`}</span>
+            </div>
+
+            <div className="amc-status-row">
+              <span className="amc-status-label">{t('amc_status_label') || 'AMC CCRS Status:'}</span>
+              <span className={`amc-status-pill ${report.status === 'resolved' ? 'status-resolved' : 'status-assigned'}`}>
+                {report.amc_status || (report.status === 'resolved' ? 'Resolved by AMC SWM' : 'Assigned to SWM Inspector')}
               </span>
-              <img src={report.verified_image_url} alt="Cleaned site" style={{ width: '100%', height: '140px', objectFit: 'cover', borderRadius: '6px' }} />
+            </div>
+
+            <p className="amc-dept-sub">
+              🏢 {report.amc_department || 'Solid Waste Management (SWM) • Health Dept'}
+            </p>
+
+            <div className="amc-dispatch-actions">
+              <a
+                href={`https://api.whatsapp.com/send?phone=917567855303&text=${encodeURIComponent(`Hi AMC CCRS,\nI want to report a garbage issue via AmdavadSafai.\n\n📍 Ward: ${wardName}\n🏷️ Category: ${categoryLabel}\n⚠️ Severity: ${report.severity.toUpperCase()}\n📝 Description: ${description}\n🌐 Map GPS: https://maps.google.com/?q=${report.lat},${report.lng}\n🎫 Ticket Ref: ${report.amc_ticket_id || 'AMC-CCRS-2026-AUTO'}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="amc-whatsapp-btn"
+              >
+                <span>📲 Send to AMC WhatsApp (+91 75678 55303)</span>
+              </a>
+
+              <a
+                href="https://www.amccrs.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="amc-portal-link"
+              >
+                <span>🌐 Track on amccrs.com</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+
+          {/* Verification Transformation Slider if Resolved */}
+          {report.status === 'resolved' && (
+            <div className="report-resolved-transformation-wrap">
+              <div className="transformation-header">
+                <CheckCircle2 size={16} style={{ color: '#059669' }} />
+                <span>{t('before_after_transformation') || 'Verified Transformation (Before ↔ After)'}</span>
+              </div>
+              <BeforeAfterSlider
+                beforeImage={report.image_url || 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80'}
+                afterImage={report.verified_image_url || 'https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=600&q=80'}
+                aspectRatio="16/10"
+              />
             </div>
           )}
 

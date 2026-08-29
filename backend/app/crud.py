@@ -73,14 +73,22 @@ def create_report(db: Session, report: schemas.ReportCreate):
     saved_image_url = save_image_and_push_to_github(report.image_url) if report.image_url else None
     saved_verified_url = save_image_and_push_to_github(report.verified_image_url) if report.verified_image_url else None
 
+    # Generate official-standard AMC CCRS Ticket ID if not provided
+    amc_id = report.amc_ticket_id or f"AMC-CCRS-2026-{random.randint(10000, 99999)}"
+
     db_report = models.Report(
         id=f"rpt_{uuid.uuid4().hex[:8]}",  # Generate short unique ID
         ward_id=ward_id,
         description_en=report.description_en,
         description_gu=report.description_gu,
+        description_hi=report.description_hi or "",
         severity=report.severity,
         status=report.status,
         category=report.category or "mixed_waste",
+        amc_ticket_id=amc_id,
+        amc_status=report.amc_status or "Assigned to SWM Inspector",
+        amc_department=report.amc_department or "Solid Waste Management (SWM)",
+        rwa_partner=report.rwa_partner or "Ahmedabad Citizen Network",
         image_url=saved_image_url,
         verified_image_url=saved_verified_url,
         upvotes=0,
@@ -107,6 +115,8 @@ def verify_report_cleanup(db: Session, report_id: str, verified_image_url: str =
     if not report:
         return None
     report.status = "resolved"
+    report.amc_status = "Resolved by AMC SWM"
+    report.resolved_at = datetime.datetime.utcnow()
     if verified_image_url:
         saved_url = save_image_and_push_to_github(verified_image_url)
         report.verified_image_url = saved_url
