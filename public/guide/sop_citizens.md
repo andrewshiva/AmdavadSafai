@@ -9,8 +9,8 @@ This SOP outlines the standard steps for citizens to effectively use the platfor
 ## 1. Accessing the Platform & Basic Navigation
 
 1. **Open the Application**: Navigate to the platform's URL via your web browser on mobile or desktop.
-2. **Language Selection**: 
-   - Use the language toggle button at the top-right corner to switch between **English** and **Gujarati**. 
+2. **Language Selection**:
+   - Use the language toggle button at the top-right corner to switch between **English** and **Gujarati**.
    - All menus, map labels, and interactive forms will instantly translate to your preferred language.
 3. **View Modes**:
    - Use the toggle switch in the top-right corner to switch between **Map View** (visual overview) and **List View** (scrollable feed of reports).
