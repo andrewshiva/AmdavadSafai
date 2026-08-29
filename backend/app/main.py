@@ -3,11 +3,13 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from typing import List, Optional
 import models, schemas, crud, geojson_data, civic_data
+from image_storage import UPLOADS_DIR
 from database import engine, get_db
-
+from seed import seed_database
 
 # Create SQLAlchemy database tables automatically
 models.Base.metadata.create_all(bind=engine)
@@ -18,14 +20,39 @@ app = FastAPI(
     version="1.0.0"
 )
 
+@app.on_event("startup")
+def on_startup():
+    try:
+        seed_database()
+    except Exception as err:
+        print(f"Startup seed notice: {err}")
+
 # CORS setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Adjust for production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount user uploaded images static directory
+os.makedirs(UPLOADS_DIR, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=UPLOADS_DIR), name="uploads")
+
+# --- Root & Health Endpoints ---
+
+@app.get("/")
+def read_root():
+    return {
+        "status": "healthy",
+        "service": "AmdavadSafai Backend API",
+        "docs_url": "/docs"
+    }
+
+@app.get("/api/health")
+def read_health():
+    return {"status": "ok"}
 
 # --- Endpoints ---
 

@@ -19,18 +19,32 @@ def seed_database():
         print("Seeding database...")
 
         # Load wards seed data
-        wards_file_path = os.path.join(
-            os.path.dirname(__file__), "..", "..", "src", "data", "wards.json"
-        )
+        candidate_ward_paths = [
+            os.path.join(os.path.dirname(__file__), "..", "..", "src", "data", "wards.json"),
+            os.path.join(os.path.dirname(__file__), "data", "wards.json"),
+            os.path.join(os.getcwd(), "src", "data", "wards.json"),
+            os.path.join(os.getcwd(), "backend", "app", "data", "wards.json"),
+        ]
+        wards_file_path = next((p for p in candidate_ward_paths if os.path.exists(p)), None)
+        if not wards_file_path:
+            print("Warning: wards.json seed file not found. Skipping seed.")
+            return
+
         with open(wards_file_path, "r", encoding="utf-8") as f:
             wards_data = json.load(f)
 
         # Load reports seed data
-        reports_file_path = os.path.join(
-            os.path.dirname(__file__), "..", "..", "src", "data", "reports.json"
-        )
-        with open(reports_file_path, "r", encoding="utf-8") as f:
-            reports_data = json.load(f)
+        candidate_report_paths = [
+            os.path.join(os.path.dirname(__file__), "..", "..", "src", "data", "reports.json"),
+            os.path.join(os.path.dirname(__file__), "data", "reports.json"),
+            os.path.join(os.getcwd(), "src", "data", "reports.json"),
+            os.path.join(os.getcwd(), "backend", "app", "data", "reports.json"),
+        ]
+        reports_file_path = next((p for p in candidate_report_paths if os.path.exists(p)), None)
+        reports_data = []
+        if reports_file_path and os.path.exists(reports_file_path):
+            with open(reports_file_path, "r", encoding="utf-8") as f:
+                reports_data = json.load(f)
 
         # 1. Insert Wards
         print(f"Inserting {len(wards_data)} wards...")

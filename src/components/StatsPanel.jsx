@@ -83,8 +83,8 @@ export const StatsPanel = ({ reports }) => {
   const zoneChartData = statsData?.zone_breakdown
     ? statsData.zone_breakdown.map((z) => ({
         zone: lang === 'gu' ? z.zone_gu || z.zone_en : z.zone_en,
-        unresolved: z.unresolved_count,
-        resolved: z.resolved_count
+        unresolved: z.unresolved,
+        resolved: z.resolved
       }))
     : [
         { zone: 'West Zone', unresolved: 5, resolved: 12 },
@@ -95,15 +95,15 @@ export const StatsPanel = ({ reports }) => {
       ];
 
   const severityChartData = statsData?.severity_distribution
-    ? statsData.severity_distribution.map((s) => ({
-        name: t(`filter_${s.severity}`),
-        value: s.count,
+    ? Object.entries(statsData.severity_distribution).map(([severityKey, valueCount]) => ({
+        name: t(`filter_${severityKey}`),
+        value: valueCount,
         color:
-          s.severity === 'minor'
+          severityKey === 'minor'
             ? '#16A34A'
-            : s.severity === 'moderate'
+            : severityKey === 'moderate'
             ? '#D97706'
-            : s.severity === 'severe'
+            : severityKey === 'severe'
             ? '#EA580C'
             : '#DC2626'
       }))
@@ -171,7 +171,7 @@ export const StatsPanel = ({ reports }) => {
               🏙️ {t('amc_civic_feed')}
             </span>
             <span style={{ fontSize: '10.5px', background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', padding: '2px 8px', borderRadius: '12px', fontWeight: 600 }}>
-              Official AMC Daily Feed
+              {t('official_amc_feed')}
             </span>
           </div>
 
@@ -181,11 +181,11 @@ export const StatsPanel = ({ reports }) => {
               <span style={{ fontSize: '16px', fontWeight: 800, color: '#38BDF8' }}>{amcFeed.active_collection_vehicles} 🚚</span>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '8px' }}>
-              <span style={{ fontSize: '10px', color: '#94A3B8', display: 'block', textTransform: 'uppercase' }}>Door-to-Door Coverage</span>
+              <span style={{ fontSize: '10px', color: '#94A3B8', display: 'block', textTransform: 'uppercase' }}>{t('door_to_door_coverage')}</span>
               <span style={{ fontSize: '16px', fontWeight: 800, color: '#4ADE80' }}>{amcFeed.door_to_door_coverage_pct}% 🏠</span>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '8px' }}>
-              <span style={{ fontSize: '10px', color: '#94A3B8', display: 'block', textTransform: 'uppercase' }}>Daily Waste Processed</span>
+              <span style={{ fontSize: '10px', color: '#94A3B8', display: 'block', textTransform: 'uppercase' }}>{t('daily_waste_processed')}</span>
               <span style={{ fontSize: '16px', fontWeight: 800, color: '#FBBF24' }}>{amcFeed.daily_waste_collected_metric_tons} MT ⚖️</span>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '8px' }}>
@@ -276,13 +276,13 @@ export const StatsPanel = ({ reports }) => {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', textAlign: 'left', color: 'var(--color-text-primary)' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--glass-border)', color: 'var(--color-text-muted)', fontSize: '11px' }}>
-                <th style={{ padding: '8px' }}>#</th>
-                <th style={{ padding: '8px' }}>Ward</th>
-                <th style={{ padding: '8px' }}>Zone</th>
-                <th style={{ padding: '8px' }}>MLA</th>
-                <th style={{ padding: '8px' }}>Total</th>
-                <th style={{ padding: '8px' }}>Active</th>
-                <th style={{ padding: '8px' }}>Res. %</th>
+                <th style={{ padding: '8px' }}>{t('th_rank')}</th>
+                <th style={{ padding: '8px' }}>{t('th_ward')}</th>
+                <th style={{ padding: '8px' }}>{t('th_zone')}</th>
+                <th style={{ padding: '8px' }}>{t('th_mla')}</th>
+                <th style={{ padding: '8px' }}>{t('th_total')}</th>
+                <th style={{ padding: '8px' }}>{t('th_active')}</th>
+                <th style={{ padding: '8px' }}>{t('th_res_rate')}</th>
               </tr>
             </thead>
             <tbody>

@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
-import { Menu, Globe, Sparkles } from 'lucide-react';
+import { Menu, Globe, Sparkles, BookOpen } from 'lucide-react';
 import SocialMenu from './SocialMenu';
 import SubscribeModal from './SubscribeModal';
 import ChangelogModal from './ChangelogModal';
+import { GuideModal } from './GuideModal';
 
 export const Header = () => {
   const { t, lang, toggleLang } = useTranslation();
   const [isSocialOpen, setIsSocialOpen] = useState(false);
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
   const [isChangelogOpen, setIsChangelogOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
 
   return (
     <header className="header-container">
@@ -41,6 +43,14 @@ export const Header = () => {
           <span>{lang === 'en' ? 'ગુજરાતી' : 'English'}</span>
         </button>
 
+        <button 
+          className="lang-toggle-btn" 
+          onClick={() => setIsGuideOpen(true)}
+          title={t('help_guide_title') || 'Guide'}
+        >
+          <BookOpen size={16} />
+        </button>
+
         <div className="menu-wrapper">
           <button
             className="menu-toggle-btn"
@@ -63,6 +73,11 @@ export const Header = () => {
       <ChangelogModal
         isOpen={isChangelogOpen}
         onClose={() => setIsChangelogOpen(false)}
+      />
+      <GuideModal
+        isOpen={isGuideOpen}
+        onClose={() => setIsGuideOpen(false)}
+        t={t}
       />
     </header>
   );

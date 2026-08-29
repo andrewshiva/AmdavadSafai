@@ -86,6 +86,7 @@ button, select, input {
   flex-direction: column;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .main-content {
@@ -98,7 +99,7 @@ button, select, input {
   position: absolute;
   top: 16px;
   right: 16px;
-  z-index: 999;
+  z-index: 1001;
   display: flex;
   gap: 8px;
   background: var(--glass-bg);
@@ -371,26 +372,30 @@ button, select, input {
 .filter-bar {
   position: absolute;
   top: 56px;
-  left: 16px;
-  z-index: 999;
+  left: 0;
+  right: 0;
+  z-index: 1001;
   display: flex;
-  gap: 12px;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .filter-item {
   display: flex;
   align-items: center;
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
+  background: var(--color-bg-elevated);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-full);
   padding: 6px 14px;
-  box-shadow: var(--shadow-md);
 }
 
 .filter-icon {
   color: var(--color-text-secondary);
   margin-right: 8px;
+  flex-shrink: 0;
 }
 
 .filter-select {
@@ -401,6 +406,7 @@ button, select, input {
   font-weight: 500;
   cursor: pointer;
   padding-right: 8px;
+  max-width: 140px;
 }
 .filter-select option {
   background: var(--color-bg-card);
@@ -409,7 +415,7 @@ button, select, input {
 
 /* Map View Container */
 .map-view-container {
-  height: calc(100vh - 56px);
+  height: 100%;
   width: 100%;
   background: #e8edf2;
 }
@@ -893,7 +899,7 @@ button, select, input {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1500;
   display: flex;
   flex-direction: column;
   background: var(--glass-bg);
@@ -1234,7 +1240,7 @@ button, select, input {
 /* NammaKasa Active/Total Reports Badge */
 .nk-report-badge {
   position: absolute;
-  top: 16px;
+  top: 60px;
   left: 16px;
   z-index: 998;
   background: var(--color-bg-card);
@@ -1277,7 +1283,7 @@ button, select, input {
 /* Move controls to right side like NammaKasa */
 .maplibregl-ctrl-bottom-right {
   right: 16px !important;
-  bottom: 80px !important;
+  bottom: 140px !important;
 }
 
 /* Ward Hover Tooltip Styling - Smooth & Fixed Centered */
@@ -1300,3 +1306,15 @@ button, select, input {
 }
 
 
+
+/* Markdown Guide Styles */
+.markdown-body { font-size: 14px; line-height: 1.6; color: var(--color-text-primary); }
+.markdown-body h1, .markdown-body h2 { font-weight: 700; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.3em; margin-top: 1.5em; margin-bottom: 0.5em; }
+.markdown-body h3 { font-weight: 600; margin-top: 1.2em; margin-bottom: 0.5em; }
+.markdown-body p { margin-top: 0; margin-bottom: 1em; }
+.markdown-body img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: 1em 0; border: 1px solid var(--glass-border); }
+.markdown-body a { color: var(--color-primary); text-decoration: none; }
+.markdown-body a:hover { text-decoration: underline; }
+.markdown-body ul, .markdown-body ol { padding-left: 2em; margin-top: 0; margin-bottom: 1em; }
+.markdown-body blockquote { padding: 0 1em; color: var(--color-text-secondary); border-left: 0.25em solid var(--glass-border); margin: 0 0 1em 0; background: var(--color-bg-elevated); border-radius: 0 8px 8px 0; padding-top: 0.5em; padding-bottom: 0.5em; }
+.markdown-body blockquote p:last-child { margin-bottom: 0; }

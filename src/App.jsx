@@ -111,7 +111,7 @@ export const App = () => {
           onClick={() => setIsReportOpen(true)}
           style={{
             position: 'absolute',
-            bottom: '64px',
+            bottom: '72px',
             right: '24px',
             zIndex: 999,
             display: 'flex',
@@ -146,6 +146,7 @@ export const App = () => {
         {activeView === 'map' ? (
           <MapView
             reports={filteredReports}
+            wardId={wardId}
             onReportSelect={(report) => setSelectedReport(report)}
             onMapClick={(coords) => {
               if (isReportOpen) {

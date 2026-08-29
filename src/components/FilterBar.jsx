@@ -22,15 +22,15 @@ export const FilterBar = ({
   return (
     <div className="filter-bar" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}>
       {/* Search Input */}
-      <div className="filter-item" style={{ flex: '1 1 180px', minWidth: '160px', position: 'relative' }}>
+      <div className="filter-item" style={{ flex: '0 1 220px', minWidth: '140px', position: 'relative' }}>
         <Search size={15} className="filter-icon" />
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search complaint description..."
+          placeholder={t('search_placeholder') || "Search complaints..."}
           className="filter-select"
-          style={{ width: '100%', paddingLeft: '32px', paddingRight: search ? '28px' : '10px' }}
+          style={{ width: '100%', paddingRight: search ? '28px' : '10px' }}
         />
         {search && (
           <button
@@ -90,7 +90,7 @@ export const FilterBar = ({
           onChange={(e) => setCategory(e.target.value)}
           className="filter-select"
         >
-          <option value="all">All Categories</option>
+          <option value="all">{t('filter_all_categories')}</option>
           <option value="mixed_waste">{t('cat_mixed_waste')}</option>
           <option value="construction_dump">{t('cat_construction_dump')}</option>
           <option value="overflowing_bin">{t('cat_overflowing_bin')}</option>
@@ -107,7 +107,7 @@ export const FilterBar = ({
           onChange={(e) => setWardId(e.target.value)}
           className="filter-select"
         >
-          <option value="all">All Wards</option>
+          <option value="all">{t('filter_all_wards')}</option>
           {wardsData.map((w) => (
             <option key={w.id} value={w.id}>
               {lang === 'gu' ? w.name_gu : w.name_en}
@@ -135,7 +135,7 @@ export const FilterBar = ({
           }}
         >
           <X size={14} />
-          Reset Filters
+          {t('reset_filters')}
         </button>
       )}
     </div>

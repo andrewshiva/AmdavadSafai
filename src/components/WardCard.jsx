@@ -40,9 +40,9 @@ export const WardCard = ({ ward, reports, onReportSelect }) => {
               </span>
             )}
           </div>
-          <button className="expand-toggle-icon">
+          <span className="expand-toggle-icon">
             {isExpanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-          </button>
+          </span>
         </div>
       </button>
 

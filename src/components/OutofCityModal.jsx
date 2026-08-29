@@ -49,7 +49,7 @@ export const OutofCityModal = ({ isOpen, onClose, distanceKm }) => {
           </div>
 
           <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', background: 'var(--color-bg-elevated)', padding: '10px 14px', borderRadius: '8px', width: '100%' }}>
-            💡 Tip: You can also tap anywhere inside Ahmedabad on the map view to place a location pin manually.
+            {t('outside_city_tip')}
           </div>
         </div>
 

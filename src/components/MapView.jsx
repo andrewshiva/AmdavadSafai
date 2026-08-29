@@ -19,7 +19,7 @@ const computeCentroid = (coords) => {
   return count > 0 ? [sumLng / count, sumLat / count] : null;
 };
 
-export const MapView = ({ reports, onMapClick, onReportSelect }) => {
+export const MapView = ({ reports, onMapClick, onReportSelect, wardId }) => {
   const { t, lang } = useTranslation();
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
@@ -33,6 +33,33 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
   // Keep refs in sync with latest props without triggering map re-init
   useEffect(() => { onMapClickRef.current = onMapClick; }, [onMapClick]);
   useEffect(() => { onReportSelectRef.current = onReportSelect; }, [onReportSelect]);
+
+  // Autofocus/fly to ward when wardId filter changes
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    if (wardId && wardId !== 'all') {
+      const selectedWard = wardsData.find((w) => w.id === wardId);
+      if (selectedWard) {
+        map.flyTo({
+          center: [selectedWard.lng, selectedWard.lat],
+          zoom: 14.2,
+          speed: 1.2,
+          curve: 1.42,
+          essential: true
+        });
+      }
+    } else if (wardId === 'all') {
+      // Zoom out to whole city overview
+      map.flyTo({
+        center: [72.5714, 23.0225],
+        zoom: 11.6,
+        speed: 1.2,
+        essential: true
+      });
+    }
+  }, [wardId]);
 
   // Attach global listener for popup detail button clicks
   useEffect(() => {
@@ -71,7 +98,8 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
       center: [72.5714, 23.0225],
       zoom: 11.6,
       minZoom: 10,
-      maxZoom: 17
+      maxZoom: 17,
+      attributionControl: false
     });
 
     // Fit bounds to entire city initially based on the mask's inner boundary
@@ -131,13 +159,26 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
         }
       });
 
-      // NammaKasa-style: Light pink/red fill for ward areas
+      // Dynamic cleanliness score based fill color (heatmap style):
+      // score >= 90: green (#16A34A)
+      // score >= 80: light green (#84CC16)
+      // score >= 65: yellow (#EAB308)
+      // score >= 50: orange (#EA580C)
+      // score < 50: red (#DC2626)
       map.addLayer({
         id: 'wards-fill',
         type: 'fill',
         source: 'wards',
         paint: {
-          'fill-color': '#DC2626',
+          'fill-color': [
+            'step',
+            ['coalesce', ['get', 'cleanliness_score'], 100],
+            '#DC2626',     // Default/Critical (< 50)
+            50, '#EA580C', // Attention Needed (50 - 64.9)
+            65, '#EAB308', // Moderate (65 - 79.9)
+            80, '#84CC16', // Good (80 - 89.9)
+            90, '#16A34A'  // Excellent (90+)
+          ],
           'fill-opacity': 0.12
         }
       });
@@ -345,16 +386,9 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
         const count = wardReports.length;
         if (count === 0) return;
 
-        let location = null;
-        if (count === 1) {
-          // Position circle marker EXACTLY on top of the single report's coordinates
-          location = [wardReports[0].lng, wardReports[0].lat];
-        } else {
-          // Average coordinates of reports in this ward
-          const avgLng = wardReports.reduce((acc, r) => acc + r.lng, 0) / count;
-          const avgLat = wardReports.reduce((acc, r) => acc + r.lat, 0) / count;
-          location = [avgLng, avgLat];
-        }
+        const ward = wardsData.find((w) => w.id === wardId);
+        if (!ward) return;
+        const location = [ward.lng, ward.lat];
 
         if (!location || isNaN(location[0]) || isNaN(location[1])) return;
 
@@ -443,7 +477,7 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
               data-report-id="${report.id}"
               style="width: 100%; background: var(--color-primary); color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer;"
             >
-              View Full Details & Representative Info →
+              ${t('view_details_rep_info')}
             </button>
           </div>
         `;
@@ -468,10 +502,80 @@ export const MapView = ({ reports, onMapClick, onReportSelect }) => {
       {/* Active/Total Reports Badge (NammaKasa style) */}
       <div className="nk-report-badge">
         <span className="nk-badge-active">{reports.filter(r => r.status === 'unresolved').length}</span>
-        <span className="nk-badge-label"> Active</span>
+        <span className="nk-badge-label"> {t('filter_unresolved')}</span>
         <span className="nk-badge-sep">·</span>
         <span className="nk-badge-total">{reports.length}</span>
         <span className="nk-badge-label"> {t('reports_count')}</span>
+      </div>
+
+      {/* Map Legend (Heatmap & Severities) */}
+      <div className="map-legend-card" style={{
+        position: 'absolute',
+        bottom: '64px',
+        left: '24px',
+        zIndex: 998,
+        background: 'var(--color-bg-card)',
+        border: '1px solid var(--glass-border)',
+        borderRadius: 'var(--radius-md)',
+        padding: '12px',
+        boxShadow: 'var(--shadow-md)',
+        fontSize: '11px',
+        color: 'var(--color-text-primary)',
+        width: '180px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+        pointerEvents: 'auto'
+      }}>
+        <div style={{ fontWeight: 700, fontSize: '11.5px', borderBottom: '1px solid var(--glass-border)', paddingBottom: '4px', marginBottom: '2px' }}>
+          {t('map_legend')}
+        </div>
+        
+        {/* Ward Cleanliness Grades */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+          <div style={{ fontWeight: 600, color: 'var(--color-text-secondary)', marginBottom: '2px' }}>{t('ward_cleanliness_score')}</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#16A34A', display: 'inline-block' }} />
+            <span>{t('score_excellent')}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#84CC16', display: 'inline-block' }} />
+            <span>{t('score_good')}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#EAB308', display: 'inline-block' }} />
+            <span>{t('score_moderate')}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#EA580C', display: 'inline-block' }} />
+            <span>{t('score_attention')}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#DC2626', display: 'inline-block' }} />
+            <span>{t('score_critical')}</span>
+          </div>
+        </div>
+
+        {/* Pin Severities */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', borderTop: '1px solid var(--glass-border)', paddingTop: '6px', marginTop: '2px' }}>
+          <div style={{ fontWeight: 600, color: 'var(--color-text-secondary)', marginBottom: '2px' }}>{t('complaint_severity_pins')}</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#16A34A', border: '1px solid white', display: 'inline-block' }} />
+            <span>{t('filter_minor')}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#D97706', border: '1px solid white', display: 'inline-block' }} />
+            <span>{t('filter_moderate')}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EA580C', border: '1px solid white', display: 'inline-block' }} />
+            <span>{t('filter_severe')}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#DC2626', border: '1px solid white', display: 'inline-block' }} />
+            <span>{t('filter_critical')}</span>
+          </div>
+        </div>
       </div>
     </div>
   );

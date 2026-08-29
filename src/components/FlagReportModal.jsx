@@ -29,7 +29,12 @@ export const FlagReportModal = ({ isOpen, onClose, report, onSuccess }) => {
         body: JSON.stringify({ reason })
       });
     } catch {
-      // Local fallback
+      // Local fallback simulation & storage update
+      const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
+      const updated = stored.map((r) =>
+        r.id === report.id ? { ...r, flagged: (r.flagged || 0) + 1, flag_reason: reason } : r
+      );
+      localStorage.setItem('amdavad_safai_local_reports', JSON.stringify(updated));
     } finally {
       setSubmitting(false);
       if (onSuccess) onSuccess();
@@ -54,7 +59,7 @@ export const FlagReportModal = ({ isOpen, onClose, report, onSuccess }) => {
           <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <div style={{ display: 'flex', gap: '10px', background: '#FEF2F2', border: '1px solid #FCA5A5', padding: '12px', borderRadius: '8px', color: '#991B1B', fontSize: '12.5px' }}>
               <AlertTriangle size={18} style={{ flexShrink: 0 }} />
-              <span>Flagging reports helps remove spam or non-existent garbage locations from the municipal map.</span>
+              <span>{t('dispute_banner_text')}</span>
             </div>
 
             <div className="input-group">
@@ -77,7 +82,7 @@ export const FlagReportModal = ({ isOpen, onClose, report, onSuccess }) => {
               {t('close')}
             </button>
             <button type="submit" className="modal-btn-primary" disabled={submitting} style={{ background: '#DC2626', color: 'white', border: 'none' }}>
-              {submitting ? 'Flagging...' : 'Submit Dispute'}
+              {submitting ? t('flagging') : t('submit_dispute')}
             </button>
           </div>
         </form>

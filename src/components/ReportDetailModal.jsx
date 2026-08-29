@@ -51,7 +51,11 @@ export const ReportDetailModal = ({
       await fetch(`/api/reports/${report.id}/upvote`, { method: 'POST' });
       if (onUpvoteSuccess) onUpvoteSuccess();
     } catch {
-      // Local state updated
+      // Local storage fallback for offline support
+      const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
+      const updated = stored.map((r) => r.id === report.id ? { ...r, upvotes: (r.upvotes || 0) + 1 } : r);
+      localStorage.setItem('amdavad_safai_local_reports', JSON.stringify(updated));
+      if (onUpvoteSuccess) onUpvoteSuccess();
     }
   };
 
@@ -93,7 +97,7 @@ export const ReportDetailModal = ({
             />
           ) : (
             <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94A3B8', fontSize: '13px' }}>
-              📍 {wardName} Garbage Dump Location
+              📍 {wardName}
             </div>
           )}
 
@@ -198,7 +202,7 @@ export const ReportDetailModal = ({
               }}
             >
               <Share2 size={13} />
-              <span>{copied ? 'Copied!' : t('share_report')}</span>
+              <span>{copied ? t('link_copied') : t('share_report')}</span>
             </button>
           </div>
 
@@ -206,7 +210,7 @@ export const ReportDetailModal = ({
           <div style={{ background: 'var(--color-bg-elevated)', padding: '14px', borderRadius: '10px', border: '1px solid var(--glass-border)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)', margin: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
               <ShieldCheck size={16} style={{ color: 'var(--color-primary)' }} />
-              Elected Representative Hierarchy & Accountability
+              {t('rep_hierarchy_title')}
             </h4>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
@@ -216,7 +220,7 @@ export const ReportDetailModal = ({
                   {t('corporator_title')}
                 </span>
                 <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-text-primary)' }}>{corporatorName}</span>
-                <span style={{ fontSize: '10.5px', color: 'var(--color-text-secondary)' }}>AMC Ward Representative</span>
+                <span style={{ fontSize: '10.5px', color: 'var(--color-text-secondary)' }}>{t('amc_ward_rep')}</span>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', background: 'var(--color-bg)', padding: '8px 10px', borderRadius: '8px' }}>
@@ -230,7 +234,7 @@ export const ReportDetailModal = ({
                     {mlaParty}
                   </span>
                 </div>
-                <span style={{ fontSize: '10.5px', color: 'var(--color-text-secondary)' }}>Gujarat Vidhan Sabha MLA</span>
+                <span style={{ fontSize: '10.5px', color: 'var(--color-text-secondary)' }}>{t('gujarat_vidhan_sabha_mla')}</span>
               </div>
             </div>
 
@@ -258,7 +262,7 @@ export const ReportDetailModal = ({
                   textDecoration: 'none'
                 }}
               >
-                📞 Call AMC Control Room (155303)
+                {t('call_amc_control_room')}
               </a>
               <a
                 href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Unresolved garbage complaint in Ward ${wardName}, Ahmedabad. Needs action @AHMAMC @AmdavadSafai ${window.location.origin}/#report=${report.id}`)}`}
@@ -279,7 +283,7 @@ export const ReportDetailModal = ({
                   textDecoration: 'none'
                 }}
               >
-                🐦 Escalate on X / Twitter
+                {t('escalate_x_twitter')}
               </a>
             </div>
           </div>
@@ -289,7 +293,7 @@ export const ReportDetailModal = ({
           {report.status === 'resolved' && report.verified_image_url && (
             <div style={{ background: '#ECFDF5', border: '1px solid #6EE7B7', padding: '12px', borderRadius: '10px' }}>
               <span style={{ fontSize: '12px', fontWeight: 700, color: '#065F46', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '6px' }}>
-                <CheckCircle2 size={14} /> Verified Clean Spot Evidence
+                <CheckCircle2 size={14} /> {t('clean_spot_evidence')}
               </span>
               <img src={report.verified_image_url} alt="Cleaned site" style={{ width: '100%', height: '140px', objectFit: 'cover', borderRadius: '6px' }} />
             </div>

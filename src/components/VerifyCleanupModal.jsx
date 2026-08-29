@@ -38,7 +38,12 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
         body: JSON.stringify({ verified_image_url: photo, notes })
       });
     } catch {
-      // Local fallback simulation
+      // Local fallback simulation & storage update
+      const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
+      const updated = stored.map((r) =>
+        r.id === report.id ? { ...r, status: 'resolved', verified_image_url: photo } : r
+      );
+      localStorage.setItem('amdavad_safai_local_reports', JSON.stringify(updated));
     } finally {
       setSubmitting(false);
       if (onSuccess) onSuccess();
@@ -93,12 +98,12 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
             </div>
 
             <div className="input-group">
-              <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-secondary)' }}>Verification Notes (Optional)</label>
+              <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-secondary)' }}>{t('verification_notes_label')}</label>
               <textarea
                 rows={2}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="e.g. Cleared by AMC truck team at 10 AM today"
+                placeholder={t('verification_notes_placeholder')}
                 className="modal-input"
               />
             </div>
@@ -109,7 +114,7 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
               {t('close')}
             </button>
             <button type="submit" className="modal-btn-primary" disabled={submitting} style={{ background: '#16A34A', color: 'white', border: 'none' }}>
-              {submitting ? 'Verifying...' : 'Mark as Resolved ✅'}
+              {submitting ? t('verifying') : t('mark_as_resolved')}
             </button>
           </div>
         </form>

@@ -212,7 +212,7 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                 <p className="modal-description">{t('report_desc')}</p>
 
                 <div className="input-group">
-                  <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-secondary)' }}>Report location</label>
+                  <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-secondary)' }}>{t('report_location_label')}</label>
                   <button
                     type="button"
                     className="modal-btn-secondary"
@@ -221,10 +221,10 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                     style={{ alignSelf: 'flex-start', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                   >
                     <LocateFixed size={16} />
-                    {locating ? 'Finding location…' : 'Use my current location'}
+                    {locating ? t('finding_location') : t('use_my_location')}
                   </button>
                   <span style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>
-                    We use this only to match the report to the correct ward.
+                    {t('location_ward_privacy_hint')}
                   </span>
                   {locationMessage && (
                     <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>{locationMessage}</span>
@@ -251,7 +251,7 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                   ) : (
                     <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px', border: '1px dashed var(--glass-border)', borderRadius: '8px', cursor: 'pointer', background: 'var(--color-bg-elevated)' }}>
                       <Camera size={18} style={{ color: 'var(--color-primary)' }} />
-                      <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>Choose Image file or Take Photo</span>
+                      <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>{t('choose_image_take_photo')}</span>
                       <input type="file" accept="image/*" capture="environment" onChange={handlePhotoSelect} style={{ display: 'none' }} />
                     </label>
                   )}
@@ -262,7 +262,17 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                   <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-secondary)' }}>{t('select_ward')} *</label>
                   <select
                     value={wardId}
-                    onChange={(e) => setWardId(e.target.value)}
+                    onChange={(e) => {
+                      const selectedId = e.target.value;
+                      setWardId(selectedId);
+                      if (selectedId && !pickedCoords) {
+                        const selectedWard = wards.find((w) => w.id === selectedId);
+                        if (selectedWard) {
+                          setLat(selectedWard.lat.toFixed(5));
+                          setLng(selectedWard.lng.toFixed(5));
+                        }
+                      }
+                    }}
                     className="modal-input"
                     required
                   >

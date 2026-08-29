@@ -62,12 +62,11 @@ def get_report_by_id(db: Session, report_id: str):
     return db.query(models.Report).filter(models.Report.id == report_id).first()
 
 def create_report(db: Session, report: schemas.ReportCreate):
-    ward_id = report.ward_id
-    if not ward_id:
-        ward, dist = get_nearest_ward(db, report.lat, report.lng)
-        if not ward:
-            raise ValueError(f"Location ({report.lat}, {report.lng}) is outside the Ahmedabad municipal jurisdiction area ({dist/1000:.1f} km away).")
-        ward_id = ward.id
+    # Always resolve the closest ward from the coordinates to maintain data integrity
+    ward, dist = get_nearest_ward(db, report.lat, report.lng)
+    if not ward:
+        raise ValueError(f"Location ({report.lat}, {report.lng}) is outside the Ahmedabad municipal jurisdiction area ({dist/1000:.1f} km away).")
+    ward_id = ward.id
 
     # Process and save uploaded image into public/uploads and push to GitHub repository
     saved_image_url = save_image_and_push_to_github(report.image_url) if report.image_url else None
@@ -112,8 +111,6 @@ def verify_report_cleanup(db: Session, report_id: str, verified_image_url: str =
         report.verified_image_url = saved_url
     db.commit()
     db.refresh(report)
-    return report
-
     return report
 
 def flag_report(db: Session, report_id: str, reason: str):

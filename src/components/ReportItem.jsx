@@ -42,12 +42,13 @@ export const ReportItem = ({ report, onClick }) => {
             {t(`filter_${report.severity}`)}
           </span>
           <span className={`badge status-${report.status}`}>
-            {report.status === 'resolved' ? (
-              <CheckCircle2 size={12} style={{ marginRight: '3px' }} />
-            ) : (
-              <AlertCircle size={12} style={{ marginRight: '3px' }} />
+            {report.status === 'resolved' && (
+              <span className="status-icon"><CheckCircle2 size={12} style={{ marginRight: '3px' }} /></span>
             )}
-            {t(`${report.status}_badge`)}
+            {report.status !== 'resolved' && (
+              <span className="status-icon"><AlertCircle size={12} style={{ marginRight: '3px' }} /></span>
+            )}
+            <span>{t(`${report.status}_badge`)}</span>
           </span>
           <span className="badge" style={{ background: 'var(--color-bg-elevated)', color: 'var(--color-text-secondary)', border: '1px solid var(--glass-border)' }}>
             {t(categoryKey)}
