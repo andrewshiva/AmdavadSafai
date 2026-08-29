@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
 import { Menu, Globe, Sparkles, BookOpen } from 'lucide-react';
 import SocialMenu from './SocialMenu';

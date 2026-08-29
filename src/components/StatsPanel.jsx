@@ -80,9 +80,9 @@ export const StatsPanel = ({ reports }) => {
     .slice(0, 5);
 
   // Fallback charts if API stats not loaded yet
-  const zoneChartData = statsData?.zone_breakdown
+  const zoneChartData = Array.isArray(statsData?.zone_breakdown)
     ? statsData.zone_breakdown.map((z) => ({
-        zone: lang === 'gu' ? z.zone_gu || z.zone_en : z.zone_en,
+        zone: lang === 'gu' ? z.zone_gu || z.zone_en : lang === 'hi' ? z.zone_hi || z.zone_en : z.zone_en,
         unresolved: z.unresolved,
         resolved: z.resolved
       }))
@@ -95,18 +95,31 @@ export const StatsPanel = ({ reports }) => {
       ];
 
   const severityChartData = statsData?.severity_distribution
-    ? Object.entries(statsData.severity_distribution).map(([severityKey, valueCount]) => ({
-        name: t(`filter_${severityKey}`),
-        value: valueCount,
-        color:
-          severityKey === 'minor'
-            ? '#16A34A'
-            : severityKey === 'moderate'
-            ? '#D97706'
-            : severityKey === 'severe'
-            ? '#EA580C'
-            : '#DC2626'
-      }))
+    ? Array.isArray(statsData.severity_distribution)
+      ? statsData.severity_distribution.map((item) => ({
+          name: t(`filter_${item.severity || item.name}`),
+          value: item.count || item.value || 0,
+          color:
+            item.severity === 'minor'
+              ? '#16A34A'
+              : item.severity === 'moderate'
+              ? '#D97706'
+              : item.severity === 'severe'
+              ? '#EA580C'
+              : '#DC2626'
+        }))
+      : Object.entries(statsData.severity_distribution).map(([severityKey, valueCount]) => ({
+          name: t(`filter_${severityKey}`),
+          value: valueCount,
+          color:
+            severityKey === 'minor'
+              ? '#16A34A'
+              : severityKey === 'moderate'
+              ? '#D97706'
+              : severityKey === 'severe'
+              ? '#EA580C'
+              : '#DC2626'
+        }))
     : [
         { name: t('filter_minor'), value: 4, color: '#16A34A' },
         { name: t('filter_moderate'), value: 6, color: '#D97706' },
