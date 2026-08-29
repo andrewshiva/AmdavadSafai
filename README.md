@@ -1,6 +1,6 @@
 # 🧹 AmdavadSafai — અમદાવાદ સફાઈ
 
-### Crowdsourced Garbage Reporting & Community Action Map for Ahmedabad
+## Crowdsourced Garbage Reporting & Community Action Map for Ahmedabad
 
 A civic-tech full-stack web application that enables citizens to track, report, and solve garbage and sanitation issues across Ahmedabad's municipal wards. Built with full **Gujarati (ગુજરાતી)**, **Hindi (हिंदी)**, and **English** language support.
 
@@ -223,4 +223,4 @@ MIT License — Built with pride for the citizens of Ahmedabad.
 
 ---
 
-**🧹 AmdavadSafai — આપણું શહેર, આપણી જવાબદારી**
+> 🧹 **AmdavadSafai** — આપણું શહેર, આપણી જવાબદારી
