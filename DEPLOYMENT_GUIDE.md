@@ -68,8 +68,9 @@ This project is fully configured to run **100% freely** with:
 
 ## 💡 Pro-Tips
 
-### Render Free Tier Spin-Down:
-Render free web services enter sleep mode if there are no requests for 15 minutes. 
+### Render Free Tier Spin-Down
+
+Render free web services enter sleep mode if there are no requests for 15 minutes.
 The first request after sleep will take ~30–40 seconds to wake up the server. Subsequent requests will be instantaneous.
 
 ### Optional: Keep Backend Awake with Free Cron Job
