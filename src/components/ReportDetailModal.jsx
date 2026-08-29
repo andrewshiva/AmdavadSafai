@@ -40,6 +40,7 @@ export const ReportDetailModal = ({
   const mlaParty = ward?.mla_party || 'BJP';
   const mpName = ward ? (lang === 'gu' ? ward.mp_gu : ward.mp_en) : 'Hasmukh Patel';
 
+  const description = lang === 'gu' ? report.description_gu : lang === 'hi' ? report.description_hi || report.description_en : report.description_en;
   const categoryKey = report.category ? `cat_${report.category}` : 'cat_mixed_waste';
   const categoryLabel = t(categoryKey);
 
