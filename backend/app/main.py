@@ -7,11 +7,11 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from typing import List, Optional
 import models, schemas, crud, geojson_data, civic_data
-from image_storage import UPLOADS_DIR
-from database import engine, get_db
+from database import engine, get_db, apply_sqlite_migrations
 from seed import seed_database
 
-# Create SQLAlchemy database tables automatically
+# Apply schema migrations and create SQLAlchemy database tables
+apply_sqlite_migrations()
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -139,3 +139,38 @@ def create_subscription(subscription: schemas.SubscriptionCreate, db: Session = 
     if db_sub:
         raise HTTPException(status_code=400, detail="Email is already subscribed to Monday Digest")
     return crud.create_subscription(db=db, subscription=subscription)
+
+# --- Cleanup Events Endpoints ---
+@app.get("/api/events", response_model=List[schemas.CleanupEventOut])
+def read_events(
+    ward_id: Optional[str] = Query('all', description="Filter cleanup events by ward ID"),
+    status: Optional[str] = Query('all', description="Filter cleanup events by status"),
+    db: Session = Depends(get_db)
+):
+    return crud.get_events(db, ward_id=ward_id, status=status)
+
+@app.get("/api/events/{event_id}", response_model=schemas.CleanupEventOut)
+def read_event_by_id(event_id: str, db: Session = Depends(get_db)):
+    event = crud.get_event_by_id(db, event_id=event_id)
+    if not event:
+        raise HTTPException(status_code=404, detail="Cleanup event not found")
+    return event
+
+@app.post("/api/events", response_model=schemas.CleanupEventOut)
+def create_cleanup_event(event: schemas.CleanupEventCreate, db: Session = Depends(get_db)):
+    try:
+        return crud.create_event(db=db, event=event)
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail=str(error)) from error
+
+@app.post("/api/events/{event_id}/join", response_model=schemas.JoinEventOut)
+def join_cleanup_event(event_id: str, db: Session = Depends(get_db)):
+    event = crud.join_event(db=db, event_id=event_id)
+    if not event:
+        raise HTTPException(status_code=404, detail="Cleanup event not found")
+    return {
+        "id": event.id,
+        "volunteers_joined": event.volunteers_joined,
+        "message": f"Successfully joined {event.title_en}!"
+    }
+

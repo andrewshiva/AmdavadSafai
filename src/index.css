@@ -1318,3 +1318,88 @@ button, select, input {
 .markdown-body ul, .markdown-body ol { padding-left: 2em; margin-top: 0; margin-bottom: 1em; }
 .markdown-body blockquote { padding: 0 1em; color: var(--color-text-secondary); border-left: 0.25em solid var(--glass-border); margin: 0 0 1em 0; background: var(--color-bg-elevated); border-radius: 0 8px 8px 0; padding-top: 0.5em; padding-bottom: 0.5em; }
 .markdown-body blockquote p:last-child { margin-bottom: 0; }
+
+/* Trilingual Toggle Control */
+.trilingual-toggle {
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-elevated, #F1F5F9);
+  border: 1px solid var(--glass-border, rgba(0,0,0,0.1));
+  border-radius: 20px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.lang-segment {
+  background: transparent;
+  border: none;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--color-text-secondary, #64748B);
+  padding: 4px 9px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lang-segment:hover {
+  color: var(--color-text-primary, #0F172A);
+}
+
+.lang-segment.active {
+  background: var(--color-primary, #059669);
+  color: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(5, 150, 105, 0.25);
+}
+
+/* Header Action Buttons & Karma Pill */
+.header-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.header-action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.header-action-btn.events-btn {
+  background: rgba(5, 150, 105, 0.1);
+  color: #047857;
+  border-color: rgba(5, 150, 105, 0.25);
+}
+
+.header-action-btn.karma-pill-btn {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.15) 100%);
+  color: #B45309;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.events-count-badge {
+  background: #059669;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 10px;
+  margin-left: 2px;
+}
+
+/* Cleanup Drive Pulse Animation */
+@keyframes drivePulse {
+  0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(5, 150, 105, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+}
+
+.cleanup-drive-marker-pin {
+  animation: drivePulse 2.4s infinite;
+}
+

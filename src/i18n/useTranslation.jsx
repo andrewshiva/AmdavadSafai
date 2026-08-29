@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import enTranslations from './en.json';
 import guTranslations from './gu.json';
+import hiTranslations from './hi.json';
 
 // Preserve context instance during Vite Fast Refresh / HMR reloads
 const TranslationContext = window.__TranslationContext || createContext({
   t: (key) => key,
   lang: 'gu',
+  setLanguage: () => {},
   toggleLang: () => {}
 });
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
@@ -23,16 +25,35 @@ export const TranslationProvider = ({ children }) => {
   }, [lang]);
 
   const toggleLang = () => {
-    setLang((prev) => (prev === 'en' ? 'gu' : 'en'));
+    setLang((prev) => {
+      if (prev === 'gu') return 'hi';
+      if (prev === 'hi') return 'en';
+      return 'gu';
+    });
   };
 
-  const t = (key) => {
-    const translations = lang === 'en' ? enTranslations : guTranslations;
-    return translations[key] || key;
+  const setLanguage = (newLang) => {
+    if (['gu', 'hi', 'en'].includes(newLang)) {
+      setLang(newLang);
+    }
+  };
+
+  const t = (key, params = {}) => {
+    let dict = guTranslations;
+    if (lang === 'en') dict = enTranslations;
+    else if (lang === 'hi') dict = hiTranslations;
+
+    let text = dict[key] || enTranslations[key] || guTranslations[key] || key;
+    if (params && typeof params === 'object') {
+      Object.entries(params).forEach(([pKey, pVal]) => {
+        text = text.replace(new RegExp(`\\{${pKey}\\}`, 'g'), String(pVal));
+      });
+    }
+    return text;
   };
 
   return (
-    <TranslationContext.Provider value={{ t, lang, toggleLang }}>
+    <TranslationContext.Provider value={{ t, lang, setLanguage, toggleLang }}>
       {children}
     </TranslationContext.Provider>
   );
@@ -41,12 +62,13 @@ export const TranslationProvider = ({ children }) => {
 export const useTranslation = () => {
   const context = useContext(TranslationContext);
   if (!context) {
-    // Return safe fallback instead of throwing during HMR or Fast Refresh transitions
     return {
       t: (key) => key,
       lang: 'gu',
+      setLanguage: () => {},
       toggleLang: () => {}
     };
   }
   return context;
 };
+

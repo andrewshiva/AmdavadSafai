@@ -22,7 +22,8 @@ export const ReportDetailModal = ({
   report,
   onVerifyClick,
   onFlagClick,
-  onUpvoteSuccess
+  onUpvoteSuccess,
+  onOpenShareCard
 }) => {
   const { t, lang } = useTranslation();
   const [upvotes, setUpvotes] = useState(report?.upvotes || 0);
@@ -185,6 +186,38 @@ export const ReportDetailModal = ({
               {t('get_directions')}
             </a>
 
+            {onOpenShareCard && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenShareCard({
+                    type: 'report',
+                    title: description,
+                    location: `${wardName} (Ward ${report.ward_id})`,
+                    status: report.status,
+                    severity: report.severity
+                  });
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  background: 'rgba(37, 211, 102, 0.1)',
+                  border: '1px solid rgba(37, 211, 102, 0.3)',
+                  color: '#15803D',
+                  padding: '6px 10px',
+                  borderRadius: '6px',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                <Share2 size={13} />
+                <span>WhatsApp / Insta</span>
+              </button>
+            )}
+
             <button
               type="button"
               onClick={handleShare}
@@ -201,7 +234,7 @@ export const ReportDetailModal = ({
                 cursor: 'pointer'
               }}
             >
-              <Share2 size={13} />
+              <ExternalLink size={13} />
               <span>{copied ? t('link_copied') : t('share_report')}</span>
             </button>
           </div>

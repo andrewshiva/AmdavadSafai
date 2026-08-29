@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from '../i18n/useTranslation';
 import { X, CheckCircle2, Upload, Camera } from 'lucide-react';
+import { addKarmaPoints } from '../utils/gamification';
 
 export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
   const { t } = useTranslation();
@@ -45,6 +46,7 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
       );
       localStorage.setItem('amdavad_safai_local_reports', JSON.stringify(updated));
     } finally {
+      addKarmaPoints('CLEANUP_VERIFIED', 25);
       setSubmitting(false);
       if (onSuccess) onSuccess();
       onClose();

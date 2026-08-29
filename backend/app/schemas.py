@@ -122,3 +122,38 @@ class StatsOut(BaseModel):
     ward_leaderboard: Optional[List[WardLeaderboardOut]] = None
     zone_breakdown: Optional[List[ZoneStatsOut]] = None
     severity_distribution: Optional[SeverityStatsOut] = None
+
+# --- Cleanup Event Schemas ---
+class CleanupEventBase(BaseModel):
+    ward_id: Optional[str] = None
+    title_en: str
+    title_gu: str
+    title_hi: Optional[str] = ""
+    description_en: str
+    description_gu: str
+    description_hi: Optional[str] = ""
+    location_name: str
+    date_time: str
+    organizer_name: Optional[str] = "Amdavad Clean Citizen Squad"
+    organizer_contact: Optional[str] = None
+    target_volunteers: Optional[int] = 25
+    volunteers_joined: Optional[int] = 1
+    required_items: Optional[str] = "Gloves, Trash Bags, Water Bottle"
+    status: Optional[str] = "upcoming"
+    lat: float
+    lng: float
+
+class CleanupEventCreate(CleanupEventBase):
+    pass
+
+class CleanupEventOut(CleanupEventBase):
+    id: str
+    created_at: datetime.datetime
+
+    class Config:
+        from_attributes = True
+
+class JoinEventOut(BaseModel):
+    id: str
+    volunteers_joined: int
+    message: str

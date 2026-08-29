@@ -5,6 +5,7 @@ import { useTranslation } from '../i18n/useTranslation';
 import wardsData from '../data/wards.json';
 import staticGeoJSON from '../data/ahmedabad_wards.json';
 import cityMaskGeoJSON from '../data/ahmedabad_city_mask.json';
+import defaultEventsData from '../data/events.json';
 
 // Compute centroid of a polygon from its coordinate ring
 const computeCentroid = (coords) => {
@@ -19,10 +20,11 @@ const computeCentroid = (coords) => {
   return count > 0 ? [sumLng / count, sumLat / count] : null;
 };
 
-export const MapView = ({ reports, onMapClick, onReportSelect, wardId }) => {
+export const MapView = ({ reports, events = defaultEventsData, onMapClick, onReportSelect, onEventSelect, wardId }) => {
   const { t, lang } = useTranslation();
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
+  const eventPinsRef = useRef([]);
   const circleMarkersRef = useRef([]);
   const individualPinsRef = useRef([]);
   const tempMarkerRef = useRef(null);
@@ -493,7 +495,69 @@ export const MapView = ({ reports, onMapClick, onReportSelect, wardId }) => {
         individualPinsRef.current.push(marker);
       });
     }
-  }, [reports, lang, geoData, zoom]);
+
+    // 3. Render Cleanup Drives (📅 Sunday Cleanups) across all zoom levels
+    eventPinsRef.current.forEach((m) => m.remove());
+    eventPinsRef.current = [];
+
+    if (events && events.length > 0) {
+      events.forEach((evt) => {
+        if (!evt.lat || !evt.lng) return;
+        const el = document.createElement('div');
+        el.className = 'cleanup-drive-marker-pin';
+        el.innerHTML = '🧹';
+        el.style.cssText = `
+          width: 32px;
+          height: 32px;
+          background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+          border: 2.5px solid #FFFFFF;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 15px;
+          cursor: pointer;
+          box-shadow: 0 4px 14px rgba(5, 150, 105, 0.5);
+          transition: transform 0.18s ease;
+          z-index: 10;
+        `;
+        el.onmouseover = () => { el.style.transform = 'scale(1.25)'; };
+        el.onmouseout = () => { el.style.transform = 'scale(1)'; };
+
+        const evtTitle = lang === 'gu' ? evt.title_gu : lang === 'hi' ? evt.title_hi || evt.title_en : evt.title_en;
+        const popupHTML = `
+          <div class="popup-content" style="padding: 12px; min-width: 220px; font-family: sans-serif;">
+            <span style="font-size: 10px; font-weight: 700; color: #059669; background: #ECFDF5; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px;">
+              📅 SUNDAY CLEANUP DRIVE
+            </span>
+            <h4 style="margin: 0 0 4px 0; font-size: 14px; font-weight: 700; color: var(--color-text-primary);">${evtTitle}</h4>
+            <p style="margin: 0 0 6px 0; font-size: 12px; color: var(--color-text-secondary);">📍 ${evt.location_name}</p>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #059669; font-weight: 700; margin-bottom: 8px;">
+              <span>⏰ ${evt.date_time}</span>
+              <span>👥 ${evt.volunteers_joined}/${evt.target_volunteers} Joined</span>
+            </div>
+            <button
+              class="view-event-detail-btn"
+              data-event-id="${evt.id}"
+              style="width: 100%; background: #059669; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer;"
+            >
+              👥 ${t('join_drive')} (+50 pts)
+            </button>
+          </div>
+        `;
+
+        const popup = new maplibregl.Popup({ offset: 10, className: 'maplibre-custom-popup' })
+          .setHTML(popupHTML);
+
+        const marker = new maplibregl.Marker({ element: el })
+          .setLngLat([evt.lng, evt.lat])
+          .setPopup(popup)
+          .addTo(map);
+
+        eventPinsRef.current.push(marker);
+      });
+    }
+  }, [reports, events, lang, geoData, zoom]);
 
   return (
     <div className="map-view-container" style={{ width: '100%', height: '100%', position: 'relative' }}>

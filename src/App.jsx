@@ -11,6 +11,10 @@ import ReportDetailModal from './components/ReportDetailModal';
 import OutofCityModal from './components/OutofCityModal';
 import VerifyCleanupModal from './components/VerifyCleanupModal';
 import FlagReportModal from './components/FlagReportModal';
+import EventsModal from './components/EventsModal';
+import CreateEventModal from './components/CreateEventModal';
+import BadgesModal from './components/BadgesModal';
+import ShareCardModal from './components/ShareCardModal';
 import { useFilter } from './hooks/useFilter';
 import { Map, List, Loader2, Plus } from 'lucide-react';
 import wardsData from './data/wards.json';
@@ -26,6 +30,10 @@ export const App = () => {
   const [verifyReportTarget, setVerifyReportTarget] = useState(null);
   const [flagReportTarget, setFlagReportTarget] = useState(null);
   const [outofCityMessage, setOutofCityMessage] = useState(null);
+  const [isEventsOpen, setIsEventsOpen] = useState(false);
+  const [isCreateEventOpen, setIsCreateEventOpen] = useState(false);
+  const [isBadgesOpen, setIsBadgesOpen] = useState(false);
+  const [shareCardTarget, setShareCardTarget] = useState(null);
 
   const {
     severity,
@@ -60,13 +68,28 @@ export const App = () => {
     return () => window.removeEventListener('hashchange', handleHash);
   }, [filteredReports]);
 
+  // Listen for event popup button clicks from MapLibre
+  useEffect(() => {
+    const handleDocumentClick = (e) => {
+      const btn = e.target.closest('.view-event-detail-btn');
+      if (btn) {
+        setIsEventsOpen(true);
+      }
+    };
+    document.addEventListener('click', handleDocumentClick);
+    return () => document.removeEventListener('click', handleDocumentClick);
+  }, []);
+
   return (
     <div className="app-container">
       {/* Welcome Screen */}
       <WelcomeOverlay />
 
-      {/* Header bar */}
-      <Header />
+      {/* Header bar with Trilingual toggle, Drives trigger & Karma points */}
+      <Header
+        onOpenEvents={() => setIsEventsOpen(true)}
+        onOpenBadges={() => setIsBadgesOpen(true)}
+      />
 
       {/* Main app body */}
       <main className="main-content">
@@ -194,6 +217,7 @@ export const App = () => {
           setFlagReportTarget(rpt);
         }}
         onUpvoteSuccess={refetch}
+        onOpenShareCard={(cardData) => setShareCardTarget(cardData)}
       />
 
       {/* Out of City Geofence Modal */}
@@ -216,6 +240,40 @@ export const App = () => {
         onClose={() => setFlagReportTarget(null)}
         report={flagReportTarget}
         onSuccess={refetch}
+      />
+
+      {/* Community Cleanup Drives Modal */}
+      <EventsModal
+        isOpen={isEventsOpen}
+        onClose={() => setIsEventsOpen(false)}
+        onOpenCreateEvent={() => {
+          setIsEventsOpen(false);
+          setIsCreateEventOpen(true);
+        }}
+        onOpenShareCard={(cardData) => setShareCardTarget(cardData)}
+      />
+
+      {/* Create Cleanup Event Modal */}
+      <CreateEventModal
+        isOpen={isCreateEventOpen}
+        onClose={() => setIsCreateEventOpen(false)}
+        onEventCreated={() => {
+          setIsEventsOpen(true);
+        }}
+      />
+
+      {/* Citizen Badges & Impact Modal */}
+      <BadgesModal
+        isOpen={isBadgesOpen}
+        onClose={() => setIsBadgesOpen(false)}
+        onOpenEvents={() => setIsEventsOpen(true)}
+      />
+
+      {/* Social Share Card Modal */}
+      <ShareCardModal
+        isOpen={Boolean(shareCardTarget)}
+        onClose={() => setShareCardTarget(null)}
+        data={shareCardTarget}
       />
 
       {/* Bottom stats drawer */}

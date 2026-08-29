@@ -1,3 +1,4 @@
+from typing import Optional, List
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from math import asin, cos, radians, sin, sqrt
@@ -221,3 +222,61 @@ def get_stats(db: Session):
         "zone_breakdown": list(zone_map.values()),
         "severity_distribution": severity_dist
     }
+
+# --- Cleanup Events CRUD ---
+def get_events(db: Session, ward_id: Optional[str] = 'all', status: Optional[str] = 'all'):
+    query = db.query(models.CleanupEvent)
+    if ward_id and ward_id != 'all':
+        query = query.filter(models.CleanupEvent.ward_id == ward_id)
+    if status and status != 'all':
+        query = query.filter(models.CleanupEvent.status == status)
+    return query.order_by(models.CleanupEvent.created_at.desc()).all()
+
+def get_event_by_id(db: Session, event_id: str):
+    return db.query(models.CleanupEvent).filter(models.CleanupEvent.id == event_id).first()
+
+def create_event(db: Session, event: schemas.CleanupEventCreate):
+    event_id = f"evt_{uuid.uuid4().hex[:8]}"
+    ward = None
+    if event.ward_id:
+        ward = get_ward_by_id(db, event.ward_id)
+    if not ward:
+        nearest_ward, _ = get_nearest_ward(db, event.lat, event.lng)
+        ward_id = nearest_ward.id if nearest_ward else None
+    else:
+        ward_id = ward.id
+
+    db_event = models.CleanupEvent(
+        id=event_id,
+        ward_id=ward_id,
+        title_en=event.title_en,
+        title_gu=event.title_gu,
+        title_hi=event.title_hi or event.title_en,
+        description_en=event.description_en,
+        description_gu=event.description_gu,
+        description_hi=event.description_hi or event.description_en,
+        location_name=event.location_name,
+        date_time=event.date_time,
+        organizer_name=event.organizer_name or "Amdavad Clean Citizen Squad",
+        organizer_contact=event.organizer_contact,
+        target_volunteers=event.target_volunteers or 25,
+        volunteers_joined=event.volunteers_joined or 1,
+        required_items=event.required_items or "Gloves, Trash Bags, Water Bottle",
+        status=event.status or "upcoming",
+        lat=event.lat,
+        lng=event.lng
+    )
+    db.add(db_event)
+    db.commit()
+    db.refresh(db_event)
+    return db_event
+
+def join_event(db: Session, event_id: str):
+    db_event = get_event_by_id(db, event_id)
+    if not db_event:
+        return None
+    db_event.volunteers_joined += 1
+    db.commit()
+    db.refresh(db_event)
+    return db_event
+

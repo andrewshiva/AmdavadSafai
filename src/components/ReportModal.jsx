@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from '../i18n/useTranslation';
 import { X, AlertCircle, MapPin, CheckCircle2, LocateFixed, Camera, Tag } from 'lucide-react';
+import { addKarmaPoints } from '../utils/gamification';
 
 export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, onOutofCity }) => {
   const { t, lang } = useTranslation();
@@ -134,6 +135,7 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
       });
 
       if (response.ok) {
+        addKarmaPoints('REPORT_SUBMITTED', 10);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
