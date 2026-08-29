@@ -64,17 +64,23 @@ If you spot uncollected garbage, an overflowing bin, or a blocked drain, report 
 You can interact with reports submitted by your fellow citizens to ensure accuracy and foster accountability. Click on any report pin on the map or in the List View to open its details.
 
 ### A. Upvoting an Unresolved Report
-If you see the same garbage issue in your area, do not create a duplicate report. 
+
+If you see the same garbage issue in your area, do not create a duplicate report.
+
 - Open the existing report and click the **Upvote (👍)** button. This raises the priority of the complaint.
 
 ### B. Verifying a Cleanup
+
 If a report is marked as "Unresolved", but you notice the AMC has cleared the area:
+
 - Open the report and click **Verify Cleanup**.
 - You will be prompted to upload a new photo of the clean spot as proof.
 - Once submitted, the report's status will change to **Resolved** and the map pin will turn green.
 
 ### C. Flagging Fake or Disputed Reports
+
 If you find a report that is fake, duplicate, or abusive:
+
 - Click the **Flag (🚩)** button on the report.
 - Select a reason for flagging. If enough citizens flag a report, it will be marked for administrative review.
 
@@ -97,5 +103,6 @@ AmdavadSafai is built to work even when you lose your internet connection or run
 ## 6. Escalating Issues
 
 If a critical report remains unresolved for a long time, use the escalation tools inside the report details:
+
 - **X (Twitter)**: Click the "Escalate on X" button to generate a pre-filled tweet tagging the official AMC handles and your local representatives.
 - **Direct Call**: Use the provided button to instantly dial the AMC Control Room.
