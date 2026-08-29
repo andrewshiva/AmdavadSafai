@@ -4,14 +4,14 @@ import { Menu, Globe, Sparkles, BookOpen } from 'lucide-react';
 import SocialMenu from './SocialMenu';
 import SubscribeModal from './SubscribeModal';
 import ChangelogModal from './ChangelogModal';
-import { GuideModal } from './GuideModal';
+
 
 export const Header = ({ onOpenEvents, onOpenBadges }) => {
   const { t, lang, setLanguage } = useTranslation();
   const [isSocialOpen, setIsSocialOpen] = useState(false);
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
   const [isChangelogOpen, setIsChangelogOpen] = useState(false);
-  const [isGuideOpen, setIsGuideOpen] = useState(false);
+
   const [karmaPoints, setKarmaPoints] = useState(() => {
     try {
       const data = JSON.parse(localStorage.getItem('amdavad_safai_karma_v1') || '{}');
@@ -103,7 +103,7 @@ export const Header = ({ onOpenEvents, onOpenBadges }) => {
 
         <button 
           className="lang-toggle-btn icon-only" 
-          onClick={() => setIsGuideOpen(true)}
+          onClick={() => window.open('/guide/', '_blank')}
           title={t('help_guide_title') || 'Guide'}
         >
           <BookOpen size={16} />
@@ -132,11 +132,7 @@ export const Header = ({ onOpenEvents, onOpenBadges }) => {
         isOpen={isChangelogOpen}
         onClose={() => setIsChangelogOpen(false)}
       />
-      <GuideModal
-        isOpen={isGuideOpen}
-        onClose={() => setIsGuideOpen(false)}
-        t={t}
-      />
+
     </header>
   );
 };
