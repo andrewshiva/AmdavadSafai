@@ -438,21 +438,23 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
         const wardName = ward ? (lang === 'en' ? ward.name_en : ward.name_gu) : '';
         const corporatorName = ward ? (lang === 'en' ? ward.corporator_en : ward.corporator_gu) : '';
 
-        // Create individual report pin element (small dot colored by severity with white border)
-        const el = document.createElement('div');
-        el.className = 'glowing-map-marker';
-        el.style.cssText = `
+        // Create individual report pin element with safe nested container
+        const containerEl = document.createElement('div');
+        containerEl.className = 'glowing-map-marker-container';
+        containerEl.style.cssText = 'cursor: pointer;';
+
+        const innerEl = document.createElement('div');
+        innerEl.className = 'glowing-map-marker-inner';
+        innerEl.style.cssText = `
           width: 14px;
           height: 14px;
           border-radius: 50%;
           background-color: ${getSeverityColor(report.severity)};
           border: 2px solid #FFFFFF;
           box-shadow: 0 0 6px ${getSeverityColor(report.severity)}, 0 2px 6px rgba(0,0,0,0.15);
-          cursor: pointer;
           transition: transform 0.15s ease;
         `;
-        el.onmouseover = () => { el.style.transform = 'scale(1.25)'; };
-        el.onmouseout = () => { el.style.transform = 'scale(1)'; };
+        containerEl.appendChild(innerEl);
 
         const popupHTML = `
           <div class="popup-content" style="padding: 12px; min-width: 220px; font-family: sans-serif;">
@@ -484,10 +486,10 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
           </div>
         `;
 
-        const popup = new maplibregl.Popup({ offset: 8, className: 'maplibre-custom-popup' })
+        const popup = new maplibregl.Popup({ offset: 8, className: 'maplibre-custom-popup', focusAfterOpen: false })
           .setHTML(popupHTML);
 
-        const marker = new maplibregl.Marker({ element: el })
+        const marker = new maplibregl.Marker({ element: containerEl })
           .setLngLat([report.lng, report.lat])
           .setPopup(popup)
           .addTo(map);
@@ -503,10 +505,14 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
     if (events && events.length > 0) {
       events.forEach((evt) => {
         if (!evt.lat || !evt.lng) return;
-        const el = document.createElement('div');
-        el.className = 'cleanup-drive-marker-pin';
-        el.innerHTML = '🧹';
-        el.style.cssText = `
+        const containerEl = document.createElement('div');
+        containerEl.className = 'cleanup-drive-marker-container';
+        containerEl.style.cssText = 'cursor: pointer; z-index: 10;';
+
+        const innerEl = document.createElement('div');
+        innerEl.className = 'cleanup-drive-marker-inner';
+        innerEl.innerHTML = '🧹';
+        innerEl.style.cssText = `
           width: 32px;
           height: 32px;
           background: linear-gradient(135deg, #059669 0%, #10B981 100%);
@@ -516,13 +522,11 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
           align-items: center;
           justify-content: center;
           font-size: 15px;
-          cursor: pointer;
           box-shadow: 0 4px 14px rgba(5, 150, 105, 0.5);
           transition: transform 0.18s ease;
-          z-index: 10;
+          user-select: none;
         `;
-        el.onmouseover = () => { el.style.transform = 'scale(1.25)'; };
-        el.onmouseout = () => { el.style.transform = 'scale(1)'; };
+        containerEl.appendChild(innerEl);
 
         const evtTitle = lang === 'gu' ? evt.title_gu : lang === 'hi' ? evt.title_hi || evt.title_en : evt.title_en;
         const popupHTML = `
@@ -546,10 +550,10 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
           </div>
         `;
 
-        const popup = new maplibregl.Popup({ offset: 10, className: 'maplibre-custom-popup' })
+        const popup = new maplibregl.Popup({ offset: 10, className: 'maplibre-custom-popup', focusAfterOpen: false })
           .setHTML(popupHTML);
 
-        const marker = new maplibregl.Marker({ element: el })
+        const marker = new maplibregl.Marker({ element: containerEl })
           .setLngLat([evt.lng, evt.lat])
           .setPopup(popup)
           .addTo(map);
