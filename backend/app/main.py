@@ -150,7 +150,7 @@ def read_stats(db: Session = Depends(get_db)):
 def create_subscription(subscription: schemas.SubscriptionCreate, db: Session = Depends(get_db)):
     db_sub = crud.get_subscription_by_email(db, email=subscription.email)
     if db_sub:
-        raise HTTPException(status_code=400, detail="Email is already subscribed to Monday Digest")
+        return db_sub
     return crud.create_subscription(db=db, subscription=subscription)
 
 # --- Cleanup Events Endpoints ---

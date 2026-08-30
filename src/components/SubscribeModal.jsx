@@ -45,25 +45,37 @@ export const SubscribeModal = ({ isOpen, onClose }) => {
       });
 
       if (response.ok) {
+        localStorage.setItem('amdavad_safai_subscribed_email', email.trim());
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
           setEmail('');
           onClose();
-        }, 2000);
+        }, 2500);
       } else {
         const errorData = await response.json().catch(() => ({}));
-        setError(errorData.detail || 'Subscription failed. Please try again.');
+        if (errorData.detail && errorData.detail.toLowerCase().includes('already subscribed')) {
+          localStorage.setItem('amdavad_safai_subscribed_email', email.trim());
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+            setEmail('');
+            onClose();
+          }, 2500);
+        } else {
+          setError(errorData.detail || 'Subscription failed. Please try again.');
+        }
       }
     } catch {
       // Static deployments do not have to run the optional API service. Keep
       // the requested subscription flow usable in that mode.
+      localStorage.setItem('amdavad_safai_subscribed_email', email.trim());
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
         setEmail('');
         onClose();
-      }, 2000);
+      }, 2500);
     }
   };
 
