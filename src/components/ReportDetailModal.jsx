@@ -14,7 +14,10 @@ import {
   ShieldCheck,
   Tag,
   Copy,
-  Check
+  Check,
+  AlertTriangle,
+  Users,
+  MessageCircle
 } from 'lucide-react';
 import wardsData from '../data/wards.json';
 import BeforeAfterSlider from './BeforeAfterSlider';
@@ -26,6 +29,7 @@ export const ReportDetailModal = ({
   report,
   onVerifyClick,
   onFlagClick,
+  onDisputeClick,
   onUpvoteSuccess,
   onOpenShareCard
 }) => {
@@ -48,6 +52,9 @@ export const ReportDetailModal = ({
   const description = lang === 'gu' ? report.description_gu : lang === 'hi' ? report.description_hi || report.description_en : report.description_en;
   const categoryKey = report.category ? `cat_${report.category}` : 'cat_mixed_waste';
   const categoryLabel = t(categoryKey);
+
+  const diffHours = report.reported_at ? Math.floor((new Date() - new Date(report.reported_at)) / (1000 * 60 * 60)) : 0;
+  const isOverdue = report.status === 'unresolved' && diffHours >= 48;
 
   const handleUpvote = async () => {
     if (hasUpvoted) return;
@@ -123,6 +130,11 @@ export const ReportDetailModal = ({
             <span className={`badge status-${report.status}`} style={{ fontSize: '11px', fontWeight: 700, padding: '4px 10px', borderRadius: '12px' }}>
               {t(`${report.status}_badge`)}
             </span>
+            {isOverdue && (
+              <span style={{ fontSize: '11px', fontWeight: 700, padding: '4px 10px', borderRadius: '12px', background: '#DC2626', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', gap: '4px', boxShadow: '0 0 8px rgba(220, 38, 38, 0.6)' }}>
+                🔥 {diffHours}h+ {t('amc_overdue') || 'Overdue'}
+              </span>
+            )}
           </div>
         </div>
 
@@ -434,29 +446,88 @@ export const ReportDetailModal = ({
             </div>
           )}
 
-          {/* Community Actions (Verify / Flag) */}
+          {/* Society WhatsApp Mobilization Action */}
+          {(() => {
+            const ticketId = getAmcTicketId(report);
+            const societyMsg = `📢 *Urgent Civic Alert for ${wardName} Residents!*\n\nA garbage hotspot is pending action in our area:\n📍 *Ward:* ${wardName}\n⚠️ *Severity:* ${report.severity.toUpperCase()}\n🎫 *AMC CCRS Ticket:* ${ticketId}\n🏛️ *Ward Corporator:* ${corporatorName}\n\n👉 *Please click here to UPVOTE and push AMC to clear it:* ${window.location.origin}/#report=${report.id}\n\n🧹 AmdavadSafai — આપણું શહેર, આપણી જવાબદારી ❤️`;
+
+            return (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <a
+                  href={`https://api.whatsapp.com/send?text=${encodeURIComponent(societyMsg)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="society-rally-whatsapp-btn"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    background: '#128C7E',
+                    color: '#FFFFFF',
+                    padding: '10px 14px',
+                    borderRadius: '8px',
+                    fontWeight: 700,
+                    fontSize: '12.5px',
+                    textDecoration: 'none',
+                    boxShadow: '0 2px 8px rgba(18, 140, 126, 0.25)',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <Users size={16} />
+                  <span>📢 {t('rally_society_whatsapp') || 'Rally Society / RWA WhatsApp Group'}</span>
+                </a>
+              </div>
+            );
+          })()}
+
+          {/* Community Actions (Verify / Dispute / Flag) */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-            <button
-              type="button"
-              onClick={() => onVerifyClick(report)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '6px',
-                padding: '10px',
-                borderRadius: '8px',
-                border: '1px solid #16A34A',
-                background: '#F0FDF4',
-                color: '#166534',
-                fontWeight: 700,
-                fontSize: '12px',
-                cursor: 'pointer'
-              }}
-            >
-              <CheckCircle2 size={15} />
-              {t('verify_cleanup')}
-            </button>
+            {report.status === 'resolved' ? (
+              <button
+                type="button"
+                onClick={() => onDisputeClick && onDisputeClick(report)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  padding: '10px',
+                  borderRadius: '8px',
+                  border: '1px solid #DC2626',
+                  background: '#FEF2F2',
+                  color: '#991B1B',
+                  fontWeight: 700,
+                  fontSize: '12px',
+                  cursor: 'pointer'
+                }}
+              >
+                <AlertTriangle size={15} />
+                <span>{t('dispute_false_resolution') || 'Dispute / Still Dirty ⚠️'}</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onVerifyClick(report)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  padding: '10px',
+                  borderRadius: '8px',
+                  border: '1px solid #16A34A',
+                  background: '#F0FDF4',
+                  color: '#166534',
+                  fontWeight: 700,
+                  fontSize: '12px',
+                  cursor: 'pointer'
+                }}
+              >
+                <CheckCircle2 size={15} />
+                <span>{t('verify_cleanup')}</span>
+              </button>
+            )}
 
             <button
               type="button"
@@ -468,16 +539,16 @@ export const ReportDetailModal = ({
                 gap: '6px',
                 padding: '10px',
                 borderRadius: '8px',
-                border: '1px solid #DC2626',
-                background: '#FEF2F2',
-                color: '#991B1B',
+                border: '1px solid #64748B',
+                background: 'var(--color-bg-elevated)',
+                color: 'var(--color-text-secondary)',
                 fontWeight: 700,
                 fontSize: '12px',
                 cursor: 'pointer'
               }}
             >
               <Flag size={15} />
-              {t('flag_incorrect')}
+              <span>{t('flag_incorrect')}</span>
             </button>
           </div>
 

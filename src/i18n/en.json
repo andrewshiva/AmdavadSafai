@@ -196,5 +196,18 @@
   "copy_ticket": "Copy Ticket #",
   "ticket_copied": "Copied!",
   "rwa_partner_label": "Civic Partner",
-  "amc_ccrs_explainer": "Directly synced with AMC Comprehensive Complaint Redressal System (CCRS) and escalated to the local Ward SWM Inspector."
+  "amc_ccrs_explainer": "Directly synced with AMC Comprehensive Complaint Redressal System (CCRS) and escalated to the local Ward SWM Inspector.",
+  "dispute_false_resolution": "Dispute / Still Dirty ⚠️",
+  "dispute_resolution_title": "Dispute False Cleanup & Re-Open",
+  "dispute_resolution_sub": "Challenge premature ticket closure with live photo evidence",
+  "anti_fake_notice_title": "Anti-Fake Resolution Audit",
+  "dispute_banner_explainer": "If municipal contractors marked this spot as clean without doing the actual work, upload proof below. This will re-open the official CCRS ticket and alert your Ward Corporator.",
+  "upload_dispute_photo": "Upload Current Photo Proof (Showing garbage still present):",
+  "take_dispute_photo": "Take Photo of Uncleaned Spot",
+  "dispute_reason_label": "Explain what is still uncleaned:",
+  "dispute_reason_placeholder": "e.g. Only the roadside bin was emptied, but the large heap of plastic debris behind the tree was left untouched.",
+  "dispute_karma_reward": "Earn +15 Karma points upon submitting verified dispute",
+  "confirm_reopen_btn": "Re-Open Complaint ⚠️",
+  "rally_society_whatsapp": "Rally Society / RWA WhatsApp Group",
+  "amc_overdue": "Overdue"
 }

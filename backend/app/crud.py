@@ -136,6 +136,22 @@ def flag_report(db: Session, report_id: str, reason: str):
     db.refresh(report)
     return report
 
+def dispute_report_resolution(db: Session, report_id: str, dispute_image_url: str = None, reason: str = None):
+    report = get_report_by_id(db, report_id)
+    if not report:
+        return None
+    report.status = "unresolved"
+    report.amc_status = "Re-Opened by Citizen Audit (CCRS Escalated)"
+    report.flag_reason = reason or "Citizen disputed false cleanup resolution"
+    report.flagged = (report.flagged or 0) + 1
+    if dispute_image_url:
+        saved_url = save_image_and_push_to_github(dispute_image_url)
+        report.image_url = saved_url
+        report.verified_image_url = None
+    db.commit()
+    db.refresh(report)
+    return report
+
 # Subscriptions crud
 def get_subscription_by_email(db: Session, email: str):
     return db.query(models.Subscription).filter(models.Subscription.email == email).first()

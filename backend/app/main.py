@@ -130,6 +130,18 @@ def flag_report(report_id: str, payload: schemas.FlagReportRequest, db: Session 
         raise HTTPException(status_code=404, detail="Report not found")
     return report
 
+@app.post("/api/reports/{report_id}/dispute", response_model=schemas.ReportOut)
+def dispute_resolution(report_id: str, payload: schemas.DisputeResolutionRequest, db: Session = Depends(get_db)):
+    report = crud.dispute_report_resolution(
+        db=db,
+        report_id=report_id,
+        dispute_image_url=payload.dispute_image_url,
+        reason=payload.reason
+    )
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return report
+
 @app.get("/api/stats", response_model=schemas.StatsOut)
 def read_stats(db: Session = Depends(get_db)):
     return crud.get_stats(db)

@@ -59,6 +59,10 @@ class FlagReportRequest(BaseModel):
     reason: str
     flag_image_url: Optional[str] = None
 
+class DisputeResolutionRequest(BaseModel):
+    reason: str
+    dispute_image_url: Optional[str] = None
+
 # --- Ward Schemas ---
 class WardBase(BaseModel):
     id: str

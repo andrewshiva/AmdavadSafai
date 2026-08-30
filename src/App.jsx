@@ -11,6 +11,7 @@ import ReportDetailModal from './components/ReportDetailModal';
 import OutofCityModal from './components/OutofCityModal';
 import VerifyCleanupModal from './components/VerifyCleanupModal';
 import FlagReportModal from './components/FlagReportModal';
+import DisputeResolutionModal from './components/DisputeResolutionModal';
 import EventsModal from './components/EventsModal';
 import CreateEventModal from './components/CreateEventModal';
 import BadgesModal from './components/BadgesModal';
@@ -31,6 +32,7 @@ export const App = () => {
   const [selectedReport, setSelectedReport] = useState(null);
   const [verifyReportTarget, setVerifyReportTarget] = useState(null);
   const [flagReportTarget, setFlagReportTarget] = useState(null);
+  const [disputeReportTarget, setDisputeReportTarget] = useState(null);
   const [outofCityMessage, setOutofCityMessage] = useState(null);
   const [isEventsOpen, setIsEventsOpen] = useState(false);
   const [isCreateEventOpen, setIsCreateEventOpen] = useState(false);
@@ -222,6 +224,10 @@ export const App = () => {
           setSelectedReport(null);
           setFlagReportTarget(rpt);
         }}
+        onDisputeClick={(rpt) => {
+          setSelectedReport(null);
+          setDisputeReportTarget(rpt);
+        }}
         onUpvoteSuccess={refetch}
         onOpenShareCard={(cardData) => setShareCardTarget(cardData)}
       />
@@ -245,6 +251,14 @@ export const App = () => {
         isOpen={Boolean(flagReportTarget)}
         onClose={() => setFlagReportTarget(null)}
         report={flagReportTarget}
+        onSuccess={refetch}
+      />
+
+      {/* Dispute False Cleanup / Re-Open Modal */}
+      <DisputeResolutionModal
+        isOpen={Boolean(disputeReportTarget)}
+        onClose={() => setDisputeReportTarget(null)}
+        report={disputeReportTarget}
         onSuccess={refetch}
       />
 

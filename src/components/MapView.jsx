@@ -438,6 +438,10 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
         const wardName = ward ? (lang === 'en' ? ward.name_en : ward.name_gu) : '';
         const corporatorName = ward ? (lang === 'en' ? ward.corporator_en : ward.corporator_gu) : '';
 
+        // Check if report is overdue (unresolved for 48h+)
+        const diffHours = report.reported_at ? Math.floor((new Date() - new Date(report.reported_at)) / (1000 * 60 * 60)) : 0;
+        const isOverdue = report.status === 'unresolved' && diffHours >= 48;
+
         // Create individual report pin element with safe nested container
         const containerEl = document.createElement('div');
         containerEl.className = 'glowing-map-marker-container';
@@ -446,12 +450,12 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
         const innerEl = document.createElement('div');
         innerEl.className = 'glowing-map-marker-inner';
         innerEl.style.cssText = `
-          width: 14px;
-          height: 14px;
+          width: ${isOverdue ? '17px' : '14px'};
+          height: ${isOverdue ? '17px' : '14px'};
           border-radius: 50%;
           background-color: ${getSeverityColor(report.severity)};
           border: 2px solid #FFFFFF;
-          box-shadow: 0 0 6px ${getSeverityColor(report.severity)}, 0 2px 6px rgba(0,0,0,0.15);
+          box-shadow: ${isOverdue ? '0 0 0 3px rgba(220, 38, 38, 0.4), 0 0 10px #DC2626' : `0 0 6px ${getSeverityColor(report.severity)}, 0 2px 6px rgba(0,0,0,0.15)`};
           transition: transform 0.15s ease;
         `;
         containerEl.appendChild(innerEl);
@@ -472,6 +476,7 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
               <span class="badge status-${report.status}" style="font-size: 10px; padding: 2px 8px; border-radius: 4px;">
                 ${t(`${report.status}_badge`)}
               </span>
+              ${isOverdue ? `<span style="font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: #DC2626; color: white;">🔥 48h+ Overdue</span>` : ''}
               <span class="popup-time" style="font-size: 11px; color: var(--color-text-muted);">
                 ${getRelativeTime(report.reported_at)}
               </span>

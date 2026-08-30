@@ -300,38 +300,84 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                   </select>
                 </div>
 
-                {/* Waste Category Selection */}
+                {/* 1-Tap Fast Category Chips */}
                 <div className="input-group">
                   <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <Tag size={15} style={{ color: 'var(--color-primary)' }} />
                     {t('category_label')} *
                   </label>
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="modal-input"
-                  >
-                    <option value="mixed_waste">{t('cat_mixed_waste')}</option>
-                    <option value="construction_dump">{t('cat_construction_dump')}</option>
-                    <option value="overflowing_bin">{t('cat_overflowing_bin')}</option>
-                    <option value="roadside_garbage">{t('cat_roadside_garbage')}</option>
-                    <option value="drainage_blockage">{t('cat_drainage_blockage')}</option>
-                  </select>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginTop: '4px' }}>
+                    {[
+                      { id: 'roadside_garbage', icon: '🗑️', label: t('cat_roadside_garbage') },
+                      { id: 'overflowing_bin', icon: '📦', label: t('cat_overflowing_bin') },
+                      { id: 'construction_dump', icon: '🧱', label: t('cat_construction_dump') },
+                      { id: 'drainage_blockage', icon: '🌊', label: t('cat_drainage_blockage') },
+                      { id: 'mixed_waste', icon: '🍂', label: t('cat_mixed_waste') }
+                    ].map((c) => {
+                      const isActive = category === c.id;
+                      return (
+                        <button
+                          key={c.id}
+                          type="button"
+                          onClick={() => setCategory(c.id)}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            padding: '8px 10px',
+                            borderRadius: '8px',
+                            border: isActive ? '2px solid var(--color-primary)' : '1px solid var(--glass-border)',
+                            background: isActive ? 'rgba(13, 148, 136, 0.12)' : 'var(--color-bg-elevated)',
+                            color: isActive ? 'var(--color-primary)' : 'var(--color-text-secondary)',
+                            fontWeight: isActive ? 700 : 500,
+                            fontSize: '11.5px',
+                            cursor: 'pointer',
+                            textAlign: 'left',
+                            transition: 'all 0.15s ease'
+                          }}
+                        >
+                          <span style={{ fontSize: '14px' }}>{c.icon}</span>
+                          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                {/* Severity Selection */}
+                {/* 1-Tap Fast Severity Chips */}
                 <div className="input-group">
                   <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-secondary)' }}>{t('severity')} *</label>
-                  <select
-                    value={severity}
-                    onChange={(e) => setSeverity(e.target.value)}
-                    className="modal-input"
-                  >
-                    <option value="minor">{t('filter_minor')} (સામાન્ય)</option>
-                    <option value="moderate">{t('filter_moderate')} (મધ્યમ)</option>
-                    <option value="severe">{t('filter_severe')} (ગંભીર)</option>
-                    <option value="critical">{t('filter_critical')} (અત્યંત ગંભીર)</option>
-                  </select>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', marginTop: '4px' }}>
+                    {[
+                      { id: 'minor', label: t('filter_minor'), color: '#10B981', bg: 'rgba(16, 185, 129, 0.15)' },
+                      { id: 'moderate', label: t('filter_moderate'), color: '#F59E0B', bg: 'rgba(245, 158, 11, 0.15)' },
+                      { id: 'severe', label: t('filter_severe'), color: '#F97316', bg: 'rgba(249, 115, 22, 0.15)' },
+                      { id: 'critical', label: t('filter_critical'), color: '#EF4444', bg: 'rgba(239, 68, 68, 0.15)' }
+                    ].map((s) => {
+                      const isActive = severity === s.id;
+                      return (
+                        <button
+                          key={s.id}
+                          type="button"
+                          onClick={() => setSeverity(s.id)}
+                          style={{
+                            padding: '8px 4px',
+                            borderRadius: '8px',
+                            border: isActive ? `2px solid ${s.color}` : '1px solid var(--glass-border)',
+                            background: isActive ? s.bg : 'var(--color-bg-elevated)',
+                            color: isActive ? s.color : 'var(--color-text-secondary)',
+                            fontWeight: isActive ? 700 : 500,
+                            fontSize: '11px',
+                            cursor: 'pointer',
+                            textAlign: 'center',
+                            transition: 'all 0.15s ease'
+                          }}
+                        >
+                          {s.label}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {/* Description English */}
