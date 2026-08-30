@@ -10,39 +10,39 @@
           [
             [
               72.6039,
-              23.0148
+              23.0158
             ],
             [
-              72.61449,
-              23.01255
+              72.61552,
+              23.0135
             ],
             [
-              72.61435,
+              72.61494,
               23.0028
             ],
             [
-              72.61418,
-              22.99333
+              72.61516,
+              22.99244
             ],
             [
               72.6039,
-              22.99027
+              22.98916
             ],
             [
-              72.5963,
-              22.9958
+              72.59584,
+              22.99538
             ],
             [
-              72.5884,
+              72.58684,
               23.0028
             ],
             [
-              72.59539,
-              23.01064
+              72.59475,
+              23.01122
             ],
             [
               72.6039,
-              23.0148
+              23.0158
             ]
           ]
         ]
@@ -51,18 +51,26 @@
         "ward_id": "ward_01",
         "name_en": "Maninagar",
         "name_gu": "મણિનગર",
+        "name_hi": "",
         "zone_en": "South Zone",
         "zone_gu": "દક્ષિણ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Ramesh Patel",
         "corporator_gu": "રમેશ પટેલ",
-        "lat": 23.0028,
-        "lng": 72.6039,
-        "total_reports": 3,
-        "unresolved_reports": 2,
-        "resolved_reports": 1,
-        "cleanliness_score": 74.5,
-        "cleanliness_grade": "B",
-        "cleanliness_status": "Moderate"
+        "corporator_hi": "",
+        "mla_en": "Darshana Vaghela",
+        "mla_gu": "દર્શના વાઘેલા",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Hasmukh Patel",
+        "mp_gu": "હસમુખ પટેલ",
+        "mp_hi": "",
+        "total_reports": 7,
+        "unresolved_reports": 3,
+        "resolved_reports": 4,
+        "cleanliness_score": 63.0,
+        "cleanliness_grade": "C",
+        "cleanliness_status": "Attention Needed"
       }
     },
     {
@@ -74,39 +82,39 @@
           [
             [
               72.5594,
-              23.05368
+              23.05493
             ],
             [
-              72.56853,
-              23.0453
+              72.56888,
+              23.04562
             ],
             [
-              72.57466,
+              72.57554,
               23.0369
             ],
             [
-              72.57174,
-              23.02555
+              72.57261,
+              23.02474
             ],
             [
               72.5594,
-              23.02569
+              23.02534
             ],
             [
-              72.54737,
-              23.02583
+              72.54655,
+              23.02507
             ],
             [
-              72.54356,
+              72.54259,
               23.0369
             ],
             [
-              72.55051,
-              23.04508
+              72.5502,
+              23.04537
             ],
             [
               72.5594,
-              23.05368
+              23.05493
             ]
           ]
         ]
@@ -115,16 +123,24 @@
         "ward_id": "ward_02",
         "name_en": "Navrangpura",
         "name_gu": "નવરંગપુરા",
+        "name_hi": "",
         "zone_en": "West Zone",
         "zone_gu": "પશ્ચિમ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Priya Shah",
         "corporator_gu": "પ્રિયા શાહ",
-        "lat": 23.0369,
-        "lng": 72.5594,
-        "total_reports": 2,
+        "corporator_hi": "",
+        "mla_en": "Amit Shah (MLA)",
+        "mla_gu": "અમિત શાહ (એમએલએ)",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 3,
         "unresolved_reports": 1,
-        "resolved_reports": 1,
-        "cleanliness_score": 93.5,
+        "resolved_reports": 2,
+        "cleanliness_score": 93.0,
         "cleanliness_grade": "A+",
         "cleanliness_status": "Excellent"
       }
@@ -138,39 +154,39 @@
           [
             [
               72.5107,
-              23.03768
+              23.03817
             ],
             [
-              72.52164,
-              23.03257
+              72.52191,
+              23.03282
             ],
             [
-              72.53152,
+              72.53266,
               23.0225
             ],
             [
-              72.52111,
-              23.01292
+              72.5213,
+              23.01274
             ],
             [
               72.5107,
-              23.00639
+              23.00578
             ],
             [
-              72.49663,
-              23.00955
+              72.49592,
+              23.0089
             ],
             [
-              72.49678,
+              72.49662,
               23.0225
             ],
             [
-              72.49692,
-              23.03518
+              72.49625,
+              23.0358
             ],
             [
               72.5107,
-              23.03768
+              23.03817
             ]
           ]
         ]
@@ -179,18 +195,26 @@
         "ward_id": "ward_03",
         "name_en": "Satellite",
         "name_gu": "સેટેલાઈટ",
+        "name_hi": "",
         "zone_en": "West Zone",
         "zone_gu": "પશ્ચિમ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Kiran Desai",
         "corporator_gu": "કિરણ દેસાઈ",
-        "lat": 23.0225,
-        "lng": 72.5107,
-        "total_reports": 2,
-        "unresolved_reports": 2,
+        "corporator_hi": "",
+        "mla_en": "Rakesh Shah",
+        "mla_gu": "રાકેશ શાહ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Amit Shah (MP)",
+        "mp_gu": "અમિત શાહ (એમપી)",
+        "mp_hi": "",
+        "total_reports": 3,
+        "unresolved_reports": 3,
         "resolved_reports": 0,
-        "cleanliness_score": 84.0,
-        "cleanliness_grade": "A",
-        "cleanliness_status": "Good"
+        "cleanliness_score": 78.0,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
       }
     },
     {
@@ -202,39 +226,39 @@
           [
             [
               72.4635,
-              23.04388
+              23.04875
             ],
             [
-              72.47438,
-              23.04411
+              72.48043,
+              23.04968
             ],
             [
-              72.47583,
+              72.4823,
               23.0341
             ],
             [
-              72.47173,
-              23.02653
+              72.47597,
+              23.02263
             ],
             [
               72.4635,
-              23.01973
+              23.01171
             ],
             [
-              72.45571,
-              23.02694
+              72.45178,
+              23.02332
             ],
             [
-              72.45033,
+              72.44328,
               23.0341
             ],
             [
-              72.45297,
-              23.04379
+              72.44715,
+              23.04915
             ],
             [
               72.4635,
-              23.04388
+              23.04875
             ]
           ]
         ]
@@ -243,18 +267,26 @@
         "ward_id": "ward_04",
         "name_en": "Bopal",
         "name_gu": "બોપલ",
+        "name_hi": "",
         "zone_en": "South West Zone",
         "zone_gu": "દક્ષિણ પશ્ચિમ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Mehul Joshi",
         "corporator_gu": "મેહુલ જોશી",
-        "lat": 23.0341,
-        "lng": 72.4635,
-        "total_reports": 3,
-        "unresolved_reports": 2,
-        "resolved_reports": 1,
-        "cleanliness_score": 74.5,
-        "cleanliness_grade": "B",
-        "cleanliness_status": "Moderate"
+        "corporator_hi": "",
+        "mla_en": "Kushang Patel",
+        "mla_gu": "કુશંગ પટેલ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Amit Shah (MP)",
+        "mp_gu": "અમિત શાહ (એમપી)",
+        "mp_hi": "",
+        "total_reports": 4,
+        "unresolved_reports": 1,
+        "resolved_reports": 3,
+        "cleanliness_score": 92.5,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
       }
     },
     {
@@ -266,39 +298,39 @@
           [
             [
               72.5432,
-              23.11798
+              23.11701
             ],
             [
-              72.55465,
-              23.11313
+              72.5539,
+              23.11244
             ],
             [
-              72.55562,
+              72.55447,
               23.1026
             ],
             [
-              72.55591,
-              23.09091
+              72.55519,
+              23.09158
             ],
             [
               72.5432,
-              23.08941
+              23.09042
             ],
             [
-              72.53356,
-              23.09373
+              72.53435,
+              23.09446
             ],
             [
-              72.52498,
+              72.52601,
               23.1026
             ],
             [
-              72.53414,
-              23.11094
+              72.53494,
+              23.1102
             ],
             [
               72.5432,
-              23.11798
+              23.11701
             ]
           ]
         ]
@@ -307,16 +339,24 @@
         "ward_id": "ward_05",
         "name_en": "Gota",
         "name_gu": "ગોતા",
+        "name_hi": "",
         "zone_en": "North West Zone",
         "zone_gu": "ઉત્તર પશ્ચિમ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Sneha Trivedi",
         "corporator_gu": "સ્નેહા ત્રિવેદી",
-        "lat": 23.1026,
-        "lng": 72.5432,
-        "total_reports": 2,
-        "unresolved_reports": 1,
+        "corporator_hi": "",
+        "mla_en": "Harshad Patel",
+        "mla_gu": "હરષદ પટેલ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Hasmukh Patel",
+        "mp_gu": "હસમુખ પટેલ",
+        "mp_hi": "",
+        "total_reports": 3,
+        "unresolved_reports": 2,
         "resolved_reports": 1,
-        "cleanliness_score": 89.5,
+        "cleanliness_score": 83.5,
         "cleanliness_grade": "A",
         "cleanliness_status": "Good"
       }
@@ -330,39 +370,39 @@
           [
             [
               72.5871,
-              23.12746
+              23.1263
             ],
             [
-              72.59699,
-              23.11799
+              72.59602,
+              23.11711
             ],
             [
-              72.60627,
+              72.60499,
               23.1089
             ],
             [
-              72.60015,
-              23.0969
+              72.59924,
+              23.09774
             ],
             [
               72.5871,
-              23.09582
+              23.09707
             ],
             [
-              72.57255,
-              23.09552
+              72.57344,
+              23.09633
             ],
             [
-              72.57076,
+              72.57208,
               23.1089
             ],
             [
-              72.57605,
-              23.11906
+              72.57699,
+              23.1182
             ],
             [
               72.5871,
-              23.12746
+              23.1263
             ]
           ]
         ]
@@ -371,18 +411,26 @@
         "ward_id": "ward_06",
         "name_en": "Chandkheda",
         "name_gu": "ચાંદખેડા",
+        "name_hi": "",
         "zone_en": "North Zone",
         "zone_gu": "ઉત્તર ઝોન",
+        "zone_hi": "",
         "corporator_en": "Vijay Solanki",
         "corporator_gu": "વિજય સોલંકી",
-        "lat": 23.1089,
-        "lng": 72.5871,
-        "total_reports": 2,
-        "unresolved_reports": 2,
+        "corporator_hi": "",
+        "mla_en": "Kaushik Jain",
+        "mla_gu": "કૌશિક જૈન",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 3,
+        "unresolved_reports": 3,
         "resolved_reports": 0,
-        "cleanliness_score": 75.0,
-        "cleanliness_grade": "B",
-        "cleanliness_status": "Moderate"
+        "cleanliness_score": 60.0,
+        "cleanliness_grade": "C",
+        "cleanliness_status": "Attention Needed"
       }
     },
     {
@@ -394,39 +442,39 @@
           [
             [
               72.6571,
-              23.10372
+              23.10744
             ],
             [
-              72.6662,
-              23.10177
+              72.66967,
+              23.10497
             ],
             [
-              72.6722,
+              72.67828,
               23.0934
             ],
             [
-              72.66451,
-              23.08658
+              72.6671,
+              23.0842
             ],
             [
               72.6571,
-              23.08014
+              23.07489
             ],
             [
-              72.64735,
-              23.08443
+              72.64353,
+              23.08092
             ],
             [
-              72.64642,
+              72.64265,
               23.0934
             ],
             [
-              72.64618,
-              23.10345
+              72.64176,
+              23.10751
             ],
             [
               72.6571,
-              23.10372
+              23.10744
             ]
           ]
         ]
@@ -435,18 +483,26 @@
         "ward_id": "ward_07",
         "name_en": "Naroda",
         "name_gu": "નરોડા",
+        "name_hi": "",
         "zone_en": "North East Zone",
         "zone_gu": "ઉત્તર પૂર્વ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Fatima Shaikh",
         "corporator_gu": "ફાતિમા શેખ",
-        "lat": 23.0934,
-        "lng": 72.6571,
-        "total_reports": 3,
-        "unresolved_reports": 2,
+        "corporator_hi": "",
+        "mla_en": "Payal Kukrani",
+        "mla_gu": "પાયલ કુકરાણી",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Hasmukh Patel",
+        "mp_gu": "હસમુખ પટેલ",
+        "mp_hi": "",
+        "total_reports": 4,
+        "unresolved_reports": 3,
         "resolved_reports": 1,
-        "cleanliness_score": 74.5,
-        "cleanliness_grade": "B",
-        "cleanliness_status": "Moderate"
+        "cleanliness_score": 59.5,
+        "cleanliness_grade": "C",
+        "cleanliness_status": "Attention Needed"
       }
     },
     {
@@ -458,39 +514,39 @@
           [
             [
               72.68,
-              23.03227
+              23.0359
             ],
             [
-              72.6929,
-              23.03188
+              72.69724,
+              23.03587
             ],
             [
-              72.69305,
+              72.69686,
               23.02
             ],
             [
-              72.69065,
-              23.0102
+              72.69398,
+              23.00713
             ],
             [
               72.68,
-              23.00382
+              22.99845
             ],
             [
-              72.67137,
-              23.01205
+              72.66893,
+              23.00981
             ],
             [
-              72.66315,
+              72.65764,
               23.02
             ],
             [
-              72.66866,
-              23.03044
+              72.66502,
+              23.03379
             ],
             [
               72.68,
-              23.03227
+              23.0359
             ]
           ]
         ]
@@ -499,12 +555,20 @@
         "ward_id": "ward_08",
         "name_en": "Vastral",
         "name_gu": "વાસ્ત્રાલ",
+        "name_hi": "",
         "zone_en": "East Zone",
         "zone_gu": "પૂર્વ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Amit Raval",
         "corporator_gu": "અમિત રાવલ",
-        "lat": 23.02,
-        "lng": 72.68,
+        "corporator_hi": "",
+        "mla_en": "Kumar Kanani",
+        "mla_gu": "કુમાર કાનાણી",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Hasmukh Patel",
+        "mp_gu": "હસમુખ પટેલ",
+        "mp_hi": "",
         "total_reports": 2,
         "unresolved_reports": 2,
         "resolved_reports": 0,
@@ -522,39 +586,39 @@
           [
             [
               72.6614,
-              23.06635
+              23.06306
             ],
             [
-              72.67323,
-              23.05848
+              72.67097,
+              23.05641
             ],
             [
-              72.67668,
+              72.67365,
               23.0476
             ],
             [
-              72.67615,
-              23.03403
+              72.67358,
+              23.03639
             ],
             [
               72.6614,
-              23.03392
+              23.03667
             ],
             [
-              72.64919,
-              23.03636
+              72.65148,
+              23.03847
             ],
             [
-              72.64134,
+              72.64489,
               23.0476
             ],
             [
-              72.65154,
-              23.05667
+              72.65358,
+              23.05479
             ],
             [
               72.6614,
-              23.06635
+              23.06306
             ]
           ]
         ]
@@ -563,18 +627,26 @@
         "ward_id": "ward_09",
         "name_en": "Nikol",
         "name_gu": "નિકોલ",
+        "name_hi": "",
         "zone_en": "East Zone",
         "zone_gu": "પૂર્વ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Darshan Bhatt",
         "corporator_gu": "દર્શન ભટ્ટ",
-        "lat": 23.0476,
-        "lng": 72.6614,
-        "total_reports": 2,
-        "unresolved_reports": 2,
+        "corporator_hi": "",
+        "mla_en": "Jagdish Vishwakarma",
+        "mla_gu": "જગદીશ વિશ્વકર્મા",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Hasmukh Patel",
+        "mp_gu": "હસમુખ પટેલ",
+        "mp_hi": "",
+        "total_reports": 3,
+        "unresolved_reports": 3,
         "resolved_reports": 0,
-        "cleanliness_score": 84.0,
-        "cleanliness_grade": "A",
-        "cleanliness_status": "Good"
+        "cleanliness_score": 78.0,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
       }
     },
     {
@@ -586,39 +658,39 @@
           [
             [
               72.497,
-              23.06295
+              23.06609
             ],
             [
-              72.50447,
-              23.05688
+              72.506,
+              23.05828
             ],
             [
-              72.5123,
+              72.51615,
               23.05
             ],
             [
-              72.50584,
-              23.04187
+              72.50785,
+              23.04001
             ],
             [
               72.497,
-              23.03942
+              23.03713
             ],
             [
-              72.48594,
-              23.03983
+              72.48314,
+              23.03724
             ],
             [
-              72.48588,
+              72.48352,
               23.05
             ],
             [
-              72.48781,
-              23.05846
+              72.48567,
+              23.06043
             ],
             [
               72.497,
-              23.06295
+              23.06609
             ]
           ]
         ]
@@ -627,18 +699,26 @@
         "ward_id": "ward_10",
         "name_en": "Thaltej",
         "name_gu": "થલતેજ",
+        "name_hi": "",
         "zone_en": "West Zone",
         "zone_gu": "પશ્ચિમ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Neha Mehta",
         "corporator_gu": "નેહા મહેતા",
-        "lat": 23.05,
-        "lng": 72.497,
-        "total_reports": 2,
-        "unresolved_reports": 1,
-        "resolved_reports": 1,
-        "cleanliness_score": 96.5,
-        "cleanliness_grade": "A+",
-        "cleanliness_status": "Excellent"
+        "corporator_hi": "",
+        "mla_en": "Gordhan Zadafia",
+        "mla_gu": "ગોરધન ઝડફિયા",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 5,
+        "unresolved_reports": 2,
+        "resolved_reports": 3,
+        "cleanliness_score": 85.5,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
       }
     },
     {
@@ -650,39 +730,39 @@
           [
             [
               72.5285,
-              23.04131
+              23.04309
             ],
             [
-              72.54019,
-              23.04076
+              72.54248,
+              23.04286
             ],
             [
-              72.54487,
+              72.54805,
               23.03
             ],
             [
-              72.53723,
-              23.02197
+              72.53861,
+              23.0207
             ],
             [
               72.5285,
-              23.01355
+              23.0102
             ],
             [
-              72.51822,
-              23.02054
+              72.51637,
+              23.01884
             ],
             [
-              72.51505,
+              72.51275,
               23.03
             ],
             [
-              72.51561,
-              23.04187
+              72.51296,
+              23.0443
             ],
             [
               72.5285,
-              23.04131
+              23.04309
             ]
           ]
         ]
@@ -691,18 +771,26 @@
         "ward_id": "ward_11",
         "name_en": "Vastrapur",
         "name_gu": "વસ્ત્રાપુર",
+        "name_hi": "",
         "zone_en": "West Zone",
         "zone_gu": "પશ્ચિમ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Ravi Kumar",
         "corporator_gu": "રવિ કુમાર",
-        "lat": 23.03,
-        "lng": 72.5285,
-        "total_reports": 2,
-        "unresolved_reports": 1,
-        "resolved_reports": 1,
-        "cleanliness_score": 89.5,
-        "cleanliness_grade": "A",
-        "cleanliness_status": "Good"
+        "corporator_hi": "",
+        "mla_en": "Imran Khedawala",
+        "mla_gu": "ઇમરાન ખેડાવાલા",
+        "mla_hi": "",
+        "mla_party": "INC",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 6,
+        "unresolved_reports": 3,
+        "resolved_reports": 3,
+        "cleanliness_score": 72.5,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
       }
     },
     {
@@ -714,39 +802,39 @@
           [
             [
               72.562,
-              23.03052
+              23.0328
             ],
             [
-              72.57635,
-              23.02821
+              72.57874,
+              23.03041
             ],
             [
-              72.57603,
+              72.57774,
               23.015
             ],
             [
-              72.5754,
-              23.00267
+              72.57754,
+              23.0007
             ],
             [
               72.562,
-              22.99783
+              22.99512
             ],
             [
-              72.55201,
-              23.00581
+              72.55078,
+              23.00467
             ],
             [
-              72.54154,
+              72.53812,
               23.015
             ],
             [
-              72.5503,
-              23.02577
+              72.54861,
+              23.02732
             ],
             [
               72.562,
-              23.03052
+              23.0328
             ]
           ]
         ]
@@ -755,18 +843,26 @@
         "ward_id": "ward_12",
         "name_en": "Paldi",
         "name_gu": "પાલડી",
+        "name_hi": "",
         "zone_en": "Central Zone",
         "zone_gu": "મધ્ય ઝોન",
+        "zone_hi": "",
         "corporator_en": "Geeta Parmar",
         "corporator_gu": "ગીતા પરમાર",
-        "lat": 23.015,
-        "lng": 72.562,
-        "total_reports": 1,
-        "unresolved_reports": 1,
-        "resolved_reports": 0,
-        "cleanliness_score": 85.0,
-        "cleanliness_grade": "A",
-        "cleanliness_status": "Good"
+        "corporator_hi": "",
+        "mla_en": "Gyasuddin Shaikh",
+        "mla_gu": "ગ્યાસુદ્દીન શેખ",
+        "mla_hi": "",
+        "mla_party": "INC",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 4,
+        "unresolved_reports": 3,
+        "resolved_reports": 1,
+        "cleanliness_score": 68.5,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
       }
     },
     {
@@ -778,39 +874,39 @@
           [
             [
               72.5975,
-              23.0419
+              23.04336
             ],
             [
-              72.60552,
-              23.03488
+              72.60606,
+              23.03538
             ],
             [
-              72.61019,
+              72.61121,
               23.0275
             ],
             [
-              72.60825,
-              23.01761
+              72.60931,
+              23.01663
             ],
             [
               72.5975,
-              23.01783
+              23.01727
             ],
             [
-              72.58742,
-              23.01822
+              72.58649,
+              23.01737
             ],
             [
-              72.58355,
+              72.58229,
               23.0275
             ],
             [
-              72.59,
-              23.0344
+              72.58956,
+              23.03481
             ],
             [
               72.5975,
-              23.0419
+              23.04336
             ]
           ]
         ]
@@ -819,18 +915,26 @@
         "ward_id": "ward_13",
         "name_en": "Kalupur",
         "name_gu": "કાલુપુર",
+        "name_hi": "",
         "zone_en": "Central Zone",
         "zone_gu": "મધ્ય ઝોન",
+        "zone_hi": "",
         "corporator_en": "Irfan Qureshi",
         "corporator_gu": "ઈરફાન કુરેશી",
-        "lat": 23.0275,
-        "lng": 72.5975,
-        "total_reports": 2,
-        "unresolved_reports": 2,
+        "corporator_hi": "",
+        "mla_en": "Shailesh Parmar",
+        "mla_gu": "શૈલેષ પરમાર",
+        "mla_hi": "",
+        "mla_party": "INC",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 3,
+        "unresolved_reports": 3,
         "resolved_reports": 0,
-        "cleanliness_score": 75.0,
-        "cleanliness_grade": "B",
-        "cleanliness_status": "Moderate"
+        "cleanliness_score": 60.0,
+        "cleanliness_grade": "C",
+        "cleanliness_status": "Attention Needed"
       }
     },
     {
@@ -842,39 +946,39 @@
           [
             [
               72.5912,
-              23.0649
+              23.06565
             ],
             [
-              72.60052,
-              23.05978
+              72.6009,
+              23.06013
             ],
             [
-              72.60946,
+              72.61082,
               23.0512
             ],
             [
-              72.60053,
-              23.04261
+              72.60091,
+              23.04226
             ],
             [
               72.5912,
-              23.03752
+              23.03678
             ],
             [
-              72.57868,
-              23.03968
+              72.57778,
+              23.03885
             ],
             [
-              72.57895,
+              72.57856,
               23.0512
             ],
             [
-              72.57941,
-              23.06205
+              72.57863,
+              23.06277
             ],
             [
               72.5912,
-              23.0649
+              23.06565
             ]
           ]
         ]
@@ -883,16 +987,24 @@
         "ward_id": "ward_14",
         "name_en": "Shahibaug",
         "name_gu": "શાહીબાગ",
+        "name_hi": "",
         "zone_en": "North Zone",
         "zone_gu": "ઉત્તર ઝોન",
+        "zone_hi": "",
         "corporator_en": "Tushar Rana",
         "corporator_gu": "તુષાર રાણા",
-        "lat": 23.0512,
-        "lng": 72.5912,
-        "total_reports": 1,
-        "unresolved_reports": 1,
+        "corporator_hi": "",
+        "mla_en": "Jitu Vaghani",
+        "mla_gu": "જીતુ વાઘાણી",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 2,
+        "unresolved_reports": 2,
         "resolved_reports": 0,
-        "cleanliness_score": 94.0,
+        "cleanliness_score": 91.0,
         "cleanliness_grade": "A+",
         "cleanliness_status": "Excellent"
       }
@@ -906,39 +1018,39 @@
           [
             [
               72.631,
-              23.05169
+              23.05185
             ],
             [
-              72.64532,
-              23.05198
+              72.64607,
+              23.05266
             ],
             [
-              72.64795,
+              72.64854,
               23.0388
             ],
             [
-              72.64168,
-              23.02897
+              72.64191,
+              23.02876
             ],
             [
               72.631,
-              23.0196
+              23.01855
             ],
             [
-              72.62037,
-              23.02902
+              72.62014,
+              23.02881
             ],
             [
-              72.61396,
+              72.61335,
               23.0388
             ],
             [
-              72.61672,
-              23.05194
+              72.61598,
+              23.05262
             ],
             [
               72.631,
-              23.05169
+              23.05185
             ]
           ]
         ]
@@ -947,18 +1059,26 @@
         "ward_id": "ward_15",
         "name_en": "Bapunagar",
         "name_gu": "બાપુનગર",
+        "name_hi": "",
         "zone_en": "East Zone",
         "zone_gu": "પૂર્વ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Jayesh Solanki",
         "corporator_gu": "જયેશ સોલંકી",
-        "lat": 23.0388,
-        "lng": 72.631,
-        "total_reports": 2,
-        "unresolved_reports": 1,
+        "corporator_hi": "",
+        "mla_en": "Bhupendra Patel (CM)",
+        "mla_gu": "ભૂપેન્દ્ર પટેલ (મુખ્યમંત્રી)",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Amit Shah (MP)",
+        "mp_gu": "અમિત શાહ (એમપી)",
+        "mp_hi": "",
+        "total_reports": 3,
+        "unresolved_reports": 2,
         "resolved_reports": 1,
-        "cleanliness_score": 89.5,
-        "cleanliness_grade": "A",
-        "cleanliness_status": "Good"
+        "cleanliness_score": 79.5,
+        "cleanliness_grade": "B",
+        "cleanliness_status": "Moderate"
       }
     },
     {
@@ -970,39 +1090,39 @@
           [
             [
               72.5059,
-              23.00096
+              23.00795
             ],
             [
-              72.51596,
-              22.99736
+              72.52145,
+              23.00242
             ],
             [
-              72.51641,
+              72.52163,
               22.9881
             ],
             [
-              72.51665,
-              22.9782
+              72.52262,
+              22.97271
             ],
             [
               72.5059,
-              22.97644
+              22.97027
             ],
             [
-              72.49787,
-              22.98071
+              72.49377,
+              22.97693
             ],
             [
-              72.49026,
+              72.48152,
               22.9881
             ],
             [
-              72.49795,
-              22.99542
+              72.49391,
+              22.99914
             ],
             [
               72.5059,
-              23.00096
+              23.00795
             ]
           ]
         ]
@@ -1011,18 +1131,26 @@
         "ward_id": "ward_16",
         "name_en": "Sarkhej",
         "name_gu": "સરખેજ",
+        "name_hi": "",
         "zone_en": "South West Zone",
         "zone_gu": "દક્ષિણ પશ્ચિમ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Nisha Prajapati",
         "corporator_gu": "નિશા પ્રજાપતિ",
-        "lat": 22.9881,
-        "lng": 72.5059,
-        "total_reports": 1,
-        "unresolved_reports": 1,
+        "corporator_hi": "",
+        "mla_en": "Kanubhai Desai",
+        "mla_gu": "કનુભાઈ દેસાઈ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Amit Shah (MP)",
+        "mp_gu": "અમિત શાહ (એમપી)",
+        "mp_hi": "",
+        "total_reports": 2,
+        "unresolved_reports": 2,
         "resolved_reports": 0,
-        "cleanliness_score": 94.0,
-        "cleanliness_grade": "A+",
-        "cleanliness_status": "Excellent"
+        "cleanliness_score": 84.0,
+        "cleanliness_grade": "A",
+        "cleanliness_status": "Good"
       }
     },
     {
@@ -1034,39 +1162,39 @@
           [
             [
               72.6567,
-              23.01206
+              23.01111
             ],
             [
-              72.66543,
-              23.00364
+              72.66462,
+              23.00289
             ],
             [
-              72.67305,
+              72.67199,
               22.9956
             ],
             [
-              72.6684,
-              22.98483
+              72.66766,
+              22.98551
             ],
             [
               72.6567,
-              22.9843
+              22.98536
             ],
             [
-              72.64414,
-              22.98403
+              72.64486,
+              22.9847
             ],
             [
-              72.64197,
+              72.64307,
               22.9956
             ],
             [
-              72.6473,
-              23.00425
+              72.6481,
+              23.00352
             ],
             [
               72.6567,
-              23.01206
+              23.01111
             ]
           ]
         ]
@@ -1075,18 +1203,26 @@
         "ward_id": "ward_17",
         "name_en": "Odhav",
         "name_gu": "ઓઢવ",
+        "name_hi": "",
         "zone_en": "South East Zone",
         "zone_gu": "દક્ષિણ પૂર્વ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Prakash Chauhan",
         "corporator_gu": "પ્રકાશ ચૌહાણ",
-        "lat": 22.9956,
-        "lng": 72.6567,
+        "corporator_hi": "",
+        "mla_en": "Babu Patel",
+        "mla_gu": "બાબુ પટેલ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Hasmukh Patel",
+        "mp_gu": "હસમુખ પટેલ",
+        "mp_hi": "",
         "total_reports": 1,
-        "unresolved_reports": 1,
-        "resolved_reports": 0,
-        "cleanliness_score": 85.0,
-        "cleanliness_grade": "A",
-        "cleanliness_status": "Good"
+        "unresolved_reports": 0,
+        "resolved_reports": 1,
+        "cleanliness_score": 99.5,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
       }
     },
     {
@@ -1098,39 +1234,39 @@
           [
             [
               72.625,
-              23.00193
+              23.00069
             ],
             [
-              72.63676,
-              22.99863
+              72.63583,
+              22.99777
             ],
             [
-              72.64541,
+              72.64416,
               22.9878
             ],
             [
-              72.63496,
-              22.97863
+              72.634,
+              22.97951
             ],
             [
               72.625,
-              22.97055
+              22.97173
             ],
             [
-              72.61166,
-              22.97552
+              72.61257,
+              22.97635
             ],
             [
-              72.61095,
+              72.61231,
               22.9878
             ],
             [
-              72.61062,
-              23.00104
+              72.6115,
+              23.00022
             ],
             [
               72.625,
-              23.00193
+              23.00069
             ]
           ]
         ]
@@ -1139,12 +1275,20 @@
         "ward_id": "ward_18",
         "name_en": "Isanpur",
         "name_gu": "ઈસનપુર",
+        "name_hi": "",
         "zone_en": "South East Zone",
         "zone_gu": "દક્ષિણ પૂર્વ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Meera Thakor",
         "corporator_gu": "મીરા ઠાકોર",
-        "lat": 22.9878,
-        "lng": 72.625,
+        "corporator_hi": "",
+        "mla_en": "C. R. Patil",
+        "mla_gu": "સી. આર. પાટીલ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Hasmukh Patel",
+        "mp_gu": "હસમુખ પટેલ",
+        "mp_hi": "",
         "total_reports": 1,
         "unresolved_reports": 1,
         "resolved_reports": 0,
@@ -1162,39 +1306,39 @@
           [
             [
               72.5497,
-              23.03845
+              23.04214
             ],
             [
-              72.56076,
-              23.03838
+              72.56525,
+              23.04251
             ],
             [
-              72.56118,
+              72.56536,
               23.0282
             ],
             [
-              72.55856,
-              23.02005
+              72.5619,
+              23.01697
             ],
             [
               72.5497,
-              23.01413
+              23.00845
             ],
             [
-              72.54224,
-              23.02133
+              72.53962,
+              23.01892
             ],
             [
-              72.5356,
+              72.53005,
               23.0282
             ],
             [
-              72.53972,
-              23.03738
+              72.53579,
+              23.041
             ],
             [
               72.5497,
-              23.03845
+              23.04214
             ]
           ]
         ]
@@ -1203,16 +1347,24 @@
         "ward_id": "ward_19",
         "name_en": "Ambawadi",
         "name_gu": "આંબાવાડી",
+        "name_hi": "",
         "zone_en": "West Zone",
         "zone_gu": "પશ્ચિમ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Sunil Vyas",
         "corporator_gu": "સુનિલ વ્યાસ",
-        "lat": 23.0282,
-        "lng": 72.5497,
-        "total_reports": 1,
-        "unresolved_reports": 1,
+        "corporator_hi": "",
+        "mla_en": "Dharmendrasinh Jadeja",
+        "mla_gu": "ધર્મેન્દ્રસિંહ જાડેજા",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 2,
+        "unresolved_reports": 2,
         "resolved_reports": 0,
-        "cleanliness_score": 97.0,
+        "cleanliness_score": 94.0,
         "cleanliness_grade": "A+",
         "cleanliness_status": "Excellent"
       }
@@ -1226,39 +1378,39 @@
           [
             [
               72.535,
-              23.01677
+              23.02213
             ],
             [
-              72.54566,
-              23.01042
+              72.549,
+              23.01349
             ],
             [
-              72.54803,
+              72.55184,
               23.0006
             ],
             [
-              72.5479,
-              22.98873
+              72.55224,
+              22.98473
             ],
             [
               72.535,
-              22.98832
+              22.98468
             ],
             [
-              72.52464,
-              22.99106
+              72.52143,
+              22.98811
             ],
             [
-              72.51719,
+              72.51125,
               23.0006
             ],
             [
-              72.5263,
-              23.0086
+              72.52384,
+              23.01087
             ],
             [
               72.535,
-              23.01677
+              23.02213
             ]
           ]
         ]
@@ -1267,16 +1419,528 @@
         "ward_id": "ward_20",
         "name_en": "Vejalpur",
         "name_gu": "વેજલપુર",
+        "name_hi": "",
         "zone_en": "South West Zone",
         "zone_gu": "દક્ષિણ પશ્ચિમ ઝોન",
+        "zone_hi": "",
         "corporator_en": "Hetal Panchal",
         "corporator_gu": "હેતલ પંચાલ",
-        "lat": 23.0006,
-        "lng": 72.535,
-        "total_reports": 1,
-        "unresolved_reports": 0,
+        "corporator_hi": "",
+        "mla_en": "Rushikesh Patel",
+        "mla_gu": "ઋષિકેશ પટેલ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Hasmukh Patel",
+        "mp_gu": "હસમુખ પટેલ",
+        "mp_hi": "",
+        "total_reports": 2,
+        "unresolved_reports": 1,
         "resolved_reports": 1,
-        "cleanliness_score": 99.5,
+        "cleanliness_score": 93.5,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_21",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.585,
+              23.09951
+            ],
+            [
+              72.59283,
+              23.0922
+            ],
+            [
+              72.60157,
+              23.085
+            ],
+            [
+              72.59486,
+              23.07593
+            ],
+            [
+              72.585,
+              23.07402
+            ],
+            [
+              72.57281,
+              23.07379
+            ],
+            [
+              72.57281,
+              23.085
+            ],
+            [
+              72.57537,
+              23.09386
+            ],
+            [
+              72.585,
+              23.09951
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_21",
+        "name_en": "Sabarmati",
+        "name_gu": "સાબરમતી",
+        "name_hi": "",
+        "zone_en": "West Zone",
+        "zone_gu": "પશ્ચિમ ઝોન",
+        "zone_hi": "",
+        "corporator_en": "Ashaben Patel",
+        "corporator_gu": "આશાબેન પટેલ",
+        "corporator_hi": "",
+        "mla_en": "Harshad Patel",
+        "mla_gu": "હરષદ પટેલ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 0,
+        "unresolved_reports": 0,
+        "resolved_reports": 0,
+        "cleanliness_score": 100.0,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_22",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.57,
+              23.08684
+            ],
+            [
+              72.58212,
+              23.08615
+            ],
+            [
+              72.58791,
+              23.075
+            ],
+            [
+              72.57892,
+              23.0668
+            ],
+            [
+              72.57,
+              23.05761
+            ],
+            [
+              72.55881,
+              23.06471
+            ],
+            [
+              72.55637,
+              23.075
+            ],
+            [
+              72.55612,
+              23.08777
+            ],
+            [
+              72.57,
+              23.08684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_22",
+        "name_en": "Ranip",
+        "name_gu": "રાણીપ",
+        "name_hi": "",
+        "zone_en": "West Zone",
+        "zone_gu": "પશ્ચિમ ઝોન",
+        "zone_hi": "",
+        "corporator_en": "Ramesh Desai",
+        "corporator_gu": "રમેશ દેસાઈ",
+        "corporator_hi": "",
+        "mla_en": "Harshad Patel",
+        "mla_gu": "હરષદ પટેલ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 1,
+        "unresolved_reports": 1,
+        "resolved_reports": 0,
+        "cleanliness_score": 97.0,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_23",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.565,
+              23.07552
+            ],
+            [
+              72.58031,
+              23.07409
+            ],
+            [
+              72.5794,
+              23.06
+            ],
+            [
+              72.57863,
+              23.04746
+            ],
+            [
+              72.565,
+              23.04157
+            ],
+            [
+              72.55499,
+              23.05079
+            ],
+            [
+              72.54377,
+              23.06
+            ],
+            [
+              72.5525,
+              23.0715
+            ],
+            [
+              72.565,
+              23.07552
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_23",
+        "name_en": "Vadaj",
+        "name_gu": "વાડજ",
+        "name_hi": "",
+        "zone_en": "West Zone",
+        "zone_gu": "પશ્ચિમ ઝોન",
+        "zone_hi": "",
+        "corporator_en": "Bhavna Shah",
+        "corporator_gu": "ભાવના શાહ",
+        "corporator_hi": "",
+        "mla_en": "Harshad Patel",
+        "mla_gu": "હરષદ પટેલ",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 0,
+        "unresolved_reports": 0,
+        "resolved_reports": 0,
+        "cleanliness_score": 100.0,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_24",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.545,
+              23.07739
+            ],
+            [
+              72.55749,
+              23.06649
+            ],
+            [
+              72.56377,
+              23.055
+            ],
+            [
+              72.56195,
+              23.03941
+            ],
+            [
+              72.545,
+              23.04034
+            ],
+            [
+              72.52984,
+              23.04105
+            ],
+            [
+              72.52287,
+              23.055
+            ],
+            [
+              72.53389,
+              23.06522
+            ],
+            [
+              72.545,
+              23.07739
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_24",
+        "name_en": "Naranpura",
+        "name_gu": "નારણપુરા",
+        "name_hi": "",
+        "zone_en": "West Zone",
+        "zone_gu": "પશ્ચિમ ઝોન",
+        "zone_hi": "",
+        "corporator_en": "Jitendra Patel",
+        "corporator_gu": "જીતેન્દ્ર પટેલ",
+        "corporator_hi": "",
+        "mla_en": "Amit Shah (MLA)",
+        "mla_gu": "અમિત શાહ (એમએલએ)",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Kirit Solanki",
+        "mp_gu": "કિરીટ સોલંકી",
+        "mp_hi": "",
+        "total_reports": 1,
+        "unresolved_reports": 1,
+        "resolved_reports": 0,
+        "cleanliness_score": 97.0,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_25",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.53,
+              23.08312
+            ],
+            [
+              72.53829,
+              23.07763
+            ],
+            [
+              72.5472,
+              23.07
+            ],
+            [
+              72.53879,
+              23.06191
+            ],
+            [
+              72.53,
+              23.05775
+            ],
+            [
+              72.51804,
+              23.059
+            ],
+            [
+              72.51876,
+              23.07
+            ],
+            [
+              72.51925,
+              23.07989
+            ],
+            [
+              72.53,
+              23.08312
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_25",
+        "name_en": "Ghatlodiya",
+        "name_gu": "ઘાટલોડિયા",
+        "name_hi": "",
+        "zone_en": "North West Zone",
+        "zone_gu": "ઉત્તર પશ્ચિમ ઝોન",
+        "zone_hi": "",
+        "corporator_en": "Chetna Parmar",
+        "corporator_gu": "ચેતના પરમાર",
+        "corporator_hi": "",
+        "mla_en": "Bhupendra Patel (CM)",
+        "mla_gu": "ભૂપેન્દ્ર પટેલ (મુખ્યમંત્રી)",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Amit Shah (MP)",
+        "mp_gu": "અમિત શાહ (એમપી)",
+        "mp_hi": "",
+        "total_reports": 0,
+        "unresolved_reports": 0,
+        "resolved_reports": 0,
+        "cleanliness_score": 100.0,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_26",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.51,
+              23.09156
+            ],
+            [
+              72.5232,
+              23.09214
+            ],
+            [
+              72.52617,
+              23.08
+            ],
+            [
+              72.51947,
+              23.07129
+            ],
+            [
+              72.51,
+              23.06197
+            ],
+            [
+              72.50002,
+              23.07082
+            ],
+            [
+              72.49478,
+              23.08
+            ],
+            [
+              72.49641,
+              23.09251
+            ],
+            [
+              72.51,
+              23.09156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_26",
+        "name_en": "Sola",
+        "name_gu": "સોલા",
+        "name_hi": "",
+        "zone_en": "North West Zone",
+        "zone_gu": "ઉત્તર પશ્ચિમ ઝોન",
+        "zone_hi": "",
+        "corporator_en": "Dipak Patel",
+        "corporator_gu": "દીપક પટેલ",
+        "corporator_hi": "",
+        "mla_en": "Bhupendra Patel (CM)",
+        "mla_gu": "ભૂપેન્દ્ર પટેલ (મુખ્યમંત્રી)",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Amit Shah (MP)",
+        "mp_gu": "અમિત શાહ (એમપી)",
+        "mp_hi": "",
+        "total_reports": 0,
+        "unresolved_reports": 0,
+        "resolved_reports": 0,
+        "cleanliness_score": 100.0,
+        "cleanliness_grade": "A+",
+        "cleanliness_status": "Excellent"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ward_27",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.55,
+              23.09239
+            ],
+            [
+              72.5644,
+              23.08825
+            ],
+            [
+              72.5641,
+              23.075
+            ],
+            [
+              72.56484,
+              23.06135
+            ],
+            [
+              72.55,
+              23.05837
+            ],
+            [
+              72.53935,
+              23.0652
+            ],
+            [
+              72.52802,
+              23.075
+            ],
+            [
+              72.53885,
+              23.08526
+            ],
+            [
+              72.55,
+              23.09239
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "ward_id": "ward_27",
+        "name_en": "Chandlodiya",
+        "name_gu": "ચાંદલોડિયા",
+        "name_hi": "",
+        "zone_en": "North West Zone",
+        "zone_gu": "ઉત્તર પશ્ચિમ ઝોન",
+        "zone_hi": "",
+        "corporator_en": "Ranjanben Patel",
+        "corporator_gu": "રંજનબેન પટેલ",
+        "corporator_hi": "",
+        "mla_en": "Bhupendra Patel (CM)",
+        "mla_gu": "ભૂપેન્દ્ર પટેલ (મુખ્યમંત્રી)",
+        "mla_hi": "",
+        "mla_party": "BJP",
+        "mp_en": "Amit Shah (MP)",
+        "mp_gu": "અમિત શાહ (એમપી)",
+        "mp_hi": "",
+        "total_reports": 0,
+        "unresolved_reports": 0,
+        "resolved_reports": 0,
+        "cleanliness_score": 100.0,
         "cleanliness_grade": "A+",
         "cleanliness_status": "Excellent"
       }
