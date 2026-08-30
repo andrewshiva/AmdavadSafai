@@ -65,8 +65,8 @@ export const EventsModal = ({ isOpen, onClose, onOpenCreateEvent, onOpenShareCar
       prev.map((ev) => (ev.id === eventId ? { ...ev, volunteers_joined: ev.volunteers_joined + 1 } : ev))
     );
 
-    // Award Gamification Points
-    addKarmaPoints('EVENT_JOINED', 50);
+    // Award Gamification Points (with deduplication on eventId)
+    addKarmaPoints('EVENT_JOINED', 50, { targetId: eventId, description: 'Joined Sunday Community Cleanup Drive' });
   };
 
   return (

@@ -140,7 +140,8 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
       });
 
       if (response.ok) {
-        addKarmaPoints('REPORT_SUBMITTED', 10);
+        const createdData = await response.json().catch(() => ({}));
+        addKarmaPoints('REPORT_SUBMITTED', 15, { targetId: createdData.id || `rpt_${Date.now()}`, description: `Filed Complaint (${wardId})` });
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
@@ -187,7 +188,7 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
       const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
       localStorage.setItem('amdavad_safai_local_reports', JSON.stringify([newReport, ...stored]));
 
-      addKarmaPoints('REPORT_SUBMITTED', 10);
+      addKarmaPoints('REPORT_SUBMITTED', 15, { targetId: newReport.id, description: `Filed Complaint (${wardId})` });
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);

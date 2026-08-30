@@ -46,7 +46,7 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
       );
       localStorage.setItem('amdavad_safai_local_reports', JSON.stringify(updated));
     } finally {
-      addKarmaPoints('CLEANUP_VERIFIED', 25);
+      addKarmaPoints('CLEANUP_VERIFIED', 30, { targetId: report.id, description: `Verified Clean Spot (${report.ward_id || 'Ahmedabad'})` });
       setSubmitting(false);
       if (onSuccess) onSuccess();
       onClose();

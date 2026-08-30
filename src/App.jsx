@@ -20,6 +20,7 @@ import WallOfCleanedModal from './components/WallOfCleanedModal';
 import RWADashboardModal from './components/RWADashboardModal';
 import { useFilter } from './hooks/useFilter';
 import { Map, List, Loader2, Plus, Sparkles, Calendar, Building2, BarChart2 } from 'lucide-react';
+import { checkDailyVisitStreak } from './utils/gamification';
 import wardsData from './data/wards.json';
 
 export const App = () => {
@@ -27,6 +28,11 @@ export const App = () => {
   const [activeView, setActiveView] = useState('map'); // 'map' or 'list'
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [pickedCoords, setPickedCoords] = useState(null);
+
+  // Initialize Citizen Device ID & Daily Streak on startup
+  useEffect(() => {
+    checkDailyVisitStreak();
+  }, []);
 
   // Modals state
   const [selectedReport, setSelectedReport] = useState(null);

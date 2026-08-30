@@ -22,6 +22,7 @@ import {
 import wardsData from '../data/wards.json';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import { getAmcTicketId } from '../utils/amcTickets';
+import { addKarmaPoints } from '../utils/gamification';
 
 export const ReportDetailModal = ({
   isOpen,
@@ -60,6 +61,9 @@ export const ReportDetailModal = ({
     if (hasUpvoted) return;
     setUpvotes((prev) => prev + 1);
     setHasUpvoted(true);
+
+    // Award +5 Karma points with targetId deduplication
+    addKarmaPoints('REPORT_UPVOTED', 5, { targetId: report.id, description: `Upvoted Complaint Hotspot (${wardName})` });
 
     try {
       await fetch(`/api/reports/${report.id}/upvote`, { method: 'POST' });
