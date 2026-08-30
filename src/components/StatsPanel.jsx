@@ -148,14 +148,48 @@ export const StatsPanel = ({ reports }) => {
     };
   }).sort((a, b) => b.resolution_rate_pct - a.resolution_rate_pct || b.total_reports - a.total_reports);
 
+  // Auto-collapse stats panel when filters change so map is immediately visible
+  const prevReportsRef = React.useRef(reports);
+  useEffect(() => {
+    if (prevReportsRef.current !== reports && isOpen) {
+      setIsOpen(false);
+    }
+    prevReportsRef.current = reports;
+  }, [reports]);
+
+  // ESC key to close stats drawer
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
   return (
     <div className={`stats-panel-container ${isOpen ? 'open' : ''}`}>
-      <button className="stats-trigger-btn" onClick={() => setIsOpen(!isOpen)}>
+      <button
+        className="stats-trigger-btn"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? (t('hide_stats_view_map') || 'View Map') : t('stats')}
+        style={{ cursor: 'pointer', transition: 'background 0.2s ease' }}
+      >
         <div className="trigger-left">
           <BarChart2 size={18} style={{ marginRight: '6px' }} />
           <span>{t('stats')}</span>
+          {isOpen && (
+            <span style={{ fontSize: '11px', background: 'rgba(13, 148, 136, 0.15)', color: 'var(--color-primary)', padding: '2px 8px', borderRadius: '12px', marginLeft: '10px', fontWeight: 600 }}>
+              🗺️ {t('hide_stats_view_map') || 'Click to View Map'}
+            </span>
+          )}
         </div>
-        {isOpen ? <ChevronDown size={18} /> : <ChevronUp size={18} />}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-primary)' }}>
+          <span style={{ fontSize: '12px', fontWeight: 600 }}>
+            {isOpen ? `🔽 ${t('hide_stats_view_map') || 'View Map'}` : `🔼 ${t('expand_stats') || 'Expand'}`}
+          </span>
+          {isOpen ? <ChevronDown size={18} /> : <ChevronUp size={18} />}
+        </div>
       </button>
 
       <div className="stats-content">

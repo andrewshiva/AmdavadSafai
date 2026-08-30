@@ -210,5 +210,7 @@
   "confirm_reopen_btn": "Re-Open Complaint ⚠️",
   "rally_society_whatsapp": "Rally Society / RWA WhatsApp Group",
   "amc_overdue": "Overdue",
-  "copy_message": "Copy WhatsApp Text"
+  "copy_message": "Copy WhatsApp Text",
+  "hide_stats_view_map": "View Map (Hide Stats)",
+  "expand_stats": "Expand Statistics"
 }

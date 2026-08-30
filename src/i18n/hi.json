@@ -213,5 +213,7 @@
   "confirm_reopen_btn": "शिकायत फिर से खोलें (Re-Open) ⚠️",
   "rally_society_whatsapp": "सोसायटी / RWA WhatsApp ग्रुप में शेयर करें",
   "amc_overdue": "लंबित",
-  "copy_message": "संदेश कॉपी करें"
+  "copy_message": "संदेश कॉपी करें",
+  "hide_stats_view_map": "मैप देखें (आंकड़े छिपाएं)",
+  "expand_stats": "आंकड़े देखें"
 }
