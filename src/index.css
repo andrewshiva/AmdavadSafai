@@ -2319,5 +2319,22 @@ button, select, input {
   border-color: rgba(99, 102, 241, 0.3);
 }
 
+/* Loading Overlay */
+.view-loading-overlay {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 8px 12px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
 
 

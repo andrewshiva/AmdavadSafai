@@ -7,7 +7,14 @@ export const useFilter = () => {
   const [category, setCategory] = useState('all');
   const [wardId, setWardId] = useState('all');
   const [search, setSearch] = useState('');
-  const [filteredReports, setFilteredReports] = useState([]);
+  const [filteredReports, setFilteredReports] = useState(() => {
+    try {
+      const storedReports = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
+      return [...storedReports, ...reportsData];
+    } catch {
+      return reportsData;
+    }
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -22,7 +29,15 @@ export const useFilter = () => {
         ward_id: ward,
         search: query
       });
-      const response = await fetch(`/api/reports?${params.toString()}`);
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+      const response = await fetch(`/api/reports?${params.toString()}`, {
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
         throw new Error('Failed to fetch reports');
       }

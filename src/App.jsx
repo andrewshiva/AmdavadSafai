@@ -167,7 +167,7 @@ export const App = () => {
         </button>
 
         {/* Loading Indicator Overlay */}
-        {loading && (
+        {loading && filteredReports.length === 0 && (
           <div className="view-loading-overlay">
             <Loader2 className="animate-spin text-teal" size={32} />
           </div>
