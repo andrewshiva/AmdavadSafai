@@ -4,9 +4,18 @@ import { ChevronUp, ChevronDown, BarChart2, ShieldAlert, PieChart as PieIcon, Ac
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend } from 'recharts';
 import wardsData from '../data/wards.json';
 
-export const StatsPanel = ({ reports }) => {
+export const StatsPanel = ({ reports, isOpen: controlledIsOpen, onToggleOpen }) => {
   const { t, lang } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const isControlled = controlledIsOpen !== undefined;
+  const isOpen = isControlled ? controlledIsOpen : internalIsOpen;
+  const setIsOpen = (next) => {
+    if (onToggleOpen) {
+      onToggleOpen(typeof next === 'function' ? next(isOpen) : next);
+    } else {
+      setInternalIsOpen(next);
+    }
+  };
   const [displayedTotal, setDisplayedTotal] = useState(0);
   const [displayedUnresolved, setDisplayedUnresolved] = useState(0);
   const [statsData, setStatsData] = useState(null);

@@ -22,6 +22,7 @@ const computeCentroid = (coords) => {
 
 export const MapView = ({ reports, events = defaultEventsData, onMapClick, onReportSelect, onEventSelect, wardId }) => {
   const { t, lang } = useTranslation();
+  const [isLegendOpen, setIsLegendOpen] = useState(false);
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const eventPinsRef = useRef([]);
@@ -581,27 +582,27 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
         <span className="nk-badge-label"> {t('reports_count')}</span>
       </div>
 
+      {/* Mobile Legend Trigger Button */}
+      <button
+        type="button"
+        className="mobile-legend-toggle-btn"
+        onClick={() => setIsLegendOpen(!isLegendOpen)}
+        aria-label="Toggle map legend"
+      >
+        <span>ℹ️ {t('map_legend')}</span>
+      </button>
+
       {/* Map Legend (Heatmap & Severities) */}
-      <div className="map-legend-card" style={{
-        position: 'absolute',
-        bottom: '64px',
-        left: '24px',
-        zIndex: 998,
-        background: 'var(--color-bg-card)',
-        border: '1px solid var(--glass-border)',
-        borderRadius: 'var(--radius-md)',
-        padding: '12px',
-        boxShadow: 'var(--shadow-md)',
-        fontSize: '11px',
-        color: 'var(--color-text-primary)',
-        width: '180px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-        pointerEvents: 'auto'
-      }}>
-        <div style={{ fontWeight: 700, fontSize: '11.5px', borderBottom: '1px solid var(--glass-border)', paddingBottom: '4px', marginBottom: '2px' }}>
-          {t('map_legend')}
+      <div className={`map-legend-card ${isLegendOpen ? 'mobile-open' : ''}`}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--glass-border)', paddingBottom: '4px', marginBottom: '2px' }}>
+          <span style={{ fontWeight: 700, fontSize: '11.5px' }}>{t('map_legend')}</span>
+          <button
+            type="button"
+            className="mobile-legend-close-btn"
+            onClick={() => setIsLegendOpen(false)}
+          >
+            ✕
+          </button>
         </div>
         
         {/* Ward Cleanliness Grades */}

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
+import { Mail, Info, BookOpen } from 'lucide-react';
 
-export const SocialMenu = ({ isOpen, onClose }) => {
+export const SocialMenu = ({ isOpen, onClose, onOpenSubscribe, onOpenChangelog }) => {
   const menuRef = useRef();
   const { t } = useTranslation();
 
@@ -23,6 +24,47 @@ export const SocialMenu = ({ isOpen, onClose }) => {
 
   return (
     <div className="social-menu" ref={menuRef}>
+      {onOpenSubscribe && (
+        <button
+          type="button"
+          className="social-menu-item mobile-only-menu-item"
+          onClick={() => {
+            onClose();
+            onOpenSubscribe();
+          }}
+        >
+          <Mail size={16} />
+          <span>{t('monday_digest') || 'Monday Digest'}</span>
+        </button>
+      )}
+
+      {onOpenChangelog && (
+        <button
+          type="button"
+          className="social-menu-item mobile-only-menu-item"
+          onClick={() => {
+            onClose();
+            onOpenChangelog();
+          }}
+        >
+          <Info size={16} />
+          <span>{t('changelog') || 'Changelog (v1.1.0)'}</span>
+        </button>
+      )}
+
+      <a
+        href="/guide/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="social-menu-item mobile-only-menu-item"
+        onClick={onClose}
+      >
+        <BookOpen size={16} />
+        <span>{t('help_guide_title') || 'Citizen Guide'}</span>
+      </a>
+
+      <div className="social-menu-divider" />
+
       <a
         href="https://t.me/AmdavadSafai"
         target="_blank"
@@ -93,4 +135,5 @@ export const SocialMenu = ({ isOpen, onClose }) => {
     </div>
   );
 };
+
 export default SocialMenu;

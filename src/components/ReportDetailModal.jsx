@@ -139,7 +139,7 @@ export const ReportDetailModal = ({
         </div>
 
         {/* Modal Body Content */}
-        <div style={{ padding: '20px', maxHeight: '65vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+        <div className="modal-body report-detail-body" style={{ padding: '18px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           
           {/* Header & Location */}
           <div>

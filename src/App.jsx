@@ -19,7 +19,7 @@ import ShareCardModal from './components/ShareCardModal';
 import WallOfCleanedModal from './components/WallOfCleanedModal';
 import RWADashboardModal from './components/RWADashboardModal';
 import { useFilter } from './hooks/useFilter';
-import { Map, List, Loader2, Plus } from 'lucide-react';
+import { Map, List, Loader2, Plus, Sparkles, Calendar, Building2, BarChart2 } from 'lucide-react';
 import wardsData from './data/wards.json';
 
 export const App = () => {
@@ -40,6 +40,7 @@ export const App = () => {
   const [isCleanedWallOpen, setIsCleanedWallOpen] = useState(false);
   const [isRWAOpen, setIsRWAOpen] = useState(false);
   const [shareCardTarget, setShareCardTarget] = useState(null);
+  const [isStatsOpen, setIsStatsOpen] = useState(false);
 
   const {
     severity,
@@ -101,7 +102,7 @@ export const App = () => {
 
       {/* Main app body */}
       <main className="main-content">
-        {/* Toggle between Map and List View */}
+        {/* Desktop Toggle between Map and List View */}
         <div className="view-controls-bar">
           <button
             className={`view-toggle-btn ${activeView === 'map' ? 'active' : ''}`}
@@ -135,37 +136,6 @@ export const App = () => {
           resetFilters={resetFilters}
         />
 
-
-        {/* Floating Report Garbage Action Button */}
-        <button
-          className="fab-report-btn"
-          onClick={() => setIsReportOpen(true)}
-          style={{
-            position: 'absolute',
-            bottom: '72px',
-            right: '24px',
-            zIndex: 999,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: 'var(--color-primary)',
-            color: 'white',
-            border: 'none',
-            padding: '12px 20px',
-            borderRadius: 'var(--radius-full)',
-            boxShadow: 'var(--shadow-lg)',
-            fontWeight: 700,
-            fontSize: '14px',
-            cursor: 'pointer',
-            transition: 'transform 0.2s ease, box-shadow 0.2s ease'
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-          onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-        >
-          <Plus size={18} strokeWidth={3} />
-          <span>{t('report_garbage')}</span>
-        </button>
-
         {/* Loading Indicator Overlay */}
         {loading && filteredReports.length === 0 && (
           <div className="view-loading-overlay">
@@ -192,6 +162,16 @@ export const App = () => {
           />
         )}
       </main>
+
+      {/* Floating Report Garbage Action Button */}
+      <button
+        className="fab-report-btn"
+        onClick={() => setIsReportOpen(true)}
+        aria-label={t('report_garbage') || 'Report Garbage'}
+      >
+        <Plus size={20} strokeWidth={2.8} />
+        <span className="fab-label">{t('report_garbage')}</span>
+      </button>
 
       {/* Report Modal */}
       <ReportModal
@@ -313,7 +293,93 @@ export const App = () => {
       />
 
       {/* Bottom stats drawer */}
-      <StatsPanel reports={filteredReports} />
+      <StatsPanel
+        reports={filteredReports}
+        isOpen={isStatsOpen}
+        onToggleOpen={setIsStatsOpen}
+      />
+
+      {/* Mobile Bottom Navigation Bar (Visible on mobile/tablet) */}
+      <nav className="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <button
+          type="button"
+          className={`mobile-nav-tab ${activeView === 'map' && !isStatsOpen ? 'active' : ''}`}
+          onClick={() => {
+            setActiveView('map');
+            setIsStatsOpen(false);
+          }}
+        >
+          <div className="mobile-nav-icon-wrap">
+            <Map size={20} />
+          </div>
+          <span className="mobile-nav-label">{t('map')}</span>
+        </button>
+
+        <button
+          type="button"
+          className={`mobile-nav-tab ${activeView === 'list' && !isStatsOpen ? 'active' : ''}`}
+          onClick={() => {
+            setActiveView('list');
+            setIsStatsOpen(false);
+          }}
+        >
+          <div className="mobile-nav-icon-wrap">
+            <List size={20} />
+            {filteredReports.filter(r => r.status === 'unresolved').length > 0 && (
+              <span className="mobile-nav-badge">
+                {filteredReports.filter(r => r.status === 'unresolved').length}
+              </span>
+            )}
+          </div>
+          <span className="mobile-nav-label">{t('list')}</span>
+        </button>
+
+        <button
+          type="button"
+          className="mobile-nav-tab"
+          onClick={() => setIsEventsOpen(true)}
+        >
+          <div className="mobile-nav-icon-wrap">
+            <Calendar size={20} />
+            <span className="mobile-nav-badge">5</span>
+          </div>
+          <span className="mobile-nav-label">{t('cleanup_drives') || 'Drives'}</span>
+        </button>
+
+        <button
+          type="button"
+          className="mobile-nav-tab"
+          onClick={() => setIsCleanedWallOpen(true)}
+        >
+          <div className="mobile-nav-icon-wrap">
+            <Sparkles size={20} />
+          </div>
+          <span className="mobile-nav-label">{t('cleaned_spots_short') || 'Cleaned'}</span>
+        </button>
+
+        <button
+          type="button"
+          className="mobile-nav-tab"
+          onClick={() => setIsRWAOpen(true)}
+        >
+          <div className="mobile-nav-icon-wrap">
+            <Building2 size={20} />
+          </div>
+          <span className="mobile-nav-label">{t('rwa_hub_short') || 'RWA Hub'}</span>
+        </button>
+
+        <button
+          type="button"
+          className={`mobile-nav-tab ${isStatsOpen ? 'active' : ''}`}
+          onClick={() => setIsStatsOpen(!isStatsOpen)}
+        >
+          <div className="mobile-nav-icon-wrap">
+            <BarChart2 size={20} />
+          </div>
+          <span className="mobile-nav-label">{t('stats')}</span>
+        </button>
+      </nav>
+
     </div>
   );
 };

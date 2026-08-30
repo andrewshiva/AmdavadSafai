@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
-import { Menu, Globe, Sparkles, BookOpen } from 'lucide-react';
+import { Menu, Sparkles, BookOpen } from 'lucide-react';
 import SocialMenu from './SocialMenu';
 import SubscribeModal from './SubscribeModal';
 import ChangelogModal from './ChangelogModal';
-
 
 export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenRWA }) => {
   const { t, lang, setLanguage } = useTranslation();
@@ -35,51 +34,52 @@ export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenR
     <header className="header-container">
       <div className="header-left">
         <div className="header-logo">
-          <Sparkles size={22} className="logo-sparkle" />
+          <Sparkles size={20} className="logo-sparkle" />
           <span className="logo-title">{t('app_name')}</span>
         </div>
+        
         <button
-          className="version-badge"
+          className="version-badge header-desktop-only"
           onClick={() => setIsChangelogOpen(true)}
         >
           v1.1.0
         </button>
 
-        {/* Cleaned Spots Proof Showcase Button */}
-        {onOpenCleanedSpots && (
-          <button
-            className="header-action-btn cleaned-spots-btn"
-            onClick={onOpenCleanedSpots}
-            title={t('wall_of_cleaned_title') || 'Wall of Cleaned Spots'}
-          >
-            <span>✨ {t('cleaned_spots_short') || 'Cleaned Spots'}</span>
-          </button>
-        )}
+        {/* Desktop Quick Action Buttons */}
+        <div className="header-desktop-actions">
+          {onOpenCleanedSpots && (
+            <button
+              className="header-action-btn cleaned-spots-btn"
+              onClick={onOpenCleanedSpots}
+              title={t('wall_of_cleaned_title') || 'Wall of Cleaned Spots'}
+            >
+              <span>✨ {t('cleaned_spots_short') || 'Cleaned Spots'}</span>
+            </button>
+          )}
 
-        {/* RWA & Ward Accountability Hub Button */}
-        {onOpenRWA && (
-          <button
-            className="header-action-btn rwa-btn"
-            onClick={onOpenRWA}
-            title={t('rwa_hub_title') || 'RWA & Ward Hub'}
-          >
-            <span>🏢 {t('rwa_hub_short') || 'RWA Hub'}</span>
-          </button>
-        )}
+          {onOpenRWA && (
+            <button
+              className="header-action-btn rwa-btn"
+              onClick={onOpenRWA}
+              title={t('rwa_hub_title') || 'RWA & Ward Hub'}
+            >
+              <span>🏢 {t('rwa_hub_short') || 'RWA Hub'}</span>
+            </button>
+          )}
 
-        {/* Community Cleanup Drives Button */}
-        {onOpenEvents && (
-          <button
-            className="header-action-btn events-btn"
-            onClick={onOpenEvents}
-            title={t('cleanup_drives')}
-          >
-            <span>🧹 {t('cleanup_drives')}</span>
-            <span className="events-count-badge">5</span>
-          </button>
-        )}
+          {onOpenEvents && (
+            <button
+              className="header-action-btn events-btn"
+              onClick={onOpenEvents}
+              title={t('cleanup_drives')}
+            >
+              <span>🧹 {t('cleanup_drives')}</span>
+              <span className="events-count-badge">5</span>
+            </button>
+          )}
+        </div>
 
-        {/* Citizen Karma Points Pill */}
+        {/* Citizen Karma Points Pill (Visible on both desktop & mobile header) */}
         {onOpenBadges && (
           <button
             className="header-action-btn karma-pill-btn"
@@ -124,7 +124,7 @@ export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenR
         </div>
 
         <button 
-          className="lang-toggle-btn icon-only" 
+          className="lang-toggle-btn icon-only header-guide-btn" 
           onClick={() => window.open('/guide/', '_blank')}
           title={t('help_guide_title') || 'Guide'}
         >
@@ -135,12 +135,15 @@ export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenR
           <button
             className="menu-toggle-btn"
             onClick={() => setIsSocialOpen(!isSocialOpen)}
+            aria-label="Open menu"
           >
             <Menu size={20} />
           </button>
           <SocialMenu
             isOpen={isSocialOpen}
             onClose={() => setIsSocialOpen(false)}
+            onOpenSubscribe={() => setIsSubscribeOpen(true)}
+            onOpenChangelog={() => setIsChangelogOpen(true)}
           />
         </div>
       </div>
@@ -158,4 +161,5 @@ export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenR
     </header>
   );
 };
+
 export default Header;
