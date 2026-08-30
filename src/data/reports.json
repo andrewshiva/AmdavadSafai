@@ -146,7 +146,12 @@
     "lat": 23.0645,
     "lng": 72.5812,
     "id": "rpt_d8570d4b",
-    "reported_at": "2026-08-29T18:20:01.639942"
+    "reported_at": "2026-08-29T18:20:01.639942",
+    "amc_ticket_id": "AMC-CCRS-2026-21033",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Ranip Vikas Samiti",
+    "description_hi": "सुभाष ब्रिज राणीप गार्डन के नीचे प्लास्टिक की बोतलें और खाने के पैकेट का कचरा"
   },
   {
     "ward_id": "ward_01",
@@ -163,7 +168,12 @@
     "lat": 22.9867,
     "lng": 72.6041,
     "id": "rpt_03e98aa7",
-    "reported_at": "2026-08-29T18:20:00.310246"
+    "reported_at": "2026-08-29T18:20:00.310246",
+    "amc_ticket_id": "AMC-CCRS-2026-45590",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Maninagar Vikas Mandal",
+    "description_hi": "इसनपुर गोविंदवाड़ी सर्कल के पास नाली अवरुद्ध और घरेलू कचरा फैला हुआ"
   },
   {
     "ward_id": "ward_20",
@@ -180,7 +190,12 @@
     "lat": 23.0045,
     "lng": 72.5312,
     "id": "rpt_fd80f79e",
-    "reported_at": "2026-08-29T18:19:58.958796"
+    "reported_at": "2026-08-29T18:19:58.958796",
+    "amc_ticket_id": "AMC-CCRS-2026-99497",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Vejalpur & Jivraj Park Citizen Front",
+    "description_hi": "जीवराज पार्क वेजलपुर मुख्य बाजार में घरेलू कचरा और प्लास्टिक रैपर्स का ढेर"
   },
   {
     "ward_id": "ward_12",
@@ -197,7 +212,12 @@
     "lat": 23.0134,
     "lng": 72.5689,
     "id": "rpt_db1a942c",
-    "reported_at": "2026-08-29T18:19:57.648544"
+    "reported_at": "2026-08-29T18:19:57.648544",
+    "amc_ticket_id": "AMC-CCRS-2026-10584",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Paldi Citizen Action Group",
+    "description_hi": "पालडी एनआईडी कैंपस गेट के बाहर रिवरफ्रंट रोड पर कचरे के डिब्बे ओवरफ्लो हो रहे हैं"
   },
   {
     "ward_id": "ward_01",
@@ -214,7 +234,12 @@
     "lat": 22.9912,
     "lng": 72.5789,
     "id": "rpt_a66a8ca2",
-    "reported_at": "2026-08-29T18:19:56.279076"
+    "reported_at": "2026-08-29T18:19:56.279076",
+    "amc_ticket_id": "AMC-CCRS-2026-71133",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Maninagar Vikas Mandal",
+    "description_hi": "Heavy toxic plastic and rubber dump accumulating along Behrampura Pirana approach road"
   },
   {
     "ward_id": "ward_24",
@@ -231,7 +256,12 @@
     "lat": 23.0534,
     "lng": 72.5542,
     "id": "rpt_a0be97e8",
-    "reported_at": "2026-08-29T18:19:55.123345"
+    "reported_at": "2026-08-29T18:19:55.123345",
+    "amc_ticket_id": "AMC-CCRS-2026-12071",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Bapunagar Workers Citizen Forum",
+    "description_hi": "Fallen tree branches and garden waste dumped near Naranpura Ankur Cross Roads"
   },
   {
     "ward_id": "ward_07",
@@ -248,7 +278,12 @@
     "lat": 23.0722,
     "lng": 72.6598,
     "id": "rpt_9aa37ea7",
-    "reported_at": "2026-08-29T18:19:53.775660"
+    "reported_at": "2026-08-29T18:19:53.775660",
+    "amc_ticket_id": "AMC-CCRS-2026-13895",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Naroda Citizens Forum",
+    "description_hi": "Industrial packing material and chemical sacks discarded in Naroda GIDC Phase 1"
   },
   {
     "ward_id": "ward_09",
@@ -265,7 +300,12 @@
     "lat": 23.0489,
     "lng": 72.6687,
     "id": "rpt_528818b0",
-    "reported_at": "2026-08-29T18:19:52.367466"
+    "reported_at": "2026-08-29T18:19:52.367466",
+    "amc_ticket_id": "AMC-CCRS-2026-28275",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Sabarmati Nagrik Samiti",
+    "description_hi": "Overflowing twin municipal dustbins outside Nikol Raspan Arcade"
   },
   {
     "ward_id": "ward_16",
@@ -282,7 +322,12 @@
     "lat": 22.9818,
     "lng": 72.4998,
     "id": "rpt_a480aea0",
-    "reported_at": "2026-08-29T18:19:50.993873"
+    "reported_at": "2026-08-29T18:19:50.993873",
+    "amc_ticket_id": "AMC-CCRS-2026-90485",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Jodhpur Village RWA Forum",
+    "description_hi": "Accumulation of plastic waste near historic Sarkhej Roza monument entrance"
   },
   {
     "ward_id": "ward_05",
@@ -299,7 +344,12 @@
     "lat": 23.1011,
     "lng": 72.5456,
     "id": "rpt_e0a07ed0",
-    "reported_at": "2026-08-29T18:19:49.609442"
+    "reported_at": "2026-08-29T18:19:49.609442",
+    "amc_ticket_id": "AMC-CCRS-2026-55932",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Gota Ward Resident Council",
+    "description_hi": "Construction sand, bricks and tiles left unattended on Gota Vandematram Road"
   },
   {
     "ward_id": "ward_06",
@@ -316,7 +366,12 @@
     "lat": 23.1095,
     "lng": 72.5841,
     "id": "rpt_8fde0aef",
-    "reported_at": "2026-08-29T18:19:48.241160"
+    "reported_at": "2026-08-29T18:19:48.241160",
+    "amc_ticket_id": "AMC-CCRS-2026-73827",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Vatva Industrial & Citizen Union",
+    "description_hi": "Clogged storm drain creating stagnant water pool near Chandkheda Visat Petrol Pump"
   },
   {
     "ward_id": "ward_03",
@@ -333,7 +388,12 @@
     "lat": 23.0335,
     "lng": 72.5112,
     "id": "rpt_843b3c12",
-    "reported_at": "2026-08-29T18:19:46.894865"
+    "reported_at": "2026-08-29T18:19:46.894865",
+    "amc_ticket_id": "AMC-CCRS-2026-14533",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Satellite Citizen Association",
+    "description_hi": "Commercial packaging and carton scrap dumped behind Pakwan Dining Hall SG Highway"
   },
   {
     "ward_id": "ward_14",
@@ -350,7 +410,12 @@
     "lat": 23.0601,
     "lng": 72.5804,
     "id": "rpt_f0f33973",
-    "reported_at": "2026-08-29T18:19:45.538375"
+    "reported_at": "2026-08-29T18:19:45.538375",
+    "amc_ticket_id": "AMC-CCRS-2026-90477",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Becharaji & Chandkheda Forum",
+    "description_hi": "Plastic bags and discarded wrappers near Sabarmati Ashram walkway on Riverfront"
   },
   {
     "ward_id": "ward_11",
@@ -367,7 +432,12 @@
     "lat": 23.0238,
     "lng": 72.5291,
     "id": "rpt_5a44b9fc",
-    "reported_at": "2026-08-29T18:19:44.177604"
+    "reported_at": "2026-08-29T18:19:44.177604",
+    "amc_ticket_id": "AMC-CCRS-2026-88108",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Ellisbridge & Law Garden Civic Society",
+    "description_hi": "Open garbage pile near Shivranjani Cross Roads BRTS bus shelter"
   },
   {
     "ward_id": "ward_04",
@@ -384,7 +454,12 @@
     "lat": 23.0298,
     "lng": 72.4589,
     "id": "rpt_145b217b",
-    "reported_at": "2026-08-29T18:19:42.853597"
+    "reported_at": "2026-08-29T18:19:42.853597",
+    "amc_ticket_id": "AMC-CCRS-2026-35789",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Bopal-Ghuma Residents Welfare Society",
+    "description_hi": "Large garbage dump blocking pedestrian walkway on South Bopal Gala Gymkhana Road"
   },
   {
     "ward_id": "ward_13",
@@ -401,7 +476,12 @@
     "lat": 23.0268,
     "lng": 72.5997,
     "id": "rpt_cf31fe45",
-    "reported_at": "2026-08-29T18:19:41.529709"
+    "reported_at": "2026-08-29T18:19:41.529709",
+    "amc_ticket_id": "AMC-CCRS-2026-67622",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Kankaria Lake Area Association",
+    "description_hi": "Clogged storm drain with plastic bottles near Kalupur Railway Station Platform 1 exit"
   },
   {
     "ward_id": "ward_12",
@@ -418,7 +498,12 @@
     "lat": 23.0118,
     "lng": 72.5815,
     "id": "rpt_9d45aab8",
-    "reported_at": "2026-08-29T18:19:40.251102"
+    "reported_at": "2026-08-29T18:19:40.251102",
+    "amc_ticket_id": "AMC-CCRS-2026-71918",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Paldi Citizen Action Group",
+    "description_hi": "Organic vegetable and floral waste accumulating near Jamalpur APMC Market Gate 2"
   },
   {
     "ward_id": "ward_19",
@@ -435,7 +520,12 @@
     "lat": 23.0272,
     "lng": 72.5564,
     "id": "rpt_07995611",
-    "reported_at": "2026-08-29T18:19:38.966527"
+    "reported_at": "2026-08-29T18:19:38.966527",
+    "amc_ticket_id": "AMC-CCRS-2026-68646",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Gomtipur Ekta Samiti",
+    "description_hi": "Single-use plastic cups and food containers scattered outside Law Garden Khau Galli"
   },
   {
     "ward_id": "ward_10",
@@ -452,7 +542,12 @@
     "lat": 23.0482,
     "lng": 72.5021,
     "id": "rpt_a5ef88b6",
-    "reported_at": "2026-08-29T18:19:37.665753"
+    "reported_at": "2026-08-29T18:19:37.665753",
+    "amc_ticket_id": "AMC-CCRS-2026-14706",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Vastrapur Resident Welfare Association",
+    "description_hi": "Construction debris and concrete rubble dumped along Sindhu Bhavan Road service lane"
   },
   {
     "ward_id": "ward_11",
@@ -469,7 +564,12 @@
     "lat": 23.0361,
     "lng": 72.5298,
     "id": "rpt_41dbc638",
-    "reported_at": "2026-08-29T18:19:36.335365"
+    "reported_at": "2026-08-29T18:19:36.335365",
+    "amc_ticket_id": "AMC-CCRS-2026-55958",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Ellisbridge & Law Garden Civic Society",
+    "description_hi": "Overflowing public waste bin near Vastrapur Lake amphitheater food stalls"
   },
   {
     "ward_id": "ward_01",
@@ -486,7 +586,12 @@
     "lat": 23.022523015,
     "lng": 72.571472605,
     "id": "rpt_cb959b11",
-    "reported_at": "2026-08-03T16:51:23.200541"
+    "reported_at": "2026-08-03T16:51:23.200541",
+    "amc_ticket_id": "AMC-CCRS-2026-81290",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Maninagar Vikas Mandal",
+    "description_hi": "Test garbage report creation by subagent"
   },
   {
     "ward_id": "ward_15",
@@ -503,7 +608,12 @@
     "lat": 23.0225,
     "lng": 72.5714,
     "id": "rpt_8e3e8816",
-    "reported_at": "2026-08-02T19:04:31.057490"
+    "reported_at": "2026-08-02T19:04:31.057490",
+    "amc_ticket_id": "AMC-CCRS-2026-40243",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Thaltej & SBR Citizen Council",
+    "description_hi": "x"
   },
   {
     "ward_id": "ward_01",
@@ -520,7 +630,12 @@
     "lat": 23.014,
     "lng": 72.604,
     "id": "rpt_304ca7ce",
-    "reported_at": "2026-08-02T18:57:23.995252"
+    "reported_at": "2026-08-02T18:57:23.995252",
+    "amc_ticket_id": "AMC-CCRS-2026-31442",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Maninagar Vikas Mandal",
+    "description_hi": "Test: overflowing bin near market"
   },
   {
     "ward_id": "ward_06",
@@ -537,7 +652,12 @@
     "lat": 23.112,
     "lng": 72.584,
     "id": "rpt_014",
-    "reported_at": "2026-07-16T14:20:00"
+    "reported_at": "2026-07-16T14:20:00",
+    "amc_ticket_id": "AMC-CCRS-2026-92969",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Vatva Industrial & Citizen Union",
+    "description_hi": "Plastic containers clogging the storm drain on Tapovan Circle road"
   },
   {
     "ward_id": "ward_01",
@@ -554,7 +674,12 @@
     "lat": 23.0021,
     "lng": 72.6031,
     "id": "rpt_002",
-    "reported_at": "2026-07-16T12:00:00"
+    "reported_at": "2026-07-16T12:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-61861",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Maninagar Vikas Mandal",
+    "description_hi": "Overflowing public dustbin near Maninagar Railway Station"
   },
   {
     "ward_id": "ward_13",
@@ -571,7 +696,12 @@
     "lat": 23.0285,
     "lng": 72.5985,
     "id": "rpt_027",
-    "reported_at": "2026-07-16T11:00:00"
+    "reported_at": "2026-07-16T11:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-69929",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Kankaria Lake Area Association",
+    "description_hi": "Heaps of old boxes and packing materials near Kalupur railway station exit"
   },
   {
     "ward_id": "ward_08",
@@ -588,7 +718,12 @@
     "lat": 23.0188,
     "lng": 72.6785,
     "id": "rpt_019",
-    "reported_at": "2026-07-16T10:00:00"
+    "reported_at": "2026-07-16T10:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-15954",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Naranpura Pragati Mandal",
+    "description_hi": "Clogged public dustbin outside Vastral Metro Station entrance"
   },
   {
     "ward_id": "ward_04",
@@ -605,7 +740,12 @@
     "lat": 23.0325,
     "lng": 72.461,
     "id": "rpt_009",
-    "reported_at": "2026-07-16T07:30:00"
+    "reported_at": "2026-07-16T07:30:00",
+    "amc_ticket_id": "AMC-CCRS-2026-57472",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Bopal-Ghuma Residents Welfare Society",
+    "description_hi": "Garbage burning near Bopal lake area causing heavy smoke"
   },
   {
     "ward_id": "ward_12",
@@ -622,7 +762,12 @@
     "lat": 23.016,
     "lng": 72.563,
     "id": "rpt_026",
-    "reported_at": "2026-07-15T22:00:00"
+    "reported_at": "2026-07-15T22:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-25881",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Paldi Citizen Action Group",
+    "description_hi": "Dumping spot near Paldi cross roads under the flyover bridge"
   },
   {
     "ward_id": "ward_06",
@@ -639,7 +784,12 @@
     "lat": 23.1095,
     "lng": 72.5885,
     "id": "rpt_013",
-    "reported_at": "2026-07-15T17:50:00"
+    "reported_at": "2026-07-15T17:50:00",
+    "amc_ticket_id": "AMC-CCRS-2026-72273",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Vatva Industrial & Citizen Union",
+    "description_hi": "Garbage dump near Chandkheda Railway Overbridge"
   },
   {
     "ward_id": "ward_10",
@@ -656,7 +806,12 @@
     "lat": 23.0515,
     "lng": 72.495,
     "id": "rpt_023",
-    "reported_at": "2026-07-15T16:10:00"
+    "reported_at": "2026-07-15T16:10:00",
+    "amc_ticket_id": "AMC-CCRS-2026-87138",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Vastrapur Resident Welfare Association",
+    "description_hi": "Plastic bags and cups outside tea stalls near SG Highway, Thaltej"
   },
   {
     "ward_id": "ward_08",
@@ -673,7 +828,12 @@
     "lat": 23.0215,
     "lng": 72.6815,
     "id": "rpt_018",
-    "reported_at": "2026-07-15T15:30:00"
+    "reported_at": "2026-07-15T15:30:00",
+    "amc_ticket_id": "AMC-CCRS-2026-44923",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Naranpura Pragati Mandal",
+    "description_hi": "Garbage dump near Vastral Ring Road Circle"
   },
   {
     "ward_id": "ward_14",
@@ -690,7 +850,12 @@
     "lat": 23.052,
     "lng": 72.5925,
     "id": "rpt_029",
-    "reported_at": "2026-07-15T14:30:00"
+    "reported_at": "2026-07-15T14:30:00",
+    "amc_ticket_id": "AMC-CCRS-2026-51345",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Becharaji & Chandkheda Forum",
+    "description_hi": "Household garbage dump on the corner of Shahibaug underpass lane"
   },
   {
     "ward_id": "ward_19",
@@ -707,7 +872,12 @@
     "lat": 23.029,
     "lng": 72.5485,
     "id": "rpt_035",
-    "reported_at": "2026-07-15T13:00:00"
+    "reported_at": "2026-07-15T13:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-95049",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Gomtipur Ekta Samiti",
+    "description_hi": "Plastics and cardboard piling up in lanes behind Ambawadi post office"
   },
   {
     "ward_id": "ward_03",
@@ -724,7 +894,12 @@
     "lat": 23.021,
     "lng": 72.5095,
     "id": "rpt_007",
-    "reported_at": "2026-07-15T11:45:00"
+    "reported_at": "2026-07-15T11:45:00",
+    "amc_ticket_id": "AMC-CCRS-2026-61174",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Satellite Citizen Association",
+    "description_hi": "Vegetable waste pile near Satellite Market area"
   },
   {
     "ward_id": "ward_17",
@@ -741,7 +916,12 @@
     "lat": 22.9965,
     "lng": 72.658,
     "id": "rpt_033",
-    "reported_at": "2026-07-15T09:30:00"
+    "reported_at": "2026-07-15T09:30:00",
+    "amc_ticket_id": "AMC-CCRS-2026-33954",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Danilimda Welfare Trust",
+    "description_hi": "Chemical packaging boxes left on Odhav GIDC main road side"
   },
   {
     "ward_id": "ward_09",
@@ -758,7 +938,12 @@
     "lat": 23.0465,
     "lng": 72.66,
     "id": "rpt_021",
-    "reported_at": "2026-07-15T09:00:00"
+    "reported_at": "2026-07-15T09:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-42997",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Sabarmati Nagrik Samiti",
+    "description_hi": "Construction sand and stones dumped on the main Nikol road intersection"
   },
   {
     "ward_id": "ward_02",
@@ -775,7 +960,12 @@
     "lat": 23.0375,
     "lng": 72.5585,
     "id": "rpt_004",
-    "reported_at": "2026-07-15T08:15:00"
+    "reported_at": "2026-07-15T08:15:00",
+    "amc_ticket_id": "AMC-CCRS-2026-90189",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Navrangpura Civic Forum",
+    "description_hi": "Garbage dumped on the corner of CG Road near Navrangpura Post Office"
   },
   {
     "ward_id": "ward_11",
@@ -792,7 +982,12 @@
     "lat": 23.031,
     "lng": 72.5295,
     "id": "rpt_024",
-    "reported_at": "2026-07-14T19:00:00"
+    "reported_at": "2026-07-14T19:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-20935",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Ellisbridge & Law Garden Civic Society",
+    "description_hi": "Garbage dump near Vastrapur Lake parking lot area"
   },
   {
     "ward_id": "ward_16",
@@ -809,7 +1004,12 @@
     "lat": 22.989,
     "lng": 72.507,
     "id": "rpt_032",
-    "reported_at": "2026-07-14T17:15:00"
+    "reported_at": "2026-07-14T17:15:00",
+    "amc_ticket_id": "AMC-CCRS-2026-44628",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Jodhpur Village RWA Forum",
+    "description_hi": "Plastic bags and papers floating in Sarkhej Roza pond area"
   },
   {
     "ward_id": "ward_09",
@@ -826,7 +1026,12 @@
     "lat": 23.0485,
     "lng": 72.6625,
     "id": "rpt_020",
-    "reported_at": "2026-07-14T13:45:00"
+    "reported_at": "2026-07-14T13:45:00",
+    "amc_ticket_id": "AMC-CCRS-2026-96857",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Sabarmati Nagrik Samiti",
+    "description_hi": "Vegetable waste pile rotting on Nikol canal link road"
   },
   {
     "ward_id": "ward_05",
@@ -843,7 +1048,12 @@
     "lat": 23.1015,
     "lng": 72.5415,
     "id": "rpt_012",
-    "reported_at": "2026-07-14T11:10:00"
+    "reported_at": "2026-07-14T11:10:00",
+    "amc_ticket_id": "AMC-CCRS-2026-57305",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Gota Ward Resident Council",
+    "description_hi": "Animal waste and plastic packaging near Gota residential colony entrance"
   },
   {
     "ward_id": "ward_01",
@@ -860,7 +1070,12 @@
     "lat": 23.0035,
     "lng": 72.6045,
     "id": "rpt_001",
-    "reported_at": "2026-07-14T09:30:00"
+    "reported_at": "2026-07-14T09:30:00",
+    "amc_ticket_id": "AMC-CCRS-2026-40327",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Maninagar Vikas Mandal",
+    "description_hi": "Large pile of construction waste on Maninagar Canal Road"
   },
   {
     "ward_id": "ward_18",
@@ -877,7 +1092,12 @@
     "lat": 22.9868,
     "lng": 72.6235,
     "id": "rpt_034",
-    "reported_at": "2026-07-14T08:00:00"
+    "reported_at": "2026-07-14T08:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-90319",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Khokhra Resident Welfare Body",
+    "description_hi": "Huge dumpsite near canal banks in Isanpur"
   },
   {
     "ward_id": "ward_07",
@@ -894,7 +1114,12 @@
     "lat": 23.095,
     "lng": 72.6585,
     "id": "rpt_015",
-    "reported_at": "2026-07-14T06:00:00"
+    "reported_at": "2026-07-14T06:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-64268",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Naroda Citizens Forum",
+    "description_hi": "Rotting garbage outside Naroda GIDC industrial units"
   },
   {
     "ward_id": "ward_13",
@@ -911,7 +1136,12 @@
     "lat": 23.0265,
     "lng": 72.596,
     "id": "rpt_028",
-    "reported_at": "2026-07-14T05:30:00"
+    "reported_at": "2026-07-14T05:30:00",
+    "amc_ticket_id": "AMC-CCRS-2026-49587",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Kankaria Lake Area Association",
+    "description_hi": "Vegetable refuse rotting in the Kalupur Market alleyways"
   },
   {
     "ward_id": "ward_15",
@@ -928,7 +1158,12 @@
     "lat": 23.0395,
     "lng": 72.6325,
     "id": "rpt_030",
-    "reported_at": "2026-07-13T16:00:00"
+    "reported_at": "2026-07-13T16:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-58719",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Thaltej & SBR Citizen Council",
+    "description_hi": "Industrial clothing scrap dumped behind Bapunagar housing board blocks"
   },
   {
     "ward_id": "ward_07",
@@ -945,7 +1180,12 @@
     "lat": 23.092,
     "lng": 72.655,
     "id": "rpt_016",
-    "reported_at": "2026-07-13T10:15:00"
+    "reported_at": "2026-07-13T10:15:00",
+    "amc_ticket_id": "AMC-CCRS-2026-28159",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Naroda Citizens Forum",
+    "description_hi": "Huge pile of scrap wood and packaging plastic near Naroda bus stand"
   },
   {
     "ward_id": "ward_03",
@@ -962,7 +1202,12 @@
     "lat": 23.0235,
     "lng": 72.5115,
     "id": "rpt_006",
-    "reported_at": "2026-07-13T10:00:00"
+    "reported_at": "2026-07-13T10:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-77812",
+    "amc_status": "Assigned to SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Satellite Citizen Association",
+    "description_hi": "E-waste and plastic bottles in the park near Mansi Circle"
   },
   {
     "ward_id": "ward_04",
@@ -979,7 +1224,12 @@
     "lat": 23.0355,
     "lng": 72.465,
     "id": "rpt_008",
-    "reported_at": "2026-07-12T14:00:00"
+    "reported_at": "2026-07-12T14:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-39016",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Bopal-Ghuma Residents Welfare Society",
+    "description_hi": "Construction debris left on Bopal-Ambli main road"
   },
   {
     "ward_id": "ward_02",
@@ -996,7 +1246,12 @@
     "lat": 23.0421,
     "lng": 72.561,
     "id": "rpt_005",
-    "reported_at": "2026-07-11T20:30:00"
+    "reported_at": "2026-07-11T20:30:00",
+    "amc_ticket_id": "AMC-CCRS-2026-61659",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Navrangpura Civic Forum",
+    "description_hi": "Commercial food waste outside restaurants on HL Commerce College road"
   },
   {
     "ward_id": "ward_15",
@@ -1013,7 +1268,12 @@
     "lat": 23.0375,
     "lng": 72.6295,
     "id": "rpt_031",
-    "reported_at": "2026-07-11T10:30:00"
+    "reported_at": "2026-07-11T10:30:00",
+    "amc_ticket_id": "AMC-CCRS-2026-45225",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Thaltej & SBR Citizen Council",
+    "description_hi": "Commercial plastics and waste cleaned up outside Bapunagar market area"
   },
   {
     "ward_id": "ward_01",
@@ -1030,7 +1290,12 @@
     "lat": 23.0085,
     "lng": 72.5995,
     "id": "rpt_003",
-    "reported_at": "2026-07-10T15:20:00"
+    "reported_at": "2026-07-10T15:20:00",
+    "amc_ticket_id": "AMC-CCRS-2026-41956",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM) • Health Dept",
+    "rwa_partner": "Maninagar Vikas Mandal",
+    "description_hi": "Plastic bags scattered outside Kankaria Lake Gate 3"
   },
   {
     "ward_id": "ward_11",
@@ -1047,7 +1312,12 @@
     "lat": 23.029,
     "lng": 72.527,
     "id": "rpt_025",
-    "reported_at": "2026-07-10T12:00:00"
+    "reported_at": "2026-07-10T12:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-66712",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Ellisbridge & Law Garden Civic Society",
+    "description_hi": "Plastic debris in the park lawns of Vastrapur Lake"
   },
   {
     "ward_id": "ward_05",
@@ -1064,7 +1334,12 @@
     "lat": 23.103,
     "lng": 72.5445,
     "id": "rpt_011",
-    "reported_at": "2026-07-09T16:40:00"
+    "reported_at": "2026-07-09T16:40:00",
+    "amc_ticket_id": "AMC-CCRS-2026-18733",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Gota Ward Resident Council",
+    "description_hi": "Dry leaves and household waste piled up near Gota cross roads"
   },
   {
     "ward_id": "ward_04",
@@ -1081,7 +1356,12 @@
     "lat": 23.0298,
     "lng": 72.4622,
     "id": "rpt_010",
-    "reported_at": "2026-07-08T09:00:00"
+    "reported_at": "2026-07-08T09:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-35303",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "AMC Drainage & Health Dept",
+    "rwa_partner": "Bopal-Ghuma Residents Welfare Society",
+    "description_hi": "Cleared illegal dump near South Bopal residential apartments"
   },
   {
     "ward_id": "ward_20",
@@ -1098,7 +1378,12 @@
     "lat": 23.0012,
     "lng": 72.5365,
     "id": "rpt_036",
-    "reported_at": "2026-07-07T11:00:00"
+    "reported_at": "2026-07-07T11:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-94447",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "Solid Waste Management (SWM)",
+    "rwa_partner": "Vejalpur & Jivraj Park Citizen Front",
+    "description_hi": "Cleared and cleaned open plot space in Vejalpur residential block"
   },
   {
     "ward_id": "ward_10",
@@ -1115,7 +1400,12 @@
     "lat": 23.049,
     "lng": 72.4985,
     "id": "rpt_022",
-    "reported_at": "2026-07-06T14:00:00"
+    "reported_at": "2026-07-06T14:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-95699",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Vastrapur Resident Welfare Association",
+    "description_hi": "Dry garbage pile behind Acropolis Mall in Thaltej"
   },
   {
     "ward_id": "ward_07",
@@ -1132,6 +1422,11 @@
     "lat": 23.091,
     "lng": 72.6599,
     "id": "rpt_017",
-    "reported_at": "2026-07-05T08:00:00"
+    "reported_at": "2026-07-05T08:00:00",
+    "amc_ticket_id": "AMC-CCRS-2026-89810",
+    "amc_status": "Resolved by AMC SWM Inspector",
+    "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
+    "rwa_partner": "Naroda Citizens Forum",
+    "description_hi": "Resolved waste dumping spot cleaned up in Naroda village center"
   }
 ]

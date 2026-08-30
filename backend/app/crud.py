@@ -54,6 +54,8 @@ def get_reports(db: Session, severity: str = None, status: str = None, category:
         query = query.filter(
             (models.Report.description_en.ilike(term)) |
             (models.Report.description_gu.ilike(term)) |
+            (models.Report.description_hi.ilike(term)) |
+            (models.Report.amc_ticket_id.ilike(term)) |
             (models.Report.id.ilike(term))
         )
     return query.order_by(models.Report.reported_at.desc()).all()

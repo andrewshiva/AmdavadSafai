@@ -21,6 +21,9 @@ A civic-tech full-stack web application that enables citizens to track, report, 
   - [5. Citizen Impact & Karma Gamification](#5-citizen-impact--karma-gamification)
   - [6. Civic Representative Accountability](#6-civic-representative-accountability)
   - [7. AMC SWM Solid Waste Feed & Analytics](#7-amc-swm-solid-waste-feed--analytics)
+  - [8. AMC CCRS 311 & WhatsApp Chatbot Bridge](#8-amc-ccrs-311--whatsapp-chatbot-bridge)
+  - [9. Before ↔ After Transformation Comparison Slider](#9-before--after-transformation-comparison-slider)
+  - [10. Wall of Cleaned Spots & RWA Pilot Dashboard](#10-wall-of-cleaned-spots--rwa-pilot-dashboard)
 - [Data Model & Architecture](#data-model--architecture)
 - [Getting Started](#getting-started)
 - [API Documentation](#api-documentation)
@@ -37,10 +40,12 @@ Citizens can:
 - View active garbage hotspots on an **interactive map** with AMC ward boundary overlays.
 - Submit geolocated garbage reports with category selection and photo evidence.
 - Verify cleaned spots with **Before → After proof photos**.
+- Sync directly with **AMC CCRS 311** official complaint tickets and WhatsApp helpline (`+91 75678 55303`).
 - Join or organize neighborhood **Sunday Cleanup Drives (સફાઈ અભિયાન)**.
 - Generate branded social cards for **WhatsApp Status & Instagram Stories**.
 - Earn **Citizen Karma Points** and rank badges for civic contributions.
 - Access elected representative hierarchies (Corporator, MLA, MP) and AMC control room escalation.
+- Explore **Ward RWA Dashboards** for localized resident welfare association accountability.
 
 ---
 
@@ -79,7 +84,7 @@ Citizens can:
 ### 2. Trilingual Localization (GU, HI, EN)
 
 - **3-Way Instant Toggle**: Seamless switching between **ગુજરાતી (Gujarati)**, **हिंदी (Hindi)**, and **English**.
-- **Comprehensive Translations**: Over 140 dictionary keys covering forms, analytics, representatives, and instructions.
+- **Comprehensive Translations**: Over 180 dictionary keys covering forms, analytics, representatives, and instructions.
 - **Anti-Tampering Guard**: Protected with `notranslate` metadata to prevent external browser translation extensions from crashing React DOM trees.
 
 ### 3. Sunday Community Cleanup Drives
@@ -117,6 +122,23 @@ Citizens can:
 - **Daily AMC Municipal Data**: Door-to-door coverage (94.6%), active collection vehicles (842+), daily waste processed (4,120 tons), recycling rate (68.2%).
 - **Zone & Severity Analytics**: Interactive Recharts breakdown and city-wide ward resolution leaderboard.
 
+### 8. AMC CCRS 311 & WhatsApp Chatbot Bridge
+
+- **Official Ticket Reference**: Automatically assigns and displays 5-digit decimal AMC CCRS ticket numbers (`AMC-CCRS-2026-XXXXX`).
+- **1-Click Copy Ticket**: Instantly copy ticket numbers with toast feedback for tracking or phone calls.
+- **AMC WhatsApp Dispatcher**: Pre-formats GPS coordinates, photo URLs, ward name, and description directly for the AMC CCRS WhatsApp bot (`+91 75678 55303`).
+- **Web Portal Link**: One-click tracking on AMC CCRS portal (`amccrs.com`).
+
+### 9. Before ↔ After Transformation Comparison Slider
+
+- **Interactive Comparison**: Dual-image comparison slider with touch and mouse dragging to highlight real cleanup results.
+- **Photo Verification**: Citizens upload proof photos of cleaned spots, triggering immediate status updates to "Resolved".
+
+### 10. Wall of Cleaned Spots & RWA Pilot Dashboard
+
+- **Wall of Cleaned Spots (સફાઈ સિદ્ધિ)**: Dedicated showcase gallery of resolved hotspots across all 27 wards with resolution times and photo verification badges.
+- **Ward RWA Pilot Dashboard**: Tailored dashboards for Resident Welfare Associations (e.g. Vastrapur, Bodakdev, Navrangpura) featuring ward resolution rates, oldest dump age, corporator scorecard, and printable civic dossiers.
+
 ---
 
 ## Data Model & Architecture
@@ -144,13 +166,19 @@ erDiagram
         string ward_id FK
         string description_en
         string description_gu
+        string description_hi
         string severity
         string status
         string category
+        string amc_ticket_id
+        string amc_status
+        string amc_department
+        string rwa_partner
         string image_url
         string verified_image_url
         int upvotes
         datetime reported_at
+        datetime resolved_at
     }
 
     CLEANUP_EVENT {

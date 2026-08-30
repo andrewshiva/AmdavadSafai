@@ -193,4 +193,8 @@
   ,"print_dossier": "RWA ડોઝિયર પ્રિન્ટ કરો"
   ,"amc_status_label": "AMC CCRS સ્ટેટસ:"
   ,"before_after_transformation": "ચકાસાયેલ રૂપાંતરણ (પહેલાં ↔ પછી)"
+  ,"copy_ticket": "ટિકિટ કોપી કરો"
+  ,"ticket_copied": "કોપી થઈ ગઈ!"
+  ,"rwa_partner_label": "નાગરિક ભાગીદાર"
+  ,"amc_ccrs_explainer": "AMC કોમ્પ્રીહેન્સિવ કમ્પ્લેઇન્ટ રિડ્રેસલ સિસ્ટમ (CCRS) સાથે સીધું જોડાયેલું અને વોર્ડ SWM ઇન્સ્પેક્ટરને સોંપાયેલું."
 }

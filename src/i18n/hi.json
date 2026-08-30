@@ -195,5 +195,9 @@
   "export_rwa_dossier": "नागरिक डोज़ियर प्रिंट / निर्यात करें",
   "print_dossier": "RWA डोज़ियर प्रिंट करें",
   "amc_status_label": "AMC CCRS स्थिति:",
-  "before_after_transformation": "सत्यापित परिवर्तन (पहले ↔ बाद में)"
+  "before_after_transformation": "सत्यापित परिवर्तन (पहले ↔ बाद में)",
+  "copy_ticket": "टिकट कॉपी करें",
+  "ticket_copied": "कॉपी हो गया!",
+  "rwa_partner_label": "नागरिक भागीदार",
+  "amc_ccrs_explainer": "AMC कॉम्प्रिहेंसिव कम्प्लेंट रिड्रेसल सिस्टम (CCRS) के साथ सीधे सिंक और स्थानीय वार्ड SWM इंस्पेक्टर को सौंपा गया।"
 }

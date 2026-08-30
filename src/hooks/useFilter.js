@@ -42,6 +42,8 @@ export const useFilter = () => {
           !q ||
           (report.description_en && report.description_en.toLowerCase().includes(q)) ||
           (report.description_gu && report.description_gu.includes(q)) ||
+          (report.description_hi && report.description_hi.includes(q)) ||
+          (report.amc_ticket_id && report.amc_ticket_id.toLowerCase().includes(q)) ||
           (report.id && report.id.toLowerCase().includes(q));
 
         return matchesSev && matchesStat && matchesCat && matchesWard && matchesSearch;

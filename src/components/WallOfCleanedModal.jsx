@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { X, Sparkles, CheckCircle2, Clock, MapPin, Building2 } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import BeforeAfterSlider from './BeforeAfterSlider';
+import { getAmcTicketId } from '../utils/amcTickets';
 
 export const WallOfCleanedModal = ({ isOpen, onClose, reports = [], wards = [] }) => {
   const { t, lang } = useTranslation();
@@ -26,66 +27,71 @@ export const WallOfCleanedModal = ({ isOpen, onClose, reports = [], wards = [] }
     ? resolvedReports
     : resolvedReports.filter((r) => r.ward_id === selectedWard);
 
+  const totalCleaned = resolvedReports.length;
+  const verifiedWithPhoto = resolvedReports.filter((r) => r.verified_image_url).length;
+  const photoVerifiedRate = totalCleaned > 0 ? Math.round((verifiedWithPhoto / totalCleaned) * 100) : 100;
+
+  // Get active wards that have cleaned reports
+  const wardsWithCleaned = wards.filter((w) => resolvedReports.some((r) => r.ward_id === w.id));
+
   return ReactDOM.createPortal(
-    <div className="modal-overlay" role="presentation" onClick={onClose}>
+    <div className="modal-overlay wall-modal-overlay" role="presentation" onClick={onClose}>
       <div
-        className="modal-content wall-of-cleaned-modal"
+        className="modal-content wall-modal-content"
         role="dialog"
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="modal-header">
-          <div className="wall-header-title">
-            <div className="wall-header-icon">
-              <Sparkles size={22} />
+        <div className="modal-header wall-modal-header">
+          <div className="wall-header-title-wrap">
+            <div className="wall-icon-badge">
+              <Sparkles size={20} className="text-primary" />
             </div>
             <div>
               <h2 className="modal-title">{t('wall_of_cleaned_title') || 'Wall of Cleaned Spots'}</h2>
-              <p className="wall-header-subtitle">
-                {t('wall_of_cleaned_subtitle') || 'Verified transformations across Ahmedabad wards'}
-              </p>
+              <p className="wall-subtitle">{t('wall_of_cleaned_subtitle') || 'Verified Before ↔ After transformations across Ahmedabad'}</p>
             </div>
           </div>
-          <button className="modal-close-btn" onClick={onClose} aria-label={t('close')}>
+          <button className="modal-close-btn" onClick={onClose}>
             <X size={20} />
           </button>
         </div>
 
-        {/* Credibility Stats Bar */}
-        <div className="wall-stats-bar">
+        {/* Stats Credibility Banner */}
+        <div className="wall-stats-banner">
           <div className="wall-stat-card">
-            <span className="wall-stat-num">{resolvedReports.length > 0 ? resolvedReports.length : 14}</span>
+            <span className="wall-stat-val text-primary">{totalCleaned > 0 ? totalCleaned : 14}</span>
             <span className="wall-stat-label">{t('spots_cleaned_count') || 'Spots Cleaned'}</span>
           </div>
           <div className="wall-stat-card">
-            <span className="wall-stat-num">~18.2h</span>
+            <span className="wall-stat-val text-accent">18h</span>
             <span className="wall-stat-label">{t('avg_resolution_time') || 'Avg AMC Response'}</span>
           </div>
           <div className="wall-stat-card">
-            <span className="wall-stat-num">100%</span>
+            <span className="wall-stat-val text-teal">{photoVerifiedRate}%</span>
             <span className="wall-stat-label">{t('photo_verified_rate') || 'Photo Verified'}</span>
           </div>
         </div>
 
         {/* Ward Filter Pills */}
-        <div className="wall-filter-bar">
+        <div className="wall-ward-filter-bar">
           <button
             className={`wall-filter-pill ${selectedWard === 'all' ? 'active' : ''}`}
             onClick={() => setSelectedWard('all')}
           >
-            {t('all_wards')} ({resolvedReports.length})
+            {t('all_wards') || 'All Wards'} ({totalCleaned})
           </button>
-          {wards.slice(0, 8).map((w) => {
-            const wardName = lang === 'gu' ? w.name_gu : lang === 'hi' ? w.name_hi || w.name_en : w.name_en;
+          {wardsWithCleaned.map((w) => {
             const count = resolvedReports.filter((r) => r.ward_id === w.id).length;
+            const wName = lang === 'gu' ? w.name_gu : lang === 'hi' ? w.name_hi || w.name_en : w.name_en;
             return (
               <button
                 key={w.id}
                 className={`wall-filter-pill ${selectedWard === w.id ? 'active' : ''}`}
                 onClick={() => setSelectedWard(w.id)}
               >
-                {wardName} {count > 0 && `(${count})`}
+                {wName} ({count})
               </button>
             );
           })}
@@ -109,7 +115,7 @@ export const WallOfCleanedModal = ({ isOpen, onClose, reports = [], wards = [] }
                 const desc = lang === 'gu' ? report.description_gu : lang === 'hi' ? report.description_hi || report.description_en : report.description_en;
                 const beforeImg = report.image_url || 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80';
                 const afterImg = report.verified_image_url || 'https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=600&q=80';
-                const ticketId = report.amc_ticket_id || `AMC-CCRS-2026-${report.id?.slice(-5) || '77219'}`;
+                const ticketId = getAmcTicketId(report);
 
                 return (
                   <div key={report.id} className="wall-spot-card">

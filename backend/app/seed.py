@@ -68,6 +68,10 @@ def seed_database():
                     import datetime
                     dt_str = report_item["reported_at"].replace("Z", "+00:00")
                     dt = datetime.datetime.fromisoformat(dt_str)
+                    resolved_dt = None
+                    if report_item.get("resolved_at"):
+                        res_str = report_item["resolved_at"].replace("Z", "+00:00")
+                        resolved_dt = datetime.datetime.fromisoformat(res_str)
                     db_report = models.Report(
                         id=report_item["id"],
                         ward_id=report_item["ward_id"],
@@ -77,13 +81,18 @@ def seed_database():
                         severity=report_item["severity"],
                         status=report_item["status"],
                         category=report_item.get("category", "mixed_waste"),
+                        amc_ticket_id=report_item.get("amc_ticket_id"),
+                        amc_status=report_item.get("amc_status", "Assigned to SWM Inspector"),
+                        amc_department=report_item.get("amc_department", "Solid Waste Management (SWM)"),
+                        rwa_partner=report_item.get("rwa_partner", "Ahmedabad Citizen Network"),
                         image_url=report_item.get("image_url"),
                         verified_image_url=report_item.get("verified_image_url"),
                         upvotes=report_item.get("upvotes", 0),
                         flagged=report_item.get("flagged", 0),
                         lat=report_item["lat"],
                         lng=report_item["lng"],
-                        reported_at=dt
+                        reported_at=dt,
+                        resolved_at=resolved_dt
                     )
                     db.add(db_report)
                 db.commit()

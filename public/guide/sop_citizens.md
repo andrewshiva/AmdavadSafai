@@ -100,9 +100,12 @@ AmdavadSafai is built to work even when you lose your internet connection or run
 
 ---
 
-## 6. Escalating Issues
+## 6. Official AMC CCRS 311 & WhatsApp Escalation
 
-If a critical report remains unresolved for a long time, use the escalation tools inside the report details:
+If a critical report remains unresolved for a long time, use the official AMC escalation tools inside the report details:
 
+- **AMC CCRS 311 Ticket**: Every report is automatically assigned an official AMC ticket number (`AMC-CCRS-2026-XXXXX`). Click the **Copy** button to save the reference for calls or web tracking.
+- **WhatsApp Dispatcher (+91 75678 55303)**: Click the **Send to AMC WhatsApp** button to generate a pre-formatted message with GPS coordinates, photo links, and ward details directly for the AMC CCRS chatbot.
+- **Web Portal**: Click **Track on amccrs.com** to track real-time municipal status.
 - **X (Twitter)**: Click the "Escalate on X" button to generate a pre-filled tweet tagging the official AMC handles and your local representatives.
-- **Direct Call**: Use the provided button to instantly dial the AMC Control Room.
+- **Direct Call**: Use the provided button to instantly dial the AMC Control Room (`155303`).

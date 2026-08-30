@@ -192,5 +192,9 @@
   "export_rwa_dossier": "Print / Export Civic Dossier",
   "print_dossier": "Print RWA Dossier",
   "amc_status_label": "AMC CCRS Status:",
-  "before_after_transformation": "Verified Transformation (Before ↔ After)"
+  "before_after_transformation": "Verified Transformation (Before ↔ After)",
+  "copy_ticket": "Copy Ticket #",
+  "ticket_copied": "Copied!",
+  "rwa_partner_label": "Civic Partner",
+  "amc_ccrs_explainer": "Directly synced with AMC Comprehensive Complaint Redressal System (CCRS) and escalated to the local Ward SWM Inspector."
 }

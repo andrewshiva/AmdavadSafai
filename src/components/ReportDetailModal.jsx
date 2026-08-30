@@ -12,10 +12,13 @@ import {
   Building2,
   UserCheck,
   ShieldCheck,
-  Tag
+  Tag,
+  Copy,
+  Check
 } from 'lucide-react';
 import wardsData from '../data/wards.json';
 import BeforeAfterSlider from './BeforeAfterSlider';
+import { getAmcTicketId } from '../utils/amcTickets';
 
 export const ReportDetailModal = ({
   isOpen,
@@ -30,6 +33,7 @@ export const ReportDetailModal = ({
   const [upvotes, setUpvotes] = useState(report?.upvotes || 0);
   const [hasUpvoted, setHasUpvoted] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [copiedTicket, setCopiedTicket] = useState(false);
 
   if (!isOpen || !report) return null;
 
@@ -325,47 +329,95 @@ export const ReportDetailModal = ({
 
 
           {/* Official AMC CCRS & 311 Ticket Integration Card */}
-          <div className="report-amc-ccrs-card">
-            <div className="amc-ccrs-header">
-              <div className="amc-ccrs-badge">
-                <span className="amc-logo-dot"></span>
-                <span>AMC CCRS 311 OFFICIAL TICKET</span>
+          {(() => {
+            const ticketId = getAmcTicketId(report);
+            const handleCopyTicketNum = () => {
+              if (navigator.clipboard) {
+                navigator.clipboard.writeText(ticketId);
+                setCopiedTicket(true);
+                setTimeout(() => setCopiedTicket(false), 2000);
+              }
+            };
+
+            return (
+              <div className="report-amc-ccrs-card">
+                <div className="amc-ccrs-header">
+                  <div className="amc-ccrs-badge">
+                    <span className="amc-logo-dot"></span>
+                    <span>AMC CCRS 311 OFFICIAL TICKET</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span className="amc-ticket-num">{ticketId}</span>
+                    <button
+                      type="button"
+                      onClick={handleCopyTicketNum}
+                      className="amc-copy-ticket-btn"
+                      title={copiedTicket ? (t('ticket_copied') || 'Copied!') : (t('copy_ticket') || 'Copy Ticket #')}
+                      style={{
+                        background: copiedTicket ? '#059669' : 'rgba(255,255,255,0.1)',
+                        border: '1px solid rgba(255,255,255,0.15)',
+                        color: 'white',
+                        borderRadius: '6px',
+                        padding: '3px 7px',
+                        fontSize: '11px',
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      {copiedTicket ? <Check size={12} /> : <Copy size={12} />}
+                      <span>{copiedTicket ? (t('ticket_copied') || 'Copied!') : (t('copy_ticket') || 'Copy')}</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="amc-status-row">
+                  <span className="amc-status-label">{t('amc_status_label') || 'AMC CCRS Status:'}</span>
+                  <span className={`amc-status-pill ${report.status === 'resolved' ? 'status-resolved' : 'status-assigned'}`}>
+                    {report.amc_status || (report.status === 'resolved' ? 'Resolved by AMC SWM' : 'Assigned to SWM Inspector')}
+                  </span>
+                </div>
+
+                <p className="amc-dept-sub">
+                  🏢 {report.amc_department || 'Solid Waste Management (SWM) • Health Dept'}
+                </p>
+
+                {report.rwa_partner && (
+                  <p className="amc-rwa-partner-sub" style={{ fontSize: '11.5px', color: '#94A3B8', margin: '4px 0 0 0', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span>🤝</span>
+                    <span><strong>{t('rwa_partner_label') || 'Civic Partner'}:</strong> {report.rwa_partner}</span>
+                  </p>
+                )}
+
+                <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.65)', margin: '8px 0 12px 0', lineHeight: 1.4 }}>
+                  {t('amc_ccrs_explainer') || 'Directly synced with AMC Comprehensive Complaint Redressal System (CCRS) and escalated to the local Ward SWM Inspector.'}
+                </p>
+
+                <div className="amc-dispatch-actions">
+                  <a
+                    href={`https://api.whatsapp.com/send?phone=917567855303&text=${encodeURIComponent(`Hi AMC CCRS,\nI want to report a garbage issue via AmdavadSafai.\n\n📍 Ward: ${wardName}\n🏷️ Category: ${categoryLabel}\n⚠️ Severity: ${report.severity.toUpperCase()}\n📝 Description: ${description}\n🌐 Map GPS: https://maps.google.com/?q=${report.lat},${report.lng}\n🎫 Ticket Ref: ${ticketId}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="amc-whatsapp-btn"
+                  >
+                    <span>📲 Send to AMC WhatsApp (+91 75678 55303)</span>
+                  </a>
+
+                  <a
+                    href="https://www.amccrs.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="amc-portal-link"
+                  >
+                    <span>🌐 Track on amccrs.com</span>
+                    <ExternalLink size={12} />
+                  </a>
+                </div>
               </div>
-              <span className="amc-ticket-num">{report.amc_ticket_id || `AMC-CCRS-2026-${report.id?.slice(-5) || '88412'}`}</span>
-            </div>
-
-            <div className="amc-status-row">
-              <span className="amc-status-label">{t('amc_status_label') || 'AMC CCRS Status:'}</span>
-              <span className={`amc-status-pill ${report.status === 'resolved' ? 'status-resolved' : 'status-assigned'}`}>
-                {report.amc_status || (report.status === 'resolved' ? 'Resolved by AMC SWM' : 'Assigned to SWM Inspector')}
-              </span>
-            </div>
-
-            <p className="amc-dept-sub">
-              🏢 {report.amc_department || 'Solid Waste Management (SWM) • Health Dept'}
-            </p>
-
-            <div className="amc-dispatch-actions">
-              <a
-                href={`https://api.whatsapp.com/send?phone=917567855303&text=${encodeURIComponent(`Hi AMC CCRS,\nI want to report a garbage issue via AmdavadSafai.\n\n📍 Ward: ${wardName}\n🏷️ Category: ${categoryLabel}\n⚠️ Severity: ${report.severity.toUpperCase()}\n📝 Description: ${description}\n🌐 Map GPS: https://maps.google.com/?q=${report.lat},${report.lng}\n🎫 Ticket Ref: ${report.amc_ticket_id || 'AMC-CCRS-2026-AUTO'}`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="amc-whatsapp-btn"
-              >
-                <span>📲 Send to AMC WhatsApp (+91 75678 55303)</span>
-              </a>
-
-              <a
-                href="https://www.amccrs.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="amc-portal-link"
-              >
-                <span>🌐 Track on amccrs.com</span>
-                <ExternalLink size={12} />
-              </a>
-            </div>
-          </div>
+            );
+          })()}
 
           {/* Verification Transformation Slider if Resolved */}
           {report.status === 'resolved' && (

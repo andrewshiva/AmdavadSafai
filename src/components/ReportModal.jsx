@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { useTranslation } from '../i18n/useTranslation';
 import { X, AlertCircle, MapPin, CheckCircle2, LocateFixed, Camera, Tag } from 'lucide-react';
 import { addKarmaPoints } from '../utils/gamification';
+import { generateAmcTicketId } from '../utils/amcTickets';
 
 export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, onOutofCity }) => {
   const { t, lang } = useTranslation();
@@ -116,6 +117,7 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
 
     const finalDescEn = descEn.trim() || descGu.trim();
     const finalDescGu = descGu.trim() || descEn.trim();
+    const newAmcTicketId = generateAmcTicketId();
 
     setSubmitting(true);
     try {
@@ -128,6 +130,9 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
           description_gu: finalDescGu,
           severity: severity,
           category: category,
+          amc_ticket_id: newAmcTicketId,
+          amc_status: 'Assigned to SWM Inspector',
+          amc_department: 'Solid Waste Management (SWM)',
           image_url: photo,
           lat: parseFloat(lat),
           lng: parseFloat(lng)
@@ -156,14 +161,22 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
       }
     } catch {
       // Fallback behavior if static deployment
+      const selectedWard = wards.find((w) => w.id === wardId);
+      const wardPartner = selectedWard ? `${selectedWard.name_en} Civic Association` : 'Ahmedabad Citizen Network';
+
       const newReport = {
         id: `rpt_local_${Date.now()}`,
         ward_id: wardId,
         description_en: finalDescEn,
         description_gu: finalDescGu,
+        description_hi: finalDescEn,
         severity: severity,
         category: category,
         status: 'unresolved',
+        amc_ticket_id: newAmcTicketId,
+        amc_status: 'Assigned to SWM Inspector',
+        amc_department: 'Solid Waste Management (SWM)',
+        rwa_partner: wardPartner,
         image_url: photo,
         upvotes: 0,
         flagged: 0,
@@ -174,6 +187,7 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
       const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
       localStorage.setItem('amdavad_safai_local_reports', JSON.stringify([newReport, ...stored]));
 
+      addKarmaPoints('REPORT_SUBMITTED', 10);
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
@@ -184,7 +198,6 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
         onClose();
       }, 1800);
     } finally {
-
       setSubmitting(false);
     }
   };
