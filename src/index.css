@@ -900,14 +900,14 @@ button, select, input {
   left: 0;
   right: 0;
   z-index: 1400;
-  max-height: calc(100vh - 110px);
+  max-height: calc(100vh - 145px);
   display: flex;
   flex-direction: column;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   border-top: 1px solid var(--glass-border);
   box-shadow: var(--shadow-sheet);
-  transform: translateY(calc(100% - 40px));
+  transform: translateY(calc(100% - 42px));
   transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -916,9 +916,9 @@ button, select, input {
 }
 
 .stats-trigger-btn {
-  height: 40px;
-  background: transparent;
-  border: none;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--glass-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -935,11 +935,11 @@ button, select, input {
 }
 
 .stats-content {
-  padding: 24px;
+  padding: 16px 20px;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
-  max-height: calc(100vh - 160px);
+  gap: 18px;
+  max-height: calc(100vh - 195px);
   overflow-y: auto;
 }
 

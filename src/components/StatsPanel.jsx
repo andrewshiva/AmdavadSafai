@@ -193,6 +193,36 @@ export const StatsPanel = ({ reports }) => {
       </button>
 
       <div className="stats-content">
+        {/* Quick View Map & Minimize Action Bar */}
+        <div style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(13, 148, 136, 0.08)', border: '1px solid rgba(13, 148, 136, 0.2)', padding: '10px 16px', borderRadius: 'var(--radius-md)' }}>
+          <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-primary-dark)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            📊 {t('stats')} ({reports.length} {t('total_reports')})
+          </span>
+          <button
+            onClick={() => setIsOpen(false)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'var(--color-primary)',
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: 'var(--radius-full)',
+              padding: '6px 14px',
+              fontSize: '12.5px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 2px 6px rgba(13, 148, 136, 0.3)',
+              transition: 'transform 0.15s ease'
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+            onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+          >
+            <span>🗺️ {t('hide_stats_view_map') || 'View Map'}</span>
+            <ChevronDown size={16} />
+          </button>
+        </div>
+
         {/* Top KPI Cards */}
         <div className="stats-grid" style={{ gridColumn: '1 / -1' }}>
           <div className="stat-card">
