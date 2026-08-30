@@ -148,14 +148,7 @@ export const StatsPanel = ({ reports }) => {
     };
   }).sort((a, b) => b.resolution_rate_pct - a.resolution_rate_pct || b.total_reports - a.total_reports);
 
-  // Auto-collapse stats panel when filters change so map is immediately visible
-  const prevReportsRef = React.useRef(reports);
-  useEffect(() => {
-    if (prevReportsRef.current !== reports && isOpen) {
-      setIsOpen(false);
-    }
-    prevReportsRef.current = reports;
-  }, [reports]);
+  // Stats panel stays open when filters change — user closes manually via View Map button or ESC
 
   // ESC key to close stats drawer
   useEffect(() => {
