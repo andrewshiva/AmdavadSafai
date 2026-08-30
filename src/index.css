@@ -223,7 +223,7 @@ button, select, input {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  z-index: 1001;
+  z-index: 1700;
   position: relative;
 }
 
@@ -374,7 +374,7 @@ button, select, input {
   top: 56px;
   left: 0;
   right: 0;
-  z-index: 1001;
+  z-index: 1600;
   display: flex;
   gap: 8px;
   padding: 8px 16px;
@@ -899,7 +899,8 @@ button, select, input {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1500;
+  z-index: 1400;
+  max-height: calc(100vh - 110px);
   display: flex;
   flex-direction: column;
   background: var(--glass-bg);
@@ -938,7 +939,7 @@ button, select, input {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  max-height: calc(80vh - 40px);
+  max-height: calc(100vh - 160px);
   overflow-y: auto;
 }
 
