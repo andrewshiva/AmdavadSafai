@@ -212,7 +212,8 @@ export const ReportDetailModal = ({
                   onOpenShareCard({
                     type: 'report',
                     title: description,
-                    location: `${wardName} (Ward ${report.ward_id})`,
+                    location: ward ? `${wardName} (${zoneName || 'Ahmedabad'})` : 'Ahmedabad',
+                    ticketId: getAmcTicketId(report),
                     status: report.status,
                     severity: report.severity
                   });

@@ -6,6 +6,7 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
   const { t, lang } = useTranslation();
   const canvasRef = useRef(null);
   const [copied, setCopied] = useState(false);
+  const [copiedText, setCopiedText] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   const reportOrEvent = data || {
@@ -16,8 +17,15 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
     severity: 'severe'
   };
 
+  const rawLocation = reportOrEvent.location || reportOrEvent.location_name || 'Ahmedabad, Gujarat';
+  const cleanLocation = rawLocation.replace(/\s*\(Ward\s+ward_\d+\)/gi, '').trim();
+  const isEvent = reportOrEvent.type === 'event';
+  const ticketRef = reportOrEvent.ticketId ? `🎫 *AMC Ticket:* ${reportOrEvent.ticketId}\n` : '';
+
   const appUrl = 'https://amdavad-safai-9i9g.vercel.app';
-  const shareText = `🧹 AmdavadSafai — Cleanliness Action in Ahmedabad!\n📍 Location: ${reportOrEvent.location || 'Ahmedabad'}\n❤️ આપણું શહેર, આપણી જવાબદારી\n👉 Track on map: ${appUrl}`;
+  const shareText = isEvent
+    ? `*AmdavadSafai — Sunday Cleanup Drive!* 🧹\n\n📍 *Location:* ${cleanLocation}\n⏰ *Time:* ${reportOrEvent.date_time || 'Sunday 7:00 AM'}\n👥 *Volunteers Joined:* ${reportOrEvent.volunteers || 24}+\n\n🤝 *આપણું શહેર, આપણી જવાબદારી*\n👉 *Join & Track:* ${appUrl}`
+    : `*AmdavadSafai — Cleanliness Action in Ahmedabad!* 🧹\n\n📍 *Location:* ${cleanLocation}\n${ticketRef}⚠️ *Status:* ${reportOrEvent.status === 'resolved' ? '✅ Resolved & Cleaned' : '⏳ Pending AMC Action'}\n\n🤝 *આપણું શહેર, આપણી જવાબદારી*\n👉 *Track live on map:* ${appUrl}`;
 
   // Draw Canvas Card
   const drawCard = () => {
@@ -110,7 +118,7 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
 
     ctx.fillStyle = '#0F172A';
     ctx.font = 'bold 18px sans-serif';
-    ctx.fillText(reportOrEvent.location || reportOrEvent.location_name || 'Ahmedabad, Gujarat', 90, y + 85);
+    ctx.fillText(cleanLocation, 90, y + 85);
 
     ctx.fillStyle = '#059669';
     ctx.font = '600 14px sans-serif';
@@ -169,6 +177,12 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
     navigator.clipboard.writeText(appUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyText = () => {
+    navigator.clipboard.writeText(shareText);
+    setCopiedText(true);
+    setTimeout(() => setCopiedText(false), 2000);
   };
 
   return (
@@ -265,6 +279,27 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
               <button
+                onClick={handleCopyText}
+                style={{
+                  background: 'rgba(37, 211, 102, 0.12)',
+                  color: '#15803D',
+                  border: '1px solid rgba(37, 211, 102, 0.35)',
+                  padding: '10px',
+                  borderRadius: '8px',
+                  fontWeight: 600,
+                  fontSize: '12.5px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                {copiedText ? <Check size={15} style={{ color: '#16A34A' }} /> : <Copy size={15} />}
+                {copiedText ? (t('ticket_copied') || 'Text Copied!') : (t('copy_message') || 'Copy Message')}
+              </button>
+
+              <button
                 onClick={handleDownload}
                 disabled={downloading}
                 style={{
@@ -284,27 +319,6 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
               >
                 <Download size={15} />
                 {t('download_card')}
-              </button>
-
-              <button
-                onClick={handleCopyLink}
-                style={{
-                  background: '#F1F5F9',
-                  color: '#334155',
-                  border: '1px solid #CBD5E1',
-                  padding: '10px',
-                  borderRadius: '8px',
-                  fontWeight: 600,
-                  fontSize: '12.5px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px'
-                }}
-              >
-                {copied ? <Check size={15} style={{ color: '#16A34A' }} /> : <Copy size={15} />}
-                {copied ? t('link_copied') : t('share_report')}
               </button>
             </div>
           </div>
