@@ -31,7 +31,7 @@ export const BadgesModal = ({ isOpen, onClose, onOpenEvents }) => {
     : 100;
 
   return (
-    <div className="modal-overlay" onClick={onClose} style={{ zIndex: 1100 }}>
+    <div className="modal-overlay" onClick={onClose}>
       <div
         className="modal-content karma-modal-content"
         onClick={(e) => e.stopPropagation()}

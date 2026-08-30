@@ -186,7 +186,7 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose} style={{ zIndex: 1200 }}>
+    <div className="modal-overlay" onClick={onClose}>
       <div
         className="modal-content share-modal-content"
         onClick={(e) => e.stopPropagation()}

@@ -88,7 +88,7 @@ export const CreateEventModal = ({ isOpen, onClose, onEventCreated }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose} style={{ zIndex: 1150 }}>
+    <div className="modal-overlay" onClick={onClose}>
       <div
         className="modal-content"
         onClick={(e) => e.stopPropagation()}
