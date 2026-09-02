@@ -5368,6 +5368,35 @@ button, select, input, textarea {
   color: #DC2626;
 }
 
+.v2-action-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0F172A;
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.22);
+  z-index: 9999;
+  animation: toastSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@keyframes toastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* ==========================================================================
    Mobile Responsive Header & Navigation Drawer
    ========================================================================== */

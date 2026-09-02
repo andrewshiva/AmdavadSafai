@@ -104,56 +104,46 @@ export const HeaderV2 = ({
           <span>{navLabels.about}</span>
         </button>
 
-        {currentUser && (
-          <button
-            type="button"
-            className={`variant-nav-link ${activeView === 'dashboard' ? 'active' : ''}`}
-            onClick={() => handleNavClick('dashboard')}
-          >
-            <span>{navLabels.dashboard}</span>
-          </button>
-        )}
+        <button
+          type="button"
+          className={`variant-nav-link ${activeView === 'dashboard' ? 'active' : ''}`}
+          onClick={() => handleNavClick('dashboard')}
+        >
+          <span>{navLabels.dashboard}</span>
+        </button>
 
-        {currentUser && (
-          <button
-            type="button"
-            className={`variant-nav-link ${activeView === 'reports' ? 'active' : ''}`}
-            onClick={() => handleNavClick('reports')}
-          >
-            <span>{navLabels.reports}</span>
-          </button>
-        )}
+        <button
+          type="button"
+          className={`variant-nav-link ${activeView === 'reports' ? 'active' : ''}`}
+          onClick={() => handleNavClick('reports')}
+        >
+          <span>{navLabels.reports}</span>
+        </button>
 
-        {currentUser && (
-          <button
-            type="button"
-            className={`variant-nav-link ${activeView === 'wards' ? 'active' : ''}`}
-            onClick={() => handleNavClick('wards')}
-          >
-            <span>{navLabels.wards}</span>
-          </button>
-        )}
+        <button
+          type="button"
+          className={`variant-nav-link ${activeView === 'wards' ? 'active' : ''}`}
+          onClick={() => handleNavClick('wards')}
+        >
+          <span>{navLabels.wards}</span>
+        </button>
 
-        {currentUser && (
-          <button
-            type="button"
-            className={`variant-nav-link ${activeView === 'drives' ? 'active' : ''}`}
-            onClick={() => handleNavClick('drives')}
-          >
-            <span>{navLabels.drives}</span>
-            <span className="events-count-badge">5</span>
-          </button>
-        )}
+        <button
+          type="button"
+          className={`variant-nav-link ${activeView === 'drives' ? 'active' : ''}`}
+          onClick={() => handleNavClick('drives')}
+        >
+          <span>{navLabels.drives}</span>
+          <span className="events-count-badge">5</span>
+        </button>
 
-        {currentUser && (
-          <button
-            type="button"
-            className={`variant-nav-link ${activeView === 'impact' ? 'active' : ''}`}
-            onClick={() => handleNavClick('impact')}
-          >
-            <span>{navLabels.impact}</span>
-          </button>
-        )}
+        <button
+          type="button"
+          className={`variant-nav-link ${activeView === 'impact' ? 'active' : ''}`}
+          onClick={() => handleNavClick('impact')}
+        >
+          <span>{navLabels.impact}</span>
+        </button>
       </nav>
 
       {/* Right: Actions (Desktop & Mobile) */}
@@ -283,25 +273,23 @@ export const HeaderV2 = ({
           <Menu size={22} />
         </button>
 
-        {/* Action Button: REPORT / CANCEL - Only visible when signed in */}
-        {currentUser && (
-          activeView === 'report' ? (
-            <button
-              type="button"
-              className="variant-cancel-btn"
-              onClick={() => handleNavClick('about')}
-            >
-              CANCEL
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="variant-report-issue-btn"
-              onClick={handleReportClick}
-            >
-              REPORT
-            </button>
-          )
+        {/* Action Button: REPORT / CANCEL */}
+        {activeView === 'report' ? (
+          <button
+            type="button"
+            className="variant-cancel-btn"
+            onClick={() => handleNavClick('about')}
+          >
+            CANCEL
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="variant-report-issue-btn"
+            onClick={handleReportClick}
+          >
+            REPORT
+          </button>
         )}
       </div>
 
@@ -374,64 +362,62 @@ export const HeaderV2 = ({
                 <ChevronRight size={16} />
               </button>
 
-              {currentUser && (
-                <>
-                  <button
-                    type="button"
-                    className={`mobile-nav-item ${activeView === 'reports' ? 'active' : ''}`}
-                    onClick={() => handleNavClick('reports')}
-                  >
-                    <span>{lang === 'gu' ? 'મારી ફરિયાદો' : lang === 'hi' ? 'मेरी शिकायतें' : 'MY REPORTS'}</span>
-                    <ChevronRight size={16} />
-                  </button>
+              <button
+                type="button"
+                className={`mobile-nav-item ${activeView === 'dashboard' ? 'active' : ''}`}
+                onClick={() => handleNavClick('dashboard')}
+              >
+                <span>{lang === 'gu' ? 'ડેશબોર્ડ (GIS નકશો)' : lang === 'hi' ? 'डैशबोर्ड (GIS मानचित्र)' : 'DASHBOARD (GIS MAP)'}</span>
+                <ChevronRight size={16} />
+              </button>
 
-                  <button
-                    type="button"
-                    className={`mobile-nav-item ${activeView === 'impact' ? 'active' : ''}`}
-                    onClick={() => handleNavClick('impact')}
-                  >
-                    <span>{lang === 'gu' ? 'સામુદાયિક પ્રભાવ ગેલેરી' : lang === 'hi' ? 'सामुदायिक प्रभाव गैलरी' : 'COMMUNITY IMPACT GALLERY'}</span>
-                    <ChevronRight size={16} />
-                  </button>
+              <button
+                type="button"
+                className={`mobile-nav-item ${activeView === 'reports' ? 'active' : ''}`}
+                onClick={() => handleNavClick('reports')}
+              >
+                <span>{lang === 'gu' ? 'નાગરિક ફરિયાદો' : lang === 'hi' ? 'नागरिक शिकायतें' : 'CIVIC REPORTS'}</span>
+                <ChevronRight size={16} />
+              </button>
 
-                  <button
-                    type="button"
-                    className={`mobile-nav-item ${activeView === 'dashboard' ? 'active' : ''}`}
-                    onClick={() => handleNavClick('dashboard')}
-                  >
-                    <span>{lang === 'gu' ? 'ડેશબોર્ડ (GIS નકશો)' : lang === 'hi' ? 'डैशबोर्ड (GIS मानचित्र)' : 'DASHBOARD (GIS MAP)'}</span>
-                    <ChevronRight size={16} />
-                  </button>
+              <button
+                type="button"
+                className={`mobile-nav-item ${activeView === 'wards' ? 'active' : ''}`}
+                onClick={() => handleNavClick('wards')}
+              >
+                <span>{lang === 'gu' ? 'વોર્ડ પ્રોફાઇલ અને અધિકારીઓ' : lang === 'hi' ? 'वार्ड प्रोफाइल और अधिकारी' : 'WARD PROFILES & OFFICERS'}</span>
+                <ChevronRight size={16} />
+              </button>
 
-                  <button
-                    type="button"
-                    className={`mobile-nav-item ${activeView === 'wards' ? 'active' : ''}`}
-                    onClick={() => handleNavClick('wards')}
-                  >
-                    <span>{lang === 'gu' ? 'વોર્ડ પ્રોફાઇલ અને અધિકારીઓ' : lang === 'hi' ? 'वार्ड प्रोफाइल और अधिकारी' : 'WARD PROFILES & OFFICERS'}</span>
-                    <ChevronRight size={16} />
-                  </button>
+              <button
+                type="button"
+                className={`mobile-nav-item ${activeView === 'drives' ? 'active' : ''}`}
+                onClick={() => handleNavClick('drives')}
+              >
+                <span>{lang === 'gu' ? 'રવિવાર સફાઈ અભિયાન' : lang === 'hi' ? 'रविवार सफाई अभियान' : 'SUNDAY CLEANUP DRIVES'}</span>
+                <ChevronRight size={16} />
+              </button>
 
-                  <button
-                    type="button"
-                    className={`mobile-nav-item ${activeView === 'drives' ? 'active' : ''}`}
-                    onClick={() => handleNavClick('drives')}
-                  >
-                    <span>{lang === 'gu' ? 'રવિવાર સફાઈ અભિયાન' : lang === 'hi' ? 'रविवार सफाई अभियान' : 'SUNDAY CLEANUP DRIVES'}</span>
-                    <ChevronRight size={16} />
-                  </button>
+              <button
+                type="button"
+                className={`mobile-nav-item ${activeView === 'impact' ? 'active' : ''}`}
+                onClick={() => handleNavClick('impact')}
+              >
+                <span>{lang === 'gu' ? 'સામુદાયિક પ્રભાવ ગેલેરી' : lang === 'hi' ? 'सामुदायिक प्रभाव गैलरी' : 'COMMUNITY IMPACT GALLERY'}</span>
+                <ChevronRight size={16} />
+              </button>
 
-                  <button
-                    type="button"
-                    className="mobile-nav-item"
-                    onClick={() => {
-                      setIsMobileDrawerOpen(false);
-                      window.open(`/guide/index.html?lang=${lang}`, '_blank');
-                    }}
-                  >
-                    <span>{lang === 'gu' ? 'નાગરિક માર્ગદર્શિકા અને SOP' : lang === 'hi' ? 'नागरिक मार्गदर्शिका एवं SOP' : 'CIVIC SOP & GUIDE'}</span>
-                    <BookOpen size={16} />
-                  </button>
+              <button
+                type="button"
+                className="mobile-nav-item"
+                onClick={() => {
+                  setIsMobileDrawerOpen(false);
+                  window.open(`/guide/index.html?lang=${lang}`, '_blank');
+                }}
+              >
+                <span>{lang === 'gu' ? 'નાગરિક માર્ગદર્શિકા અને SOP' : lang === 'hi' ? 'नागरिक मार्गदर्शिका एवं SOP' : 'CIVIC SOP & GUIDE'}</span>
+                <BookOpen size={16} />
+              </button>
 
                   <button
                     type="button"
@@ -456,8 +442,6 @@ export const HeaderV2 = ({
                     <span>{lang === 'gu' ? 'પ્લેટફોર્મ ચેન્જલોગ' : lang === 'hi' ? 'प्लेटफ़ॉर्म चेंजलॉग' : 'PLATFORM CHANGELOG'}</span>
                     <FileText size={16} />
                   </button>
-                </>
-              )}
             </div>
 
             {/* Mobile Trilingual Toggle */}

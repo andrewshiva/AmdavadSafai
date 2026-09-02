@@ -30,9 +30,10 @@ import { Loader2 } from 'lucide-react';
 import { checkDailyVisitStreak } from '../utils/gamification';
 
 export const AppV2 = ({ onSwitchVersion }) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const [activeView, setActiveView] = useState('about'); // 'about', 'dashboard', 'reports', 'wards', 'impact', 'report'
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [toastMsg, setToastMsg] = useState('');
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('amdavad_safai_user_v2');
@@ -91,15 +92,24 @@ export const AppV2 = ({ onSwitchVersion }) => {
     } catch {
       // Ignore
     }
+    const msg = lang === 'gu' ? `સ્વાગત છે, ${user.name}` : lang === 'hi' ? `स्वागत है, ${user.name}` : `Welcome, ${user.name}`;
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(''), 3500);
   };
 
   const handleLogout = () => {
     setCurrentUser(null);
+    if (activeView === 'report') {
+      setActiveView('about');
+    }
     try {
       localStorage.removeItem('amdavad_safai_user_v2');
     } catch {
       // Ignore
     }
+    const msg = lang === 'gu' ? 'તમે સફળતાપૂર્વક સાઇન આઉટ થયા છો' : lang === 'hi' ? 'आप सफलतापूर्वक साइन आउट हो गए हैं' : 'Signed out successfully';
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(''), 3500);
   };
 
   const handleRequireLoginOrReport = () => {
@@ -337,6 +347,13 @@ export const AppV2 = ({ onSwitchVersion }) => {
           isOpen={isStatsOpen}
           onToggleOpen={() => setIsStatsOpen(!isStatsOpen)}
         />
+      )}
+
+      {/* Dynamic Action Toast */}
+      {toastMsg && (
+        <div className="v2-action-toast">
+          <span>{toastMsg}</span>
+        </div>
       )}
     </div>
   );
