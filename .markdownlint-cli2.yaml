@@ -1,0 +1,10 @@
+ignores:
+  - "**/.gemini/**"
+  - "**/brain/**"
+  - "**/browser/**"
+  - "**/scratchpad_*.md"
+  - "node_modules/**"
+  - "dist/**"
+  - "backend/**"
+  - "graphify-out/**"
+  - "public/guide/**"

@@ -16,8 +16,7 @@ import {
   Copy,
   Check,
   AlertTriangle,
-  Users,
-  MessageCircle
+  Users
 } from 'lucide-react';
 import wardsData from '../data/wards.json';
 import BeforeAfterSlider from './BeforeAfterSlider';

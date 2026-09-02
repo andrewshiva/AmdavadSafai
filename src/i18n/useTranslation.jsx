@@ -22,6 +22,8 @@ export const TranslationProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('amdavad_safai_lang_v2', lang);
     document.documentElement.lang = lang;
+    document.documentElement.setAttribute('data-lang', lang);
+    document.body.setAttribute('data-lang', lang);
   }, [lang]);
 
   const toggleLang = () => {

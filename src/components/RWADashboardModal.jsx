@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { X, Building2, ShieldCheck, AlertTriangle, UserCheck, FileText, Download, Users, CheckCircle2 } from 'lucide-react';
+import { X, Building2, ShieldCheck, AlertTriangle, UserCheck, Download, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import { getAmcTicketId } from '../utils/amcTickets';
 

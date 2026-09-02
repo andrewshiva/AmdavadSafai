@@ -7,20 +7,7 @@ import staticGeoJSON from '../data/ahmedabad_wards.json';
 import cityMaskGeoJSON from '../data/ahmedabad_city_mask.json';
 import defaultEventsData from '../data/events.json';
 
-// Compute centroid of a polygon from its coordinate ring
-const computeCentroid = (coords) => {
-  let sumLat = 0, sumLng = 0, count = 0;
-  const ring = coords[0]; // outer ring
-  if (!ring) return null;
-  for (const [lng, lat] of ring) {
-    sumLng += lng;
-    sumLat += lat;
-    count++;
-  }
-  return count > 0 ? [sumLng / count, sumLat / count] : null;
-};
-
-export const MapView = ({ reports, events = defaultEventsData, onMapClick, onReportSelect, onEventSelect, wardId }) => {
+export const MapView = ({ reports, events = defaultEventsData, onMapClick, onReportSelect, wardId }) => {
   const { t, lang } = useTranslation();
   const [isLegendOpen, setIsLegendOpen] = useState(false);
   const mapContainerRef = useRef(null);
@@ -567,7 +554,7 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
         eventPinsRef.current.push(marker);
       });
     }
-  }, [reports, events, lang, geoData, zoom]);
+  }, [reports, events, lang, geoData, zoom, t]);
 
   return (
     <div className="map-view-container" style={{ width: '100%', height: '100%', position: 'relative' }}>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from '../i18n/useTranslation';
-import { Eye, AlertOctagon, Search, Tag, MapPin, X, SlidersHorizontal, Check, RefreshCw } from 'lucide-react';
+import { Eye, AlertOctagon, Search, Tag, MapPin, X, SlidersHorizontal, RefreshCw } from 'lucide-react';
 import wardsData from '../data/wards.json';
 
 export const FilterBar = ({
@@ -114,11 +114,17 @@ export const FilterBar = ({
               className="filter-select"
             >
               <option value="all">{t('filter_all_categories')}</option>
-              <option value="mixed_waste">{t('cat_mixed_waste')}</option>
-              <option value="construction_dump">{t('cat_construction_dump')}</option>
-              <option value="overflowing_bin">{t('cat_overflowing_bin')}</option>
+              <option value="garbage_pile">{t('cat_garbage_pile')}</option>
               <option value="roadside_garbage">{t('cat_roadside_garbage')}</option>
+              <option value="overflowing_bin">{t('cat_overflowing_bin')}</option>
+              <option value="sewage_overflow">{t('cat_sewage_overflow')}</option>
               <option value="drainage_blockage">{t('cat_drainage_blockage')}</option>
+              <option value="dead_animal">{t('cat_dead_animal')}</option>
+              <option value="street_light">{t('cat_street_light')}</option>
+              <option value="public_toilet">{t('cat_public_toilet')}</option>
+              <option value="construction_dump">{t('cat_construction_dump')}</option>
+              <option value="mixed_waste">{t('cat_mixed_waste')}</option>
+              <option value="other_issue">{t('cat_other_issue')}</option>
             </select>
           </div>
 
@@ -353,11 +359,17 @@ export const FilterBar = ({
                     className="modal-input mobile-sheet-select"
                   >
                     <option value="all">{t('filter_all_categories')}</option>
-                    <option value="mixed_waste">{t('cat_mixed_waste')}</option>
-                    <option value="construction_dump">{t('cat_construction_dump')}</option>
-                    <option value="overflowing_bin">{t('cat_overflowing_bin')}</option>
+                    <option value="garbage_pile">{t('cat_garbage_pile')}</option>
                     <option value="roadside_garbage">{t('cat_roadside_garbage')}</option>
+                    <option value="overflowing_bin">{t('cat_overflowing_bin')}</option>
+                    <option value="sewage_overflow">{t('cat_sewage_overflow')}</option>
                     <option value="drainage_blockage">{t('cat_drainage_blockage')}</option>
+                    <option value="dead_animal">{t('cat_dead_animal')}</option>
+                    <option value="street_light">{t('cat_street_light')}</option>
+                    <option value="public_toilet">{t('cat_public_toilet')}</option>
+                    <option value="construction_dump">{t('cat_construction_dump')}</option>
+                    <option value="mixed_waste">{t('cat_mixed_waste')}</option>
+                    <option value="other_issue">{t('cat_other_issue')}</option>
                   </select>
                 </div>
 

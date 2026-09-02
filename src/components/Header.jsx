@@ -5,7 +5,15 @@ import SocialMenu from './SocialMenu';
 import SubscribeModal from './SubscribeModal';
 import ChangelogModal from './ChangelogModal';
 
-export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenRWA }) => {
+export const Header = ({
+  activeView = 'map',
+  setActiveView,
+  onOpenEvents,
+  onOpenBadges,
+  onOpenCleanedSpots,
+  onOpenRWA,
+  onOpenReport
+}) => {
   const { t, lang, setLanguage } = useTranslation();
   const [isSocialOpen, setIsSocialOpen] = useState(false);
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
@@ -31,76 +39,66 @@ export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenR
   }, []);
 
   return (
-    <header className="header-container">
+    <header className="header-container variant-header">
+      {/* Left: Ahmedabad Safai Logo */}
       <div className="header-left">
-        <div className="header-logo">
-          <Sparkles size={20} className="logo-sparkle" />
-          <span className="logo-title">{t('app_name')}</span>
-        </div>
-        
         <button
-          className="version-badge header-desktop-only"
-          onClick={() => setIsChangelogOpen(true)}
+          type="button"
+          className="variant-logo-btn"
+          onClick={() => setActiveView && setActiveView('map')}
+          title="Ahmedabad Safai Home"
         >
-          v1.1.0
-        </button>
-
-        {/* Desktop Quick Action Buttons */}
-        <div className="header-desktop-actions">
-          {onOpenCleanedSpots && (
-            <button
-              className="header-action-btn cleaned-spots-btn"
-              onClick={onOpenCleanedSpots}
-              title={t('wall_of_cleaned_title') || 'Wall of Cleaned Spots'}
-            >
-              <span>✨ {t('cleaned_spots_short') || 'Cleaned Spots'}</span>
-            </button>
-          )}
-
-          {onOpenRWA && (
-            <button
-              className="header-action-btn rwa-btn"
-              onClick={onOpenRWA}
-              title={t('rwa_hub_title') || 'RWA & Ward Hub'}
-            >
-              <span>🏢 {t('rwa_hub_short') || 'RWA Hub'}</span>
-            </button>
-          )}
-
-          {onOpenEvents && (
-            <button
-              className="header-action-btn events-btn"
-              onClick={onOpenEvents}
-              title={t('cleanup_drives')}
-            >
-              <span>🧹 {t('cleanup_drives')}</span>
-              <span className="events-count-badge">5</span>
-            </button>
-          )}
-        </div>
-
-        {/* Citizen Karma Points Pill (Visible on both desktop & mobile header) */}
-        {onOpenBadges && (
-          <button
-            className="header-action-btn karma-pill-btn"
-            onClick={onOpenBadges}
-            title={t('my_badges')}
-          >
-            <span>⚡ {karmaPoints} pts</span>
-          </button>
-        )}
-      </div>
-
-      <div className="header-center">
-        <button
-          className="digest-banner-btn"
-          onClick={() => setIsSubscribeOpen(true)}
-        >
-          {t('subscribe_banner')}
+          <div className="variant-logo-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+              <line x1="10" y1="11" x2="10" y2="17"/>
+              <line x1="14" y1="11" x2="14" y2="17"/>
+            </svg>
+          </div>
+          <div className="variant-logo-text">
+            <span className="logo-main-title">AHMEDABAD SAFAI</span>
+            <span className="logo-sub-title">અમદાવાદ સફાઈ</span>
+          </div>
         </button>
       </div>
 
-      <div className="header-right">
+      {/* Center: Navigation Links (Dashboard, Reports, About Us, Wards) */}
+      <nav className="variant-center-nav" aria-label="Main Navigation">
+        <button
+          type="button"
+          className={`variant-nav-link ${activeView === 'map' ? 'active' : ''}`}
+          onClick={() => setActiveView && setActiveView('map')}
+        >
+          DASHBOARD
+        </button>
+
+        <button
+          type="button"
+          className={`variant-nav-link ${activeView === 'list' ? 'active' : ''}`}
+          onClick={() => setActiveView && setActiveView('list')}
+        >
+          REPORTS
+        </button>
+
+        <button
+          type="button"
+          className={`variant-nav-link ${activeView === 'about' ? 'active' : ''}`}
+          onClick={() => setActiveView && setActiveView('about')}
+        >
+          ABOUT US
+        </button>
+
+        <button
+          type="button"
+          className="variant-nav-link"
+          onClick={onOpenRWA}
+        >
+          WARDS
+        </button>
+      </nav>
+
+      {/* Right: Actions, Language Toggle, Karma Pill & REPORT ISSUE CTA */}
+      <div className="header-right variant-header-right">
         {/* 3-Way Language Segmented Control */}
         <div className="trilingual-toggle">
           <button
@@ -113,7 +111,7 @@ export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenR
             className={`lang-segment ${lang === 'hi' ? 'active' : ''}`}
             onClick={() => setLanguage('hi')}
           >
-            हिं
+            हिં
           </button>
           <button
             className={`lang-segment ${lang === 'en' ? 'active' : ''}`}
@@ -122,6 +120,38 @@ export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenR
             EN
           </button>
         </div>
+
+        {/* Citizen Karma Points */}
+        {onOpenBadges && (
+          <button
+            className="variant-karma-btn"
+            onClick={onOpenBadges}
+            title={t('my_badges')}
+          >
+            <span>⚡ {karmaPoints} pts</span>
+          </button>
+        )}
+
+        {/* Cancel Button when in Report View or Report Issue CTA */}
+        {activeView === 'report' ? (
+          <button
+            type="button"
+            className="variant-cancel-btn"
+            onClick={() => setActiveView && setActiveView('map')}
+          >
+            CANCEL
+          </button>
+        ) : (
+          onOpenReport && (
+            <button
+              type="button"
+              className="variant-report-issue-btn"
+              onClick={() => (setActiveView ? setActiveView('report') : onOpenReport())}
+            >
+              REPORT ISSUE
+            </button>
+          )
+        )}
 
         <button 
           className="lang-toggle-btn icon-only header-guide-btn" 
@@ -144,6 +174,7 @@ export const Header = ({ onOpenEvents, onOpenBadges, onOpenCleanedSpots, onOpenR
             onClose={() => setIsSocialOpen(false)}
             onOpenSubscribe={() => setIsSubscribeOpen(true)}
             onOpenChangelog={() => setIsChangelogOpen(true)}
+            onOpenAbout={() => setActiveView && setActiveView('about')}
           />
         </div>
       </div>

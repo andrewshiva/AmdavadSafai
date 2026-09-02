@@ -4,7 +4,7 @@ import { ChevronUp, ChevronDown, BarChart2, ShieldAlert, PieChart as PieIcon, Ac
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend } from 'recharts';
 import wardsData from '../data/wards.json';
 
-export const StatsPanel = ({ reports, isOpen: controlledIsOpen, onToggleOpen }) => {
+export const StatsPanel = ({ reports = [], isOpen: controlledIsOpen, onToggleOpen }) => {
   const { t, lang } = useTranslation();
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const isControlled = controlledIsOpen !== undefined;
@@ -21,9 +21,10 @@ export const StatsPanel = ({ reports, isOpen: controlledIsOpen, onToggleOpen }) 
   const [statsData, setStatsData] = useState(null);
 
   // Stats calculation from local reports array
-  const totalCount = reports.length;
-  const unresolvedCount = reports.filter((r) => r.status === 'unresolved').length;
-  const resolvedCount = reports.filter((r) => r.status === 'resolved').length;
+  const safeReports = Array.isArray(reports) ? reports : [];
+  const totalCount = safeReports.length;
+  const unresolvedCount = safeReports.filter((r) => r.status === 'unresolved').length;
+  const resolvedCount = safeReports.filter((r) => r.status === 'resolved').length;
   const resolutionRate = totalCount > 0 ? ((resolvedCount / totalCount) * 100).toFixed(1) : '0.0';
 
   const [civicMetrics, setCivicMetrics] = useState(null);
@@ -167,7 +168,7 @@ export const StatsPanel = ({ reports, isOpen: controlledIsOpen, onToggleOpen }) 
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, setIsOpen]);
 
   return (
     <div className={`stats-panel-container ${isOpen ? 'open' : ''}`}>

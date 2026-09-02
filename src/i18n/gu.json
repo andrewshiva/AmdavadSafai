@@ -35,182 +35,209 @@
   "reports_count": "ફરિયાદો",
   "unresolved_count": "અનિરાકૃત",
   "no_reports": "ફિલ્ટર્સ સાથે મેળ ખાતી કોઈ ફરિયાદ મળી નથી.",
-  "welcome_desc": "અમદાવાદને સ્વચ્છ રાખવામાં મદદ કરો. કચરાના હોટસ્પોટ્સ ટ્રેક કરો, ઉકેલનો સમય તપાસો અને જુઓ કે તમારા વોર્ડના કોર્પોરેટર કેવું પ્રદર્શન કરી રહ્યા છે."
-  ,"telegram": "Telegram"
-  ,"twitter": "Twitter / X"
-  ,"instagram": "Instagram"
-  ,"no_unresolved_reports": "No unresolved reports!"
-  ,"report_garbage": "ફરિયાદ કરો"
-  ,"report_desc": "તમારા વોર્ડમાં કચરાની ફરિયાદ નોંધાવો જેથી કોર્પોરેટર અને AMC અધિકારીઓને જાણ થાય."
-  ,"select_ward": "વોર્ડ પસંદ કરો"
-  ,"description_en": "વિગતો (અંગ્રેજીમાં)"
-  ,"description_gu": "વિગતો (ગુજરાતીમાં)"
-  ,"severity": "તીવ્રતા"
-  ,"location_coords": "સ્થાન કોઓર્ડિનેટ્સ (Lat, Lng)"
-  ,"click_map_hint": "💡 ટિપ: આ ફોર્મ ખુલ્લું હોય ત્યારે નકશા પર કોઈપણ જગ્યાએ ક્લિક કરીને આપોઆપ કોઓર્ડિનેટ્સ પસંદ કરો!"
-  ,"submitting": "સબમિટ થઈ રહ્યું છે..."
-  ,"submit_report": "ફરિયાદ સબમિટ કરો"
-  ,"report_success": "✅ ફરિયાદ સફળતાપૂર્વક નોંધાઈ ગઈ છે! નકશા પર માર્કર ઉમેરાયું છે."
-  ,"version_history": "વર્ઝન ઇતિહાસ અને અપડેટ્સ"
-  ,"changelog_desc": "અમદાવાદ સફાઈમાં ઉમેરાયેલા નવા ફીચર્સ, સુધારાઓ અને નાગરિક ડેટા અપડેટ્સ જુઓ."
-  ,"v1_0_0_title": "v1.0.0 — ફૂલ-સ્ટેક પાયથોન અને નાગરિક UI રિલીઝ"
-  ,"v1_0_0_desc": "FastAPI અને SQLite ડેટાબેઝ સાથે જોડાણ. સ્પષ્ટ નાગરિક UI ડિઝાઇન, GeoJSON વોર્ડ બાઉન્ડ્રી અને AMC સોલિડ વેસ્ટ ડેટા ઇન્ટિગ્રેટેડ."
-  ,"v0_9_0_title": "v0.9.0 — ઇન્ટરેક્ટિવ મેપ અને દ્વિભાષી સપોર્ટ"
-  ,"v0_9_0_desc": "Leaflet નકશો, કોર્પોરેટર ટ્રેકિંગ, સોમવાર ડાઇજેસ્ટ ન્યૂઝલેટર અને ગુજરાતી/અંગ્રેજી ભાષા સપોર્ટ ઉમેરાયો."
-  ,"zone_wise_breakdown": "ઝોન મુજબ અનિરાકૃત ફરિયાદો"
-  ,"severity_distribution": "તીવ્રતા મુજબ વિભાજન"
-  ,"amc_civic_feed": "AMC સોલિડ વેસ્ટ મેનેજમેન્ટ ડેટા"
-  ,"collection_vehicles": "સક્રિય કચરાના વાહનો"
-  ,"recycling_rate": "રિસાયક્લિંગ અને પ્રોસેસિંગ દર"
-  ,"category_label": "કચરાની શ્રેણી"
-  ,"cat_mixed_waste": "મશ્ર ઘરગથ્થુ કચરો"
-  ,"cat_construction_dump": "બાંધકામ અને મકાનનો મલબો"
-  ,"cat_overflowing_bin": "ઓવરફ્લો થતી કચરાપેટી"
-  ,"cat_roadside_garbage": "રોડ સાઇડ કચરાનો ઢગલો"
-  ,"cat_drainage_blockage": "ગટર અને ડ્રેનેજ બ્લોકેજ કચરો"
-  ,"upload_photo": "ફોટો અપલોડ કરો / કેમેરા"
-  ,"photo_preview": "ફોટો પ્રીવ્યૂ"
-  ,"remove_photo": "ફોટો હટાવો"
-  ,"mla_title": "વોર્ડ ધારાસભ્ય (MLA)"
-  ,"mp_title": "સાંસદ (MP)"
-  ,"corporator_title": "નગરસેવક (કોર્પોરેટર)"
-  ,"party_label": "પક્ષ"
-  ,"get_directions": "દિશા મેળવો (Google Maps)"
-  ,"ive_seen_this": "મેં પણ આ કચરો જોયો છે"
-  ,"people_seen_this": "રહેવાસીઓએ આ સમસ્યા ચકાસી છે"
-  ,"verify_cleanup": "સફાઈની ચકાસણી કરો"
-  ,"verify_cleanup_desc": "આ સ્થળ સાફ થઈ ગયું છે તે દર્શાવતો ફોટો અપલોડ કરીને ઉકેલાયેલ તરીકે માર્ક કરો."
-  ,"upload_clean_photo": "સાફ સ્થળનો ફોટો અપલોડ કરો"
-  ,"flag_incorrect": "ખોટી ફરિયાદ તરીકે ફ્લેગ કરો"
-  ,"flag_reason_prompt": "આ ફરિયાદ કેમ ખોટી છે તેનું કારણ આપો:"
-  ,"outside_city_title": "તમે અમદાવાદ બહાર છો"
-  ,"outside_city_desc": "અમદાવાદ સફાઈ પર ફરિયાદ માટે અમદાવાદ મહાનગરપાલિકા વિસ્તારમાં હોવું જરૂરી છે. મોબાઈલથી રિપોર્ટ કરવા QR કોડ સ્કેન કરો અથવા નકશા પર પિન મૂકો."
-  ,"scan_qr_hint": "મોબાઈલ પર રિપોર્ટ કરવા સ્કેન કરો"
-  ,"ward_leaderboard_title": "શહેર મુજબ વોર્ડ સફાઈ લીડરબોર્ડ"
-  ,"resolution_rate_rank": "નિરાકરણ દર %"
-  ,"share_report": "ફરિયાદ શેર કરો"
-  ,"link_copied": "લિંક ક્લિપબોર્ડ પર કોપી થઈ ગઈ!"
-  ,"search_placeholder": "વોર્ડ, વિગત અથવા ID દ્વારા ફરિયાદો શોધો..."
-  ,"filter_all_categories": "બધી શ્રેણીઓ"
-  ,"filter_all_wards": "બધા વોર્ડ"
-  ,"reset_filters": "ફિલ્ટર્સ રીસેટ કરો"
-  ,"rep_hierarchy_title": "ચૂંટાયેલા પ્રતિનિધિઓની શ્રેણી અને જવાબદારી"
-  ,"amc_ward_rep": "AMC વોર્ડ પ્રતિનિધિ"
-  ,"gujarat_vidhan_sabha_mla": "ગુજરાત વિધાનસભા ધારાસભ્ય"
-  ,"call_amc_control_room": "📞 AMC કંટ્રોલ રૂમ સંપર્ક (155303)"
-  ,"escalate_x_twitter": "🐦 X / Twitter પર મોકલો"
-  ,"clean_spot_evidence": "સાફ થયેલ સ્થળનો ચકાસાયેલ પુરાવો"
-  ,"view_details_rep_info": "સંપૂર્ણ વિગતો અને પ્રતિનિધિ માહિતી જુઓ →"
-  ,"dispute_banner_text": "ખોટી ફરિયાદ ફ્લેગ કરવાથી નકશામાંથી સ્પામ અને ખોટા સ્થાનો દૂર કરવામાં મદદ મળે છે."
-  ,"submit_dispute": "વિવાદ સબમિટ કરો"
-  ,"flagging": "ફ્લેગ થઈ રહ્યું છે..."
-  ,"verification_notes_label": "ચકાસણી નોંધો (વૈકલ્પિક)"
-  ,"verification_notes_placeholder": "દા.ત. આજે સવારે 10 વાગ્યે AMC ટીમ દ્વારા સાફ કરવામાં આવ્યું"
-  ,"mark_as_resolved": "ઉકેલાયેલ તરીકે ચિહ્નિત કરો ✅"
-  ,"verifying": "ચકાસણી થઈ રહી છે..."
-  ,"report_location_label": "ફરિયાદનું સ્થળ"
-  ,"finding_location": "સ્થાન શોધી રહ્યું છે…"
-  ,"use_my_location": "મારું વર્તમાન સ્થાન વાપરો"
-  ,"location_ward_privacy_hint": "અમે આનો ઉપયોગ ફક્ત યોગ્ય વોર્ડ સાથે મેળ બેસાડવા માટે કરીએ છીએ."
-  ,"choose_image_take_photo": "ઇમેજ પસંદ કરો અથવા ફોટો લો"
-  ,"official_amc_feed": "સત્તાવાર AMC દૈનિક ડેટા"
-  ,"door_to_door_coverage": "ઘરે-ઘરે કચરો એકત્રીકરણ"
-  ,"daily_waste_processed": "દૈનિક કચરા પ્રોસેસિંગ"
-  ,"th_rank": "#"
-  ,"th_ward": "વોર્ડ"
-  ,"th_zone": "ઝોન"
-  ,"th_mla": "ધારાસભ્ય"
-  ,"th_total": "કુલ"
-  ,"th_active": "સક્રિય"
-  ,"th_res_rate": "ઉકેલ %"
-  ,"map_legend": "નકશા સંકેતો"
-  ,"ward_cleanliness_score": "વોર્ડ સ્વચ્છતા સ્કોર:"
-  ,"score_excellent": "ઉત્કૃષ્ટ (90 - 100)"
-  ,"score_good": "સારું (80 - 89)"
-  ,"score_moderate": "મધ્યમ (65 - 79)"
-  ,"score_attention": "ધ્યાન જરૂરી (50 - 64)"
-  ,"score_critical": "ગંભીર ચેતવણી (< 50)"
-  ,"outside_city_tip": "💡 ટિપ: સ્થાન પિન મૂકવા માટે તમે નકશા પર અમદાવાદમાં ગમે ત્યાં ટેપ પણ કરી શકો છો."
-  ,"help_guide_title": "નાગરિક SOP માર્ગદર્શિકા"
-  ,"cleanup_drives": "સફાઈ અભિયાન"
-  ,"cleanup_drives_subtitle": "અમદાવાદમાં આગામી રવિવાર સામુદાયિક સફાઈ અભિયાન"
-  ,"join_drive": "અભિયાનમાં જોડાઓ (RSVP)"
-  ,"drive_joined": "તમે જોડાઈ ગયા છો! 🎉"
-  ,"organize_drive": "નવું અભિયાન શરૂ કરો"
-  ,"volunteers_joined_label": "જોડાયેલા સ્વયંસેવકો"
-  ,"target_volunteers_label": "લક્ષ્ય સ્વયંસેવકો"
-  ,"items_needed": "સાથે લાવવાની સામગ્રી"
-  ,"organizer": "આયોજક"
-  ,"share_card": "સોશિયલ કાર્ડ શેર કરો"
-  ,"share_card_desc": "WhatsApp સ્ટેટસ અથવા Instagram સ્ટોરી પર શેર કરવા માટે સુંદર કાર્ડ બનાવો"
-  ,"share_on_whatsapp": "WhatsApp પર શેર કરો"
-  ,"download_card": "કાર્ડ ડાઉનલોડ કરો"
-  ,"share_tagline": "આપણું શહેર, આપણી જવાબદારી ❤️"
-  ,"my_badges": "નાગરિક પ્રભાવ અને બેજ"
-  ,"citizen_karma": "નાગરિક પ્રભાવ પોઇન્ટ્સ"
-  ,"karma_points": "પોઇન્ટ્સ"
-  ,"level": "લેવલ"
-  ,"badge_safai_sevak": "સફાઈ સેવક"
-  ,"badge_ward_guardian": "વોર્ડ રક્ષક"
-  ,"badge_safai_warrior": "અમદાવાદ સફાઈ વોરિયર"
-  ,"badge_eco_champion": "ઇકો ચેમ્પિયન"
-  ,"points_earned_toast": "+{points} નાગરિક પ્રભાવ પોઇન્ટ્સ મળ્યા!"
-  ,"create_event_title": "નવું સામુદાયિક સફાઈ અભિયાન આયોજિત કરો"
-  ,"event_title_label": "અભિયાનનું શીર્ષક"
-  ,"event_location_label": "ચોક્કસ લેન્ડમાર્ક / સ્થળ"
-  ,"event_datetime_label": "તારીખ અને સમય (દા.ત. રવિવાર, સવારે ૭:૦૦)"
-  ,"event_target_label": "અપેક્ષિત સ્વયંસેવકો"
-  ,"event_items_label": "સાથે લાવવાની સામગ્રી (મોજાં, થેલી વગેરે)"
-  ,"cleaned_spots_short": "સફાઈ સિદ્ધિ"
-  ,"wall_of_cleaned_title": "સફાઈ સિદ્ધિ ગેલેરી"
-  ,"wall_of_cleaned_subtitle": "અમદાવાદના વોર્ડમાં થયેલી સફાઈની જીવંત તુલના (પહેલાં ↔ પછી)"
-  ,"spots_cleaned_count": "સાફ થયેલા સ્થળો"
-  ,"avg_resolution_time": "સરેરાશ AMC સફાઈ સમય"
-  ,"photo_verified_rate": "ફોટો પ્રમાણિત દર"
-  ,"before_label": "પહેલાં (ગંદકી)"
-  ,"after_label": "પછી (સફાઈ થયેલ)"
-  ,"turnaround_time": "સફાઈ સમય: ૧૮ કલાક"
-  ,"resolved_by_amc": "AMC SWM દ્વારા સફાઈ પૂર્ણ"
-  ,"wall_footer_tip": "દરેક ચકાસાયેલ સફાઈ માટે +૨૫ કર્મા પોઈન્ટ મળે છે અને વોર્ડ સ્કોરકાર્ડ સુધરે છે."
-  ,"no_cleaned_in_ward": "આ વોર્ડમાં હજી કોઈ સાફ થયેલ સ્થળ નોંધાયેલ નથી"
-  ,"be_first_to_verify": "તમારા વોર્ડને અહીં ચમકાવવા કચરાની ફરિયાદ કરો અથવા સફાઈ ચકાસો!"
-  ,"rwa_hub_short": "RWA હબ"
-  ,"rwa_hub_title": "RWA અને વોર્ડ નાગરિક ડેશબોર્ડ"
-  ,"rwa_hub_subtitle": "રહેવાસી મંડળ અને પત્રકારો માટે વોર્ડ જવાબદેહી કેન્દ્ર"
-  ,"select_ward_rwa": "RWA સ્કોરકાર્ડ માટે વોર્ડ પસંદ કરો:"
-  ,"rwa_pilot_title": "સામુદાયિક સ્વચ્છતા પહેલ"
-  ,"rwa_pilot_desc": "દરેક કચરાના ઢગલાના નિકાલ સુધી ટ્રેકિંગ માટે સ્થાનિક રહેવાસી મંડળ સાથે ભાગીદારી."
-  ,"rwa_resolution_rate": "નિકાલ દર"
-  ,"of_total_fixed": "સ્થળો સાફ કરાયા"
-  ,"rwa_unresolved_active": "સક્રિય કચરાના હોટસ્પોટ"
-  ,"pending_amc_action": "AMC કાર્યવાહી બાકી"
-  ,"rwa_oldest_dump": "સૌથી જૂનો કચરો"
-  ,"longest_pending": "સૌથી લાંબા સમયથી બાકી"
-  ,"elected_reps_card": "વોર્ડ શાસન અને જવાબદેહી શ્રેણી"
-  ,"active_hotspots_list": "ત્વરિત AMC SWM કાર્યવાહીની જરૂરિયાત વાળા સ્થળો"
-  ,"no_active_hotspots_ward": "આ વોર્ડમાં હાલ કોઈ અનરિઝોલ્વ્ડ કચરાનો ઢગલો નથી!"
-  ,"export_rwa_dossier": "નાગરિક ડોઝિયર પ્રિન્ટ / એક્સપોર્ટ કરો"
-  ,"print_dossier": "RWA ડોઝિયર પ્રિન્ટ કરો"
-  ,"amc_status_label": "AMC CCRS સ્ટેટસ:"
-  ,"before_after_transformation": "ચકાસાયેલ રૂપાંતરણ (પહેલાં ↔ પછી)"
-  ,"copy_ticket": "ટિકિટ કોપી કરો"
-  ,"ticket_copied": "કોપી થઈ ગઈ!"
-  ,"rwa_partner_label": "નાગરિક ભાગીદાર"
-  ,"amc_ccrs_explainer": "AMC કોમ્પ્રીહેન્સિવ કમ્પ્લેઇન્ટ રિડ્રેસલ સિસ્ટમ (CCRS) સાથે સીધું જોડાયેલું અને વોર્ડ SWM ઇન્સ્પેક્ટરને સોંપાયેલું."
-  ,"dispute_false_resolution": "હજુ કચરો બાકી છે / વિવાદ ⚠️"
-  ,"dispute_resolution_title": "ખોટી સફાઈ સામે વિવાદ અને રી-ઓપન"
-  ,"dispute_resolution_sub": "જીવંત ફોટો પુરાવા સાથે અકાળે બંધ થયેલી ફરિયાદ ફરી ખોલો"
-  ,"anti_fake_notice_title": "ફેક રિઝોલ્યુશન ઓડિટ"
-  ,"dispute_banner_explainer": "જો મ્યુનિસિપલ કોન્ટ્રાક્ટરે કામ કર્યા વિના સ્થળને સાફ જાહેર કર્યું હોય, તો નીચે પુરાવો અપલોડ કરો. આનાથી CCRS ટિકિટ ફરી ખુલશે અને વોર્ડ કોર્પોરેટરને ચેતવણી જશે."
-  ,"upload_dispute_photo": "હાલનો ફોટો પુરાવો અપલોડ કરો (ગંદકી દેખાય તેવો):"
-  ,"take_dispute_photo": "ગંદકીવાળા સ્થળનો ફોટો લો"
-  ,"dispute_reason_label": "હજુ શું સાફ નથી થયું તે સમજાવો:"
-  ,"dispute_reason_placeholder": "દા.ત. માત્ર રસ્તા પરની કચરાપેટી ખાલી કરાઈ છે, પરંતુ પાછળનો મોટો કચરાનો ઢગલો સાફ નથી કરાયો."
-  ,"dispute_karma_reward": "ચકાસાયેલ વિવાદ સબમિટ કરવા પર +૧૫ કર્મા પોઈન્ટ મેળવો"
-  ,"confirm_reopen_btn": "ફરિયાદ ફરી ખોલો (Re-Open) ⚠️"
-  ,"rally_society_whatsapp": "સોસાયટી / RWA WhatsApp ગ્રુપમાં શેર કરો"
-  ,"amc_overdue": "વિલંબિત"
-  ,"copy_message": "મેસેજ કોપી કરો"
-  ,"hide_stats_view_map": "નકશો જુઓ (આંકડા છુપાવો)"
-  ,"expand_stats": "આંકડા જુઓ"
+  "welcome_desc": "અમદાવાદને સ્વચ્છ રાખવામાં મદદ કરો. કચરાના હોટસ્પોટ્સ ટ્રેક કરો, ઉકેલનો સમય તપાસો અને જુઓ કે તમારા વોર્ડના કોર્પોરેટર કેવું પ્રદર્શન કરી રહ્યા છે.",
+  "telegram": "Telegram",
+  "twitter": "Twitter / X",
+  "instagram": "Instagram",
+  "no_unresolved_reports": "No unresolved reports!",
+  "report_garbage": "ફરિયાદ કરો",
+  "report_desc": "તમારા વોર્ડમાં કચરાની ફરિયાદ નોંધાવો જેથી કોર્પોરેટર અને AMC અધિકારીઓને જાણ થાય.",
+  "select_ward": "વોર્ડ પસંદ કરો",
+  "description_en": "વિગતો (અંગ્રેજીમાં)",
+  "description_gu": "વિગતો (ગુજરાતીમાં)",
+  "severity": "તીવ્રતા",
+  "location_coords": "સ્થાન કોઓર્ડિનેટ્સ (Lat, Lng)",
+  "click_map_hint": "💡 ટિપ: આ ફોર્મ ખુલ્લું હોય ત્યારે નકશા પર કોઈપણ જગ્યાએ ક્લિક કરીને આપોઆપ કોઓર્ડિનેટ્સ પસંદ કરો!",
+  "submitting": "સબમિટ થઈ રહ્યું છે...",
+  "submit_report": "ફરિયાદ સબમિટ કરો",
+  "report_success": "✅ ફરિયાદ સફળતાપૂર્વક નોંધાઈ ગઈ છે! નકશા પર માર્કર ઉમેરાયું છે.",
+  "version_history": "વર્ઝન ઇતિહાસ અને અપડેટ્સ",
+  "changelog_desc": "અમદાવાદ સફાઈમાં ઉમેરાયેલા નવા ફીચર્સ, સુધારાઓ અને નાગરિક ડેટા અપડેટ્સ જુઓ.",
+  "v1_0_0_title": "v1.0.0 — ફૂલ-સ્ટેક પાયથોન અને નાગરિક UI રિલીઝ",
+  "v1_0_0_desc": "FastAPI અને SQLite ડેટાબેઝ સાથે જોડાણ. સ્પષ્ટ નાગરિક UI ડિઝાઇન, GeoJSON વોર્ડ બાઉન્ડ્રી અને AMC સોલિડ વેસ્ટ ડેટા ઇન્ટિગ્રેટેડ.",
+  "v0_9_0_title": "v0.9.0 — ઇન્ટરેક્ટિવ મેપ અને દ્વિભાષી સપોર્ટ",
+  "v0_9_0_desc": "Leaflet નકશો, કોર્પોરેટર ટ્રેકિંગ, સોમવાર ડાઇજેસ્ટ ન્યૂઝલેટર અને ગુજરાતી/અંગ્રેજી ભાષા સપોર્ટ ઉમેરાયો.",
+  "zone_wise_breakdown": "ઝોન મુજબ અનિરાકૃત ફરિયાદો",
+  "severity_distribution": "તીવ્રતા મુજબ વિભાજન",
+  "amc_civic_feed": "AMC સોલિડ વેસ્ટ મેનેજમેન્ટ ડેટા",
+  "collection_vehicles": "સક્રિય કચરાના વાહનો",
+  "recycling_rate": "રિસાયક્લિંગ અને પ્રોસેસિંગ દર",
+  "category_label": "કચરાની શ્રેણી",
+  "cat_mixed_waste": "મશ્ર ઘરગથ્થુ કચરો",
+  "cat_construction_dump": "બાંધકામ અને મકાનનો મલબો",
+  "cat_overflowing_bin": "ઓવરફ્લો થતી કચરાપેટી",
+  "cat_roadside_garbage": "રોડ સાઇડ કચરાનો ઢગલો",
+  "cat_drainage_blockage": "ગટર અને ડ્રેનેજ બ્લોકેજ કચરો",
+  "upload_photo": "ફોટો અપલોડ કરો / કેમેરા",
+  "photo_preview": "ફોટો પ્રીવ્યૂ",
+  "remove_photo": "ફોટો હટાવો",
+  "mla_title": "વોર્ડ ધારાસભ્ય (MLA)",
+  "mp_title": "સાંસદ (MP)",
+  "corporator_title": "નગરસેવક (કોર્પોરેટર)",
+  "party_label": "પક્ષ",
+  "get_directions": "દિશા મેળવો (Google Maps)",
+  "ive_seen_this": "મેં પણ આ કચરો જોયો છે",
+  "people_seen_this": "રહેવાસીઓએ આ સમસ્યા ચકાસી છે",
+  "verify_cleanup": "સફાઈની ચકાસણી કરો",
+  "verify_cleanup_desc": "આ સ્થળ સાફ થઈ ગયું છે તે દર્શાવતો ફોટો અપલોડ કરીને ઉકેલાયેલ તરીકે માર્ક કરો.",
+  "upload_clean_photo": "સાફ સ્થળનો ફોટો અપલોડ કરો",
+  "flag_incorrect": "ખોટી ફરિયાદ તરીકે ફ્લેગ કરો",
+  "flag_reason_prompt": "આ ફરિયાદ કેમ ખોટી છે તેનું કારણ આપો:",
+  "outside_city_title": "તમે અમદાવાદ બહાર છો",
+  "outside_city_desc": "અમદાવાદ સફાઈ પર ફરિયાદ માટે અમદાવાદ મહાનગરપાલિકા વિસ્તારમાં હોવું જરૂરી છે. મોબાઈલથી રિપોર્ટ કરવા QR કોડ સ્કેન કરો અથવા નકશા પર પિન મૂકો.",
+  "scan_qr_hint": "મોબાઈલ પર રિપોર્ટ કરવા સ્કેન કરો",
+  "ward_leaderboard_title": "શહેર મુજબ વોર્ડ સફાઈ લીડરબોર્ડ",
+  "resolution_rate_rank": "નિરાકરણ દર %",
+  "share_report": "ફરિયાદ શેર કરો",
+  "link_copied": "લિંક ક્લિપબોર્ડ પર કોપી થઈ ગઈ!",
+  "search_placeholder": "વોર્ડ, વિગત અથવા ID દ્વારા ફરિયાદો શોધો...",
+  "filter_all_categories": "બધી શ્રેણીઓ",
+  "filter_all_wards": "બધા વોર્ડ",
+  "reset_filters": "ફિલ્ટર્સ રીસેટ કરો",
+  "rep_hierarchy_title": "ચૂંટાયેલા પ્રતિનિધિઓની શ્રેણી અને જવાબદારી",
+  "amc_ward_rep": "AMC વોર્ડ પ્રતિનિધિ",
+  "gujarat_vidhan_sabha_mla": "ગુજરાત વિધાનસભા ધારાસભ્ય",
+  "call_amc_control_room": "📞 AMC કંટ્રોલ રૂમ સંપર્ક (155303)",
+  "escalate_x_twitter": "🐦 X / Twitter પર મોકલો",
+  "clean_spot_evidence": "સાફ થયેલ સ્થળનો ચકાસાયેલ પુરાવો",
+  "view_details_rep_info": "સંપૂર્ણ વિગતો અને પ્રતિનિધિ માહિતી જુઓ →",
+  "dispute_banner_text": "ખોટી ફરિયાદ ફ્લેગ કરવાથી નકશામાંથી સ્પામ અને ખોટા સ્થાનો દૂર કરવામાં મદદ મળે છે.",
+  "submit_dispute": "વિવાદ સબમિટ કરો",
+  "flagging": "ફ્લેગ થઈ રહ્યું છે...",
+  "verification_notes_label": "ચકાસણી નોંધો (વૈકલ્પિક)",
+  "verification_notes_placeholder": "દા.ત. આજે સવારે 10 વાગ્યે AMC ટીમ દ્વારા સાફ કરવામાં આવ્યું",
+  "mark_as_resolved": "ઉકેલાયેલ તરીકે ચિહ્નિત કરો ✅",
+  "verifying": "ચકાસણી થઈ રહી છે...",
+  "report_location_label": "ફરિયાદનું સ્થળ",
+  "finding_location": "સ્થાન શોધી રહ્યું છે…",
+  "use_my_location": "મારું વર્તમાન સ્થાન વાપરો",
+  "location_ward_privacy_hint": "અમે આનો ઉપયોગ ફક્ત યોગ્ય વોર્ડ સાથે મેળ બેસાડવા માટે કરીએ છીએ.",
+  "choose_image_take_photo": "ઇમેજ પસંદ કરો અથવા ફોટો લો",
+  "official_amc_feed": "સત્તાવાર AMC દૈનિક ડેટા",
+  "door_to_door_coverage": "ઘરે-ઘરે કચરો એકત્રીકરણ",
+  "daily_waste_processed": "દૈનિક કચરા પ્રોસેસિંગ",
+  "th_rank": "#",
+  "th_ward": "વોર્ડ",
+  "th_zone": "ઝોન",
+  "th_mla": "ધારાસભ્ય",
+  "th_total": "કુલ",
+  "th_active": "સક્રિય",
+  "th_res_rate": "ઉકેલ %",
+  "map_legend": "નકશા સંકેતો",
+  "ward_cleanliness_score": "વોર્ડ સ્વચ્છતા સ્કોર:",
+  "score_excellent": "ઉત્કૃષ્ટ (90 - 100)",
+  "score_good": "સારું (80 - 89)",
+  "score_moderate": "મધ્યમ (65 - 79)",
+  "score_attention": "ધ્યાન જરૂરી (50 - 64)",
+  "score_critical": "ગંભીર ચેતવણી (< 50)",
+  "outside_city_tip": "💡 ટિપ: સ્થાન પિન મૂકવા માટે તમે નકશા પર અમદાવાદમાં ગમે ત્યાં ટેપ પણ કરી શકો છો.",
+  "help_guide_title": "નાગરિક SOP માર્ગદર્શિકા",
+  "cleanup_drives": "સફાઈ અભિયાન",
+  "cleanup_drives_subtitle": "અમદાવાદમાં આગામી રવિવાર સામુદાયિક સફાઈ અભિયાન",
+  "join_drive": "અભિયાનમાં જોડાઓ (RSVP)",
+  "drive_joined": "તમે જોડાઈ ગયા છો! 🎉",
+  "organize_drive": "નવું અભિયાન શરૂ કરો",
+  "volunteers_joined_label": "જોડાયેલા સ્વયંસેવકો",
+  "target_volunteers_label": "લક્ષ્ય સ્વયંસેવકો",
+  "items_needed": "સાથે લાવવાની સામગ્રી",
+  "organizer": "આયોજક",
+  "share_card": "સોશિયલ કાર્ડ શેર કરો",
+  "share_card_desc": "WhatsApp સ્ટેટસ અથવા Instagram સ્ટોરી પર શેર કરવા માટે સુંદર કાર્ડ બનાવો",
+  "share_on_whatsapp": "WhatsApp પર શેર કરો",
+  "download_card": "કાર્ડ ડાઉનલોડ કરો",
+  "share_tagline": "આપણું શહેર, આપણી જવાબદારી ❤️",
+  "my_badges": "નાગરિક પ્રભાવ અને બેજ",
+  "citizen_karma": "નાગરિક પ્રભાવ પોઇન્ટ્સ",
+  "karma_points": "પોઇન્ટ્સ",
+  "level": "લેવલ",
+  "badge_safai_sevak": "સફાઈ સેવક",
+  "badge_ward_guardian": "વોર્ડ રક્ષક",
+  "badge_safai_warrior": "અમદાવાદ સફાઈ વોરિયર",
+  "badge_eco_champion": "ઇકો ચેમ્પિયન",
+  "points_earned_toast": "+{points} નાગરિક પ્રભાવ પોઇન્ટ્સ મળ્યા!",
+  "create_event_title": "નવું સામુદાયિક સફાઈ અભિયાન આયોજિત કરો",
+  "event_title_label": "અભિયાનનું શીર્ષક",
+  "event_location_label": "ચોક્કસ લેન્ડમાર્ક / સ્થળ",
+  "event_datetime_label": "તારીખ અને સમય (દા.ત. રવિવાર, સવારે ૭:૦૦)",
+  "event_target_label": "અપેક્ષિત સ્વયંસેવકો",
+  "event_items_label": "સાથે લાવવાની સામગ્રી (મોજાં, થેલી વગેરે)",
+  "cleaned_spots_short": "સફાઈ સિદ્ધિ",
+  "wall_of_cleaned_title": "સફાઈ સિદ્ધિ ગેલેરી",
+  "wall_of_cleaned_subtitle": "અમદાવાદના વોર્ડમાં થયેલી સફાઈની જીવંત તુલના (પહેલાં ↔ પછી)",
+  "spots_cleaned_count": "સાફ થયેલા સ્થળો",
+  "avg_resolution_time": "સરેરાશ AMC સફાઈ સમય",
+  "photo_verified_rate": "ફોટો પ્રમાણિત દર",
+  "before_label": "પહેલાં (ગંદકી)",
+  "after_label": "પછી (સફાઈ થયેલ)",
+  "turnaround_time": "સફાઈ સમય: ૧૮ કલાક",
+  "resolved_by_amc": "AMC SWM દ્વારા સફાઈ પૂર્ણ",
+  "wall_footer_tip": "દરેક ચકાસાયેલ સફાઈ માટે +૨૫ કર્મા પોઈન્ટ મળે છે અને વોર્ડ સ્કોરકાર્ડ સુધરે છે.",
+  "no_cleaned_in_ward": "આ વોર્ડમાં હજી કોઈ સાફ થયેલ સ્થળ નોંધાયેલ નથી",
+  "be_first_to_verify": "તમારા વોર્ડને અહીં ચમકાવવા કચરાની ફરિયાદ કરો અથવા સફાઈ ચકાસો!",
+  "rwa_hub_short": "RWA હબ",
+  "rwa_hub_title": "RWA અને વોર્ડ નાગરિક ડેશબોર્ડ",
+  "rwa_hub_subtitle": "રહેવાસી મંડળ અને પત્રકારો માટે વોર્ડ જવાબદેહી કેન્દ્ર",
+  "select_ward_rwa": "RWA સ્કોરકાર્ડ માટે વોર્ડ પસંદ કરો:",
+  "rwa_pilot_title": "સામુદાયિક સ્વચ્છતા પહેલ",
+  "rwa_pilot_desc": "દરેક કચરાના ઢગલાના નિકાલ સુધી ટ્રેકિંગ માટે સ્થાનિક રહેવાસી મંડળ સાથે ભાગીદારી.",
+  "rwa_resolution_rate": "નિકાલ દર",
+  "of_total_fixed": "સ્થળો સાફ કરાયા",
+  "rwa_unresolved_active": "સક્રિય કચરાના હોટસ્પોટ",
+  "pending_amc_action": "AMC કાર્યવાહી બાકી",
+  "rwa_oldest_dump": "સૌથી જૂનો કચરો",
+  "longest_pending": "સૌથી લાંબા સમયથી બાકી",
+  "elected_reps_card": "વોર્ડ શાસન અને જવાબદેહી શ્રેણી",
+  "active_hotspots_list": "ત્વરિત AMC SWM કાર્યવાહીની જરૂરિયાત વાળા સ્થળો",
+  "no_active_hotspots_ward": "આ વોર્ડમાં હાલ કોઈ અનરિઝોલ્વ્ડ કચરાનો ઢગલો નથી!",
+  "export_rwa_dossier": "નાગરિક ડોઝિયર પ્રિન્ટ / એક્સપોર્ટ કરો",
+  "print_dossier": "RWA ડોઝિયર પ્રિન્ટ કરો",
+  "amc_status_label": "AMC CCRS સ્ટેટસ:",
+  "before_after_transformation": "ચકાસાયેલ રૂપાંતરણ (પહેલાં ↔ પછી)",
+  "copy_ticket": "ટિકિટ કોપી કરો",
+  "ticket_copied": "કોપી થઈ ગઈ!",
+  "rwa_partner_label": "નાગરિક ભાગીદાર",
+  "amc_ccrs_explainer": "AMC કોમ્પ્રીહેન્સિવ કમ્પ્લેઇન્ટ રિડ્રેસલ સિસ્ટમ (CCRS) સાથે સીધું જોડાયેલું અને વોર્ડ SWM ઇન્સ્પેક્ટરને સોંપાયેલું.",
+  "dispute_false_resolution": "હજુ કચરો બાકી છે / વિવાદ ⚠️",
+  "dispute_resolution_title": "ખોટી સફાઈ સામે વિવાદ અને રી-ઓપન",
+  "dispute_resolution_sub": "જીવંત ફોટો પુરાવા સાથે અકાળે બંધ થયેલી ફરિયાદ ફરી ખોલો",
+  "anti_fake_notice_title": "ફેક રિઝોલ્યુશન ઓડિટ",
+  "dispute_banner_explainer": "જો મ્યુનિસિપલ કોન્ટ્રાક્ટરે કામ કર્યા વિના સ્થળને સાફ જાહેર કર્યું હોય, તો નીચે પુરાવો અપલોડ કરો. આનાથી CCRS ટિકિટ ફરી ખુલશે અને વોર્ડ કોર્પોરેટરને ચેતવણી જશે.",
+  "upload_dispute_photo": "હાલનો ફોટો પુરાવો અપલોડ કરો (ગંદકી દેખાય તેવો):",
+  "take_dispute_photo": "ગંદકીવાળા સ્થળનો ફોટો લો",
+  "dispute_reason_label": "હજુ શું સાફ નથી થયું તે સમજાવો:",
+  "dispute_reason_placeholder": "દા.ત. માત્ર રસ્તા પરની કચરાપેટી ખાલી કરાઈ છે, પરંતુ પાછળનો મોટો કચરાનો ઢગલો સાફ નથી કરાયો.",
+  "dispute_karma_reward": "ચકાસાયેલ વિવાદ સબમિટ કરવા પર +૧૫ કર્મા પોઈન્ટ મેળવો",
+  "confirm_reopen_btn": "ફરિયાદ ફરી ખોલો (Re-Open) ⚠️",
+  "rally_society_whatsapp": "સોસાયટી / RWA WhatsApp ગ્રુપમાં શેર કરો",
+  "amc_overdue": "વિલંબિત",
+  "copy_message": "મેસેજ કોપી કરો",
+  "hide_stats_view_map": "નકશો જુઓ (આંકડા છુપાવો)",
+  "expand_stats": "આંકડા જુઓ",
+  "about_nav": "વિશે",
+  "about_title": "અમદાવાદ સફાઈ વિશે",
+  "about_subtitle": "અમદાવાદ માટે ક્રાઉડસોર્સ્ડ કચરા રિપોર્ટિંગ અને નાગરિક સફાઈ અભિયાન",
+  "about_mission_slogan": "આપણું શહેર, આપણી જવાબદારી ❤️",
+  "about_mission_quote": "“માત્ર ફરિયાદ ન કરો, ઉકેલવામાં સહભાગી બનો.”",
+  "about_tab_overview": "ઉદ્દેશ અને કાર્યપદ્ધતિ",
+  "about_tab_features": "મુખ્ય વિશેષતાઓ",
+  "about_tab_governance": "શાસન અને હેલ્પલાઇન",
+  "about_tab_tech": "ઓપન સોર્સ અને ટેકનોલોજી",
+  "about_story_title": "અમદાવાદ સફાઈ મિશન",
+  "about_story_desc": "અમદાવાદ સફાઈ એ નાગરિકો, સ્વયંસેવકો, રેસિડેન્ટ વેલ્ફેર એસોસિએશન્સ (RWA) અને અમદાવાદ મ્યુનિસિપલ કોર્પોરેશન (AMC) વચ્ચે સેતુ બનાવતું એક ઓપન સિવિક-ટેક પ્લેટફોર્મ છે. અમારું માનવું છે કે શહેરની વાસ્તવિક સ્વચ્છતા માટે પારદર્શિતા, સ્થાનિક જવાબદારી અને નાગરિક સહભાગિતા અનિવાર્ય છે.",
+  "about_how_it_works": "તે કેવી રીતે કાર્ય કરે છે (૪ પગલાંનું ચક્ર)",
+  "about_step1_title": "૧. કચરો નોંધો અને વર્ગીકૃત કરો",
+  "about_step1_desc": "નાગરિકો કચરાના ઢગલાનો ફોટો પાડી નકશા પર ક્લિક કરે છે. એપ આપોઆપ AMC વોર્ડ અને જીપીએસ લોકેશન શોધી લે છે.",
+  "about_step2_title": "૨. જાહેર જવાબદારી",
+  "about_step2_desc": "ફરિયાદને સત્તાવાર AMC CCRS ૩૧૧ ટ્રેકિંગ નંબર મળે છે અને વોર્ડ કોર્પોરેટર, ધારાસભ્ય અને સાંસદ સાથે લિંક થાય છે.",
+  "about_step3_title": "૩. નાગરિક સહભાગિતા અને અભિયાન",
+  "about_step3_desc": "ગંદકીવાળા સ્થળોને સાફ કરવા નાગરિકો રવિવાર સફાઈ અભિયાનમાં જોડાઈ શકે છે અથવા નવું અભિયાન આયોજિત કરી શકે છે.",
+  "about_step4_title": "૪. ચકાસણી અને રૂપાંતરણ",
+  "about_step4_desc": "સફાઈ પછીના ફોટા અપલોડ કરી પહેલાં ↔ પછી સ્લાઈડર બનાવો, સિટિઝન કર્મા બેજ મેળવો અને વોર્ડ સ્કોર સુધારો.",
+  "about_helplines_title": "સત્તાવાર AMC હેલ્પલાઇન અને સંપર્ક",
+  "about_amc_ccrs_phone": "AMC CCRS 311 કોલ સેન્ટર",
+  "about_amc_whatsapp_bot": "AMC WhatsApp ચેટબોટ (+91 75678 55303)",
+  "about_amc_control_room": "AMC સેન્ટ્રલ કંટ્રોલ રૂમ (079-25391811)",
+  "about_swm_dept": "સોલિડ વેસ્ટ મેનેજમેન્ટ (SWM) વિભાગ",
+  "about_open_source_title": "૧૦૦% ઓપન સોર્સ અને ગોપનીયતા",
+  "about_open_source_desc": "સંપૂર્ણ ગોપનીયતા સાથે નિર્મિત. કોઈ વપરાશકર્તા ટ્રેકિંગ કે ફરજિયાત લોગિન નથી. ડિવાઇસ ઓળખ સુરક્ષિત રીતે તમારા બ્રાઉઝરમાં સાચવવામાં આવે છે."
 }

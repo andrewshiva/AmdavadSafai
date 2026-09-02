@@ -311,9 +311,13 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                     {[
                       { id: 'roadside_garbage', icon: '🗑️', label: t('cat_roadside_garbage') },
                       { id: 'overflowing_bin', icon: '📦', label: t('cat_overflowing_bin') },
-                      { id: 'construction_dump', icon: '🧱', label: t('cat_construction_dump') },
                       { id: 'drainage_blockage', icon: '🌊', label: t('cat_drainage_blockage') },
-                      { id: 'mixed_waste', icon: '🍂', label: t('cat_mixed_waste') }
+                      { id: 'dead_animal', icon: '🐾', label: t('cat_dead_animal') },
+                      { id: 'street_light', icon: '💡', label: t('cat_street_light') },
+                      { id: 'public_toilet', icon: '🚻', label: t('cat_public_toilet') },
+                      { id: 'construction_dump', icon: '🧱', label: t('cat_construction_dump') },
+                      { id: 'mixed_waste', icon: '🍂', label: t('cat_mixed_waste') },
+                      { id: 'other_issue', icon: '⚠️', label: t('cat_other_issue') }
                     ].map((c) => {
                       const isActive = category === c.id;
                       return (

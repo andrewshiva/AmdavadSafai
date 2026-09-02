@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
 import { Mail, Info, BookOpen } from 'lucide-react';
 
-export const SocialMenu = ({ isOpen, onClose, onOpenSubscribe, onOpenChangelog }) => {
+export const SocialMenu = ({ isOpen, onClose, onOpenSubscribe, onOpenChangelog, onOpenAbout }) => {
   const menuRef = useRef();
   const { t } = useTranslation();
 
@@ -24,6 +24,20 @@ export const SocialMenu = ({ isOpen, onClose, onOpenSubscribe, onOpenChangelog }
 
   return (
     <div className="social-menu" ref={menuRef}>
+      {onOpenAbout && (
+        <button
+          type="button"
+          className="social-menu-item"
+          onClick={() => {
+            onClose();
+            onOpenAbout();
+          }}
+        >
+          <Info size={16} />
+          <span>{t('about_title') || 'About AmdavadSafai'}</span>
+        </button>
+      )}
+
       {onOpenSubscribe && (
         <button
           type="button"

@@ -300,7 +300,9 @@
     let currentLang = 'en';
 
     function switchLang(lang) {
+      if (!['en', 'gu', 'hi'].includes(lang)) lang = 'en';
       currentLang = lang;
+      localStorage.setItem('amdavad_safai_lang_v2', lang);
 
       // Update active button
       document.querySelectorAll('.lang-switcher button').forEach(btn => {
@@ -333,8 +335,10 @@
         });
     }
 
-    // Load default language on page load
-    switchLang('en');
+    // Auto detect language from URL query or app localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialLang = urlParams.get('lang') || localStorage.getItem('amdavad_safai_lang_v2') || 'en';
+    switchLang(initialLang);
   </script>
 </body>
 </html>
