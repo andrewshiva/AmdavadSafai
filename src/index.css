@@ -5268,28 +5268,45 @@ button, select, input, textarea {
 
 .variant-user-dropdown {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 12px);
   right: 0;
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
-  border-radius: 16px;
-  padding: 14px;
-  min-width: 190px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  padding: 10px;
+  min-width: 215px;
+  box-shadow: 0 14px 38px -4px rgba(15, 23, 42, 0.14), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
   z-index: 1000;
   display: flex;
   flex-direction: column;
   text-align: left;
+  animation: dropdownFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.user-dropdown-info {
+  padding: 6px 10px 8px 10px;
 }
 
 .user-dropdown-info strong {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
   color: #0F172A;
   display: block;
 }
+
 .user-dropdown-info small {
-  font-size: 10.5px;
+  font-size: 11px;
   color: #64748B;
   font-weight: 600;
   display: block;
@@ -5299,25 +5316,56 @@ button, select, input, textarea {
 .dropdown-divider {
   border: none;
   border-top: 1px solid #F1F5F9;
-  margin: 10px 0;
+  margin: 6px 0;
 }
 
 .dropdown-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 11px;
   background: none;
   border: none;
-  padding: 6px 8px;
-  border-radius: 8px;
-  font-size: 11.5px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 12px;
   font-weight: 700;
+  color: #1E293B;
   cursor: pointer;
   text-align: left;
-  transition: background 0.15s ease;
+  width: 100%;
+  transition: all 0.15s ease;
 }
+
+.dropdown-item-btn svg {
+  flex-shrink: 0;
+  color: #64748B;
+  transition: color 0.15s ease;
+}
+
+.dropdown-item-btn:hover {
+  background: #F8FAFC;
+  color: #0F172A;
+}
+
+.dropdown-item-btn:hover svg {
+  color: #FF6B35;
+}
+
 .dropdown-item-btn.text-danger {
   color: #EF4444;
 }
+
+.dropdown-item-btn.text-danger svg {
+  color: #EF4444;
+}
+
 .dropdown-item-btn.text-danger:hover {
   background: #FEF2F2;
+  color: #DC2626;
+}
+
+.dropdown-item-btn.text-danger:hover svg {
+  color: #DC2626;
 }
 
 /* ==========================================================================

@@ -219,7 +219,7 @@ export const HeaderV2 = ({
                       setIsSubscribeOpen(true);
                     }}
                   >
-                    <Mail size={13} />
+                    <Mail size={15} />
                     <span>Monday Digest</span>
                   </button>
                   <button
@@ -230,7 +230,7 @@ export const HeaderV2 = ({
                       setIsChangelogOpen(true);
                     }}
                   >
-                    <FileText size={13} />
+                    <FileText size={15} />
                     <span>Changelog</span>
                   </button>
                   <button
@@ -241,8 +241,8 @@ export const HeaderV2 = ({
                       window.open(`/guide/index.html?lang=${lang}`, '_blank');
                     }}
                   >
-                    <BookOpen size={13} />
-                    <span>{lang === 'gu' ? 'નાગરિક SOP માર્ગદર્શિકા' : lang === 'hi' ? 'नागरिक SOP गाइड' : 'Citizen SOP Guide'}</span>
+                    <BookOpen size={15} />
+                    <span>{lang === 'gu' ? 'નાગરિક SOP માર્ગદર્શિકા' : lang === 'hi' ? 'नाગરિક SOP गाइड' : 'Citizen SOP Guide'}</span>
                   </button>
                   <hr className="dropdown-divider" />
                   <button
@@ -253,7 +253,7 @@ export const HeaderV2 = ({
                       if (onLogout) onLogout();
                     }}
                   >
-                    <LogOut size={13} />
+                    <LogOut size={15} />
                     <span>Sign Out</span>
                   </button>
                 </div>
