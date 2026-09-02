@@ -1,14 +1,25 @@
 import sys, os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
 
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from typing import List, Optional
-import models, schemas, crud, geojson_data, civic_data
-from database import engine, get_db, apply_sqlite_migrations
-from seed import seed_database
+
+try:
+    import models, schemas, crud, geojson_data, civic_data
+    from database import engine, get_db, apply_sqlite_migrations
+    from seed import seed_database
+except ImportError:
+    from app import models, schemas, crud, geojson_data, civic_data
+    from app.database import engine, get_db, apply_sqlite_migrations
+    from app.seed import seed_database
 
 # Apply schema migrations and create SQLAlchemy database tables
 apply_sqlite_migrations()
