@@ -1,8 +1,18 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "cleanUrls": true,
   "rewrites": [
+    {
+      "source": "/guide",
+      "destination": "/guide/index.html"
+    },
+    {
+      "source": "/guide/",
+      "destination": "/guide/index.html"
+    },
     {
       "source": "/api/:path*",
       "destination": "https://amdavadsafai.onrender.com/api/:path*"
@@ -12,7 +22,7 @@
       "destination": "https://amdavadsafai.onrender.com/uploads/:path*"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api|uploads|guide|assets|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]

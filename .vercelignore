@@ -1,0 +1,7 @@
+backend/
+.agents/
+.gemini/
+*.py
+*.pyc
+requirements.txt
+render.yaml
