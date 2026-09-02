@@ -8,18 +8,19 @@ export const App = () => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const vParam = params.get('v');
-      if (vParam === '2' || vParam === 'v2') return 'v2';
       if (vParam === '1' || vParam === 'v1') return 'v1';
+      if (vParam === '2' || vParam === 'v2') return 'v2';
 
-      // 2. Check Port detection (5182 = v2, 5180 = v1)
-      if (window.location.port === '5182') return 'v2';
+      // 2. Check Port detection (5180 = v1, 5182 = v2)
       if (window.location.port === '5180') return 'v1';
+      if (window.location.port === '5182') return 'v2';
 
       // 3. Check LocalStorage preference
       const saved = localStorage.getItem('amdavad_safai_app_version');
-      if (saved === 'v2' || saved === 'v1') return saved;
+      if (saved === 'v1') return 'v1';
+      if (saved === 'v2') return 'v2';
     }
-    return 'v1';
+    return 'v2';
   });
 
   const handleSwitchVersion = (targetVersion) => {
