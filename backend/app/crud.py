@@ -6,7 +6,7 @@ import json
 import os
 import uuid
 import random
-import models, schemas
+import models, schemas, geojson_data
 from image_storage import save_image_local
 
 # Wards crud
@@ -16,8 +16,24 @@ def get_wards(db: Session):
 def get_ward_by_id(db: Session, ward_id: str):
     return db.query(models.Ward).filter(models.Ward.id == ward_id).first()
 
+AHMEDABAD_BBOX = {
+    "min_lat": 22.8900,
+    "max_lat": 23.1600,
+    "min_lng": 72.4300,
+    "max_lng": 72.7100,
+}
+
 def get_nearest_ward(db: Session, lat: float, lng: float):
-    """Return the closest configured Ahmedabad ward and its distance in metres. Rejects points > 35km outside city limits."""
+    """Resolve Ahmedabad ward for coordinates. Rejects points outside the
+    municipal boundary (see ADR-0009).
+
+    1. Bounding box fast-reject gate.
+    2. Point-in-polygon against ward boundaries (real DataMeet geometry where
+       matched, synthetic octagons otherwise) — the strict gate.
+    3. Union check against all 48 official AMC ward boundaries (DataMeet snapshot).
+    4. Beyond the official municipal limits, the point is strictly outside
+       Ahmedabad and (None, distance_m) is returned.
+    """
     wards = get_wards(db)
     if not wards:
         return None, None
@@ -35,11 +51,24 @@ def get_nearest_ward(db: Session, lat: float, lng: float):
     nearest = min(wards, key=distance_m)
     dist = distance_m(nearest)
 
-    # Strict Geofencing check: Maximum 35 km (35,000 meters) from nearest ward center
-    if dist > 35_000:
+    # Fast reject points outside the Ahmedabad municipal bounding box
+    if not (AHMEDABAD_BBOX["min_lat"] <= lat <= AHMEDABAD_BBOX["max_lat"] and
+            AHMEDABAD_BBOX["min_lng"] <= lng <= AHMEDABAD_BBOX["max_lng"]):
         return None, round(dist, 1)
 
-    return nearest, round(dist, 1)
+    index_of = {w.id: i for i, w in enumerate(wards)}
+
+    inside_id = geojson_data.locate_point(lat, lng, wards, index_of.get)
+    if inside_id:
+        return get_ward_by_id(db, ward_id=inside_id), 0.0
+
+    # Inside official AMC limits (union of the 48 wards) but in no pilot
+    # polygon: still Ahmedabad — accept, attributed to the nearest pilot ward.
+    if geojson_data.inside_official_limits(lat, lng):
+        return nearest, round(dist, 1)
+
+    # Strictly reject any point outside both pilot polygons and official AMC municipal limits
+    return None, round(dist, 1)
 
 # Reports crud
 def get_reports(db: Session, severity: str = None, status: str = None, category: str = None, ward_id: str = None, search: str = None):
@@ -345,15 +374,13 @@ def get_event_by_id(db: Session, event_id: str):
     return db.query(models.CleanupEvent).filter(models.CleanupEvent.id == event_id).first()
 
 def create_event(db: Session, event: schemas.CleanupEventCreate):
-    event_id = f"evt_{uuid.uuid4().hex[:8]}"
-    ward = None
-    if event.ward_id:
-        ward = get_ward_by_id(db, event.ward_id)
+    # Strictly validate event coordinates are inside Ahmedabad municipal limits
+    ward, dist = get_nearest_ward(db, event.lat, event.lng)
     if not ward:
-        nearest_ward, _ = get_nearest_ward(db, event.lat, event.lng)
-        ward_id = nearest_ward.id if nearest_ward else None
-    else:
-        ward_id = ward.id
+        raise ValueError(f"Event location ({event.lat}, {event.lng}) is outside Ahmedabad municipal jurisdiction area ({dist/1000:.1f} km away).")
+
+    event_id = f"evt_{uuid.uuid4().hex[:8]}"
+    ward_id = event.ward_id if event.ward_id else ward.id
 
     db_event = models.CleanupEvent(
         id=event_id,

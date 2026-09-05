@@ -7,10 +7,12 @@ import staticGeoJSON from '../data/ahmedabad_wards.json';
 import cityMaskGeoJSON from '../data/ahmedabad_city_mask.json';
 import defaultEventsData from '../data/events.json';
 import { formatDateTime } from '../utils/dateTime';
+import { isWithinAhmedabad } from '../utils/geofence';
 
 export const MapView = ({ reports, events = defaultEventsData, onMapClick, onReportSelect, wardId }) => {
   const { t, lang } = useTranslation();
   const [isLegendOpen, setIsLegendOpen] = useState(false);
+  const [mapWarning, setMapWarning] = useState('');
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const eventPinsRef = useRef([]);
@@ -90,6 +92,10 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
       zoom: 11.6,
       minZoom: 10,
       maxZoom: 17,
+      maxBounds: [
+        [72.25, 22.80], // Southwest bounds [lng, lat]
+        [72.85, 23.25]  // Northeast bounds [lng, lat]
+      ],
       attributionControl: false
     });
 
@@ -273,6 +279,22 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
         suppressNextMapClick.current = false;
         return;
       }
+
+      // Check if clicked point is within Ahmedabad municipal jurisdiction
+      const isInside = isWithinAhmedabad(e.lngLat.lat, e.lngLat.lng);
+      if (!isInside) {
+        setMapWarning(
+          lang === 'gu'
+            ? '📍 આ સ્થાન અમદાવાદ મ્યુનિસિપલ હદની બહાર છે — કૃપા કરીને શહેરની અંદર ક્લિક કરો.'
+            : lang === 'hi'
+            ? '📍 यह स्थान अहमदाबाद नगर निगम सीमा के बाहर है — कृपया शहर के भीतर क्लिक करें।'
+            : '📍 Selected location is outside Ahmedabad municipal limits. Please click inside the city.'
+        );
+        setTimeout(() => setMapWarning(''), 3500);
+        return;
+      }
+
+      setMapWarning('');
       if (onMapClickRef.current) {
         onMapClickRef.current({ lat: e.lngLat.lat, lng: e.lngLat.lng });
 
@@ -560,6 +582,32 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
   return (
     <div className="map-view-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
       <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
+
+      {/* Out of Ahmedabad Boundary Toast Warning */}
+      {mapWarning && (
+        <div style={{
+          position: 'absolute',
+          top: '16px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#FEF2F2',
+          border: '1.5px solid #EF4444',
+          color: '#B91C1C',
+          padding: '8px 18px',
+          borderRadius: '24px',
+          fontSize: '12px',
+          fontWeight: 700,
+          boxShadow: '0 6px 16px rgba(239,68,68,0.25)',
+          zIndex: 100,
+          pointerEvents: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          whiteSpace: 'nowrap'
+        }}>
+          {mapWarning}
+        </div>
+      )}
       
       {/* Active/Total Reports Badge (NammaKasa style) */}
       <div className="nk-report-badge">

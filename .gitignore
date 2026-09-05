@@ -49,6 +49,7 @@ graphify-out/
 # Testing, Scratch & Experimental Models (kept out of production)
 scratch/
 tests/
+!backend/tests/
 
 # Unreferenced generation artifacts (see public/intro_video.mp4 for the shipped video)
 src/data/*.mp4

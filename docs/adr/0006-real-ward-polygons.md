@@ -22,6 +22,19 @@ with officials.
 - Ward assignment stays Haversine-to-center; polygons are display + future
   point-in-polygon work, not the resolve path.
 
+## Update: official union as the geofence (ADR-0009 gate)
+
+- Vadaj verified inside `06 NEW WADAJ` (centre containment + transliteration):
+  21/27 pilot wards now draw real polygons.
+- Satellite, Vastrapur, Kalupur, Ambawadi, Sola keep synthetic display:
+  their centres fall inside neighbouring official wards (Jodhpur, Bodakdev,
+  Khadia, Navrangpura, Gota), but borrowing a neighbour's shape under a
+  pilot label would misattribute the map — so display stays honest.
+- The *gate* uses the full 48-ward union (`inside_official_limits`): any
+  point inside official AMC limits is accepted and attributed to the nearest
+  pilot ward. Bopal predates the snapshot and is covered by its pilot
+   octagon.
+
 ## Consequences
 
 - The map now draws real boundaries for most wards; no API shape break

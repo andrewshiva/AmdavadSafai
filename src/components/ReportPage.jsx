@@ -22,8 +22,8 @@ import {
 } from 'lucide-react';
 import { generateAmcTicketId } from '../utils/amcTickets';
 import { addKarmaPoints } from '../utils/gamification';
-import { formatDateTime } from '../utils/dateTime';
 import wardsData from '../data/wards.json';
+import { validateAhmedabadCoords, isWithinAhmedabad, cleanseStoredReports } from '../utils/geofence';
 
 export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
   const { lang } = useTranslation();
@@ -52,12 +52,26 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
   const [triageLoading, setTriageLoading] = useState(false);
   const [triageResult, setTriageResult] = useState(null);
 
+  // Purge any legacy out-of-bounds reports from previous sessions
+  useEffect(() => {
+    cleanseStoredReports();
+  }, []);
+
   useEffect(() => {
     if (pickedCoords && pickedCoords.lat && pickedCoords.lng) {
-      setLat(pickedCoords.lat.toFixed(5));
-      setLng(pickedCoords.lng.toFixed(5));
+      const v = validateAhmedabadCoords(pickedCoords.lat, pickedCoords.lng, lang);
+      if (v.valid) {
+        setLat(pickedCoords.lat.toFixed(5));
+        setLng(pickedCoords.lng.toFixed(5));
+        if (v.ward) setWardId(v.ward.id);
+        setError('');
+        setLocationMessage(`${v.ward?.name_en || 'Ward'} selected on map.`);
+      } else {
+        setError(v.error);
+        setLocationMessage('');
+      }
     }
-  }, [pickedCoords]);
+  }, [pickedCoords, lang]);
 
   const categories = [
     {
@@ -167,8 +181,20 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
       async (pos) => {
         const nextLat = pos.coords.latitude;
         const nextLng = pos.coords.longitude;
+
+        // Strict client-side boundary validation first
+        const validation = validateAhmedabadCoords(nextLat, nextLng, lang);
+        if (!validation.valid) {
+          setLocating(false);
+          setLocationMessage('');
+          setError(validation.error);
+          return;
+        }
+
+        // Inside Ahmedabad: accept coordinates
         setLat(nextLat.toFixed(5));
         setLng(nextLng.toFixed(5));
+        setError('');
 
         try {
           const res = await fetch('/api/wards/resolve', {
@@ -180,11 +206,16 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
           if (res.ok && data.ward) {
             setWardId(data.ward.id);
             setLocationMessage(`${data.ward.name_en} detected automatically via GPS.`);
+          } else if (res.status === 400) {
+            setLocationMessage('');
+            setError(data.detail || validation.error);
           } else {
-            setLocationMessage('GPS coordinates recorded.');
+            setWardId(validation.ward.id);
+            setLocationMessage(`${validation.ward.name_en} detected automatically via GPS.`);
           }
         } catch {
-          setLocationMessage('GPS location captured.');
+          setWardId(validation.ward.id);
+          setLocationMessage(`${validation.ward.name_en} detected automatically via GPS.`);
         } finally {
           setLocating(false);
         }
@@ -219,7 +250,35 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
 
   const handleSubmit = async () => {
     setError('');
+    const reportLat = parseFloat(lat);
+    const reportLng = parseFloat(lng);
+
+    // 1. Strict client-side boundary check before ANY action
+    const clientValidation = validateAhmedabadCoords(reportLat, reportLng, lang);
+    if (!clientValidation.valid) {
+      setError(clientValidation.error);
+      return;
+    }
+
     setSubmitting(true);
+
+    // 2. Server-side jurisdiction verification (ADR-0009)
+    try {
+      const check = await fetch('/api/wards/resolve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lat: reportLat, lng: reportLng })
+      });
+      if (!check.ok && check.status === 400) {
+        const checkErr = await check.json().catch(() => ({}));
+        setError(checkErr.detail || clientValidation.error);
+        setSubmitting(false);
+        return;
+      }
+    } catch {
+      // Backend unreachable — client validation passed, proceed with caution
+    }
+
     const amcTicket = generateAmcTicketId(wardId || 'ward_01');
     const assignedDept = getAmcDepartmentForCategory(category);
     const nowIso = new Date().toISOString();
@@ -239,20 +298,12 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
       amc_department: assignedDept,
       rwa_partner: 'Ahmedabad Citizen Network',
       image_url: photo || 'https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&auto=format&fit=crop&q=80',
-      lat: parseFloat(lat) || 23.0225,
-      lng: parseFloat(lng) || 72.5714,
+      lat: reportLat,
+      lng: reportLng,
       upvotes: 1,
       reported_at: nowIso,
       created_at: nowIso
     };
-
-    // Save report to local storage so it reflects immediately across MyReportsView and Dashboard
-    try {
-      const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
-      localStorage.setItem('amdavad_safai_local_reports', JSON.stringify([reportData, ...stored]));
-    } catch {
-      // Ignore
-    }
 
     try {
       const response = await fetch('/api/reports', {
@@ -263,19 +314,43 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
 
       if (response.ok) {
         const result = await response.json();
+        // Save verified report to local cache for instant UI reflection
+        try {
+          const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
+          localStorage.setItem('amdavad_safai_local_reports', JSON.stringify([result, ...stored]));
+        } catch {
+          // Ignore
+        }
         addKarmaPoints('REPORT_SUBMITTED', 15, { targetId: result.id || amcTicket, description: `Filed Complaint (${wardId})` });
         setSubmittedTicket(result.amc_ticket_id || amcTicket);
         if (onSuccess) onSuccess(result);
         setSubmitting(false);
         return;
       }
+
+      // Server rejected (out of city or validation error) — NEVER save locally
+      const errBody = await response.json().catch(() => ({}));
+      setError(errBody.detail || clientValidation.error);
+      setSubmitting(false);
+      return;
     } catch (submitError) {
-      console.warn('Backend offline, using local storage fallback...', submitError);
+      console.warn('Backend offline, checking coordinates for offline fallback...', submitError);
     }
 
-    addKarmaPoints('REPORT_SUBMITTED', 15, { targetId: reportData.id, description: `Filed Complaint (${wardId})` });
-    setSubmittedTicket(amcTicket);
-    if (onSuccess) onSuccess(reportData);
+    // Offline fallback ONLY permitted if coordinates are verified within Ahmedabad
+    if (clientValidation.valid) {
+      try {
+        const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
+        localStorage.setItem('amdavad_safai_local_reports', JSON.stringify([reportData, ...stored]));
+      } catch {
+        // Ignore
+      }
+      addKarmaPoints('REPORT_SUBMITTED', 15, { targetId: reportData.id, description: `Filed Complaint (${wardId})` });
+      setSubmittedTicket(amcTicket);
+      if (onSuccess) onSuccess(reportData);
+    } else {
+      setError(clientValidation.error);
+    }
     setSubmitting(false);
   };
 
@@ -480,6 +555,13 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
                       <span>Lng: {lng}</span>
                     </div>
                   </div>
+
+                  {error && (
+                    <div className="variant-error-pill" style={{ marginTop: '12px' }}>
+                      <AlertCircle size={16} />
+                      <span>{error}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="variant-slab-card">
@@ -594,7 +676,15 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
                   <button
                     type="button"
                     className="variant-btn-primary"
-                    onClick={() => setStep(3)}
+                    onClick={() => {
+                      const v = validateAhmedabadCoords(lat, lng, lang);
+                      if (!v.valid) {
+                        setError(v.error);
+                        return;
+                      }
+                      setError('');
+                      setStep(3);
+                    }}
                   >
                     <span>REVIEW & CONFIRM</span>
                     <ArrowRight size={16} />

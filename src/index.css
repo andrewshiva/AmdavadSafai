@@ -1586,11 +1586,19 @@ button, select, input, textarea {
 
   .mobile-legend-toggle-btn {
     display: flex;
+    bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .variant-intensity-scale-pill {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    min-width: 0;
   }
 
   .map-legend-card {
     position: absolute;
-    bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+    bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
     left: 14px !important;
     width: 200px !important;
     display: none !important;

@@ -72,7 +72,8 @@ export const CreateEventModal = ({ isOpen, onClose, onEventCreated }) => {
           onClose();
         }, 1200);
       } else {
-        setError('Failed to create event. Please try again.');
+        const err = await res.json().catch(() => ({}));
+        setError(err.detail || 'Failed to create event. Please try again.');
       }
     } catch {
       // Optimistic offline fallback

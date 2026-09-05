@@ -9,10 +9,12 @@ import models
 REAL_WARDS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "amd_wards.geojson")
 
 # Normalised pilot-name -> official feature Name for transliteration mismatches
+# (each alias verified: pilot centre falls inside the official polygon)
 NAME_ALIASES = {
     "SHAHIBAUG": "16 SHAHIBAG",
     "GHATLODIYA": "07 GHATLODIA",
     "CHANDLODIYA": "02 CHANDLODIA",
+    "VADAJ": "06 NEW WADAJ",
 }
 
 
@@ -53,6 +55,68 @@ def match_real_polygon(ward_name_en: str):
     if alias and (alias in index or _norm(alias) in index):
         return index.get(alias) or index.get(_norm(alias)), alias
     return None, None
+
+
+def point_in_ring(lng: float, lat: float, ring) -> bool:
+    """Ray-casting containment for a GeoJSON linear ring. Ring: [[lng, lat], ...]."""
+    inside = False
+    n = len(ring)
+    if n < 4:
+        return False
+    j = n - 1
+    for i in range(n):
+        xi, yi = ring[i][0], ring[i][1]
+        xj, yj = ring[j][0], ring[j][1]
+        if ((yi > lat) != (yj > lat)) and (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi):
+            inside = not inside
+        j = i
+    return inside
+
+
+def locate_point(lat: float, lng: float, wards, ward_index_of):
+    """Municipal-boundary check. Returns (ward_id | None).
+
+    Accepts points inside any ward polygon — real DataMeet geometry where
+    matched, else the same synthetic octagon served to the map — so the
+    geofence follows the drawn boundaries instead of ward-centre distance.
+    """
+    for w in wards:
+        geom, _ = match_real_polygon(w.name_en)
+        if geom is not None:
+            rings = geom["coordinates"]
+        else:
+            rings = generate_polygon_for_center(w.lat, w.lng, ward_index_of(w.id))
+        outer = rings[0] if rings else []
+        if outer and point_in_ring(lng, lat, outer):
+            return w.id
+    return None
+
+
+def inside_official_limits(lat: float, lng: float) -> bool:
+    """True when the point falls inside ANY of the 48 official AMC ward
+    polygons (DataMeet snapshot) — the municipal boundary as a union.
+
+    Pilot labels without a 1:1 official polygon (Satellite, Bopal, Vastrapur,
+    Kalupur, Ambawadi, Sola) must NOT borrow a neighbour's shape for display,
+    but points inside official limits are still Ahmedabad and pass the gate.
+    Bopal predates the snapshot's AMC limits and is covered by its pilot
+    octagon via locate_point instead.
+    """
+    for feature in _load_real_features():
+        geom = feature.get("geometry") or {}
+        rings = geom.get("coordinates") or []
+        outer = rings[0] if rings else []
+        if outer and point_in_ring(lng, lat, outer):
+            return True
+    return False
+
+
+def _load_real_features():
+    try:
+        with open(REAL_WARDS_PATH, encoding="utf-8") as f:
+            return json.load(f).get("features", [])
+    except Exception:
+        return []
 
 
 # Synthetic fallback: realistic polygon around ward lat/lng centers

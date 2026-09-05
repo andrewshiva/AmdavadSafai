@@ -72,7 +72,12 @@ export const AppV2 = ({ onSwitchVersion }) => {
   }, []);
 
   // Reporting and civic actions are anonymous — no login required (ADR-0004).
-  const handleOpenReport = () => {
+  const handleOpenReport = (coords) => {
+    if (coords && coords.lat && coords.lng) {
+      setPickedCoords(coords);
+    } else {
+      setPickedCoords(null);
+    }
     setActiveView('report');
   };
 
@@ -98,10 +103,12 @@ export const AppV2 = ({ onSwitchVersion }) => {
         {activeView === 'report' ? (
           <ReportPage
             onCancel={() => {
+              setPickedCoords(null);
               setActiveView('dashboard');
               if (refetch) refetch();
             }}
             onSuccess={() => {
+              setPickedCoords(null);
               if (refetch) refetch();
             }}
             pickedCoords={pickedCoords}

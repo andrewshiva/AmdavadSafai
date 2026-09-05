@@ -5,6 +5,7 @@ import { X, AlertCircle, MapPin, CheckCircle2, LocateFixed, Camera, Tag, Clock, 
 import { addKarmaPoints } from '../utils/gamification';
 import { generateAmcTicketId } from '../utils/amcTickets';
 import { formatDateTime } from '../utils/dateTime';
+import { validateAhmedabadCoords } from '../utils/geofence';
 
 export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, onOutofCity }) => {
   const { t, lang } = useTranslation();
@@ -27,10 +28,17 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
 
   useEffect(() => {
     if (pickedCoords && pickedCoords.lat && pickedCoords.lng) {
-      setLat(pickedCoords.lat.toFixed(5));
-      setLng(pickedCoords.lng.toFixed(5));
+      const v = validateAhmedabadCoords(pickedCoords.lat, pickedCoords.lng, lang);
+      if (v.valid) {
+        setLat(pickedCoords.lat.toFixed(5));
+        setLng(pickedCoords.lng.toFixed(5));
+        if (v.ward) setWardId(v.ward.id);
+        setError('');
+      } else {
+        setError(v.error);
+      }
     }
-  }, [pickedCoords]);
+  }, [pickedCoords, lang]);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -66,8 +74,18 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
       async (position) => {
         const nextLat = position.coords.latitude;
         const nextLng = position.coords.longitude;
+
+        const validation = validateAhmedabadCoords(nextLat, nextLng, lang);
+        if (!validation.valid) {
+          setLocating(false);
+          setLocationMessage('');
+          setError(validation.error);
+          return;
+        }
+
         setLat(nextLat.toFixed(5));
         setLng(nextLng.toFixed(5));
+        setError('');
 
         try {
           const response = await fetch('/api/wards/resolve', {
@@ -82,12 +100,14 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
               if (onOutofCity) onOutofCity(match.detail);
               return;
             }
-            throw new Error(match.detail || 'Unable to match this location to a ward.');
+            throw new Error(match.detail || validation.error);
           }
 
           setWardId(match.ward.id);
           const wardName = lang === 'gu' ? match.ward.name_gu : match.ward.name_en;
-          setLocationMessage(`${wardName} selected automatically (${Math.round(match.distance_m)} m from ward centre).`);
+          setLocationMessage(match.distance_m > 0
+            ? `${wardName} selected automatically (${Math.round(match.distance_m)} m from ward centre).`
+            : `${wardName} selected automatically (inside ward boundary).`);
         } catch (locationError) {
           setLocationMessage('Location captured. Please select the correct ward manually.');
           setError(locationError.message || 'Unable to match this location to a ward.');
@@ -108,7 +128,11 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    const validation = validateAhmedabadCoords(lat, lng, lang);
+    if (!validation.valid) {
+      setError(validation.error);
+      return;
+    }
 
     if (!wardId) {
       setError(t('select_ward'));
@@ -167,6 +191,11 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
         setError(err.detail || 'Failed to submit complaint.');
       }
     } catch {
+      if (!validation.valid) {
+        setError(validation.error);
+        setSubmitting(false);
+        return;
+      }
       // Fallback behavior if static deployment
       const selectedWard = wards.find((w) => w.id === wardId);
       const wardPartner = selectedWard ? `${selectedWard.name_en} Civic Association` : 'Ahmedabad Citizen Network';
