@@ -14,7 +14,6 @@ import VideoModal from '../components/VideoModal';
 import FilterBar from '../components/FilterBar';
 import MapView from '../components/MapView';
 import ListView from '../components/ListView';
-import StatsPanel from '../components/StatsPanel';
 import WelcomeOverlay from '../components/WelcomeOverlay';
 import ReportDetailModal from '../components/ReportDetailModal';
 import VerifyCleanupModal from '../components/VerifyCleanupModal';
@@ -58,7 +57,6 @@ export const AppV2 = ({ onSwitchVersion }) => {
   const [isCleanedWallOpen, setIsCleanedWallOpen] = useState(false);
   const [isRWAOpen, setIsRWAOpen] = useState(false);
   const [shareCardTarget, setShareCardTarget] = useState(null);
-  const [isStatsOpen, setIsStatsOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
 
@@ -170,7 +168,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
             currentUser={currentUser}
             onOpenReport={handleRequireLoginOrReport}
             onOpenEvents={() => setIsEventsOpen(true)}
-            onToggleStats={() => setIsStatsOpen(!isStatsOpen)}
+            onToggleStats={() => setActiveView('stats')}
             onOpenVideo={() => setIsVideoOpen(true)}
           />
         ) : activeView === 'reports' ? (
@@ -384,15 +382,6 @@ export const AppV2 = ({ onSwitchVersion }) => {
         isOpen={isAIAssistantOpen}
         onClose={() => setIsAIAssistantOpen(false)}
       />
-
-      {/* Stats Drawer - Only visible after login in Version 2 */}
-      {currentUser && (
-        <StatsPanel
-          reports={filteredReports}
-          isOpen={isStatsOpen}
-          onToggleOpen={() => setIsStatsOpen(!isStatsOpen)}
-        />
-      )}
 
       {/* Dynamic Action Toast */}
       {toastMsg && (

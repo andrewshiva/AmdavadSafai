@@ -352,44 +352,6 @@ export const StatisticsView = ({ reports = [] }) => {
           </button>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="statspage-footer">
-        <div className="statspage-footer-grid">
-          <div>
-            <div className="statspage-brand">
-              <span className="statspage-brand-box">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                </svg>
-              </span>
-              <strong>SAFAI</strong>
-            </div>
-            <p className="statspage-tagline">સાથે મળીને આપણે અમદાવાદને શ્રેષ્ઠ શહેર બનાવીશું.</p>
-          </div>
-          <div>
-            <div className="statspage-foot-head">RESOURCES</div>
-            {['IMPACT MAPS', 'DATA API', 'RESOLUTION LOG'].map((x) => (
-              <a key={x} href="#" onClick={(e) => e.preventDefault()} className="statspage-foot-link">{x}</a>
-            ))}
-          </div>
-          <div>
-            <div className="statspage-foot-head">TRANSPARENCY</div>
-            {['OPEN DATA POLICY', 'AMC AUDITS'].map((x) => (
-              <a key={x} href="#" onClick={(e) => e.preventDefault()} className="statspage-foot-link">{x}</a>
-            ))}
-          </div>
-          <div>
-            <div className="statspage-foot-head">HELPLINE</div>
-            <a href="tel:155303" className="statspage-helpline">155303</a>
-            <div className="statspage-foot-sub">TOLL FREE SUPPORT</div>
-          </div>
-        </div>
-        <div className="statspage-foot-base">
-          <span>© 2024 AHMEDABAD SAFAI PLATFORM.</span>
-          <span className="statspage-socials"><span>𝕏</span><span>f</span><span>◉</span></span>
-        </div>
-      </footer>
     </div>
   );
 };
