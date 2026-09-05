@@ -1,8 +1,61 @@
+import json
 import math
+import os
 from sqlalchemy.orm import Session
 import models
 
-# Generate realistic polygon boundaries around ward lat/lng centers for Ahmedabad
+# Real AMC ward polygons (DataMeet Municipal_Spatial_Data, CC BY 4.0).
+# Pilot wards without an official match keep the synthetic fallback below.
+REAL_WARDS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "amd_wards.geojson")
+
+# Normalised pilot-name -> official feature Name for transliteration mismatches
+NAME_ALIASES = {
+    "SHAHIBAUG": "16 SHAHIBAG",
+    "GHATLODIYA": "07 GHATLODIA",
+    "CHANDLODIYA": "02 CHANDLODIA",
+}
+
+
+def _norm(name: str) -> str:
+    return "".join(c for c in (name or "").upper() if c.isalpha())
+
+
+_real_index = None
+
+
+def _load_real_index():
+    global _real_index
+    if _real_index is not None:
+        return _real_index
+    _real_index = {}
+    try:
+        with open(REAL_WARDS_PATH, encoding="utf-8") as f:
+            data = json.load(f)
+        for feature in data.get("features", []):
+            name = ((feature.get("properties") or {}).get("Name") or "").strip()
+            if name and feature.get("geometry"):
+                _real_index[_norm(name)] = feature["geometry"]
+                _real_index[name.strip().upper()] = feature["geometry"]
+    except Exception as err:
+        print(f"[GeoJSON] Notice: real ward polygons unavailable ({err}). Using synthetic fallback.")
+    return _real_index
+
+
+def match_real_polygon(ward_name_en: str):
+    """Return (geometry, official_name) for a pilot ward, or (None, None)."""
+    index = _load_real_index()
+    if not index:
+        return None, None
+    key = _norm(ward_name_en)
+    if key in index:
+        return index[key], ward_name_en
+    alias = NAME_ALIASES.get(key)
+    if alias and (alias in index or _norm(alias) in index):
+        return index.get(alias) or index.get(_norm(alias)), alias
+    return None, None
+
+
+# Synthetic fallback: realistic polygon around ward lat/lng centers
 def generate_polygon_for_center(lat: float, lng: float, ward_index: int):
     # Radius in degrees (~1.2 km radius, slightly varied for realism based on index)
     radius_deg = 0.012 + (ward_index % 3) * 0.002
@@ -18,7 +71,7 @@ def generate_polygon_for_center(lat: float, lng: float, ward_index: int):
         d_lat = r * math.cos(angle)
         d_lng = (r * math.sin(angle)) / math.cos(math.radians(lat))
         points.append([round(lng + d_lng, 5), round(lat + d_lat, 5)])
-    
+
     # Close the polygon by repeating first point
     if points:
         points.append(points[0])
@@ -82,14 +135,21 @@ def get_wards_geojson(db: Session):
 
     for idx, ward in enumerate(wards):
         metrics = calculate_cleanliness_metrics(db, ward.id)
-        polygon = generate_polygon_for_center(ward.lat, ward.lng, idx)
+        real_geom, official_name = match_real_polygon(ward.name_en)
+        if real_geom is not None:
+            coordinates = real_geom["coordinates"]
+            boundary_source = "datameet"
+        else:
+            coordinates = generate_polygon_for_center(ward.lat, ward.lng, idx)
+            boundary_source = "synthetic"
+            official_name = ""
 
         feature = {
             "type": "Feature",
             "id": ward.id,
             "geometry": {
                 "type": "Polygon",
-                "coordinates": polygon
+                "coordinates": coordinates
             },
             "properties": {
                 "ward_id": ward.id,
@@ -111,6 +171,8 @@ def get_wards_geojson(db: Session):
                 "mp_hi": getattr(ward, 'mp_hi', '') or 'हसमुख पटेल',
                 "lat": ward.lat,
                 "lng": ward.lng,
+                "boundary_source": boundary_source,
+                "boundary_official_name": official_name,
                 **metrics
             }
         }

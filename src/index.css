@@ -8425,6 +8425,16 @@ button, select, input, textarea {
   color: #DC2626;
   white-space: nowrap;
 }
+.statspage-esc-badge {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+  background: #DC2626;
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
 .statspage-alert-btn {
   margin-top: auto;
   width: 100%;

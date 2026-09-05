@@ -3,7 +3,7 @@ import { useTranslation } from '../i18n/useTranslation';
 import { ArrowRight, MapPin, Play, Camera, Zap, Truck, CheckCircle2, ShieldCheck, Clock, PhoneCall } from 'lucide-react';
 import wardsData from '../data/wards.json';
 
-export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggleStats, onOpenVideo, currentUser }) => {
+export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggleStats, onOpenVideo }) => {
   const { lang } = useTranslation();
   const videoRef = useRef(null);
   const wardCount = wardsData.length;
@@ -174,15 +174,13 @@ export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggl
               <Play size={14} className="play-icon-orange" fill="#FF6B35" />
               <span>{content.btn_watch_video}</span>
             </button>
-            {currentUser && (
-              <button
-                type="button"
-                className="variant-btn-secondary"
-                onClick={onToggleStats}
-              >
-                <span>{content.btn_view_impact}</span>
-              </button>
-            )}
+            <button
+              type="button"
+              className="variant-btn-secondary"
+              onClick={onToggleStats}
+            >
+              <span>{content.btn_view_impact}</span>
+            </button>
           </div>
         </div>
 

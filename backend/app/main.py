@@ -1,4 +1,5 @@
 import sys, os
+import datetime
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
@@ -171,6 +172,25 @@ def dispute_resolution(report_id: str, payload: schemas.DisputeResolutionRequest
 @app.get("/api/stats", response_model=schemas.StatsOut)
 def read_stats(db: Session = Depends(get_db)):
     return crud.get_stats(db)
+
+# --- Pressure pipeline (see ADR-0007) ---
+
+def _escalation_threshold() -> int:
+    try:
+        return max(1, int(os.getenv("ESCALATION_THRESHOLD", "10")))
+    except ValueError:
+        return 10
+
+@app.get("/api/escalations")
+def read_escalations(db: Session = Depends(get_db)):
+    """Wards at/over the unresolved-report escalation threshold."""
+    threshold = _escalation_threshold()
+    return {"threshold": threshold, "escalated_wards": crud.get_escalated_wards(db, threshold=threshold)}
+
+@app.get("/api/digest/wards")
+def read_ward_digest(db: Session = Depends(get_db)):
+    """Machine-readable ward digest for the weekly authority mailer (no email sent)."""
+    return {"generated_at": datetime.datetime.utcnow().isoformat(), "wards": crud.get_ward_digest(db)}
 
 @app.post("/api/subscribe", response_model=schemas.SubscriptionOut)
 def create_subscription(subscription: schemas.SubscriptionCreate, db: Session = Depends(get_db)):

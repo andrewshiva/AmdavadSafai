@@ -2,11 +2,15 @@ import React, { useState, useMemo } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
 import { Download, Phone, Mail, Image, MapPin, CheckCircle2, Clock, ThumbsUp, Shield, User } from 'lucide-react';
 import wardsData from '../data/wards.json';
+import pilotConfig from '../data/pilot.json';
 import { formatDateTime } from '../utils/dateTime';
+
+const PILOT_WARD_IDS = new Set(pilotConfig?.pilot_ward_ids || []);
+const DEFAULT_WARD_ID = (pilotConfig?.pilot_ward_ids || [])[0] || wardsData[1]?.id || 'ward_02';
 
 export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport }) => {
   const { t, lang } = useTranslation();
-  const [selectedWardId, setSelectedWardId] = useState(wardsData[1]?.id || 'ward_02'); // Default: Navrangpura
+  const [selectedWardId, setSelectedWardId] = useState(DEFAULT_WARD_ID); // Default: pilot ward
 
   const currentWard = useMemo(() => {
     return wardsData.find((w) => w.id === selectedWardId) || wardsData[0] || {
@@ -59,6 +63,11 @@ export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport })
             <span className="variant-tag">
               {lang === 'gu' ? 'વોર્ડ પ્રોફાઇલ' : lang === 'hi' ? 'वार्ड प्रोफाइल' : 'WARD PROFILE'}
             </span>
+            {PILOT_WARD_IDS.has(selectedWardId) && (
+              <span className="variant-tag" title={lang === 'gu' ? 'પાયલટ વોર્ડ: ભાગીદારી પ્રક્રિયામાં' : lang === 'hi' ? 'पायलट वार्ड: भागीदारी प्रक्रिया में' : 'Pilot ward: partnership onboarding pending'}>
+                {lang === 'gu' ? 'પાયલટ' : lang === 'hi' ? 'पायलट' : 'PILOT'}
+              </span>
+            )}
             <select
               value={selectedWardId}
               onChange={(e) => setSelectedWardId(e.target.value)}

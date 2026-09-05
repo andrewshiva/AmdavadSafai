@@ -9,7 +9,6 @@ import DashboardView from './DashboardView';
 import StatisticsView from './StatisticsView';
 import WardsProfileView from './WardsProfileView';
 import CleanupDrivesView from './CleanupDrivesView';
-import LoginModal from './LoginModal';
 import VideoModal from '../components/VideoModal';
 import FilterBar from '../components/FilterBar';
 import MapView from '../components/MapView';
@@ -34,16 +33,6 @@ import { checkDailyVisitStreak } from '../utils/gamification';
 export const AppV2 = ({ onSwitchVersion }) => {
   const { t, lang } = useTranslation();
   const [activeView, setActiveView] = useState('about'); // 'about', 'dashboard', 'reports', 'wards', 'impact', 'report'
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [toastMsg, setToastMsg] = useState('');
-  const [currentUser, setCurrentUser] = useState(() => {
-    try {
-      const saved = localStorage.getItem('amdavad_safai_user_v2');
-      return saved ? JSON.parse(saved) : null;
-    } catch {
-      return null;
-    }
-  });
 
   const [selectedReport, setSelectedReport] = useState(null);
   const [selectedReceipt, setSelectedReceipt] = useState(null);
@@ -82,41 +71,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
     checkDailyVisitStreak();
   }, []);
 
-  const handleLoginSuccess = (userData) => {
-    const user = {
-      name: userData.name || (userData.role === 'officer' ? 'Inspector R. Shah' : 'Jatin Sharma'),
-      initials: userData.role === 'officer' ? 'RS' : 'JS',
-      phone: userData.phone || '+91 98765 43210',
-      role: userData.role || 'citizen'
-    };
-    setCurrentUser(user);
-    try {
-      localStorage.setItem('amdavad_safai_user_v2', JSON.stringify(user));
-    } catch {
-      // Ignore
-    }
-    const msg = lang === 'gu' ? `સ્વાગત છે, ${user.name}` : lang === 'hi' ? `स्वागत है, ${user.name}` : `Welcome, ${user.name}`;
-    setToastMsg(msg);
-    setTimeout(() => setToastMsg(''), 3500);
-  };
-
-  const handleLogout = () => {
-    setCurrentUser(null);
-    if (activeView === 'report') {
-      setActiveView('about');
-    }
-    try {
-      localStorage.removeItem('amdavad_safai_user_v2');
-    } catch {
-      // Ignore
-    }
-    const msg = lang === 'gu' ? 'તમે સફળતાપૂર્વક સાઇન આઉટ થયા છો' : lang === 'hi' ? 'आप सफलतापूर्वक साइन आउट हो गए हैं' : 'Signed out successfully';
-    setToastMsg(msg);
-    setTimeout(() => setToastMsg(''), 3500);
-  };
-
   // Reporting and civic actions are anonymous — no login required (ADR-0004).
-  // Sign-in remains only as an optional identity for karma/badges.
   const handleOpenReport = () => {
     setActiveView('report');
   };
@@ -130,12 +85,9 @@ export const AppV2 = ({ onSwitchVersion }) => {
       <HeaderV2
         activeView={activeView}
         setActiveView={setActiveView}
-        currentUser={currentUser}
         onOpenEvents={() => setIsEventsOpen(true)}
         onOpenBadges={() => setIsBadgesOpen(true)}
         onOpenRWA={() => setIsRWAOpen(true)}
-        onOpenLogin={() => setIsLoginOpen(true)}
-        onLogout={handleLogout}
         onOpenVideo={() => setIsVideoOpen(true)}
         onOpenAIAssistant={() => setIsAIAssistantOpen(true)}
         onSwitchVersion={onSwitchVersion}
@@ -163,7 +115,6 @@ export const AppV2 = ({ onSwitchVersion }) => {
         ) : activeView === 'about' ? (
           <AboutSection
             reports={filteredReports}
-            currentUser={currentUser}
             onOpenReport={handleOpenReport}
             onOpenEvents={() => setIsEventsOpen(true)}
             onToggleStats={() => setActiveView('stats')}
@@ -205,12 +156,6 @@ export const AppV2 = ({ onSwitchVersion }) => {
         )}
       </main>
 
-      {/* Login & Authentication Modal */}
-      <LoginModal
-        isOpen={isLoginOpen}
-        onClose={() => setIsLoginOpen(false)}
-        onLoginSuccess={handleLoginSuccess}
-      />
 
       {/* Introduction & Overview Video Modal */}
       <VideoModal
@@ -356,12 +301,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
         onClose={() => setIsAIAssistantOpen(false)}
       />
 
-      {/* Dynamic Action Toast */}
-      {toastMsg && (
-        <div className="v2-action-toast">
-          <span>{toastMsg}</span>
-        </div>
-      )}
+
     </div>
   );
 };

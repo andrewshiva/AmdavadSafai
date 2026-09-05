@@ -23,7 +23,11 @@ Seed data (`src/data/*.json` → SQLite via `backend/app/seed.py` on startup): `
 ## Key flows
 
 - Report: GPS → `POST /api/wards/resolve` (Haversine nearest ward, reject > 35 km, see `crud.get_nearest_ward`) → optional `POST /api/ai/triage` → `POST /api/reports` (ward re-resolved server-side from coords; base64 image → `/uploads/*`) → upvote/verify/flag/dispute → receipt/share.
-- Map (`MapView.jsx` + `GET /api/wards/geojson`): ward polygons are **synthetic approximations** (see ADR-0001); cleanliness score `100 − penalty(minor 3 / moderate 6 / severe 10 / critical 15 / resolved 0.5)` → grade `A+..D`.
+- Map (`MapView.jsx` + `GET /api/wards/geojson`): 20/27 pilot wards draw real
+  AMC polygons (DataMeet, CC BY 4.0 — see ADR-0006); 7 without an official
+  counterpart keep the synthetic approximation flagged via
+  `boundary_source`. Cleanliness score `100 − penalty(minor 3 / moderate 6
+  / severe 10 / critical 15 / resolved 0.5)` → grade `A+..D`.
 - AI (`ai_service.py`): heuristic keyword intents live; MiniMind-3 + SigLIP-2 load only when torch + local weights exist (see ADR-0002).
 
 ## Numbers are live

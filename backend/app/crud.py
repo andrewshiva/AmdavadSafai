@@ -2,6 +2,8 @@ from typing import Optional, List
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from math import asin, cos, radians, sin, sqrt
+import json
+import os
 import uuid
 import random
 import models, schemas
@@ -252,6 +254,83 @@ def get_stats(db: Session):
         "zone_breakdown": list(zone_map.values()),
         "severity_distribution": severity_dist
     }
+
+# --- Pressure pipeline: escalations & ward digest (see ADR-0007) ---
+def get_pilot_ward_ids():
+    """Pilot focus wards from src/data/pilot.json (see ADR-0008). Tolerant: empty set when absent."""
+    try:
+        here = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src", "data", "pilot.json"))
+        with open(here, encoding="utf-8") as f:
+            ids = (json.load(f) or {}).get("pilot_ward_ids") or []
+        return set(ids)
+    except Exception:
+        return set()
+def get_escalated_wards(db: Session, threshold: int = 10):
+    """Wards with unresolved counts at/over threshold, worst first."""
+    rows = (
+        db.query(models.Report.ward_id, func.count(models.Report.id).label('count'))
+        .filter(models.Report.status == 'unresolved')
+        .group_by(models.Report.ward_id)
+        .order_by(func.count(models.Report.id).desc())
+        .all()
+    )
+    out = []
+    for ward_id, count in rows:
+        if (count or 0) < threshold:
+            continue
+        ward = get_ward_by_id(db, ward_id=ward_id)
+        out.append({
+            "ward_id": ward_id,
+            "name_en": ward.name_en if ward else ward_id,
+            "zone_en": ward.zone_en if ward else "",
+            "unresolved": count,
+            "threshold": threshold,
+            "escalated": True
+        })
+    return out
+
+
+def get_ward_digest(db: Session, limit_per_ward: int = 5):
+    """Machine-readable per-ward digest for the weekly authority mailer.
+
+    Email sending is intentionally NOT implemented (no provider configured).
+    A cron job should GET this endpoint and mail it to AMC contacts.
+    """
+    wards = get_wards(db)
+    digest = []
+    pilot_ids = get_pilot_ward_ids()
+    for w in wards:
+        w_reports = db.query(models.Report).filter(models.Report.ward_id == w.id).all()
+        total = len(w_reports)
+        unresolved = [r for r in w_reports if r.status == "unresolved"]
+        resolved = total - len(unresolved)
+        top = sorted(unresolved, key=lambda r: (r.upvotes or 0), reverse=True)[:limit_per_ward]
+        digest.append({
+            "ward_id": w.id,
+            "name_en": w.name_en,
+            "zone_en": w.zone_en,
+            "pilot": w.id in pilot_ids,
+            "total_reports": total,
+            "unresolved": len(unresolved),
+            "resolved": resolved,
+            "resolution_rate_pct": round((resolved / total * 100) if total > 0 else 100.0, 1),
+            "mla_en": getattr(w, 'mla_en', '') or '',
+            "top_unresolved": [
+                {
+                    "id": r.id,
+                    "tracking_ref": r.amc_ticket_id,
+                    "severity": r.severity,
+                    "category": r.category,
+                    "lat": r.lat,
+                    "lng": r.lng,
+                    "upvotes": r.upvotes or 0,
+                    "reported_at": r.reported_at.isoformat() if r.reported_at else None
+                }
+                for r in top
+            ]
+        })
+    digest.sort(key=lambda d: (-d["unresolved"], d["ward_id"]))
+    return digest
 
 # --- Cleanup Events CRUD ---
 def get_events(db: Session, ward_id: Optional[str] = 'all', status: Optional[str] = 'all'):

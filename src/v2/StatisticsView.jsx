@@ -31,6 +31,7 @@ export const StatisticsView = ({ reports = [] }) => {
   const { t, lang } = useTranslation();
   const [apiStats, setApiStats] = useState(null);
   const [swmFeed, setSwmFeed] = useState(null);
+  const [escalatedIds, setEscalatedIds] = useState(() => new Set());
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -42,6 +43,14 @@ export const StatisticsView = ({ reports = [] }) => {
     fetch('/api/civic-metrics')
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => { if (!cancelled && data?.amc_swm_feed) setSwmFeed(data.amc_swm_feed); })
+      .catch(() => {});
+    fetch('/api/escalations')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!cancelled && Array.isArray(data?.escalated_wards)) {
+          setEscalatedIds(new Set(data.escalated_wards.map((w) => w.ward_id)));
+        }
+      })
       .catch(() => {});
     return () => { cancelled = true; };
   }, []);
@@ -186,6 +195,7 @@ export const StatisticsView = ({ reports = [] }) => {
     worstTitle: lang === 'gu' ? 'સૌથી નબળા વોર્ડ' : lang === 'hi' ? 'सबसे खराब वार्ड' : 'WORST PERFORMING WARDS',
     unresolvedUnit: lang === 'gu' ? 'અનિરાકૃત' : lang === 'hi' ? 'अनसुलझी' : 'UNRESOLVED',
     alert: lang === 'gu' ? 'વોર્ડ સુપરવાઇઝરને ચેતવો' : lang === 'hi' ? 'वार्ड पर्यवेक्षकों को सचेत करें' : 'ALERT WARD SUPERVISORS',
+    escalated: lang === 'gu' ? 'એસ્કેલેટેડ' : lang === 'hi' ? 'एस्केलेटेड' : 'ESCALATED',
     copied: lang === 'gu' ? 'નકલ થઈ!' : lang === 'hi' ? 'कॉपी हुआ!' : 'COPIED ✓',
     noData: lang === 'gu' ? 'હજુ કોઈ ડેટા નથી' : lang === 'hi' ? 'अभी कोई डेटा नहीं' : 'No data yet'
   };
@@ -341,6 +351,7 @@ export const StatisticsView = ({ reports = [] }) => {
               <div key={w.ward_id} className="statspage-worst-row">
                 <span className="statspage-worst-dot" />
                 <strong>{i + 1}. {w.name}</strong>
+                {escalatedIds.has(w.ward_id) && <span className="statspage-esc-badge">⚠ {L.escalated}</span>}
                 <span className="statspage-worst-count">{w.count} {L.unresolvedUnit}</span>
               </div>
             )) : (

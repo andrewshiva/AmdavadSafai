@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from '../i18n/useTranslation';
-import { Menu, BookOpen, X, ChevronRight, LogOut, User, Mail, FileText, Sparkles } from 'lucide-react';
+import { Menu, BookOpen, X, ChevronRight, Mail, FileText, Sparkles } from 'lucide-react';
 import SubscribeModal from '../components/SubscribeModal';
 import ChangelogModal from '../components/ChangelogModal';
 
 export const HeaderV2 = ({
   activeView = 'about',
   setActiveView,
-  currentUser,
   onOpenEvents,
   onOpenBadges,
   onOpenRWA,
-  onOpenLogin,
-  onLogout,
   onOpenVideo,
   onOpenAIAssistant,
   onSwitchVersion
@@ -21,7 +18,6 @@ export const HeaderV2 = ({
   const { t, lang, setLanguage } = useTranslation();
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
   const [isChangelogOpen, setIsChangelogOpen] = useState(false);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
   const navLabels = {
@@ -32,7 +28,6 @@ export const HeaderV2 = ({
     drives: lang === 'gu' ? 'સફાઈ અભિયાન' : lang === 'hi' ? 'सफाई अभियान' : 'DRIVES',
     stats: lang === 'gu' ? 'આંકડા' : lang === 'hi' ? 'आंकड़े' : 'STATISTICS',
     impact: lang === 'gu' ? 'ઇમ્પેક્ટ' : lang === 'hi' ? 'प्रभाव' : 'IMPACT',
-    signin: lang === 'gu' ? 'સાઇન ઇન' : lang === 'hi' ? 'साइन इन' : 'SIGN IN',
   };
 
   const [karmaPoints, setKarmaPoints] = useState(() => {
@@ -193,95 +188,13 @@ export const HeaderV2 = ({
         )}
 
         {/* Desktop Karma Points */}
-        {currentUser && onOpenBadges && (
+        {onOpenBadges && (
           <button
             className="variant-karma-btn header-desktop-only"
             onClick={onOpenBadges}
             title={t('my_badges')}
           >
             <span>⚡ {karmaPoints} pts</span>
-          </button>
-        )}
-
-        {/* Desktop User Avatar & Sign Out */}
-        {currentUser ? (
-          <div className="variant-user-auth-group header-desktop-only">
-            <div className="variant-user-avatar-wrap">
-              <button
-                type="button"
-                className="variant-avatar-circle-btn"
-                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                title={currentUser.name || 'Citizen Profile'}
-              >
-                <span>{currentUser.initials || 'JS'}</span>
-              </button>
-
-              {isUserMenuOpen && (
-                <div className="variant-user-dropdown">
-                  <div className="user-dropdown-info">
-                    <strong>{currentUser.name || 'Amdavadi Citizen'}</strong>
-                    <small>{currentUser.role === 'officer' ? 'AMC Sanitation Officer' : 'Active Citizen'}</small>
-                  </div>
-                  <hr className="dropdown-divider" />
-                  <button
-                    type="button"
-                    className="dropdown-item-btn"
-                    onClick={() => {
-                      setIsUserMenuOpen(false);
-                      setIsSubscribeOpen(true);
-                    }}
-                  >
-                    <Mail size={15} />
-                    <span>Monday Digest</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="dropdown-item-btn"
-                    onClick={() => {
-                      setIsUserMenuOpen(false);
-                      setIsChangelogOpen(true);
-                    }}
-                  >
-                    <FileText size={15} />
-                    <span>Changelog</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="dropdown-item-btn"
-                    onClick={() => {
-                      setIsUserMenuOpen(false);
-                      window.open(`/guide/index.html?lang=${lang}`, '_blank');
-                    }}
-                  >
-                    <BookOpen size={15} />
-                    <span>{lang === 'gu' ? 'નાગરિક SOP માર્ગદર્શિકા' : lang === 'hi' ? 'नाગરિક SOP गाइड' : 'Citizen SOP Guide'}</span>
-                  </button>
-                  <hr className="dropdown-divider" />
-                  <button
-                    type="button"
-                    className="dropdown-item-btn text-danger"
-                    onClick={() => {
-                      setIsUserMenuOpen(false);
-                      if (onLogout) onLogout();
-                    }}
-                  >
-                    <LogOut size={15} />
-                    <span>Sign Out</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        ) : (
-          /* Desktop Sign In Button */
-          <button
-            type="button"
-            className="variant-signin-btn header-desktop-only"
-            onClick={onOpenLogin}
-            title="Sign In / Login"
-          >
-            <User size={13} />
-            <span>{navLabels.signin}</span>
           </button>
         )}
 
@@ -337,41 +250,22 @@ export const HeaderV2 = ({
               </button>
             </div>
 
-            {/* User Profile or Login CTA */}
-            {currentUser ? (
-              <div className="mobile-user-card">
-                <div className="mobile-user-avatar">
-                  <span>{currentUser.initials || 'JS'}</span>
-                </div>
-                <div className="mobile-user-info">
-                  <strong>{currentUser.name}</strong>
-                  <span>⚡ {karmaPoints} Karma Points</span>
-                </div>
-                <button
-                  type="button"
-                  className="mobile-logout-btn"
-                  onClick={() => {
-                    setIsMobileDrawerOpen(false);
-                    if (onLogout) onLogout();
-                  }}
-                  title="Logout"
-                >
-                  <LogOut size={16} />
-                </button>
-              </div>
-            ) : (
-              <button
-                type="button"
-                className="mobile-login-banner-btn"
-                onClick={() => {
+            {/* Civic Safai Karma Card */}
+            <div
+              className="mobile-user-card"
+              onClick={() => {
+                if (onOpenBadges) {
                   setIsMobileDrawerOpen(false);
-                  if (onOpenLogin) onOpenLogin();
-                }}
-              >
-                <span>SIGN IN / LOGIN</span>
-                <ChevronRight size={16} />
-              </button>
-            )}
+                  onOpenBadges();
+                }
+              }}
+              style={{ cursor: onOpenBadges ? 'pointer' : 'default' }}
+            >
+              <div className="mobile-user-info">
+                <strong>{lang === 'gu' ? 'અમદાવાદ નાગરિક કર્મા' : lang === 'hi' ? 'अहमदाबाद नागरिक कर्मा' : 'Citizen Safai Karma'}</strong>
+                <span>⚡ {karmaPoints} Karma Points</span>
+              </div>
+            </div>
 
             {/* Mobile Nav Links */}
             <div className="mobile-drawer-links">

@@ -129,7 +129,7 @@
   "th_active": "सक्रिय",
   "th_res_rate": "समाधान %",
   "map_legend": "नक्शा संकेतक",
-  "approx_boundaries": "वार्ड रेखाएं अनुमानित हैं, आधिकारिक AMC सीमाएं नहीं।",
+  "approx_boundaries": "वार्ड रेखाएं: DataMeet के माध्यम से AMC (CC BY 4.0); कुछ पायलट वार्ड अनुमानित।",
   "ward_cleanliness_score": "वार्ड स्वच्छता स्कोर:",
   "score_excellent": "उत्कृष्ट (90 - 100)",
   "score_good": "अच्छा (80 - 89)",
