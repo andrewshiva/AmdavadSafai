@@ -1905,10 +1905,12 @@ button, select, input, textarea {
   margin: 0 4px;
 }
 
-/* Move controls to right side like NammaKasa */
+/* Zoom controls docked top-right: bottom corners belong to the
+   intensity pill (desktop) / full-width pill + legend (mobile) */
 .maplibregl-ctrl-bottom-right {
+  top: 16px !important;
   right: 16px !important;
-  bottom: 140px !important;
+  bottom: auto !important;
 }
 
 /* Ward Hover Tooltip Styling - Smooth & Fixed Centered */
