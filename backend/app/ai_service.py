@@ -140,25 +140,35 @@ def triage_civic_report(description: str, category: Optional[str] = None) -> Dic
     predicted_sev = "moderate"
     predicted_cat = category or "mixed_waste"
 
-    if any(k in text for k in ["gutter", "drain", "drainage", "sewage", "nalla", "manhole", "water logging"]):
-        predicted_dept = "AMC Drainage & Health Dept"
+    # Category & Department Detection
+    if any(k in text for k in ["dead animal", "carcass", "dead cow", "dead dog", "dead cat", "animal body", "stray cattle", "cattle"]):
+        predicted_dept = "Cattle Nuisance Control Dept (CNCD)"
+        predicted_cat = "dead_animal"
+    elif any(k in text for k in ["gutter", "drain", "drainage", "sewage", "nalla", "manhole", "water logging", "overflowing sewage"]):
+        predicted_dept = "Water & Drainage Department"
         predicted_cat = "drainage_blockage"
     elif any(k in text for k in ["debris", "malba", "construction", "bricks", "cement", "concrete", "demolition", "rubble"]):
-        predicted_dept = "AMC Engineering Dept (C&D Waste Unit)"
+        predicted_dept = "Estate & Solid Waste Management"
         predicted_cat = "construction_dump"
+    elif any(k in text for k in ["street light", "streetlight", "pole", "dark street", "lamp", "light not working", "electrical pole", "wire"]):
+        predicted_dept = "Light & Electrical Department"
+        predicted_cat = "street_light"
+    elif any(k in text for k in ["toilet", "urinal", "public toilet", "sauchalay", "washroom"]):
+        predicted_dept = "Public Health & SWM Department"
+        predicted_cat = "public_toilet"
     elif any(k in text for k in ["dustbin", "container", "overflowing bin", "dumper", "trash can"]):
-        predicted_dept = "Solid Waste Management (SWM) • Health Dept"
+        predicted_dept = "Solid Waste Management (SWM)"
         predicted_cat = "overflowing_bin"
     elif any(k in text for k in ["road", "street", "footpath", "divider", "pavement"]):
         predicted_dept = "Solid Waste Management (SWM)"
         predicted_cat = "roadside_garbage"
 
     # Severity heuristics
-    if any(k in text for k in ["hospital", "school", "dead animal", "carcass", "hazardous", "fire", "toxic", "massive heap", "blocked road"]):
+    if any(k in text for k in ["hospital", "school", "dead animal", "carcass", "hazardous", "fire", "toxic", "massive heap", "blocked road", "emergency"]):
         predicted_sev = "critical"
-    elif any(k in text for k in ["huge", "heavy", "rotting", "stinking", "maggots", "flies", "stray cattle", "overflow"]):
+    elif any(k in text for k in ["huge", "heavy", "rotting", "stinking", "maggots", "flies", "stray cattle", "overflow", "severe"]):
         predicted_sev = "severe"
-    elif any(k in text for k in ["small", "wrapper", "cups", "paper", "bottles", "few"]):
+    elif any(k in text for k in ["small", "wrapper", "cups", "paper", "bottles", "few", "minor"]):
         predicted_sev = "minor"
 
     summary = f"Identified as {predicted_cat.replace('_', ' ')} assigned to {predicted_dept} with {predicted_sev} urgency."
