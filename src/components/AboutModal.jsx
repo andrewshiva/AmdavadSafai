@@ -363,6 +363,35 @@ export const AboutModal = ({
                       <span className="helpline-number">ahmedabadcity.gov.in</span>
                     </div>
                   </a>
+
+                  <a
+                    href="https://x.com/AmdavadAMC?lang=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="about-helpline-box"
+                    title="Visit Official AMC Twitter / X Handle"
+                  >
+                    <div className="helpline-icon-tag twitter" style={{ background: '#000000', color: '#FFFFFF' }}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                      </svg>
+                    </div>
+                    <div className="helpline-meta">
+                      <span className="helpline-title">AMC Official Twitter / X</span>
+                      <span className="helpline-number">@AmdavadAMC</span>
+                    </div>
+                  </a>
                 </div>
               </div>
 
