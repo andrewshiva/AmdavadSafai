@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { useTranslation } from '../i18n/useTranslation';
 import {
   X,
@@ -19,6 +21,30 @@ const SUGGESTIONS = [
   "How to join Sunday cleanup drives?",
   "How do I earn Safai Karma points?"
 ];
+
+// Markdown element styles tuned for the dark bot bubble
+const mdComponents = {
+  p: ({ children }) => <p style={{ margin: '0 0 8px' }}>{children}</p>,
+  strong: ({ children }) => <strong style={{ fontWeight: 800 }}>{children}</strong>,
+  em: ({ children }) => <em>{children}</em>,
+  h1: ({ children }) => <div style={{ fontSize: '14px', fontWeight: 800, margin: '0 0 8px' }}>{children}</div>,
+  h2: ({ children }) => <div style={{ fontSize: '14px', fontWeight: 800, margin: '0 0 8px' }}>{children}</div>,
+  h3: ({ children }) => <div style={{ fontSize: '13.5px', fontWeight: 800, margin: '0 0 8px' }}>{children}</div>,
+  h4: ({ children }) => <div style={{ fontSize: '13px', fontWeight: 800, margin: '0 0 8px' }}>{children}</div>,
+  ul: ({ children }) => <ul style={{ margin: '0 0 8px', paddingLeft: '18px' }}>{children}</ul>,
+  ol: ({ children }) => <ol style={{ margin: '0 0 8px', paddingLeft: '18px' }}>{children}</ol>,
+  li: ({ children }) => <li style={{ marginBottom: '4px' }}>{children}</li>,
+  a: ({ href, children }) => (
+    <a href={href} target="_blank" rel="noreferrer" style={{ color: '#FB923C', textDecoration: 'underline' }}>
+      {children}
+    </a>
+  ),
+  code: ({ children }) => (
+    <code style={{ background: 'rgba(255,255,255,0.12)', borderRadius: '4px', padding: '1px 5px', fontSize: '12px' }}>
+      {children}
+    </code>
+  )
+};
 
 export const CivicAIAssistantModal = ({ isOpen = false, onClose }) => {
   const { t, lang } = useTranslation();
@@ -224,7 +250,15 @@ export const CivicAIAssistantModal = ({ isOpen = false, onClose }) => {
                 border: m.sender === 'user' ? 'none' : '1px solid rgba(255, 255, 255, 0.08)',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
               }}>
-                <div style={{ whiteSpace: 'pre-wrap' }}>{m.text}</div>
+                <div style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>
+                  {m.sender === 'bot' ? (
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+                      {m.text}
+                    </ReactMarkdown>
+                  ) : (
+                    m.text
+                  )}
+                </div>
               </div>
             </div>
           ))}
