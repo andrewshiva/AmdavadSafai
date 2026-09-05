@@ -55,11 +55,7 @@ export const HeaderV2 = ({
   }, []);
 
   const handleReportClick = () => {
-    if (!currentUser) {
-      if (onOpenLogin) onOpenLogin();
-    } else {
-      if (setActiveView) setActiveView('report');
-    }
+    if (setActiveView) setActiveView('report');
   };
 
   const handleNavClick = (viewName) => {
@@ -180,6 +176,9 @@ export const HeaderV2 = ({
           </button>
         </div>
 
+        {/* Subtle Section Divider */}
+        <div className="variant-nav-divider header-desktop-only" />
+
         {/* AI Assistant Button */}
         {onOpenAIAssistant && (
           <button
@@ -187,24 +186,9 @@ export const HeaderV2 = ({
             className="variant-ai-btn header-desktop-only"
             onClick={onOpenAIAssistant}
             title="AmdavadSafai AI Assistant"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '6px 12px',
-              borderRadius: '999px',
-              background: 'linear-gradient(135deg, #1E293B, #0F172A)',
-              border: '1px solid rgba(249, 115, 22, 0.4)',
-              color: '#F97316',
-              fontSize: '11.5px',
-              fontWeight: 800,
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-              flexShrink: 0
-            }}
           >
-            <Sparkles size={13} color="#F97316" />
-            <span>AI Assistant</span>
+            <Sparkles size={13} />
+            <span className="variant-ai-label">AI Assistant</span>
           </button>
         )}
 
