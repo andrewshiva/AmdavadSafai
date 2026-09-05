@@ -1913,6 +1913,21 @@ button, select, input, textarea {
   bottom: auto !important;
 }
 
+/* Bot chat bubble markdown formatting */
+.bot-markdown-content > *:first-child {
+  margin-top: 0 !important;
+}
+.bot-markdown-content > *:last-child {
+  margin-bottom: 0 !important;
+}
+.bot-markdown-content p {
+  margin-bottom: 8px;
+}
+.bot-markdown-content ul,
+.bot-markdown-content ol {
+  margin-bottom: 8px;
+}
+
 /* Ward Hover Tooltip Styling - Smooth & Fixed Centered */
 .ward-tooltip-popup {
   pointer-events: none !important;

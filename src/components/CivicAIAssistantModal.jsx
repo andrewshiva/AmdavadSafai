@@ -24,23 +24,64 @@ const SUGGESTIONS = [
 
 // Markdown element styles tuned for the dark bot bubble
 const mdComponents = {
-  p: ({ children }) => <p style={{ margin: '0 0 8px' }}>{children}</p>,
-  strong: ({ children }) => <strong style={{ fontWeight: 800 }}>{children}</strong>,
-  em: ({ children }) => <em>{children}</em>,
-  h1: ({ children }) => <div style={{ fontSize: '14px', fontWeight: 800, margin: '0 0 8px' }}>{children}</div>,
-  h2: ({ children }) => <div style={{ fontSize: '14px', fontWeight: 800, margin: '0 0 8px' }}>{children}</div>,
-  h3: ({ children }) => <div style={{ fontSize: '13.5px', fontWeight: 800, margin: '0 0 8px' }}>{children}</div>,
-  h4: ({ children }) => <div style={{ fontSize: '13px', fontWeight: 800, margin: '0 0 8px' }}>{children}</div>,
-  ul: ({ children }) => <ul style={{ margin: '0 0 8px', paddingLeft: '18px' }}>{children}</ul>,
-  ol: ({ children }) => <ol style={{ margin: '0 0 8px', paddingLeft: '18px' }}>{children}</ol>,
-  li: ({ children }) => <li style={{ marginBottom: '4px' }}>{children}</li>,
+  p: ({ children }) => <p style={{ margin: '0 0 8px', lineHeight: 1.55 }}>{children}</p>,
+  strong: ({ children }) => <strong style={{ fontWeight: 800, color: '#F8FAFC' }}>{children}</strong>,
+  em: ({ children }) => <em style={{ color: '#E2E8F0' }}>{children}</em>,
+  h1: ({ children }) => <div style={{ fontSize: '14.5px', fontWeight: 800, margin: '6px 0 6px', color: '#FDBA74' }}>{children}</div>,
+  h2: ({ children }) => <div style={{ fontSize: '14px', fontWeight: 800, margin: '6px 0 6px', color: '#FDBA74' }}>{children}</div>,
+  h3: ({ children }) => <div style={{ fontSize: '13.5px', fontWeight: 800, margin: '4px 0 6px', color: '#FDBA74' }}>{children}</div>,
+  h4: ({ children }) => <div style={{ fontSize: '13px', fontWeight: 800, margin: '4px 0 4px', color: '#FED7AA' }}>{children}</div>,
+  ul: ({ children }) => <ul style={{ margin: '0 0 8px', paddingLeft: '20px' }}>{children}</ul>,
+  ol: ({ children }) => <ol style={{ margin: '0 0 8px', paddingLeft: '20px' }}>{children}</ol>,
+  li: ({ children }) => <li style={{ marginBottom: '4px', lineHeight: 1.5 }}>{children}</li>,
+  blockquote: ({ children }) => (
+    <blockquote style={{
+      borderLeft: '3px solid #F97316',
+      margin: '6px 0 8px',
+      padding: '4px 10px',
+      background: 'rgba(249, 115, 22, 0.08)',
+      borderRadius: '0 6px 6px 0',
+      color: '#E2E8F0',
+      fontStyle: 'italic'
+    }}>
+      {children}
+    </blockquote>
+  ),
+  table: ({ children }) => (
+    <div style={{ overflowX: 'auto', margin: '6px 0 8px' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>{children}</table>
+    </div>
+  ),
+  th: ({ children }) => (
+    <th style={{ borderBottom: '1px solid rgba(255,255,255,0.2)', padding: '4px 8px', textAlign: 'left', fontWeight: 700, color: '#FDBA74' }}>
+      {children}
+    </th>
+  ),
+  td: ({ children }) => (
+    <td style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '4px 8px' }}>
+      {children}
+    </td>
+  ),
+  hr: () => <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '10px 0' }} />,
+  pre: ({ children }) => (
+    <pre style={{
+      background: 'rgba(0,0,0,0.3)',
+      borderRadius: '6px',
+      padding: '8px 10px',
+      overflowX: 'auto',
+      margin: '6px 0 8px',
+      fontSize: '12px'
+    }}>
+      {children}
+    </pre>
+  ),
   a: ({ href, children }) => (
     <a href={href} target="_blank" rel="noreferrer" style={{ color: '#FB923C', textDecoration: 'underline' }}>
       {children}
     </a>
   ),
   code: ({ children }) => (
-    <code style={{ background: 'rgba(255,255,255,0.12)', borderRadius: '4px', padding: '1px 5px', fontSize: '12px' }}>
+    <code style={{ background: 'rgba(255,255,255,0.12)', borderRadius: '4px', padding: '1px 5px', fontSize: '12px', color: '#FDBA74' }}>
       {children}
     </code>
   )
@@ -250,11 +291,17 @@ export const CivicAIAssistantModal = ({ isOpen = false, onClose }) => {
                 border: m.sender === 'user' ? 'none' : '1px solid rgba(255, 255, 255, 0.08)',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
               }}>
-                <div style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>
+                <div style={{
+                  whiteSpace: m.sender === 'bot' ? 'normal' : 'pre-wrap',
+                  overflowWrap: 'break-word',
+                  wordBreak: 'break-word'
+                }}>
                   {m.sender === 'bot' ? (
-                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
-                      {m.text}
-                    </ReactMarkdown>
+                    <div className="bot-markdown-content" style={{ '& > *:last-child': { marginBottom: 0 } }}>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+                        {m.text}
+                      </ReactMarkdown>
+                    </div>
                   ) : (
                     m.text
                   )}
