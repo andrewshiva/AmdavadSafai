@@ -198,7 +198,9 @@ export const HeaderV2 = ({
               color: '#F97316',
               fontSize: '11.5px',
               fontWeight: 800,
-              cursor: 'pointer'
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
             }}
           >
             <Sparkles size={13} color="#F97316" />

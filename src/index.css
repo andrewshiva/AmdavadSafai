@@ -3690,6 +3690,8 @@ button, select, input, textarea {
   font-weight: 700;
   cursor: pointer;
   transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .variant-karma-btn:hover {
   background: #E2E8F0;
@@ -4504,6 +4506,20 @@ button, select, input, textarea {
   border-radius: 9999px;
   font-size: 11.5px;
   font-weight: 800;
+}
+
+/* Header crowding guard: 7 nav items + control cluster at laptop widths */
+@media (max-width: 1280px) {
+  .variant-header {
+    padding: 0 16px;
+  }
+  .variant-center-nav {
+    gap: 13px;
+  }
+  .variant-header-right,
+  .header-right {
+    gap: 8px;
+  }
 }
 
 /* Responsive Overrides */
