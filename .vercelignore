@@ -7,3 +7,7 @@ backend/**
 requirements.txt
 **/requirements.txt
 render.yaml
+scratch/
+scratch/**
+tests/
+tests/**

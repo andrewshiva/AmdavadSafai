@@ -34,3 +34,8 @@ graphify-out/
 
 # Gemini
 .agents/
+
+# Testing, Scratch & Experimental Models (kept out of production)
+scratch/
+tests/
+
