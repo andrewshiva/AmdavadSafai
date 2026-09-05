@@ -18,6 +18,10 @@ officer surface.
   top-5 unresolved with coordinates + tracking refs) shaped for a weekly
   mailer cron. Email sending is NOT implemented — no provider configured;
   the endpoint is the contract the future mailer consumes.
+- Recipients are now known: `src/data/civic_centers.json` (63 AMC City Civic
+  Centers with named contact persons + phones, retrieved 2026-09-05) mapped
+  to pilot wards in `src/data/ward_contacts.json` (match quality recorded per
+  ward). Contacts rotate — re-verify before official use.
 - The public Statistics page doubles as the read-only officer view; no
   separate officer UI until an AMC consumer asks for one.
 

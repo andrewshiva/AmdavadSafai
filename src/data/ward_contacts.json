@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "source": "src/data/civic_centers.json (AMC City Civic Centers, retrieved 2026-09-05)",
+    "note": "match=direct: same/alias area name. match=contained: pilot centre verified inside the official ward polygon. match=nearest: closest listed centre, no official counterpart. Contacts rotate — re-verify before official use."
+  },
+  "mapping": {
+    "ward_01": { "center": "Mani Nagar", "match": "direct" },
+    "ward_02": { "center": "Usmanpura", "match": "nearest" },
+    "ward_03": { "center": "Jodhpur", "match": "contained" },
+    "ward_04": { "center": "Bopal Guma", "match": "direct" },
+    "ward_05": { "center": "Gota", "match": "direct" },
+    "ward_06": { "center": "Chandkheda", "match": "direct" },
+    "ward_07": { "center": "Naroda", "match": "direct" },
+    "ward_08": { "center": "Vastral", "match": "direct" },
+    "ward_09": { "center": "Nikol", "match": "direct" },
+    "ward_10": { "center": "Thaltej", "match": "direct" },
+    "ward_11": { "center": "Bodakdev", "match": "contained" },
+    "ward_12": { "center": "Ambawadi", "match": "nearest" },
+    "ward_13": { "center": "Khadia", "match": "contained" },
+    "ward_14": { "center": "Dudheswar", "match": "nearest" },
+    "ward_15": { "center": "Bapunagar", "match": "direct" },
+    "ward_16": { "center": "Sarkhej", "match": "direct" },
+    "ward_17": { "center": "Odhav", "match": "direct" },
+    "ward_18": { "center": "Isanpur", "match": "direct" },
+    "ward_19": { "center": "Ambawadi", "match": "direct" },
+    "ward_20": { "center": "Vejalpur", "match": "direct" },
+    "ward_21": { "center": "Sabarmati", "match": "direct" },
+    "ward_22": { "center": "Ranip", "match": "direct" },
+    "ward_23": { "center": "Nava Vadaj", "match": "direct" },
+    "ward_24": { "center": "Naranpura", "match": "direct" },
+    "ward_25": { "center": "Ghatlodia", "match": "direct" },
+    "ward_26": { "center": "Gota", "match": "contained" },
+    "ward_27": { "center": "Chandlodia", "match": "direct" }
+  }
+}

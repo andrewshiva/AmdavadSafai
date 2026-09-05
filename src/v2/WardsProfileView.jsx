@@ -3,7 +3,19 @@ import { useTranslation } from '../i18n/useTranslation';
 import { Download, Phone, Mail, Image, MapPin, CheckCircle2, Clock, ThumbsUp, Shield, User } from 'lucide-react';
 import wardsData from '../data/wards.json';
 import pilotConfig from '../data/pilot.json';
+import civicCenters from '../data/civic_centers.json';
+import wardContacts from '../data/ward_contacts.json';
 import { formatDateTime } from '../utils/dateTime';
+
+const CIVIC_BY_CENTER = Object.fromEntries(
+  (civicCenters?.centers || []).map((c) => [(c.center || '').trim().toLowerCase(), c])
+);
+const civicForWard = (wardId) => {
+  const m = wardContacts?.mapping?.[wardId];
+  if (!m) return null;
+  const c = CIVIC_BY_CENTER[(m.center || '').trim().toLowerCase()];
+  return c ? { ...c, match: m.match } : null;
+};
 
 const PILOT_WARD_IDS = new Set(pilotConfig?.pilot_ward_ids || []);
 const DEFAULT_WARD_ID = (pilotConfig?.pilot_ward_ids || [])[0] || wardsData[1]?.id || 'ward_02';
@@ -174,6 +186,20 @@ export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport })
                 <span>swm@ahmedabadcity.gov.in</span>
               </a>
             </div>
+
+            {(() => {
+              const civic = civicForWard(selectedWardId);
+              if (!civic) return null;
+              return (
+                <div style={{ marginTop: '12px', padding: '10px 12px', background: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: '8px', fontSize: '11px', lineHeight: 1.5, color: '#475569', textAlign: 'left', width: '100%' }}>
+                  <div style={{ fontWeight: 800, color: '#92400E', letterSpacing: '0.06em', fontSize: '10px' }}>
+                    {lang === 'gu' ? 'વોર્ડ સિવિક સેન્ટર' : lang === 'hi' ? 'वार्ड सिविक सेंटर' : 'WARD CIVIC CENTER'}
+                  </div>
+                  <div><strong>{civic.center}</strong> · {civic.address}</div>
+                  <div>{civic.contact_person} · <a href={`tel:${(civic.contact_no || '').replace(/\s/g, '')}`}>{civic.contact_no}</a> · {civic.timings}</div>
+                </div>
+              );
+            })()}
 
             <button
               type="button"

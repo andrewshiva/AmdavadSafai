@@ -348,6 +348,44 @@ def get_pilot_ward_ids():
         return set(ids)
     except Exception:
         return set()
+
+
+_civic_cache = None
+
+
+def get_civic_center(ward_id: str):
+    """AMC City Civic Center serving a pilot ward (see src/data/ward_contacts.json).
+
+    Tolerant: {} when files are absent. Contacts rotate — re-verify before
+    official use.
+    """
+    global _civic_cache
+    if _civic_cache is None:
+        _civic_cache = {}
+        try:
+            base = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src", "data"))
+            with open(os.path.join(base, "civic_centers.json"), encoding="utf-8") as f:
+                centers = {(c.get("center") or "").strip().lower(): c
+                           for c in (json.load(f) or {}).get("centers", [])}
+            with open(os.path.join(base, "ward_contacts.json"), encoding="utf-8") as f:
+                mapping = (json.load(f) or {}).get("mapping", {})
+            for wid, m in mapping.items():
+                c = centers.get(((m or {}).get("center") or "").strip().lower())
+                if not c:
+                    continue
+                _civic_cache[wid] = {
+                    "center": c.get("center", ""),
+                    "ward_no": c.get("ward_no", ""),
+                    "zone": c.get("zone", ""),
+                    "address": c.get("address", ""),
+                    "contact_person": c.get("contact_person", ""),
+                    "contact_no": c.get("contact_no", ""),
+                    "timings": c.get("timings", ""),
+                    "match": (m or {}).get("match", ""),
+                }
+        except Exception as err:
+            print(f"[Digest] Notice: civic center data unavailable ({err}).")
+    return _civic_cache.get(ward_id, {})
 def get_escalated_wards(db: Session, threshold: int = 10):
     """Wards with unresolved counts at/over threshold, worst first."""
     rows = (
@@ -398,6 +436,7 @@ def get_ward_digest(db: Session, limit_per_ward: int = 5):
             "resolved": resolved,
             "resolution_rate_pct": round((resolved / total * 100) if total > 0 else 100.0, 1),
             "mla_en": getattr(w, 'mla_en', '') or '',
+            "civic_center": get_civic_center(w.id),
             "top_unresolved": [
                 {
                     "id": r.id,

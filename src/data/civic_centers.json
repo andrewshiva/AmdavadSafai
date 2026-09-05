@@ -1,0 +1,577 @@
+{
+  "meta": {
+    "source": "https://ahmedabadcity.gov.in/StaticPage/CityCivicCenters (GetCityCivicCenterDtls endpoint)",
+    "retrieved": "2026-09-05",
+    "license": "AMC public data; contact persons rotate — re-verify before official use",
+    "count": 63
+  },
+  "centers": [
+    {
+      "zone": "Central  Zone",
+      "ward_no": "001",
+      "center": "Sardar bag",
+      "address": "Nr.Air-India Office, Opp.Sardarbag, Ahmedabad",
+      "contact_person": "Vishal Makvana",
+      "contact_no": "9274395202",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "Central  Zone",
+      "ward_no": "002",
+      "center": "Relief Road",
+      "address": "Opp. Roopam Cinema, Relief Road, Ahmedabad",
+      "contact_person": "Vishal Makvana",
+      "contact_no": "9274395202",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "Central  Zone",
+      "ward_no": "003",
+      "center": "Girdharnagar",
+      "address": "Girdharnagar Ward Office, B/H Kirti Appt., Nr. Pritampura Municipal School No. 3-4, Kanjinagar Cross Road, Girdharnagar, Ahmedabad",
+      "contact_person": "Vishal Nakiya",
+      "contact_no": "9274395062",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "Central  Zone",
+      "ward_no": "003",
+      "center": "Dudheswar",
+      "address": "Dudheshwar Sub Zonal Office, Dudheshwar Water Works Compound, Shahibaug, Ahmedabad",
+      "contact_person": "Mihir Patni",
+      "contact_no": "9274395053",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "Central  Zone",
+      "ward_no": "005",
+      "center": "Shahpur",
+      "address": "Shahpur Ward Office, Beside Bapu Smruti Kunj Road Store, Near Shahpur Darawaja, Ahmedabad",
+      "contact_person": "Mihir Patni",
+      "contact_no": "9274395053",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "Central  Zone",
+      "ward_no": "006",
+      "center": "Khadia",
+      "address": "Angadia Octroi Post, Opp. Mahipatram Ashram, Beside Raipur Gate, Khadia, Ahmedabad",
+      "contact_person": "Sonalben Parikh",
+      "contact_no": "9726416171",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "Central  Zone",
+      "ward_no": "001",
+      "center": "Jamalpur",
+      "address": "Jamalpur Sub Zonal Office, J.P. Store, Opp. AMTS Staff Quarters, Jamalpur, Ahmedabad",
+      "contact_person": "Mahesh Thoriya",
+      "contact_no": "9274395055",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "Central  Zone",
+      "ward_no": "002",
+      "center": "Dariapur",
+      "address": "Dariapur Ward Office, Nr. Kuti Masjid, Nr. Rupapari Ni pol, Dariapur Darawaja, Ahmedabad",
+      "contact_person": "Sonalben Parikh",
+      "contact_no": "9726416171",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "Central  Zone",
+      "ward_no": "009",
+      "center": "Asarwa",
+      "address": "Ren Basera, Chamanpura Circle, Chamunda Over Bridge, Ahmedabad",
+      "contact_person": "Vishal Nakiya",
+      "contact_no": "9274395062",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "Central  Zone",
+      "ward_no": "006",
+      "center": "Danapith",
+      "address": "Sardar Patel Bhavan, Danapith, Ahmedabad",
+      "contact_person": "Mahesh Thoriya",
+      "contact_no": "9274395055",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "011",
+      "center": "Virat Nagar",
+      "address": "Harubhai Mehta Bhavan, Viratnagar Char Rasta, Bapunagar, Ahmedabad",
+      "contact_person": "Hansaben Amaliyar",
+      "contact_no": "9099083077",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "012",
+      "center": "Odhav",
+      "address": "Odhav Ward Office, Near Rabari Vasahat, Beside Odhav Fire Station, Odhav, Ahmedabad",
+      "contact_person": "Hitesh Katara",
+      "contact_no": "9726416165",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "011",
+      "center": "Arbudanagar",
+      "address": "Viratnagar Subzonal Office, Nr. Dhanlaxmi Soc., Soni ni Chali, Odhav",
+      "contact_person": "Hitesh Katara",
+      "contact_no": "9726416165",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "014",
+      "center": "Amraiwadi",
+      "address": "Amraiwadi Sub Zonal Office, Near Mathur Master Cross Road, 132 Foot Ring Road, Amaraiwadi, Ahmedabad",
+      "contact_person": "Jayshreeben Chaudhari",
+      "contact_no": "9274395057",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "015",
+      "center": "Mahavirnagar",
+      "address": "Mahavirnagar Ward Office, Inside Old AMTS Depot, Opp. Ekata Appartment, Hatkeshwar-CTM Road, Ahmedabad",
+      "contact_person": "Jayshreeben Chaudhari",
+      "contact_no": "9274395057",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "016",
+      "center": "Rajpur",
+      "address": "Rajpur Sub Zonal Office, Near Chakudia Mahadev, Baliyakaka Road, Rajpur, Ahmedabad",
+      "contact_person": "Paresh Patel",
+      "contact_no": "9726416156",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "016",
+      "center": "Gomtipur",
+      "address": "Gomtipur Ward Office, Nr. Gomatipur Referal Hospital, Municipal Bal Bhavan, Opp. Gomatipur Darwaja, Ahmedabad",
+      "contact_person": "Paresh Patel",
+      "contact_no": "9726416156",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "018",
+      "center": "Nikol",
+      "address": "Nikol Ward Office, Jinal Bunglows, D-Mart Road, Nikol, Ahmedabad",
+      "contact_person": "Nilesh Chauhan",
+      "contact_no": "9274395060",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "019",
+      "center": "Vastral",
+      "address": "Vastral ward office, Flora Hotel opp. Near Reliance petrol pump, Ring road, Vastral, Ahmedabad",
+      "contact_person": "Govindbhai Bambhaniya",
+      "contact_no": "9274395046",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "East Zone",
+      "ward_no": "020",
+      "center": "Ramol-Hathijan",
+      "address": "S.P.Ring Road, Nr. Vrindavan Party Plot, Ramol-Hathijan, Ahmedabad",
+      "contact_person": "Govindbhai Bambhaniya",
+      "contact_no": "9274395046",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North West Zone",
+      "ward_no": "021",
+      "center": "Bodakdev",
+      "address": "Nr. Atithi Dining Hall, Nr. Deep Tower, Inside Shradhdha Petrol Pump, Bodakdev, Ahmedabad",
+      "contact_person": "Hitesh Patel",
+      "contact_no": "9726416103",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "North West Zone",
+      "ward_no": "022",
+      "center": "Chandlodia",
+      "address": "Chandlodiya Ward Office, Near Satva elegance, Sillvar star char rasta, Chandlodiya, Ahmedabad",
+      "contact_person": "Ravi Nayak",
+      "contact_no": "9227898602",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "North West Zone",
+      "ward_no": "023",
+      "center": "Ghatlodia",
+      "address": "Ghatlodiya Ward Office, Under Chanakya Bridge, Near Prabhat Chawk, Ghatlodiya, Ahmedabad",
+      "contact_person": "Purviben Patel",
+      "contact_no": "9726416181",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "North West Zone",
+      "ward_no": "021",
+      "center": "Memnagar",
+      "address": "Bodakdev Ward Office, Old Nagarpalika Office, Nr. Manav Mandir Temple, Memnagar Gam, Ahmedabad",
+      "contact_person": "Hitesh Patel",
+      "contact_no": "9726416103",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North West Zone",
+      "ward_no": "025",
+      "center": "Thaltej",
+      "address": "Thaltej Ward Office, Behind Ayna Complex, Zydus Road, Thaltej",
+      "contact_person": "Purviben Patel",
+      "contact_no": "9726416181",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North West Zone",
+      "ward_no": "026",
+      "center": "Gota",
+      "address": "Gota Ward Office, Nr.ADB Water Tank, Science City Road, Sola, Ahmedabad",
+      "contact_person": "Purviben Patel",
+      "contact_no": "9726416181",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North Zone",
+      "ward_no": "032",
+      "center": "Memco",
+      "address": "Rajiv Gandhi Bhavan, Naroda Road, Nr. Memco Cross Road, Ahmedabad",
+      "contact_person": "Bhavesh Prajapati",
+      "contact_no": "9726415841",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "North Zone",
+      "ward_no": "033",
+      "center": "Naroda",
+      "address": "Naroda Ward Office, Naroda Gam, Ahmedabad",
+      "contact_person": "Pratikshaben Asari",
+      "contact_no": "9274395199",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North Zone",
+      "ward_no": "033",
+      "center": "Nobalnagar",
+      "address": "Nobal Nagar ward Office, Beside EWS Quarters, Near Bhagwati Floor Mill, Opp. Naroda Police Station, Naroda, Ahmedabad",
+      "contact_person": "Pratikshaben Asari",
+      "contact_no": "9274395199",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North Zone",
+      "ward_no": "035",
+      "center": "Sardar Nagar",
+      "address": "Sardarnagar Library Bhavan, Near Sardarnagar Police Station, Sardarnagar, Ahmedabad",
+      "contact_person": "Bhalaji Rathod",
+      "contact_no": "9726416134",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North Zone",
+      "ward_no": "036",
+      "center": "Saraspur",
+      "address": "Saraspur Bal Bhavan, Near K.K. Eye Hospital, Saraspur, Ahmedabad",
+      "contact_person": "Jignesh Dabhi",
+      "contact_no": "9274395049",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North Zone",
+      "ward_no": "037",
+      "center": "Kubernagar",
+      "address": "Kubernagar Sub Zonal Office, Near C Ward Water Tank, Opp. Sardargram Railway Station, Ahmedabad",
+      "contact_person": "Bhalaji Rathod",
+      "contact_no": "9726416134",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North Zone",
+      "ward_no": "038",
+      "center": "India Colony",
+      "address": "India Colony Ward Office, Potaliya Urban Health Center Compound, Opp. Chandraprasad Desai Hall, Bapunagar, Ahmedabad",
+      "contact_person": "Jignesh Dabhi",
+      "contact_no": "9274395049",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North Zone",
+      "ward_no": "039",
+      "center": "Thakkarbapanagar",
+      "address": "Thakkarbapanagar Ward Office, Kevadia Ni Chali, Opp Bajarang Ashram, National Highway No. 8, Thakkarbapanagar, Ahmedabad",
+      "contact_person": "Jay Zalavadiya",
+      "contact_no": "9274395059",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "North Zone",
+      "ward_no": "038",
+      "center": "Bapunagar",
+      "address": "Beside Urban Health Centre, Margha Farm Road, Beside Viratnagar Cross Road, Bapunagar, Ahmedabad",
+      "contact_person": "Jay Zalavadiya",
+      "contact_no": "9274395059",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South West Zone",
+      "ward_no": "027",
+      "center": "Vejalpur",
+      "address": "Beside venus, Butbhawani mandir Road, Vejalpur, Ahmedabad",
+      "contact_person": "Nitiben Patel",
+      "contact_no": "9274395064",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South West Zone",
+      "ward_no": "028",
+      "center": "Jodhpur",
+      "address": "South West zonal office,Dr. Tushar Deshmukh Bhavan, behind Shelby hospital, opp. Karnavati club, jodhpur",
+      "contact_person": "Harshaben Jogi",
+      "contact_no": "9274395165",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South West Zone",
+      "ward_no": "029",
+      "center": "Sarkhej",
+      "address": "Sarkhej Subzonal Office, Nr. Makarba Water Tank, Opp. Makarba Police Head Quaters, Makarba.",
+      "contact_person": "Aabidali Sunasara",
+      "contact_no": "9274395045",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South West Zone",
+      "ward_no": "030",
+      "center": "Maktampura",
+      "address": "Maktampura Ward Office, Nr.APMC Market, Maktampura, Ahmedabad",
+      "contact_person": "Aabidali Sunasara",
+      "contact_no": "9274395045",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South West Zone",
+      "ward_no": "028",
+      "center": "Bopal Guma",
+      "address": "Auda City Civic Center, Opp. Sobo Center, South Bopal, Ahmedabad",
+      "contact_person": "Harshaben Jogi",
+      "contact_no": "9274395165",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South Zone",
+      "ward_no": "042",
+      "center": "Mani Nagar",
+      "address": "South Zone Zonal Office, Opp. Maninagar Fire Station, Rambaug, Maninagar, Ahmedabad",
+      "contact_person": "Jitendra Dolse",
+      "contact_no": "9726416152",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "South Zone",
+      "ward_no": "043",
+      "center": "Indrapuri (Bagefirdaush)",
+      "address": "Indrapuri Ward Office, Nr. Express High-Way, C.T.M. Cross Road, Ahmedabad",
+      "contact_person": "Palakben Panchal",
+      "contact_no": "9726416138",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "South Zone",
+      "ward_no": "044",
+      "center": "Isanpur",
+      "address": "Isanpur Ward Office, Nr. Water Tank, Opp. Vruj Hospital, Ramwadi, Isanpur, Ahmedabad",
+      "contact_person": "Manit Modi",
+      "contact_no": "9274395052",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "South Zone",
+      "ward_no": "045",
+      "center": "Kankaria",
+      "address": "Kankaria Ward Office, Near Municipal School, Near Parasi Agyari, Ved Mandir Road, Kankaria, Ahmedabad",
+      "contact_person": "Afzalkhan Pathan",
+      "contact_no": "9274395065",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South Zone",
+      "ward_no": "046",
+      "center": "Khokhra",
+      "address": "Kokhara Circle, Beside Rokadia Hanuman, Kokhara, Ahmedabad",
+      "contact_person": "Palakben Panchal",
+      "contact_no": "9726416138",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South Zone",
+      "ward_no": "044",
+      "center": "Ghodasar",
+      "address": "Ghodasar Ward Office, Rajeshwari Society, Near Chandola Lake, Ghodasar, Ahmedabad",
+      "contact_person": "Manit Modi",
+      "contact_no": "9274395052",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South Zone",
+      "ward_no": "048",
+      "center": "Vatva",
+      "address": "Vatva Ward Office, Beside Kashiba hospital,Vatva Gam, Ahmedabad",
+      "contact_person": "Pritesh Chaudhari",
+      "contact_no": "9274395056",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South Zone",
+      "ward_no": "049",
+      "center": "Lambha",
+      "address": "Lambha Ward Office, Final Plot No 56, Near Freeway Trade Centre, Narol Aslali Highway, Narol Gam, Ahmedabad",
+      "contact_person": "Pritesh Chaudhari",
+      "contact_no": "9274395056",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "South Zone",
+      "ward_no": "050",
+      "center": "Behrampura",
+      "address": "Behrampura Ward Office, Beside Torrent Power Substation, Khodiyarnagar Char Rasta, Behrampura, Ahmedabad",
+      "contact_person": "Afzalkhan Pathan",
+      "contact_no": "9274395065",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "051",
+      "center": "Law Garden",
+      "address": "Shop No.3, Ground Floor, Multilevel Parking, B/h. Navrangpura Bus Stand, Navrangpura, Ahmedabad.",
+      "contact_person": "Nitiben Patel",
+      "contact_no": "9274395064",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "052",
+      "center": "Usmanpura",
+      "address": "Dr. Ramanbhai Patel Bhavan, Usmanpura Cross Road, Ashram Road, Ahmedabad",
+      "contact_person": "Komalben Dolia",
+      "contact_no": "9726415849",
+      "timings": "9.00 am to 7.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "053",
+      "center": "Chandkheda",
+      "address": "Chandkheda Sub Zonal office, near sona cross road, Behind Podar school, New C.G. Road, Chandkheda, Ahmedabad",
+      "contact_person": "Zalakben Shridev",
+      "contact_no": "9726416101",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "054",
+      "center": "Dharnidhar",
+      "address": "K.K. Shastri Vanchnalay, Opp. Dharanidhar Derasar, Ahmedabad",
+      "contact_person": "Kaminiben Shah",
+      "contact_no": "9274395129",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "055",
+      "center": "Vasna",
+      "address": "Vasna Swimming Pool Building, Opp. Godavari Flat, Vasna, Ahmedabad",
+      "contact_person": "Kaminiben Shah",
+      "contact_no": "9274395129",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "056",
+      "center": "Nava Vadaj",
+      "address": "Nava Wadaj Sub Zonal Office, Purshottam Nagar, Opp. Parth Tower, Nava Wadaj, Ahmedabad",
+      "contact_person": "Manishaben Shah",
+      "contact_no": "9274395140",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "057",
+      "center": "Sabarmati",
+      "address": "Sabarmati Sub Zonal Office, Opp Torrent Power Station, Sabarmati, Ahmedabad",
+      "contact_person": "Zalakben Shridev",
+      "contact_no": "9726416101",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "058",
+      "center": "S P. Stadium",
+      "address": "Sardar Patel Stadium Ward Office, Near Naranpura Crossing, Near Panchsheel Society, Naranpura, Ahmedabad",
+      "contact_person": "Monaliben Patel",
+      "contact_no": "9274395133",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "051",
+      "center": "Ambawadi",
+      "address": "Gandhigram Sub Zonal Office, Near Himmatlal Park, Azad Society, Ahmedabad",
+      "contact_person": "Nitiben Patel",
+      "contact_no": "9274395064",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "060",
+      "center": "Naranpura",
+      "address": "Naranpura Ward Office, Nr. Kameshwar Mahadev Mandir, Naranpura, Ahmedabad",
+      "contact_person": "Monaliben Patel",
+      "contact_no": "9274395133",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "056",
+      "center": "RTO",
+      "address": "RTO Campus, Nr Collector Office, Subhash Bridge, Ahmedabad",
+      "contact_person": "Manishaben Shah",
+      "contact_no": "9274395140",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "062",
+      "center": "Ranip",
+      "address": "Ranip ward office, Opp. Gayatri bus station, Balolnagar char rasta, Ranip, Ahmedabad",
+      "contact_person": "Ravi Nayak",
+      "contact_no": "9227898602",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "062",
+      "center": "Kali",
+      "address": "Kali Ward Office, Kali Gam, Post Digvijay Nagar, Ahmedabad",
+      "contact_person": "Ravi Nayak",
+      "contact_no": "9227898602",
+      "timings": "9.00 am to 4.30 pm"
+    },
+    {
+      "zone": "West Zone",
+      "ward_no": "051",
+      "center": "BPSP (Building Plan Scrutiny Pool)",
+      "address": "3rd floor, Multilevel Parking, B/S Navrangpura Busstop, Navrangpura, Ahmedabad",
+      "contact_person": "Nitiben Patel",
+      "contact_no": "9274395064",
+      "timings": "10.30 am to 6.10 pm"
+    }
+  ]
+}
