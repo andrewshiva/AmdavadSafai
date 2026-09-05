@@ -21,9 +21,9 @@ import {
   Sparkles
 } from 'lucide-react';
 import { generateAmcTicketId } from '../utils/amcTickets';
-import { addKarmaPoints } from '../utils/gamification';
+import { addKarmaPoints, getOrCreateDeviceId } from '../utils/gamification';
 import wardsData from '../data/wards.json';
-import { validateAhmedabadCoords, isWithinAhmedabad, cleanseStoredReports } from '../utils/geofence';
+import { validateAhmedabadCoords, cleanseStoredReports } from '../utils/geofence';
 
 export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
   const { lang } = useTranslation();
@@ -302,7 +302,8 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
       lng: reportLng,
       upvotes: 1,
       reported_at: nowIso,
-      created_at: nowIso
+      created_at: nowIso,
+      reporter_device_id: getOrCreateDeviceId()
     };
 
     try {

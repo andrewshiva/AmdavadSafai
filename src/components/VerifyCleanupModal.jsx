@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from '../i18n/useTranslation';
-import { X, CheckCircle2, Upload, Camera, Sparkles } from 'lucide-react';
-import { addKarmaPoints } from '../utils/gamification';
+import { X, CheckCircle2, Camera, Sparkles } from 'lucide-react';
+import { holdKarmaEscrow, finalizeKarmaEscrow, getOrCreateDeviceId } from '../utils/gamification';
+
+const captureGps = () => new Promise((resolve) => {
+  if (typeof navigator === 'undefined' || !navigator.geolocation) return resolve(null);
+  const timer = setTimeout(() => resolve(null), 4000);
+  navigator.geolocation.getCurrentPosition(
+    (pos) => { clearTimeout(timer); resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }); },
+    () => { clearTimeout(timer); resolve(null); },
+    { enableHighAccuracy: true, timeout: 3500, maximumAge: 60000 }
+  );
+});
 
 export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const [photo, setPhoto] = useState(null);
   const [notes, setNotes] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [visionLoading, setVisionLoading] = useState(false);
   const [aiVisionResult, setAiVisionResult] = useState(null);
+  const [pendingNotice, setPendingNotice] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -43,15 +54,13 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
           if (res.ok) {
             const data = await res.json();
             setAiVisionResult(data);
+          } else {
+            // No verdict without a model response — community review decides.
+            setAiVisionResult(null);
           }
         } catch {
-          // Fallback simulation
-          setAiVisionResult({
-            transformation_score: 78.4,
-            is_genuine_cleanup: true,
-            verdict: 'Genuine cleanup verified (AMC SWM Standard)',
-            model: 'AI Vision'
-          });
+          // Offline: no fake verdict. Community review decides.
+          setAiVisionResult(null);
         } finally {
           setVisionLoading(false);
         }
@@ -63,25 +72,51 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    setPendingNotice(false);
+    const deviceId = getOrCreateDeviceId();
+
+    // +30 held in escrow until the report certifies (reporter or 2-device quorum)
+    holdKarmaEscrow('CLEANUP_VERIFIED', { targetId: report.id, description: `Verify Clean Spot (${report.ward_id || 'Ahmedabad'}) — pending certification` });
+
+    // Best-effort live GPS at upload time (Q7 fallback tag when unavailable)
+    const gps = await captureGps();
 
     try {
-      await fetch(`/api/reports/${report.id}/verify`, {
+      const res = await fetch(`/api/reports/${report.id}/verify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ verified_image_url: photo, notes })
+        body: JSON.stringify({
+          verified_image_url: photo,
+          notes,
+          device_id: deviceId,
+          verification_lat: gps ? gps.lat : null,
+          verification_lng: gps ? gps.lng : null
+        })
       });
-    } catch {
-      // Local fallback simulation & storage update
-      const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
-      const updated = stored.map((r) =>
-        r.id === report.id ? { ...r, status: 'resolved', verified_image_url: photo } : r
-      );
-      localStorage.setItem('amdavad_safai_local_reports', JSON.stringify(updated));
-    } finally {
-      addKarmaPoints('CLEANUP_VERIFIED', 30, { targetId: report.id, description: `Verified Clean Spot (${report.ward_id || 'Ahmedabad'})` });
+      const result = await res.json().catch(() => ({}));
+      if (res.ok && result.verification_state === 'certified') {
+        finalizeKarmaEscrow(report.id);
+        setSubmitting(false);
+        if (onSuccess) onSuccess();
+        onClose();
+        return;
+      }
+      // Pending quorum: escrow stays held, volunteer sees the count state.
+      setPendingNotice(true);
       setSubmitting(false);
-      if (onSuccess) onSuccess();
-      onClose();
+    } catch {
+      // Offline: mark locally as awaiting review, escrow stays held.
+      try {
+        const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
+        const updated = stored.map((r) =>
+          r.id === report.id ? { ...r, verification_state: 'pending_review', verified_image_url: photo } : r
+        );
+        localStorage.setItem('amdavad_safai_local_reports', JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+      setPendingNotice(true);
+      setSubmitting(false);
     }
   };
 
@@ -103,6 +138,23 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
             <p className="modal-description" style={{ fontSize: '13px', margin: 0 }}>
               {t('verify_cleanup_desc')}
             </p>
+            <p style={{ fontSize: '11.5px', margin: 0, color: '#0284C7', fontWeight: 700 }}>
+              {lang === 'gu'
+                ? 'જાહેર ડ્યુઅલ-ફોટો પુરાવો — સફાઈ પ્રમાણિત થવા માટે ૨ પુષ્ટિ જોઈએ.'
+                : lang === 'hi'
+                ? 'सार्वजनिक डुअल-फोटो प्रमाण — प्रमाणन हेतु 2 पुष्टियां आवश्यक।'
+                : 'Public dual-photo proof — 2 confirmations certify a cleanup.'}
+            </p>
+
+            {pendingNotice && (
+              <div style={{ padding: '10px 12px', borderRadius: '8px', background: 'rgba(217, 119, 6, 0.12)', border: '1px solid #FCD34D', fontSize: '12px', color: '#92400E' }}>
+                {lang === 'gu'
+                  ? 'નોંધાઈ ગયું! તમારી પુષ્ટિ ૨ માંથી ૧ છે — બીજી પુષ્ટિ કે ફરિયાદીની મંજૂરી મળતાં +૩૦ કર્મા છૂટશે.'
+                  : lang === 'hi'
+                  ? 'दर्ज! आपकी पुष्टि 2 में से 1 है — दूसरी पुष्टि या शिकायतकर्ता की स्वीकृति पर +30 कर्मा जारी होगा।'
+                  : 'Recorded! Your confirmation is 1 of 2 — +30 karma releases on a second confirmation or reporter approval.'}
+              </div>
+            )}
 
             <div className="input-group">
               <label style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-text-secondary)' }}>
@@ -174,11 +226,13 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
 
           <div className="modal-footer">
             <button type="button" className="modal-btn-secondary" onClick={onClose} disabled={submitting}>
-              {t('close')}
+              {pendingNotice ? (lang === 'gu' ? 'પૂર્ણ' : lang === 'hi' ? 'पूर्ण' : 'Done') : t('close')}
             </button>
-            <button type="submit" className="modal-btn-primary" disabled={submitting} style={{ background: '#16A34A', color: 'white', border: 'none' }}>
-              {submitting ? t('verifying') : t('mark_as_resolved')}
-            </button>
+            {!pendingNotice && (
+              <button type="submit" className="modal-btn-primary" disabled={submitting} style={{ background: '#16A34A', color: 'white', border: 'none' }}>
+                {submitting ? t('verifying') : t('mark_as_resolved')}
+              </button>
+            )}
           </div>
         </form>
       </div>

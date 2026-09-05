@@ -59,7 +59,13 @@ def apply_sqlite_migrations():
                 "amc_status": "VARCHAR DEFAULT 'Assigned to SWM Inspector'",
                 "amc_department": "VARCHAR DEFAULT 'Solid Waste Management (SWM)'",
                 "rwa_partner": "VARCHAR DEFAULT 'Ahmedabad Citizen Network'",
-                "resolved_at": "DATETIME"
+                "resolved_at": "DATETIME",
+                "verification_state": "VARCHAR DEFAULT 'unreviewed'",
+                "reporter_device_id": "VARCHAR DEFAULT ''",
+                "verifier_device_ids": "VARCHAR DEFAULT '[]'",
+                "verification_lat": "FLOAT",
+                "verification_lng": "FLOAT",
+                "location_proof": "VARCHAR DEFAULT 'none'"
             }
             for col, col_type in cols_to_add.items():
                 if col not in existing_cols:

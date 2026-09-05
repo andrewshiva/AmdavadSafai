@@ -363,6 +363,86 @@ export const addKarmaPoints = (actionType, customPoints = null, metadata = {}) =
 };
 
 /**
+ * 3b. Karma Escrow for verifications (Q9 decision).
+ * CLEANUP_VERIFIED points are held as pending until the report is certified
+ * (reporter confirm or 2-device quorum). Prevents leaderboard spam from
+ * unverified confirmations. No slashing — honest mistakes stay friendly.
+ */
+export const holdKarmaEscrow = (actionType = 'CLEANUP_VERIFIED', metadata = {}) => {
+  const current = getKarmaData();
+  const actionDef = KARMA_ACTIONS[actionType];
+  const pointsToHold = actionDef?.points || 30;
+  const targetId = metadata.targetId || metadata.reportId || 'generic';
+  const now = new Date().toISOString();
+  const escrow = Array.isArray(current.escrow) ? [...current.escrow] : [];
+
+  // Idempotent: one pending escrow per target
+  if (targetId !== 'generic' && escrow.some((e) => e.targetId === targetId && e.status === 'pending')) {
+    return { success: false, reason: 'ALREADY_PENDING', current };
+  }
+  // Already verified before: nothing to hold
+  if (actionType === 'CLEANUP_VERIFIED' && targetId !== 'generic') {
+    if (current.verifiedReports && current.verifiedReports[targetId]) {
+      return { success: false, reason: 'ALREADY_VERIFIED', current };
+    }
+    current.verifiedReports = { ...(current.verifiedReports || {}), [targetId]: now };
+  }
+
+  escrow.unshift({
+    id: `esc_${Date.now()}`,
+    action: actionType,
+    points: pointsToHold,
+    targetId,
+    timestamp: now,
+    status: 'pending',
+    description: metadata.description || actionDef?.description || actionType
+  });
+  const updated = { ...current, escrow: escrow.slice(0, 30) };
+  saveKarmaData(updated);
+  return { success: true, pointsHeld: pointsToHold, current: updated };
+};
+
+/**
+ * Finalize pending escrow for a target (called when its report certifies).
+ */
+export const finalizeKarmaEscrow = (targetId) => {
+  const current = getKarmaData();
+  const escrow = Array.isArray(current.escrow) ? [...current.escrow] : [];
+  let released = 0;
+  const remaining = escrow.map((e) => {
+    if (e.targetId === targetId && e.status === 'pending') {
+      released += e.points;
+      return { ...e, status: 'released' };
+    }
+    return e;
+  });
+  if (released === 0) return { success: false, reason: 'NOTHING_PENDING', current };
+  const releasedEntries = remaining
+    .filter((e) => e.targetId === targetId && e.status === 'released')
+    .map((e) => ({ id: e.id, action: e.action, points: e.points, targetId: e.targetId, timestamp: e.timestamp, description: e.description }));
+  const updated = {
+    ...current,
+    points: current.points + released,
+    escrow: remaining.slice(0, 30),
+    history: [...releasedEntries, ...(current.history || [])].slice(0, 30)
+  };
+  saveKarmaData(updated);
+  return { success: true, pointsReleased: released, totalPoints: updated.points, current: updated };
+};
+
+/**
+ * Pending (unreleased) escrow entries for display.
+ */
+export const getPendingEscrow = () => {
+  try {
+    const current = getKarmaData();
+    return (current.escrow || []).filter((e) => e.status === 'pending');
+  } catch {
+    return [];
+  }
+};
+
+/**
  * 4. Badge Progression Calculations
  */
 export const getCurrentBadge = (points) => {

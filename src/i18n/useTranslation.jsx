@@ -7,8 +7,8 @@ import hiTranslations from './hi.json';
 const TranslationContext = window.__TranslationContext || createContext({
   t: (key) => key,
   lang: 'gu',
-  setLanguage: () => {},
-  toggleLang: () => {}
+  setLanguage: () => { },
+  toggleLang: () => { }
 });
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   window.__TranslationContext = TranslationContext;
@@ -67,8 +67,8 @@ export const useTranslation = () => {
     return {
       t: (key) => key,
       lang: 'gu',
-      setLanguage: () => {},
-      toggleLang: () => {}
+      setLanguage: () => { },
+      toggleLang: () => { }
     };
   }
   return context;

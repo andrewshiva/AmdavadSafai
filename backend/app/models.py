@@ -54,6 +54,14 @@ class Report(Base):
     reported_at = Column(DateTime, default=datetime.datetime.utcnow)
     resolved_at = Column(DateTime, nullable=True)
 
+    # Community verification (see ADR-0007/0008 round-2 decisions)
+    verification_state = Column(String, default="unreviewed", nullable=False)  # unreviewed | pending_review | certified | disputed
+    reporter_device_id = Column(String, nullable=True, default="")
+    verifier_device_ids = Column(String, nullable=True, default="[]")  # JSON list of distinct device ids
+    verification_lat = Column(Float, nullable=True)
+    verification_lng = Column(Float, nullable=True)
+    location_proof = Column(String, nullable=True, default="none")  # gps | none
+
     ward = relationship("Ward", back_populates="reports")
 
 class CleanupEvent(Base):

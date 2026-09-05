@@ -145,7 +145,14 @@ def upvote_report(report_id: str, db: Session = Depends(get_db)):
 
 @app.post("/api/reports/{report_id}/verify", response_model=schemas.ReportOut)
 def verify_cleanup(report_id: str, payload: schemas.VerifyCleanupRequest, db: Session = Depends(get_db)):
-    report = crud.verify_report_cleanup(db=db, report_id=report_id, verified_image_url=payload.verified_image_url)
+    report = crud.verify_report_cleanup(
+        db=db,
+        report_id=report_id,
+        verified_image_url=payload.verified_image_url,
+        device_id=payload.device_id,
+        verification_lat=payload.verification_lat,
+        verification_lng=payload.verification_lng
+    )
     if not report:
         raise HTTPException(status_code=404, detail="Report not found")
     return report

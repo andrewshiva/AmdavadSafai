@@ -35,6 +35,7 @@ class ReportBase(BaseModel):
     flag_reason: Optional[str] = None
     lat: float
     lng: float
+    reporter_device_id: Optional[str] = ""
 
 class ReportCreate(ReportBase):
     pass
@@ -43,6 +44,11 @@ class ReportOut(ReportBase):
     id: str
     reported_at: datetime.datetime
     resolved_at: Optional[datetime.datetime] = None
+    verification_state: str = "unreviewed"
+    verifier_count: int = 0
+    verification_lat: Optional[float] = None
+    verification_lng: Optional[float] = None
+    location_proof: str = "none"
 
     class Config:
         from_attributes = True
@@ -54,6 +60,9 @@ class UpvoteOut(BaseModel):
 class VerifyCleanupRequest(BaseModel):
     verified_image_url: Optional[str] = None
     notes: Optional[str] = None
+    device_id: Optional[str] = None
+    verification_lat: Optional[float] = None
+    verification_lng: Optional[float] = None
 
 class FlagReportRequest(BaseModel):
     reason: str

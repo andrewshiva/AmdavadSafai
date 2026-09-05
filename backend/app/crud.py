@@ -6,6 +6,7 @@ import json
 import os
 import uuid
 import random
+import datetime
 import models, schemas, geojson_data
 from image_storage import save_image_local
 
@@ -129,11 +130,13 @@ def create_report(db: Session, report: schemas.ReportCreate):
         upvotes=0,
         flagged=0,
         lat=report.lat,
-        lng=report.lng
+        lng=report.lng,
+        reporter_device_id=report.reporter_device_id or ""
     )
     db.add(db_report)
     db.commit()
     db.refresh(db_report)
+    db_report.verifier_count = 0
     return db_report
 
 def upvote_report(db: Session, report_id: str):
@@ -145,18 +148,68 @@ def upvote_report(db: Session, report_id: str):
     db.refresh(report)
     return report
 
-def verify_report_cleanup(db: Session, report_id: str, verified_image_url: str = None):
+def _haversine_m(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+    earth_radius_m = 6_371_000
+    delta_lat = radians(lat2 - lat1)
+    delta_lng = radians(lng2 - lng1)
+    a = (
+        sin(delta_lat / 2) ** 2
+        + cos(radians(lat1)) * cos(radians(lat2)) * sin(delta_lng / 2) ** 2
+    )
+    return 2 * earth_radius_m * asin(sqrt(a))
+
+
+def verify_report_cleanup(db: Session, report_id: str, verified_image_url: str = None,
+                          device_id: str = None, verification_lat: float = None,
+                          verification_lng: float = None):
+    """Community quorum certification (never AI auto-close).
+
+    - Records the verifier device (distinct ids only).
+    - GPS proof: verification coords within 200 m of the report pin earn
+      location_proof='gps', else 'none' (tag, not a block).
+    - Certifies when the ORIGINAL reporter confirms OR any 2 distinct
+      devices confirm; otherwise state goes pending_review and the report
+      stays unresolved.
+    """
     report = get_report_by_id(db, report_id)
     if not report:
         return None
-    report.status = "resolved"
-    report.amc_status = "Resolved by AMC SWM"
-    report.resolved_at = datetime.datetime.utcnow()
+
+    try:
+        known_ids = json.loads(report.verifier_device_ids or "[]")
+    except (TypeError, ValueError):
+        known_ids = []
+    if device_id and device_id not in known_ids:
+        known_ids.append(device_id)
+
+    proof = "none"
+    if verification_lat is not None and verification_lng is not None:
+        try:
+            if _haversine_m(report.lat, report.lng, verification_lat, verification_lng) <= 200:
+                proof = "gps"
+        except (TypeError, ValueError):
+            proof = "none"
+
     if verified_image_url:
         saved_url = save_image_local(verified_image_url)
         report.verified_image_url = saved_url
+    report.verifier_device_ids = json.dumps(known_ids)
+    report.verification_lat = verification_lat
+    report.verification_lng = verification_lng
+    report.location_proof = proof
+
+    reporter = (report.reporter_device_id or "")
+    certified = bool(device_id and reporter and device_id == reporter) or len(known_ids) >= 2
+    if certified:
+        report.status = "resolved"
+        report.verification_state = "certified"
+        report.amc_status = "Resolved — community certified"
+        report.resolved_at = datetime.datetime.utcnow()
+    else:
+        report.verification_state = "pending_review"
     db.commit()
     db.refresh(report)
+    report.verifier_count = len(known_ids)
     return report
 
 def flag_report(db: Session, report_id: str, reason: str):
@@ -174,6 +227,7 @@ def dispute_report_resolution(db: Session, report_id: str, dispute_image_url: st
     if not report:
         return None
     report.status = "unresolved"
+    report.verification_state = "disputed"
     report.amc_status = "Re-Opened by Citizen Audit (CCRS Escalated)"
     report.flag_reason = reason or "Citizen disputed false cleanup resolution"
     report.flagged = (report.flagged or 0) + 1

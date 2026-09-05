@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from '../i18n/useTranslation';
 import { X, AlertCircle, MapPin, CheckCircle2, LocateFixed, Camera, Tag, Clock, Sparkles } from 'lucide-react';
-import { addKarmaPoints } from '../utils/gamification';
+import { addKarmaPoints, getOrCreateDeviceId } from '../utils/gamification';
 import { generateAmcTicketId } from '../utils/amcTickets';
 import { formatDateTime } from '../utils/dateTime';
 import { validateAhmedabadCoords } from '../utils/geofence';
@@ -165,7 +165,8 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
           amc_department: 'Solid Waste Management (SWM)',
           image_url: photo,
           lat: parseFloat(lat),
-          lng: parseFloat(lng)
+          lng: parseFloat(lng),
+          reporter_device_id: getOrCreateDeviceId()
         })
       });
 
@@ -219,7 +220,8 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
         lat: parseFloat(lat),
         lng: parseFloat(lng),
         reported_at: nowIso,
-        created_at: nowIso
+        created_at: nowIso,
+        reporter_device_id: getOrCreateDeviceId()
       };
       const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
       localStorage.setItem('amdavad_safai_local_reports', JSON.stringify([newReport, ...stored]));
