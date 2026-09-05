@@ -115,12 +115,10 @@ export const AppV2 = ({ onSwitchVersion }) => {
     setTimeout(() => setToastMsg(''), 3500);
   };
 
-  const handleRequireLoginOrReport = () => {
-    if (!currentUser) {
-      setIsLoginOpen(true);
-    } else {
-      setActiveView('report');
-    }
+  // Reporting and civic actions are anonymous — no login required (ADR-0004).
+  // Sign-in remains only as an optional identity for karma/badges.
+  const handleOpenReport = () => {
+    setActiveView('report');
   };
 
   return (
@@ -160,13 +158,13 @@ export const AppV2 = ({ onSwitchVersion }) => {
           <DashboardView
             reports={filteredReports}
             onSelectReport={(report) => setSelectedReport(report)}
-            onOpenReport={handleRequireLoginOrReport}
+            onOpenReport={handleOpenReport}
           />
         ) : activeView === 'about' ? (
           <AboutSection
             reports={filteredReports}
             currentUser={currentUser}
-            onOpenReport={handleRequireLoginOrReport}
+            onOpenReport={handleOpenReport}
             onOpenEvents={() => setIsEventsOpen(true)}
             onToggleStats={() => setActiveView('stats')}
             onOpenVideo={() => setIsVideoOpen(true)}
@@ -176,30 +174,25 @@ export const AppV2 = ({ onSwitchVersion }) => {
             reports={filteredReports}
             onSelectReport={(report) => setSelectedReport(report)}
             onViewReceipt={(report) => setSelectedReceipt(report)}
-            onOpenReport={handleRequireLoginOrReport}
+            onOpenReport={handleOpenReport}
           />
         ) : activeView === 'wards' ? (
           <WardsProfileView
             reports={filteredReports}
             onSelectReport={(report) => setSelectedReport(report)}
-            onOpenReport={handleRequireLoginOrReport}
+            onOpenReport={handleOpenReport}
           />
         ) : activeView === 'drives' ? (
           <CleanupDrivesView
             onOpenCreateEvent={() => {
-              if (!currentUser) {
-                setIsLoginOpen(true);
-              } else {
-                setIsCreateEventOpen(true);
-              }
+              setIsCreateEventOpen(true);
             }}
-            onRequireLogin={() => setIsLoginOpen(true)}
             onNavigateToImpact={() => setActiveView('impact')}
           />
         ) : activeView === 'impact' ? (
           <ImpactGalleryView
             onOpenEvents={() => setActiveView('drives')}
-            onOpenReport={handleRequireLoginOrReport}
+            onOpenReport={handleOpenReport}
           />
         ) : activeView === 'stats' ? (
           <StatisticsView reports={filteredReports} />
@@ -207,7 +200,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
           <DashboardView
             reports={filteredReports}
             onSelectReport={(report) => setSelectedReport(report)}
-            onOpenReport={handleRequireLoginOrReport}
+            onOpenReport={handleOpenReport}
           />
         )}
       </main>
@@ -237,27 +230,15 @@ export const AppV2 = ({ onSwitchVersion }) => {
           }}
           onVerify={(report) => {
             setSelectedReport(null);
-            if (!currentUser) {
-              setIsLoginOpen(true);
-            } else {
-              setVerifyingReport(report);
-            }
+            setVerifyingReport(report);
           }}
           onFlag={(report) => {
             setSelectedReport(null);
-            if (!currentUser) {
-              setIsLoginOpen(true);
-            } else {
-              setFlaggingReport(report);
-            }
+            setFlaggingReport(report);
           }}
           onDispute={(report) => {
             setSelectedReport(null);
-            if (!currentUser) {
-              setIsLoginOpen(true);
-            } else {
-              setDisputingReport(report);
-            }
+            setDisputingReport(report);
           }}
           onShareCard={(report) => {
             setShareCardTarget(report);
@@ -273,11 +254,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
           onClose={() => setSelectedReceipt(null)}
           onDispute={(report) => {
             setSelectedReceipt(null);
-            if (!currentUser) {
-              setIsLoginOpen(true);
-            } else {
-              setDisputingReport(report);
-            }
+            setDisputingReport(report);
           }}
           onShareCard={(report) => {
             setShareCardTarget(report);
@@ -329,14 +306,10 @@ export const AppV2 = ({ onSwitchVersion }) => {
       <EventsModal
         isOpen={isEventsOpen}
         onClose={() => setIsEventsOpen(false)}
-        onOpenCreate={() => {
-          setIsEventsOpen(false);
-          if (!currentUser) {
-            setIsLoginOpen(true);
-          } else {
+          onOpenCreate={() => {
+            setIsEventsOpen(false);
             setIsCreateEventOpen(true);
-          }
-        }}
+          }}
         onShareEvent={(event) => {
           setShareCardTarget(event);
         }}

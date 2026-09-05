@@ -104,16 +104,16 @@ export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggl
       ? 'अहमदाबाद सफाई नागरिकों और अहमदाबाद नगर निगम (AMC) के बीच पारदर्शिता बढ़ाने वाला एक ओपन-सोर्स नागरिक मंच है। हमारा लक्ष्य अहमदाबाद को भारत का सबसे स्वच्छ शहर बनाना है।'
       : 'Ahmedabad Safai is an open civic technology platform built to create direct accountability between citizens and the Ahmedabad Municipal Corporation (AMC). Our goal is to make Ahmedabad the cleanest, most responsive smart city in India.',
     about_p2: lang === 'gu'
-      ? 'AMC કંટ્રોલ રૂમ (૧૫૫૩૦૩) અને સ્વચ્છ ભારત મિશન સાથે સંકલિત થઈને, અમે દરેક વોર્ડમાં કચરાના હોટસ્પોટ્સ દૂર કરીએ છીએ અને ચૂંટાયેલા કોર્પોરેટરોની કામગીરી જાહેર રાખીએ છીએ.'
+      ? 'AMC હેલ્પલાઇન (૧૫૫૩૦૩) પર સત્તાવાર ફરિયાદની સાથે, અમે દરેક વોર્ડમાં કચરાના હોટસ્પોટ્સનો સ્વતંત્ર નાગરિક રેકોર્ડ રાખીએ છીએ અને ચૂંટાયેલા કોર્પોરેટરોની કામગીરી જાહેર રાખીએ છીએ.'
       : lang === 'hi'
-      ? 'AMC कंट्रोल रूम (155303) और स्वच्छ भारत मिशन के साथ एकीकृत होकर, हम प्रत्येक वार्ड में कचरे के हॉटस्पॉट दूर करते हैं और वार्ड पार्षदों का प्रदर्शन सार्वजनिक रखते हैं।'
-      : 'Integrated directly with the AMC Central Control & Redressal System (155303) and Swachh Bharat guidelines, we maintain full public visibility on ward-level resolution times, corporator performance, and community cleanliness drives.',
+      ? 'AMC हेल्पलाइन (155303) पर आधिकारिक शिकायत के साथ-साथ, हम प्रत्येक वार्ड में कचरा हॉटस्पॉट का स्वतंत्र नागरिक रिकॉर्ड रखते हैं और वार्ड पार्षदों का प्रदर्शन सार्वजनिक रखते हैं।'
+      : 'An independent citizen record of ward-level reports, corporator visibility, and community cleanup drives. For official redressal, citizens file with the AMC Central Control & Redressal System (155303).',
 
     // Governance Badges
     gov_sla_title: lang === 'gu' ? 'નાગરિક અધિકારપત્ર (Citizen Charter)' : lang === 'hi' ? 'नागरिक अधिकार पत्र' : 'CITIZEN CHARTER SLA',
     gov_sla_desc: lang === 'gu' ? 'કચરો: ૧૨ કલાક · મૃત પશુ: ૨૪ કલાક · ગટર: ૪૮ કલાક' : lang === 'hi' ? 'कचरा: 12 घंटे · मृत पशु: 24 घंटे · नाली: 48 घंटे' : 'Garbage: 12h · Dead Animal: 24h · Drainage: 48h resolution SLA',
-    gov_ccrs_title: lang === 'gu' ? 'ઓટોમેટેડ AMC ટિકિટિંગ' : lang === 'hi' ? 'स्वचालित AMC टिकटिंग' : 'AUTOMATED AMC TICKETING',
-    gov_ccrs_desc: lang === 'gu' ? 'દરેક ફરિયાદને અધિકૃત AMC ફરિયાદ નંબર ફાળવાય છે.' : lang === 'hi' ? 'प्रत्येक शिकायत को आधिकारिक AMC शिकायत संख्या दी जाती है।' : 'Every complaint auto-generates an AMC CCRS reference number.',
+    gov_ccrs_title: lang === 'gu' ? 'સામુદાયિક ટ્રેકિંગ' : lang === 'hi' ? 'सामुदायिक ट्रैकिंग' : 'COMMUNITY TRACKING',
+    gov_ccrs_desc: lang === 'gu' ? 'દરેક ફરિયાદને સામુદાયિક ટ્રેકિંગ સંદર્ભ મળે છે; સત્તાવાર ફરિયાદ ૧૫૫૩૦૩ પર.' : lang === 'hi' ? 'प्रत्येक शिकायत को सामुदायिक ट्रैकिंग संदर्भ मिलता है; आधिकारिक शिकायत 155303 पर।' : 'Every complaint gets a community tracking ref; official filing via 155303.',
 
     // Leadership Team
     team_tag: lang === 'gu' ? 'સંચાલન મંડળ' : lang === 'hi' ? 'प्रबंधन टीम' : 'LEADERSHIP TEAM',

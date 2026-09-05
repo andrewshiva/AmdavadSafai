@@ -238,7 +238,7 @@ def verify_cleanup_vision(before_url: str, after_url: str) -> Dict[str, Any]:
         "transformation_score": 78.4,
         "similarity": 0.216,
         "is_genuine_cleanup": True,
-        "verdict": "Verified clean spot transformation (AMC SWM Certified)",
+        "verdict": "Verified clean spot transformation (community-verified)",
         "model": "AmdavadSafai Vision AI",
         "status": "success"
     }
@@ -246,9 +246,11 @@ def verify_cleanup_vision(before_url: str, after_url: str) -> Dict[str, Any]:
 
 # --- Core Feature 3: Conversational Civic AI Assistant ---
 
-CIVIC_SYSTEM_PROMPT = """You are AmdavadSafai AI, an intelligent civic assistant for Ahmedabad Municipal Corporation (AMC).
+CIVIC_SYSTEM_PROMPT = """You are AmdavadSafai AI, an independent civic assistant for Ahmedabad.
+You help citizens document garbage issues publicly, track community cleanup records,
+and direct official filing to AMC CCRS 311 (Call 155303 or WhatsApp +91 75678 55303).
 You assist citizens with:
-1. AMC CCRS 311 complaint registration and tracking SLA (Citizen charter turnaround < 48 hours).
+1. Documenting reports with community tracking references (not official AMC tickets).
 2. Solid Waste Management (SWM) ward guidelines, segregated door-to-door waste collection, and ban on single-use plastics.
 3. Ward Corporators, MLAs, and escalation channels (Call 155303 or WhatsApp +91 75678 55303).
 4. Sunday Community Cleanup Drives (સફાઈ અભિયાન) and Safai Karma rewards.
@@ -273,41 +275,41 @@ def chat_civic_assistant(message: str, history: Optional[List[Dict[str, str]]] =
     ]):
         if is_gu:
             reply = (
-                "**અમદાવાદ સફાઈ (AmdavadSafai)** એ અમદાવાદ મ્યુનિસિપલ કોર્પોરેશન (AMC) સાથે મળીને નાગરિકો માટે બનાવેલ સ્માર્ટ સ્વચ્છતા પોર્ટલ છે.\n\n"
+                "**અમદાવાદ સફાઈ (AmdavadSafai)** એ નાગરિકો માટે બનાવેલ સ્વતંત્ર સ્વચ્છતા પોર્ટલ છે (AMC સાથે સત્તાવાર ભાગીદારી નથી).\n\n"
                 "### 🌟 આ એપની મુખ્ય સેવાઓ:\n"
-                "1. 📍 **લાઈવ વોર્ડ મેપ**: અમદાવાદના તમામ 48 વોર્ડમાં કચરાના હોટસ્પોટ્સ અને સ્વચ્છતા સ્કોર (0-100) જુઓ.\n"
-                "2. 📸 **ઝડપી ફરિયાદ નોંધણી (CCRS 311)**: કચરાનો ફોટો પાડીને AMC SWM ટીમને સીધી ફરિયાદ મોકલો.\n"
-                "3. ⏱️ **48 કલાક નિકાલ ગેરંટી**: AMC સિટિઝન ચાર્ટર હેઠળ 24 થી 48 કલાકમાં સફાઈની ખાતરી.\n"
-                "4. 🤖 **AI વિઝન વેરિફિકેશન**: સફાઈ પહેલાં અને પછીના ફોટા ચકાસીને સત્તાવાર AMC ડિજિટલ રસીદ મેળવો.\n"
+                "1. 📍 **લાઈવ વોર્ડ મેપ**: પાયલટ વોર્ડમાં કચરાના હોટસ્પોટ્સ અને સ્વચ્છતા સ્કોર (0-100) જુઓ.\n"
+                "2. 📸 **ઝડપી ફરિયાદ નોંધણી**: કચરાનો ફોટો પાડીને સામુદાયિક ટ્રેકિંગ સંદર્ભ સાથે જાહેર રેકોર્ડ બનાવો. સત્તાવાર ફરિયાદ AMC CCRS ૩૧૧ (૧૫૫૩૦૩) પર નોંધાવો.\n"
+                "3. ⏱️ **48 કલાક લક્ષ્ય**: સત્તાવાર સફાઈ AMC કરે છે — અમારું કામ જાહેર હિસાબ ઊભો કરવાનો છે.\n"
+                "4. 🤖 **AI વિઝન વેરિફિકેશન**: સફાઈ પહેલાં અને પછીના ફોટા ચકાસીને સામુદાયિક સફાઈ રેકોર્ડ મેળવો.\n"
                 "5. 🏆 **સફાઈ કર્મા પોઈન્ટ્સ**: ફરિયાદો નોંધવા અને ઉકેલવા બદલ પોઈન્ટ્સ અને બેજ મેળવો.\n"
                 "6. 🤝 **રવિવાર સફાઈ અભિયાન**: સાબરમતી રિવરફ્રન્ટ, કાંકરિયા કે તમારી સોસાયટીમાં સ્વયંસેવક સફાઈ ડ્રાઈવમાં જોડાઓ.\n"
-                "7. 🏛️ **કોર્પોરેટર અને MLA વિગતો**: તમારા વોર્ડના 4 ચૂંટાયેલા કોર્પોરેટરો અને ધારાસભ્યની સંપર્ક વિગતો મેળવો.\n\n"
+                "7. 🏛️ **કોર્પોરેટર અને MLA વિગતો**: તમારા વોર્ડના કોર્પોરેટર અને ધારાસભ્યની જાહેર વિગતો જુઓ.\n\n"
                 "🤝 *આપણું શહેર, આપણી જવાબદારી!*"
             )
         elif is_hi:
             reply = (
-                "**अहमदाबाद सफाई (AmdavadSafai)** एएमसी (AMC) के सहयोग से नागरिकों के लिए बनाया गया एक आधुनिक नागरिक स्वच्छता मंच है।\n\n"
+                "**अहमदाबाद सफाई (AmdavadSafai)** नागरिकों के लिए बनाया गया एक स्वतंत्र नागरिक स्वच्छता मंच है (AMC के साथ आधिकारिक भागीदारी नहीं है)।\n\n"
                 "### 🌟 इस ऐप की मुख्य सुविधाएं:\n"
-                "1. 📍 **लाइव वार्ड मैप**: अहमदाबाद के सभी 48 वार्डों में कचरा हॉटस्पॉट और स्वच्छता स्कोर देखें।\n"
-                "2. 📸 **त्वरित शिकायत पंजीकरण (CCRS 311)**: कचरे का फोटो खींचकर सीधे AMC सॉलिड वेस्ट मैनेजमेंट टीम को भेजें।\n"
-                "3. ⏱️ **48 घंटे में समाधान**: AMC नागरिक चार्टर के तहत 24 से 48 घंटे में समाधान की गारंटी।\n"
-                "4. 🤖 **AI विजन सत्यापन**: सफाई से पहले और बाद की तस्वीरों का सत्यापन और डिजिटल समाधान प्रमाण पत्र।\n"
+                "1. 📍 **लाइव वार्ड मैप**: पायलट वार्डों में कचरा हॉटस्पॉट और स्वच्छता स्कोर देखें।\n"
+                "2. 📸 **त्वरित शिकायत पंजीकरण**: कचरे का फोटो खींचकर सामुदायिक ट्रैकिंग संदर्भ के साथ सार्वजनिक रिकॉर्ड बनाएं। आधिकारिक शिकायत AMC CCRS 311 (155303) पर दर्ज करें।\n"
+                "3. ⏱️ **48 घंटे का लक्ष्य**: आधिकारिक सफाई AMC करता है — हमारा काम सार्वजनिक हिसाब बनाना है।\n"
+                "4. 🤖 **AI विजन सत्यापन**: सफाई से पहले और बाद की तस्वीरों का सत्यापन और सामुदायिक सफाई रिकॉर्ड।\n"
                 "5. 🏆 **सफाई कर्मा व लीडरबोर्ड**: शिकायत समाधान और सफाई अभियानों से पॉइंट्स और बैज अर्जित करें।\n"
                 "6. 🤝 **रविवार सफाई अभियान**: साबरमती रिवरफ्रंट और शहरभर के सार्वजनिक स्थानों पर नागरिक सफाई अभियानों में भाग लें।\n"
-                "7. 🏛️ **वार्ड पार्षद विवरण**: अपने वार्ड के 4 पार्षदों और विधायक से सीधे संपर्क करें।\n\n"
+                "7. 🏛️ **वार्ड पार्षद विवरण**: अपने वार्ड के पार्षद और विधायक की सार्वजनिक जानकारी देखें।\n\n"
                 "🤝 *આપણું શહેર, આપણી જવાબદારી!*"
             )
         else:
             reply = (
-                "**AmdavadSafai (અમદાવાદ સફાઈ)** is Ahmedabad's citizen-driven civic cleanliness platform built in partnership with the Ahmedabad Municipal Corporation (AMC).\n\n"
+                "**AmdavadSafai (અમદાવાદ સફાઈ)** is Ahmedabad's independent citizen-driven civic cleanliness platform (no official AMC partnership).\n\n"
                 "### 🌟 What You Can Do on AmdavadSafai:\n"
-                "1. 📍 **Interactive Ward Map**: View live garbage hotspots, community cleanliness scores (0–100), and boundary lines across all **48 wards of Ahmedabad**.\n"
-                "2. 📸 **Instant Garbage Reporting (CCRS 311)**: Click **'+ Report Garbage'** to snap a photo, auto-detect your location with GPS, and route directly to AMC Solid Waste Management (SWM).\n"
-                "3. ⏱️ **48-Hour Resolution SLA**: Official turnaround guarantee! Under the AMC Citizen Charter, standard waste hotspots are cleared within **24 to 48 hours**.\n"
-                "4. 🤖 **AI Vision Verification & Receipts**: When cleared, our AI compares before-and-after photos to verify genuine cleanup, issuing an official **AMC Resolution Receipt & Cleanliness Certificate**.\n"
-                "5. 🏆 **Safai Karma & Leaderboards**: Earn points (+10 for reporting, +25 for cleanups, +50 for Sunday drives) and unlock civic badges (*Swachhata Warrior, Spotless Guardian*).\n"
+                "1. 📍 **Interactive Ward Map**: View live garbage hotspots and community cleanliness scores (0–100) across pilot wards.\n"
+                "2. 📸 **Instant Garbage Reporting**: Click **'+ Report Garbage'** to snap a photo, auto-detect your location with GPS, and create a public community record with a tracking reference. File officially via AMC CCRS 311 (155303).\n"
+                "3. ⏱️ **48-Hour Target**: Official cleanup is AMC's job — ours is public accountability.\n"
+                "4. 🤖 **AI Vision Verification & Records**: When cleared, our AI compares before-and-after photos to verify genuine cleanup, issuing a community cleanup record.\n"
+                "5. 🏆 **Safai Karma & Leaderboards**: Earn points (+15 for reporting, +30 for verification, +50 for Sunday drives) and unlock civic badges.\n"
                 "6. 🤝 **Sunday Cleanup Drives (સફાઈ અભિયાન)**: Join or organize morning community cleanup drives at Sabarmati Riverfront, Kankaria Lake, and neighborhood spots.\n"
-                "7. 🏛️ **Ward Governance Transparency**: Look up your 4 elected Municipal Corporators, MLA, and SWM Sanitary Inspectors with direct contact numbers.\n\n"
+                "7. 🏛️ **Ward Governance Transparency**: Look up your ward Corporator and MLA public details.\n\n"
                 "🤝 *આપણું શહેર, આપણી જવાબદારી — Our City, Our Responsibility!*"
             )
         return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
@@ -340,7 +342,7 @@ def chat_civic_assistant(message: str, history: Optional[List[Dict[str, str]]] =
             "- **Official WhatsApp Grievance Bot**: **+91 75678 55303**\n"
             "- **AMC Central Office**: Mahanagar Seva Sadan, Danapith, Ahmedabad - 380001\n"
             "- **Emergency Control Room**: 079-25391811 / 25391812\n\n"
-            "All registered complaints generate an official AMC CCRS ticket number with a guaranteed 48-hour resolution SLA."
+            "All reports get an AmdavadSafai community tracking reference (not an official AMC ticket). For official redressal with a 48-hour target, file via AMC CCRS 311 (155303)."
         )
         return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
 
@@ -380,13 +382,13 @@ def chat_civic_assistant(message: str, history: Optional[List[Dict[str, str]]] =
         "leaderboard", "gamification", "receipt", "certificate", "કર્મા", "कर्मा"
     ]):
         reply = (
-            "### 🏆 Safai Karma & Official Cleanliness Receipts:\n\n"
+            "### 🏆 Safai Karma & Community Cleanup Records:\n\n"
             "AmdavadSafai rewards every verified citizen action with **Safai Karma points**:\n"
-            "- **Report a genuine garbage hotspot**: **+10 Karma**\n"
-            "- **Verify cleanup with before/after photos**: **+25 Karma** + Official AMC Resolution Receipt\n"
-            "- **Participate in a Sunday Cleanup Drive**: **+50 Karma**\n"
-            "- **Validate or resolve community disputes**: **+15 Karma**\n\n"
-            "📜 *Resolution Receipts include a cryptographic QR code verifying municipal SWM team compliance, and badges are displayed on your citizen profile!*"
+            "- **Report a genuine garbage hotspot**: **+15 Karma**\n"
+            "- **Verify cleanup with before/after photos**: **+30 Karma** + Community Cleanup Record\n"
+            "- **Join a Sunday Cleanup Drive**: **+50 Karma** (organize one: **+100 Karma**)\n"
+            "- **File a cleanup dispute with photo proof**: **+15 Karma**\n\n"
+            "📜 *Resolved reports earn a printable Community Cleanup Record with before/after photo evidence, and badges are displayed on your citizen profile!*"
         )
         return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
 

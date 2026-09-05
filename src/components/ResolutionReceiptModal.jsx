@@ -42,7 +42,7 @@ export const ResolutionReceiptModal = ({
   const corporatorName = ward ? (lang === 'gu' ? ward.corporator_gu : ward.corporator_en) : 'Ward Corporator';
 
   const ticketId = getAmcTicketId(report);
-  const receiptNumber = `AMC-REC-2026-${ticketId.split('-').pop() || '90412'}`;
+  const receiptNumber = `AS-REC-2026-${ticketId.split('-').pop() || '90412'}`;
   const reportedTime = report.created_at || report.reported_at;
   const resolvedTime = report.resolved_at || new Date().toISOString();
 
@@ -73,14 +73,14 @@ export const ResolutionReceiptModal = ({
   };
 
   const handleWhatsAppShare = () => {
-    const shareText = `📜 *Official AMC Resolution Receipt & Cleanliness Certificate*\n\n` +
-      `🏛️ *Ahmedabad Municipal Corporation (AMC)*\n` +
-      `🎫 *CCRS Ticket:* ${ticketId}\n` +
-      `🧾 *Receipt No:* ${receiptNumber}\n` +
+    const shareText = `🧹 *Community Cleanup Record — AmdavadSafai*\n\n` +
+      `🎫 *Tracking Ref:* ${ticketId}\n` +
+      `🧾 *Record No:* ${receiptNumber}\n` +
       `📍 *Location:* ${wardName} (${zoneName || 'West Zone'})\n` +
-      `🧹 *Status:* Resolved & Sanitized ✓\n` +
-      `⚡ *Turnaround SLA:* ${turnaroundHours} Hours (Citizen Charter Compliant)\n` +
-      `🔗 *Verify Live Receipt:* ${window.location.origin}/#report=${report.id}\n\n` +
+      `🧹 *Status:* Resolved & community-verified ✓\n` +
+      `⏱️ *Turnaround:* ${turnaroundHours} Hours (community record)\n` +
+      `🔗 *View record:* ${window.location.origin}/#report=${report.id}\n\n` +
+      `File officially via AMC CCRS 311: 155303\n\n` +
       `🧹 AmdavadSafai — આપણું શહેર, આપણી જવાબદારી ❤️`;
 
     const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
@@ -109,7 +109,7 @@ export const ResolutionReceiptModal = ({
           <div className="receipt-control-left">
             <span className="receipt-badge-top">
               <ShieldCheck size={14} />
-              {lang === 'gu' ? 'સત્તાવાર AMC રસીદ' : lang === 'hi' ? 'आधिकारिक AMC रसीद' : 'Official AMC Redressal Receipt'}
+                {lang === 'gu' ? 'સામુદાયિક સફાઈ રેકોર્ડ' : lang === 'hi' ? 'सामुदायिक सफाई रिकॉर्ड' : 'Community Cleanup Record'}
             </span>
           </div>
 
@@ -158,13 +158,13 @@ export const ResolutionReceiptModal = ({
 
             <div className="receipt-header-titles">
               <h2 className="receipt-org-title">
-                અમદાવાદ મ્યુનિસિપલ કોર્પોરેશન
+                અમદાવાદ સફાઈ
               </h2>
               <h3 className="receipt-org-sub">
-                AHMEDABAD MUNICIPAL CORPORATION
+                AMDAVAD SAFAI
               </h3>
               <p className="receipt-dept-tag">
-                Solid Waste Management (SWM) • Central Grievance Redressal System (CCRS 311)
+                Community Cleanup Record • Citizen-verified
               </p>
             </div>
 
@@ -182,14 +182,14 @@ export const ResolutionReceiptModal = ({
           {/* Certificate Title Banner */}
           <div className="receipt-title-box">
             <div className="receipt-doc-tag">
-              {lang === 'gu' ? 'નાગરિક સફાઈ પ્રમાણપત્ર' : lang === 'hi' ? 'नागरिक स्वच्छता प्रमाणपत्र' : 'CIVIC CLEANLINESS CERTIFICATE'}
+              {lang === 'gu' ? 'નાગરિક-ચકાસેલ નોંધ' : lang === 'hi' ? 'नागरिक-सत्यापित रिकॉर्ड' : 'CITIZEN-VERIFIED RECORD'}
             </div>
             <h1 className="receipt-doc-heading">
               {lang === 'gu'
-                ? 'ફરિયાદ નિરાકરણ અને સ્થળ સ્વચ્છતા રસીદ'
+                ? 'સામુદાયિક સફાઈ રેકોર્ડ'
                 : lang === 'hi'
-                ? 'शिकायत निवारण एवं स्थल स्वच्छता रसीद'
-                : 'Grievance Redressal & Sanitation Certificate'}
+                ? 'सामुदायिक सफाई रिकॉर्ड'
+                : 'Community Cleanup Record'}
             </h1>
           </div>
 
@@ -204,7 +204,7 @@ export const ResolutionReceiptModal = ({
 
             <div className="receipt-meta-item">
               <span className="receipt-meta-lbl">
-                {lang === 'gu' ? 'AMC CCRS ટિકિટ #:' : lang === 'hi' ? 'AMC CCRS टिकट #:' : 'AMC CCRS Ticket #:'}
+                {lang === 'gu' ? 'ટ્રેકિંગ સંદર્ભ #:' : lang === 'hi' ? 'ट्रैकिंग संदर्भ #:' : 'Tracking Ref #:'}
               </span>
               <div className="receipt-ticket-copy-wrap">
                 <strong className="receipt-meta-val receipt-highlight receipt-mono">{ticketId}</strong>
@@ -253,7 +253,7 @@ export const ResolutionReceiptModal = ({
           <div className="receipt-timeline-section">
             <h4 className="receipt-section-subtitle">
               <Clock size={14} />
-              <span>{lang === 'gu' ? 'સત્તાવાર કાર્યવાહી સમયરેખા (Audit Trail)' : lang === 'hi' ? 'आधिकारिक कार्रवाई समयरेखा (Audit Trail)' : 'Official Action Timeline & Audit Trail'}</span>
+                <span>{lang === 'gu' ? 'સામુદાયિક કાર્યવાહી સમયરેખા' : lang === 'hi' ? 'सामुदायिक कार्रवाई समयरेखा' : 'Community Action Timeline'}</span>
             </h4>
 
             <div className="receipt-timeline-grid">
@@ -262,7 +262,7 @@ export const ResolutionReceiptModal = ({
                 <div className="receipt-step-body">
                   <span className="receipt-step-time">{formatDateTime(reportedTime, lang) || 'Aug 28, 2026 · 10:15 AM'}</span>
                   <span className="receipt-step-title">{lang === 'gu' ? 'નાગરિક દ્વારા નોંધણી' : lang === 'hi' ? 'नागरिक द्वारा पंजीकरण' : 'Complaint Filed by Citizen'}</span>
-                  <span className="receipt-step-desc">Logged on AmdavadSafai & assigned CCRS 311 Ticket</span>
+                    <span className="receipt-step-desc">Logged on AmdavadSafai with a community tracking reference</span>
                 </div>
               </div>
 
@@ -272,8 +272,8 @@ export const ResolutionReceiptModal = ({
                   <span className="receipt-step-time">
                     {formatDateTime(new Date(new Date(reportedTime || Date.now()).getTime() + 3 * 3600 * 1000).toISOString(), lang)}
                   </span>
-                  <span className="receipt-step-title">{lang === 'gu' ? 'SWM ટુકડી રવાના' : lang === 'hi' ? 'SWM दल प्रेषित' : 'Dispatched to SWM Ward Team'}</span>
-                  <span className="receipt-step-desc">Sanitary vehicle and ward cleaning staff deployed</span>
+                  <span className="receipt-step-title">{lang === 'gu' ? 'વોર્ડ સફાઈ માટે ચિહ્નિત' : lang === 'hi' ? 'वार्ड सफाई हेतु चिह्नित' : 'Flagged for Ward Cleanup'}</span>
+                  <span className="receipt-step-desc">Report published for community follow-up</span>
                 </div>
               </div>
 
@@ -295,7 +295,7 @@ export const ResolutionReceiptModal = ({
               </div>
               <div className="receipt-sla-right">
                 <span className="receipt-sla-badge">
-                  ⚡ 100% {lang === 'gu' ? 'SLA સુસંગત (AMC સિટિઝન ચાર્ટર < 48 કલાક)' : lang === 'hi' ? 'SLA अनुपालित (AMC सिटीजन चार्टर < 48 घंटे)' : 'SLA Compliant (AMC Citizen Charter < 48h)'}
+                  ⚡ {lang === 'gu' ? 'સમુદાય-ચકાસેલ સફાઈ' : lang === 'hi' ? 'समुदाय-सत्यापित सफाई' : 'Community-verified cleanup'}
                 </span>
               </div>
             </div>
@@ -359,7 +359,7 @@ export const ResolutionReceiptModal = ({
                 <UserCheck size={16} />
               </div>
               <span className="receipt-sig-name">{corporatorName}</span>
-              <span className="receipt-sig-role">{lang === 'gu' ? 'વોર્ડ કોર્પોરેટર, AMC' : lang === 'hi' ? 'वार्ड कॉर्पोरेटर, AMC' : 'Ward Corporator, AMC'}</span>
+              <span className="receipt-sig-role">{lang === 'gu' ? 'વોર્ડ કોર્પોરેટર' : lang === 'hi' ? 'वार्ड पार्षद' : 'Ward Corporator'}</span>
             </div>
 
             <div className="receipt-sig-block">
@@ -367,23 +367,23 @@ export const ResolutionReceiptModal = ({
                 <CheckCircle2 size={16} />
                 <span>DIGITALLY CERTIFIED</span>
               </div>
-              <span className="receipt-sig-name">AMC SWM Quality Control</span>
-              <span className="receipt-sig-role">Govt of Gujarat Municipal Redressal</span>
+              <span className="receipt-sig-name">AmdavadSafai Community Record</span>
+              <span className="receipt-sig-role">Citizen-verified cleanup</span>
             </div>
 
             <div className="receipt-sig-block">
               <div className="receipt-sig-line">
                 <Building2 size={16} />
               </div>
-              <span className="receipt-sig-name">AMC Ward 14 SWM Inspector</span>
-              <span className="receipt-sig-role">Solid Waste Management Cell</span>
+              <span className="receipt-sig-name">{lang === 'gu' ? 'નાગરિક રિપોર્ટર' : lang === 'hi' ? 'नागरिक रिपोर्टर' : 'Citizen Reporter'}</span>
+              <span className="receipt-sig-role">AmdavadSafai community</span>
             </div>
           </div>
 
           {/* Disclaimer Footer */}
           <div className="receipt-disclaimer-footer">
             <p>
-              This is a computer-generated grievance resolution receipt and civic certificate issued via the AmdavadSafai platform in collaboration with the Ahmedabad Municipal Corporation (AMC). Verification hash: <code>{ticketId}-GJ01-AMC-SWM</code>.
+              This is a community-generated cleanup record from the AmdavadSafai platform — not an official AMC document. For official redressal, file with AMC CCRS 311 (155303). Record ref: <code>{ticketId}</code>.
             </p>
           </div>
 

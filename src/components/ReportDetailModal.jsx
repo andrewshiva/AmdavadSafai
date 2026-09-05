@@ -531,10 +531,10 @@ export const ReportDetailModal = ({
                 </div>
                 <div>
                   <div style={{ fontSize: '13px', fontWeight: 700, color: '#14532D' }}>
-                    {lang === 'gu' ? 'સત્તાવાર સફાઈ નિરાકરણ રસીદ' : lang === 'hi' ? 'आधिकारिक सफाई समाधान रसीद' : 'Official Resolution Receipt'}
+                    {lang === 'gu' ? 'સામુદાયિક સફાઈ રેકોર્ડ' : lang === 'hi' ? 'सामुदायिक सफाई रिकॉर्ड' : 'Community Cleanup Record'}
                   </div>
                   <div style={{ fontSize: '11px', color: '#166534' }}>
-                    {lang === 'gu' ? 'AMC CCRS સફાઈ પ્રમાણપત્ર અને ઓડિટ' : lang === 'hi' ? 'AMC CCRS स्वच्छता प्रमाणपत्र एवं ऑडिट' : 'AMC CCRS Cleanliness Certificate & SLA Audit'}
+                    {lang === 'gu' ? 'સમુદાય-ચકાસેલ સફાઈ નોંધ' : lang === 'hi' ? 'समुदाय-सत्यापित सफाई रिकॉर्ड' : 'Community-verified cleanup record'}
                   </div>
                 </div>
               </div>

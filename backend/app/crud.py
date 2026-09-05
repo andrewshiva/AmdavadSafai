@@ -76,8 +76,9 @@ def create_report(db: Session, report: schemas.ReportCreate):
     saved_image_url = save_image_local(report.image_url) if report.image_url else None
     saved_verified_url = save_image_local(report.verified_image_url) if report.verified_image_url else None
 
-    # Generate official-standard AMC CCRS Ticket ID if not provided
-    amc_id = report.amc_ticket_id or f"AMC-CCRS-2026-{random.randint(10000, 99999)}"
+    # Platform tracking reference (NOT an official AMC CCRS ticket — see ADR-0005).
+    # Citizens must file officially via AMC CCRS 311 helpline 155303.
+    amc_id = report.amc_ticket_id or f"AS-2026-{random.randint(10000, 99999)}"
 
     db_report = models.Report(
         id=f"rpt_{uuid.uuid4().hex[:8]}",  # Generate short unique ID

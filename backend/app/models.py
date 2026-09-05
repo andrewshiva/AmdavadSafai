@@ -40,7 +40,7 @@ class Report(Base):
     severity = Column(String, nullable=False)  # minor, moderate, severe, critical
     status = Column(String, nullable=False)    # unresolved, resolved
     category = Column(String, nullable=False, default="mixed_waste") # mixed_waste, construction_dump, overflowing_bin, roadside_garbage, drainage_blockage
-    amc_ticket_id = Column(String, nullable=True, index=True) # e.g. AMC-CCRS-2026-88412
+    amc_ticket_id = Column(String, nullable=True, index=True) # platform tracking ref, e.g. AS-2026-88412 (not an official AMC ticket)
     amc_status = Column(String, nullable=True, default="Assigned to SWM Inspector") # Registered, Assigned, In Progress, Resolved
     amc_department = Column(String, nullable=True, default="Solid Waste Management (SWM)")
     rwa_partner = Column(String, nullable=True, default="Ahmedabad Citizen Network")
