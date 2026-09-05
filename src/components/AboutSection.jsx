@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
-import { ArrowRight, MapPin, Play, Camera, Zap, Truck, CheckCircle2, ShieldCheck, Clock, PhoneCall } from 'lucide-react';
+import { ArrowRight, MapPin, Play, Camera, Zap, Truck, CheckCircle2, ShieldCheck, Clock, PhoneCall, Sparkles } from 'lucide-react';
 import wardsData from '../data/wards.json';
 
 export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggleStats, onOpenVideo }) => {
@@ -61,17 +61,18 @@ export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggl
     video_tag: lang === 'gu' ? 'પ્લેટફોર્મ પરિચય વિડિઓ' : lang === 'hi' ? 'प्लेटफ़ॉर्म परिचय वीडियो' : 'PLATFORM INTRODUCTION VIDEO',
     video_title: lang === 'gu' ? 'અમદાવાદ સફાઈ કેવી રીતે કાર્ય કરે છે તે જુઓ' : lang === 'hi' ? 'देखें अहमदाबाद सफाई कैसे काम करता है' : 'WATCH HOW AMDAVAD SAFAI WORKS',
     video_subtitle: lang === 'gu'
-      ? 'રીઅલ-ટાઇમ ફરિયાદ મેપિંગ, ઓટોમેટેડ એએમસી ડિસ્પેચ અને નાગરિક કર્મ પોઈન્ટ્સની ૨ મિનિટની વિડિઓ ઝાંખી.'
+      ? 'લાઇવ મેપિંગ, ૪૮ કલાકનું SLA ટ્રેકિંગ, વોર્ડ સિવિક સેન્ટર્સ અને સામુદાયિક મંજૂરી ક્વોરમની ૨૦ સેકન્ડની વિડિઓ ઝાંખી.'
       : lang === 'hi'
-      ? 'रीयल-टाइम शिकायत मैपिंग, स्वचालित एएमसी प्रेषण और नागरिक कर्म रिवार्ड का 2 मिनट का वीडियो अवलोकन।'
-      : 'A 2-minute dynamic walkthrough of real-time complaint mapping, automated AMC departmental dispatch, and verified citizen karma rewards.',
+      ? 'रीयल-टाइम मैपिंग, 48 घंटे का SLA ट्रैकिंग, वार्ड सिविक सेंटर और सामुदायिक पुष्टि का 20 सेकंड का वीडियो अवलोकन।'
+      : 'A 20-second dynamic showcase of real-time complaint mapping, 48-hour SLA tracking, Ward Civic Centers, and community verification quorum.',
     theater_mode: lang === 'gu' ? 'મોટા પડદે જુઓ ↗' : lang === 'hi' ? 'थिएटर मोड ↗' : 'THEATER MODE ↗',
 
     // Video Chapters
-    chap1: lang === 'gu' ? 'ફોટો અને GPS ટેગ' : lang === 'hi' ? 'फोटो और GPS टैग' : 'Photo & GPS Geotag',
-    chap2: lang === 'gu' ? 'AMC વિભાગીય ડિસ્પેચ' : lang === 'hi' ? 'AMC विभागीय प्रेषण' : 'AMC Dept Dispatch',
-    chap3: lang === 'gu' ? 'લાઇવ વાહન ટ્રેકિંગ' : lang === 'hi' ? 'लाइव वाहन ट्रैकिंग' : 'Live SLA Tracking',
-    chap4: lang === 'gu' ? 'ખાતરી અને કર્મ પોઈન્ટ્સ' : lang === 'hi' ? 'सत्यापन और कर्म' : 'Verification & Karma',
+    chap1: lang === 'gu' ? 'મેપ અને લાઇવ રિપોર્ટિંગ' : lang === 'hi' ? 'मैप और लाइव रिपोर्टिंग' : 'Map & Live Reporting',
+    chap2: lang === 'gu' ? '૪૮ કલાક SLA ટ્રેકિંગ' : lang === 'hi' ? '48 घंटे SLA ट्रैकिंग' : '48h SLA Tracking',
+    chap3: lang === 'gu' ? 'વોર્ડ સિવિક સેન્ટર્સ' : lang === 'hi' ? 'वार्ड सिविक सेंटर' : 'Ward Civic Centers',
+    chap4: lang === 'gu' ? 'AI સિવિક સહાયક' : lang === 'hi' ? 'AI नागरिक सहायक' : 'AI Civic Assistant',
+    chap5: lang === 'gu' ? 'સામુદાયિક ક્વોરમ' : lang === 'hi' ? 'सामुदायिक कोरम' : 'Community Quorum',
 
     // 4-Step Workflow
     how_tag: lang === 'gu' ? 'કાર્યપદ્ધતિ' : lang === 'hi' ? 'कार्यप्रणाली' : 'SYSTEM PROCESS',
@@ -269,31 +270,41 @@ export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggl
           <button
             type="button"
             className="chapter-pill"
-            onClick={() => handleSeek(30)}
+            onClick={() => handleSeek(4)}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '20px', background: '#F8FAFC', border: '1px solid #E2E8F0', fontSize: '11px', fontWeight: 700, cursor: 'pointer' }}
           >
             <Zap size={12} color="#3B82F6" />
-            <span>0:30 · {content.chap2}</span>
+            <span>0:04 · {content.chap2}</span>
           </button>
 
           <button
             type="button"
             className="chapter-pill"
-            onClick={() => handleSeek(55)}
+            onClick={() => handleSeek(8)}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '20px', background: '#F8FAFC', border: '1px solid #E2E8F0', fontSize: '11px', fontWeight: 700, cursor: 'pointer' }}
           >
             <Truck size={12} color="#10B981" />
-            <span>0:55 · {content.chap3}</span>
+            <span>0:08 · {content.chap3}</span>
           </button>
 
           <button
             type="button"
             className="chapter-pill"
-            onClick={() => handleSeek(80)}
+            onClick={() => handleSeek(12)}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '20px', background: '#F8FAFC', border: '1px solid #E2E8F0', fontSize: '11px', fontWeight: 700, cursor: 'pointer' }}
+          >
+            <Sparkles size={12} color="#F59E0B" />
+            <span>0:12 · {content.chap4}</span>
+          </button>
+
+          <button
+            type="button"
+            className="chapter-pill"
+            onClick={() => handleSeek(16)}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '20px', background: '#F8FAFC', border: '1px solid #E2E8F0', fontSize: '11px', fontWeight: 700, cursor: 'pointer' }}
           >
             <CheckCircle2 size={12} color="#8B5CF6" />
-            <span>1:20 · {content.chap4}</span>
+            <span>0:16 · {content.chap5}</span>
           </button>
         </div>
 
