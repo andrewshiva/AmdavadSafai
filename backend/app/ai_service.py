@@ -255,42 +255,230 @@ You assist citizens with:
 Always be polite, proactive, concise, and encourage civic participation. આપણું શહેર, આપણી જવાબદારી!"""
 
 def chat_civic_assistant(message: str, history: Optional[List[Dict[str, str]]] = None, lang: str = "en") -> Dict[str, Any]:
-    tokenizer, model = load_minimind()
-
     clean_msg = (message or "").strip()
     msg_lower = clean_msg.lower()
 
-    faq_matches = [
-        (
-            ["ccrs", "311", "helpline", "complaint number", "phone", "contact"],
-            "AMC's central helpline for civic grievances is **CCRS 311** (Call **155303** or WhatsApp **+91 75678 55303**). You can report garbage, overflowing dustbins, or storm drainage issues 24/7 with a 48-hour SLA guarantee."
-        ),
-        (
-            ["sla", "time", "hours", "turnaround", "how long"],
-            "Under the official AMC Citizen Charter, standard garbage complaints must be addressed within **24 to 48 hours**. If unresolved after 48 hours, the ticket automatically escalates to the Ward SWM Chief Inspector."
-        ),
-        (
-            ["thaltej", "corporator", "representative", "mla", "vastrapur", "maninagar"],
-            "Every ward in Ahmedabad has 4 elected Municipal Corporators and 1 MLA. You can view your ward's corporator and MLA directly on our **Wards** tab or by clicking any complaint card in that area."
-        ),
-        (
-            ["drive", "sunday", "event", "volunteer", "abhiyan"],
-            "AmdavadSafai hosts community **Sunday Cleanup Drives (સફાઈ અભિયાન)**! You can join an existing drive or host your own in your society by navigating to the **Drives** tab. Participating earns you +50 Safai Karma points!"
-        ),
-        (
-            ["receipt", "certificate", "karma", "points", "reward"],
-            "When your reported garbage spot is cleared and verified by the SWM inspector, an official **AMC Resolution Receipt & Cleanliness Certificate** is generated, awarding you **+25 Safai Karma points**!"
+    # Detect language from script or parameter
+    is_gu = bool(re.search(r'[\u0A80-\u0AFF]', clean_msg)) or lang == "gu"
+    is_hi = bool(re.search(r'[\u0900-\u097F]', clean_msg)) or lang == "hi"
+
+    # Intent 1: What this app does / Platform Overview
+    if any(p in msg_lower for p in [
+        "what this app does", "what does this app do", "what is this app", "what this app is",
+        "how does this app work", "how this app works", "how does it work", "about this app",
+        "about amdavadsafai", "explain this app", "what can this app do", "what is amdavadsafai",
+        "why use this", "app features", "features", "overview", "what can you do", "what do you do",
+        "help me understand", "tell me about", "આ એપ શું કરે", "આ એપ વિશે", "યહ એપ ક્યા કરતા હૈ",
+        "यह ऐप क्या करता है", "इस ऐप के बारे में"
+    ]):
+        if is_gu:
+            reply = (
+                "**અમદાવાદ સફાઈ (AmdavadSafai)** એ અમદાવાદ મ્યુનિસિપલ કોર્પોરેશન (AMC) સાથે મળીને નાગરિકો માટે બનાવેલ સ્માર્ટ સ્વચ્છતા પોર્ટલ છે.\n\n"
+                "### 🌟 આ એપની મુખ્ય સેવાઓ:\n"
+                "1. 📍 **લાઈવ વોર્ડ મેપ**: અમદાવાદના તમામ 48 વોર્ડમાં કચરાના હોટસ્પોટ્સ અને સ્વચ્છતા સ્કોર (0-100) જુઓ.\n"
+                "2. 📸 **ઝડપી ફરિયાદ નોંધણી (CCRS 311)**: કચરાનો ફોટો પાડીને AMC SWM ટીમને સીધી ફરિયાદ મોકલો.\n"
+                "3. ⏱️ **48 કલાક નિકાલ ગેરંટી**: AMC સિટિઝન ચાર્ટર હેઠળ 24 થી 48 કલાકમાં સફાઈની ખાતરી.\n"
+                "4. 🤖 **AI વિઝન વેરિફિકેશન**: સફાઈ પહેલાં અને પછીના ફોટા ચકાસીને સત્તાવાર AMC ડિજિટલ રસીદ મેળવો.\n"
+                "5. 🏆 **સફાઈ કર્મા પોઈન્ટ્સ**: ફરિયાદો નોંધવા અને ઉકેલવા બદલ પોઈન્ટ્સ અને બેજ મેળવો.\n"
+                "6. 🤝 **રવિવાર સફાઈ અભિયાન**: સાબરમતી રિવરફ્રન્ટ, કાંકરિયા કે તમારી સોસાયટીમાં સ્વયંસેવક સફાઈ ડ્રાઈવમાં જોડાઓ.\n"
+                "7. 🏛️ **કોર્પોરેટર અને MLA વિગતો**: તમારા વોર્ડના 4 ચૂંટાયેલા કોર્પોરેટરો અને ધારાસભ્યની સંપર્ક વિગતો મેળવો.\n\n"
+                "🤝 *આપણું શહેર, આપણી જવાબદારી!*"
+            )
+        elif is_hi:
+            reply = (
+                "**अहमदाबाद सफाई (AmdavadSafai)** एएमसी (AMC) के सहयोग से नागरिकों के लिए बनाया गया एक आधुनिक नागरिक स्वच्छता मंच है।\n\n"
+                "### 🌟 इस ऐप की मुख्य सुविधाएं:\n"
+                "1. 📍 **लाइव वार्ड मैप**: अहमदाबाद के सभी 48 वार्डों में कचरा हॉटस्पॉट और स्वच्छता स्कोर देखें।\n"
+                "2. 📸 **त्वरित शिकायत पंजीकरण (CCRS 311)**: कचरे का फोटो खींचकर सीधे AMC सॉलिड वेस्ट मैनेजमेंट टीम को भेजें।\n"
+                "3. ⏱️ **48 घंटे में समाधान**: AMC नागरिक चार्टर के तहत 24 से 48 घंटे में समाधान की गारंटी।\n"
+                "4. 🤖 **AI विजन सत्यापन**: सफाई से पहले और बाद की तस्वीरों का सत्यापन और डिजिटल समाधान प्रमाण पत्र।\n"
+                "5. 🏆 **सफाई कर्मा व लीडरबोर्ड**: शिकायत समाधान और सफाई अभियानों से पॉइंट्स और बैज अर्जित करें।\n"
+                "6. 🤝 **रविवार सफाई अभियान**: साबरमती रिवरफ्रंट और शहरभर के सार्वजनिक स्थानों पर नागरिक सफाई अभियानों में भाग लें।\n"
+                "7. 🏛️ **वार्ड पार्षद विवरण**: अपने वार्ड के 4 पार्षदों और विधायक से सीधे संपर्क करें।\n\n"
+                "🤝 *આપણું શહેર, આપણી જવાબદારી!*"
+            )
+        else:
+            reply = (
+                "**AmdavadSafai (અમદાવાદ સફાઈ)** is Ahmedabad's citizen-driven civic cleanliness platform built in partnership with the Ahmedabad Municipal Corporation (AMC).\n\n"
+                "### 🌟 What You Can Do on AmdavadSafai:\n"
+                "1. 📍 **Interactive Ward Map**: View live garbage hotspots, community cleanliness scores (0–100), and boundary lines across all **48 wards of Ahmedabad**.\n"
+                "2. 📸 **Instant Garbage Reporting (CCRS 311)**: Click **'+ Report Garbage'** to snap a photo, auto-detect your location with GPS, and route directly to AMC Solid Waste Management (SWM).\n"
+                "3. ⏱️ **48-Hour Resolution SLA**: Official turnaround guarantee! Under the AMC Citizen Charter, standard waste hotspots are cleared within **24 to 48 hours**.\n"
+                "4. 🤖 **AI Vision Verification & Receipts**: When cleared, our AI compares before-and-after photos to verify genuine cleanup, issuing an official **AMC Resolution Receipt & Cleanliness Certificate**.\n"
+                "5. 🏆 **Safai Karma & Leaderboards**: Earn points (+10 for reporting, +25 for cleanups, +50 for Sunday drives) and unlock civic badges (*Swachhata Warrior, Spotless Guardian*).\n"
+                "6. 🤝 **Sunday Cleanup Drives (સફાઈ અભિયાન)**: Join or organize morning community cleanup drives at Sabarmati Riverfront, Kankaria Lake, and neighborhood spots.\n"
+                "7. 🏛️ **Ward Governance Transparency**: Look up your 4 elected Municipal Corporators, MLA, and SWM Sanitary Inspectors with direct contact numbers.\n\n"
+                "🤝 *આપણું શહેર, આપણી જવાબદારી — Our City, Our Responsibility!*"
+            )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 2: How to report
+    if any(p in msg_lower for p in [
+        "how to report", "how do i report", "how to lodge", "lodge complaint", "submit complaint",
+        "file report", "register grievance", "post garbage", "how to complain", "report trash",
+        "ફરિયાદ કેવી રીતે", "કચરો કેવી રીતે", "शिकायत कैसे"
+    ]):
+        reply = (
+            "### 📸 How to Report Garbage on AmdavadSafai:\n\n"
+            "1. Click the orange **'+ Report Garbage'** button at the top of the screen.\n"
+            "2. Take or upload a photo showing the waste hotspot.\n"
+            "3. Pin the location on our interactive Ahmedabad map (or enable GPS auto-detect).\n"
+            "4. Our **AI Auto-Triage** will automatically identify the waste category (Roadside, Drainage, or C&D Debris) and assign the right AMC department.\n"
+            "5. Click **Submit Report**! You will receive a live tracking ticket with a 48-hour countdown SLA.\n\n"
+            "📞 *Alternatively, call AMC's CCRS 311 helpline directly at **155303** or WhatsApp **+91 75678 55303**.*"
         )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 3: CCRS 311 / Helplines
+    if any(p in msg_lower for p in [
+        "ccrs", "311", "helpline", "toll free", "complaint number", "phone", "contact",
+        "call amc", "whatsapp", "call", "number", "હેલ્પલાઇન", "हेल्पलाइन"
+    ]):
+        reply = (
+            "### 📞 Official Ahmedabad Municipal Corporation (AMC) Helplines:\n\n"
+            "- **Central CCRS 311 Helpline**: Call **155303** (Toll-Free, 24/7)\n"
+            "- **Official WhatsApp Grievance Bot**: **+91 75678 55303**\n"
+            "- **AMC Central Office**: Mahanagar Seva Sadan, Danapith, Ahmedabad - 380001\n"
+            "- **Emergency Control Room**: 079-25391811 / 25391812\n\n"
+            "All registered complaints generate an official AMC CCRS ticket number with a guaranteed 48-hour resolution SLA."
+        )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 4: SLA / Turnaround Time
+    if any(p in msg_lower for p in [
+        "sla", "turnaround", "how long", "time limit", "when will it be cleaned",
+        "resolution time", "hours", "days", "deadline", "કેટલો સમય", "कितना समय"
+    ]):
+        reply = (
+            "### ⏱️ AMC Citizen Charter Resolution SLA:\n\n"
+            "- **Standard Roadside Garbage & Overflowing Bins**: **24 to 48 hours**\n"
+            "- **Drainage Overflow & Sewage Leaks**: **within 24 hours**\n"
+            "- **Hazardous / Hospital / Toxic Waste**: **under 12 hours (Emergency Priority)**\n"
+            "- **Construction & Demolition Debris (C&D)**: **72 hours**\n\n"
+            "⚠️ *If unresolved after 48 hours, the ticket automatically escalates to the Ward SWM Chief Inspector and Zonal Deputy Municipal Commissioner.*"
+        )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 5: Sunday Cleanup Drives
+    if any(p in msg_lower for p in [
+        "drive", "sunday", "event", "events", "volunteer", "abhiyan", "cleanliness drive",
+        "join drive", "participate", "cleanup drive", "સફાઈ અભિયાન", "सफाई अभियान"
+    ]):
+        reply = (
+            "### 🤝 Sunday Community Cleanup Drives (સફાઈ અભિયાન):\n\n"
+            "Every Sunday morning from **7:00 AM to 9:00 AM**, citizens and RWAs across Ahmedabad organize localized cleanup drives.\n\n"
+            "- **Popular Locations**: Sabarmati Riverfront, Kankaria Lakefront, Vastrapur Lake, Chandola Lake, and local ward parks.\n"
+            "- **AMC Support**: AMC provides safety gloves, collection bags, and municipal tipper vans on-site.\n"
+            "- **Karma Rewards**: Earn **+50 Safai Karma points** and unlock community volunteer badges!\n\n"
+            "👉 *Head to the **Drives** tab on AmdavadSafai to RSVP for an upcoming drive or organize one for your society!*"
+        )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 6: Safai Karma & Resolution Receipts
+    if any(p in msg_lower for p in [
+        "karma", "point", "points", "reward", "rewards", "badge", "badges",
+        "leaderboard", "gamification", "receipt", "certificate", "કર્મા", "कर्मा"
+    ]):
+        reply = (
+            "### 🏆 Safai Karma & Official Cleanliness Receipts:\n\n"
+            "AmdavadSafai rewards every verified citizen action with **Safai Karma points**:\n"
+            "- **Report a genuine garbage hotspot**: **+10 Karma**\n"
+            "- **Verify cleanup with before/after photos**: **+25 Karma** + Official AMC Resolution Receipt\n"
+            "- **Participate in a Sunday Cleanup Drive**: **+50 Karma**\n"
+            "- **Validate or resolve community disputes**: **+15 Karma**\n\n"
+            "📜 *Resolution Receipts include a cryptographic QR code verifying municipal SWM team compliance, and badges are displayed on your citizen profile!*"
+        )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 7: Ward Corporators & Governance
+    if any(p in msg_lower for p in [
+        "corporator", "mla", "representative", "ward", "councillor", "parshad",
+        "zone office", "કોર્પોરેટર", "પાર્ષદ", "पार्षद", "विधायक"
+    ]):
+        reply = (
+            "### 🏛️ Ahmedabad Municipal Governance & Ward Representatives:\n\n"
+            "Ahmedabad is divided into **48 municipal wards** across 7 zones (North, South, East, West, Central, North West, South West):\n\n"
+            "- **4 Municipal Corporators** per ward (with 50% reservation for women representatives).\n"
+            "- **1 Member of Legislative Assembly (MLA)** per assembly constituency.\n"
+            "- **Ward SWM Chief Sanitary Inspector** responsible for daily waste collection.\n\n"
+            "👉 *Switch to the **Wards** tab or click on any ward in the map to see corporator names, contact info, cleanliness rankings, and zone office details!*"
+        )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 8: Waste Segregation & Plastic Ban Rules
+    if any(p in msg_lower for p in [
+        "segregat", "dry waste", "wet waste", "plastic", "ban", "rule", "rules",
+        "fine", "penalty", "timing", "door to door", "van", "dumper", "નિયમ", "પ્લાસ્ટિક"
+    ]):
+        reply = (
+            "### ♻️ AMC Waste Segregation & Plastic Ban Guidelines:\n\n"
+            "1. **Source Segregation** (Mandatory under AMC SWM Bylaws 2020):\n"
+            "   - 🟢 **Green Bin (Wet Waste)**: Kitchen waste, food scraps, fruit/vegetable peels.\n"
+            "   - 🔵 **Blue Bin (Dry Waste)**: Paper, clean plastic, cardboard, glass, metal.\n"
+            "   - 🔴 **Red (Hazardous/Sanitary)**: Diapers, medicines, sanitary waste.\n"
+            "2. **Single-Use Plastic Ban**: Plastic carry bags under 120 microns and single-use plastic items are prohibited in Ahmedabad, with spot fines from ₹250 to ₹5,000.\n"
+            "3. **Collection Timing**: AMC Door-to-Door collection vans arrive daily between **7:00 AM and 11:00 AM**."
+        )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 9: False Cleanups / Disputes
+    if any(p in msg_lower for p in [
+        "dispute", "fake", "fraud", "not cleaned", "still dirty", "reopen", "re-open", "false"
+    ]):
+        reply = (
+            "### ⚠️ Disputing a False or Incomplete Cleanup:\n\n"
+            "If an AMC ticket was marked as resolved but the spot remains dirty:\n"
+            "1. Open the report card on the map or in **My Reports**.\n"
+            "2. Click the **'Dispute Cleanup'** button.\n"
+            "3. Upload a current photo of the uncleaned area and state the issue.\n"
+            "4. The ticket will be immediately re-opened with high priority and escalated to the AMC Zonal Deputy Health Officer."
+        )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 10: Identity & Greetings
+    if any(p in msg_lower for p in [
+        "who are you", "who are u", "what is your name", "are you a bot", "introduce yourself"
+    ]):
+        reply = (
+            "I am the **AmdavadSafai Civic AI Assistant**, developed for Ahmedabad citizens and AMC. "
+            "I can assist you with lodging waste complaints, checking CCRS 311 helplines, finding ward corporators, "
+            "tracking resolution turnaround SLAs, and joining Sunday cleanup drives. How can I help you today? "
+            "આપણું શહેર, આપણી જવાબદારી!"
+        )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    if any(p in msg_lower for p in [
+        "hi", "hello", "hey", "kem cho", "namaste", "pranam", "good morning",
+        "good afternoon", "good evening", "કેમ છો", "નમસ્તે", "नमस्ते"
+    ]):
+        if is_gu:
+            reply = "નમસ્તે! અમદાવાદ સફાઈ AI સહાયકમાં આપનું સ્વાગત છે. હું કચરાની ફરિયાદ નોંધણી, AMC CCRS 311 હેલ્પલાઇન અને વોર્ડ કોર્પોરેટરની વિગતોમાં તમારી મદદ કરી શકું છું. હું તમારી શું મદદ કરી શકું?"
+        elif is_hi:
+            reply = "नमस्ते! अहमदाबाद सफाई AI सहायक में आपका स्वागत है। मैं कचरा शिकायत पंजीकरण, AMC CCRS 311 हेल्पलाइन और वार्ड पार्षद विवरण में आपकी सहायता कर सकता हूँ। मैं आज आपकी क्या मदद करूँ?"
+        else:
+            reply = "Namaste! Welcome to AmdavadSafai Civic AI. How can I assist you with garbage reporting, AMC 311 helplines, ward corporators, or Sunday cleanup drives today? આપણું શહેર, આપણી જવાબદારી!"
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
+
+    # Intent 11: Specific Ward names in Ahmedabad
+    amc_wards = [
+        "thaltej", "vastrapur", "bodakdev", "maninagar", "navrangpura", "paldi", "ranip",
+        "chandkheda", "ghatodiya", "jodhpur", "vejalpur", "sarkhej", "bopal", "ghodasar",
+        "behrampura", "khadia", "shahpur", "jamalpur", "dariyapur", "aswa", "naroda",
+        "odhav", "nikol", "vatva", "lambha", "amraiwadi", "gomtipur", "bapunagar", "sabarmati", "danilimda"
     ]
+    matched_ward = next((w for w in amc_wards if w in msg_lower), None)
+    if matched_ward:
+        reply = (
+            f"### 📍 Ward Information: **{matched_ward.capitalize()}**\n\n"
+            f"The **{matched_ward.capitalize()}** ward is governed under Ahmedabad Municipal Corporation (AMC). "
+            f"You can view its current Cleanliness Score (0–100), active garbage complaints, 4 elected Municipal Corporators, "
+            f"and local SWM Sanitary Inspector by selecting it in the **Wards** tab.\n\n"
+            f"To report uncollected waste in {matched_ward.capitalize()}, click '+ Report Garbage' or call AMC CCRS at **155303**."
+        )
+        return {"reply": reply, "model": "AmdavadSafai Civic AI", "status": "success"}
 
-    for keywords, response in faq_matches:
-        if any(kw in msg_lower for kw in keywords):
-            return {
-                "reply": response,
-                "model": "AmdavadSafai Civic AI",
-                "status": "success"
-            }
-
+    # Generative AI fallback via local weights if available
+    tokenizer, model = load_minimind()
     if model is not None and tokenizer is not None:
         try:
             formatted_prompt = f"{CIVIC_SYSTEM_PROMPT}\n\nUser: {clean_msg}\nAssistant:"
@@ -298,26 +486,40 @@ def chat_civic_assistant(message: str, history: Optional[List[Dict[str, str]]] =
             with torch.no_grad():
                 outputs = model.generate(
                     **inputs,
-                    max_new_tokens=100,
-                    temperature=0.8,
-                    top_p=0.9,
+                    max_new_tokens=90,
+                    temperature=0.7,
+                    top_p=0.85,
+                    repetition_penalty=1.2,
                     do_sample=True,
                     eos_token_id=tokenizer.eos_token_id
                 )
-            reply = tokenizer.decode(outputs[0][inputs['input_ids'].shape[1]:], skip_special_tokens=True).strip()
-            if reply:
+            generated = tokenizer.decode(outputs[0][inputs['input_ids'].shape[1]:], skip_special_tokens=True).strip()
+            # Verify generation quality: no loops or echoes
+            if (
+                generated
+                and len(generated) > 25
+                and "Assistant:" not in generated
+                and generated.count("\n") < 5
+                and not generated.startswith(clean_msg)
+            ):
                 return {
-                    "reply": reply,
+                    "reply": generated,
                     "model": "AmdavadSafai Civic AI",
                     "status": "success"
                 }
         except Exception as err:
             print(f"[AI Service] MiniMind chat note: {err}")
 
+    # Articulate, helpful civic fallback
     fallback_reply = (
-        f"Thank you for reaching out to AmdavadSafai AI. To address '{clean_msg}', you can pin the exact location "
-        "on the interactive map to dispatch the ward Solid Waste Management (SWM) team. "
-        "AMC guarantees a turnaround within 48 hours under the Citizen Charter. આપણું શહેર, આપણી જવાબદારી!"
+        f"Thank you for reaching out to **AmdavadSafai Civic AI**!\n\n"
+        f"Regarding your query on **\"{clean_msg}\"**:\n"
+        f"- 📍 **Report a Waste Hotspot**: Click the orange **'+ Report Garbage'** button to pin the location on our interactive Ahmedabad map.\n"
+        f"- 📞 **AMC CCRS 311 Helpline**: Call **155303** (Toll-Free, 24/7) or WhatsApp **+91 75678 55303** for immediate municipal response.\n"
+        f"- 🏛️ **Ward Governance**: Switch to the **Wards** tab to look up your local corporators, MLA, and SWM Sanitary Inspector.\n"
+        f"- 🤝 **Sunday Cleanup Drives**: Join weekly citizen cleanups under the **Drives** tab.\n\n"
+        f"*💡 Quick questions you can ask me: 'What this app does', 'How to report garbage', 'Official resolution SLA', or 'Waste segregation rules'!*\n\n"
+        f"🤝 **આપણું શહેર, આપણી જવાબદારી!**"
     )
     return {
         "reply": fallback_reply,
