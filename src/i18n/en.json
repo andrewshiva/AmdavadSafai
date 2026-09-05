@@ -128,6 +128,7 @@
   "th_active": "Active",
   "th_res_rate": "Res. %",
   "map_legend": "Map Legend",
+  "approx_boundaries": "Ward lines are approximate, not official AMC boundaries.",
   "ward_cleanliness_score": "Ward Cleanliness Score:",
   "score_excellent": "Excellent (90 - 100)",
   "score_good": "Good (80 - 89)",

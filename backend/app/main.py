@@ -213,18 +213,28 @@ def join_cleanup_event(event_id: str, db: Session = Depends(get_db)):
         "message": f"Successfully joined {event.title_en}!"
     }
 
-# --- Citizen Karma & Device Identity Sync Endpoint ---
+# --- Citizen Karma & Device Identity Sync Endpoint (ack-only, see ADR-0003) ---
 @app.post("/api/karma/sync")
 def sync_citizen_karma(payload: dict):
-    # Validates and acknowledges persistent citizen device identity
-    device_id = payload.get("device_id", "unknown")
-    points = payload.get("points", 35)
-    streak_days = payload.get("streak_days", 1)
+    # Validates and acknowledges persistent citizen device identity.
+    # LocalStorage on the client is the source of truth; nothing is persisted here.
+    raw_device = payload.get("device_id", "unknown")
+    device_id = raw_device if isinstance(raw_device, str) and raw_device.strip() else "unknown"
+    try:
+        points = int(payload.get("points", 0))
+    except (TypeError, ValueError):
+        points = 0
+    try:
+        streak_days = int(payload.get("streak_days", 0))
+    except (TypeError, ValueError):
+        streak_days = 0
     return {
         "status": "synced",
         "device_id": device_id,
-        "acknowledged_points": points,
-        "streak_days": streak_days
+        "acknowledged_points": max(0, points),
+        "streak_days": max(0, streak_days),
+        "persisted": False,
+        "mode": "ack_only"
     }
 
 
@@ -235,6 +245,7 @@ def get_ai_status():
     """Reports status of live AI models and compute availability."""
     return {
         "status": "active",
+        "mode": "ml_models" if ai_service.TORCH_AVAILABLE else "heuristic_fallback",
         "torch_available": ai_service.TORCH_AVAILABLE,
         "compute_device": ai_service.DEVICE,
         "models": {

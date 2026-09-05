@@ -24,50 +24,14 @@ export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport })
     };
   }, [selectedWardId]);
 
-  // Filter reports belonging to current ward
+  // Reports belonging to current ward (live only — no fabricated fallback)
   const wardReports = useMemo(() => {
-    const list = reports.filter((r) => r.ward_id === selectedWardId);
-    if (list.length > 0) return list;
-
-    // Realistic fallback timeline issues for this ward
-    return [
-      {
-        id: `rpt_${selectedWardId}_01`,
-        description_en: 'OVERFLOWING DUSTBIN NEAR COMMERCIAL COMPLEX',
-        description_gu: 'કોમર્શિયલ કોમ્પ્લેક્સ નજીક ઓવરફ્લો થતી કચરાપેટી',
-        description_hi: 'व्यावसायिक परिसर के पास भरी हुई कचरा पेटी',
-        location: `${currentWard.name_en} Cross Roads, near Main Market.`,
-        created_at: new Date(Date.now() - 25 * 60000).toISOString(),
-        upvotes: 14,
-        status: 'in_progress',
-        statusLabel: lang === 'gu' ? 'સફાઈ ચાલુ' : lang === 'hi' ? 'सफाई जारी' : 'IN PROGRESS'
-      },
-      {
-        id: `rpt_${selectedWardId}_02`,
-        description_en: 'CONSTRUCTION DEBRIS BLOCKING SIDEWALK',
-        description_gu: 'ફૂટપાથ પર પડેલો બાંધકામનો મલબો',
-        description_hi: 'फुटपाथ पर पड़ा निर्माण मलबा',
-        location: `${currentWard.name_en} Society Lane 3. Blocked pedestrian path.`,
-        created_at: new Date(Date.now() - 120 * 60000).toISOString(),
-        verified: true,
-        status: 'resolved',
-        statusLabel: lang === 'gu' ? 'ઉકેલાયેલ' : lang === 'hi' ? 'समाधानित' : 'RESOLVED'
-      },
-      {
-        id: `rpt_${selectedWardId}_03`,
-        description_en: 'WATER LOGGING & DRAINAGE SPILL',
-        description_gu: 'પાણી ભરાવો અને ડ્રેનેજ લીકેજ',
-        description_hi: 'जलभराव और नाली का गंदा पानी',
-        location: `${currentWard.name_en} Underpass corner.`,
-        created_at: new Date(Date.now() - 300 * 60000).toISOString(),
-        status: 'pending',
-        statusLabel: lang === 'gu' ? 'બાકી' : lang === 'hi' ? 'लंबित' : 'PENDING'
-      }
-    ];
-  }, [reports, selectedWardId, currentWard, lang]);
+    return reports.filter((r) => r.ward_id === selectedWardId);
+  }, [reports, selectedWardId]);
 
   const activeIssuesCount = wardReports.filter((r) => r.status !== 'resolved').length;
   const resolvedIssuesCount = wardReports.filter((r) => r.status === 'resolved').length;
+  const wardResolutionPct = wardReports.length > 0 ? Math.round((resolvedIssuesCount / wardReports.length) * 100) : 0;
 
   const corporatorInitials = useMemo(() => {
     const name = currentWard.corporator_en || 'Priya Shah';
@@ -140,7 +104,7 @@ export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport })
           <span className="ward-stat-label">
             {lang === 'gu' ? 'સક્રિય ફરિયાદો' : lang === 'hi' ? 'सक्रिय शिकायतें' : 'ACTIVE'}
           </span>
-          <div className="ward-stat-val">{activeIssuesCount || 12}</div>
+          <div className="ward-stat-val">{activeIssuesCount}</div>
           <span className="ward-stat-sub">
             {lang === 'gu' ? 'અનિરાકૃત સમસ્યાઓ' : lang === 'hi' ? 'लंबित मुद्दे' : 'OPEN ISSUES'}
           </span>
@@ -150,19 +114,19 @@ export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport })
           <span className="ward-stat-label">
             {lang === 'gu' ? 'ઉકેલાયેલ' : lang === 'hi' ? 'हल की गई' : 'SOLVED'}
           </span>
-          <div className="ward-stat-val">348</div>
+          <div className="ward-stat-val">{resolvedIssuesCount}</div>
           <span className="ward-stat-sub">
-            {lang === 'gu' ? 'આ મહિને સાફ કરાયા' : lang === 'hi' ? 'इस माह निस्तारित' : 'THIS MONTH'}
+            {lang === 'gu' ? 'કુલ ઉકેલાયેલ' : lang === 'hi' ? 'कुल समाधानित' : 'TOTAL RESOLVED'}
           </span>
         </div>
 
         <div className="variant-slab-card variant-ward-stat-slab">
           <span className="ward-stat-label">
-            {lang === 'gu' ? 'વાહનો' : lang === 'hi' ? 'वाहन बेड़ा' : 'FLEET'}
+            {lang === 'gu' ? 'કુલ' : lang === 'hi' ? 'कुल' : 'TOTAL'}
           </span>
-          <div className="ward-stat-val">18</div>
+          <div className="ward-stat-val">{wardReports.length}</div>
           <span className="ward-stat-sub">
-            {lang === 'gu' ? 'સક્રિય કચરા વાહનો' : lang === 'hi' ? 'सक्रिय सफाई वाहन' : 'ACTIVE TRUCKS'}
+            {lang === 'gu' ? 'નોંધાયેલી ફરિયાદો' : lang === 'hi' ? 'दर्ज शिकायतें' : 'RECORDED REPORTS'}
           </span>
         </div>
       </div>
@@ -222,10 +186,10 @@ export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport })
               <span className="perf-name">
                 {lang === 'gu' ? 'નિરાકરણ દર' : lang === 'hi' ? 'समाधान दर' : 'RESOLUTION RATE'}
               </span>
-              <span className="perf-score">94%</span>
+              <span className="perf-score">{wardReports.length > 0 ? `${wardResolutionPct}%` : '—'}</span>
             </div>
             <div className="variant-progress-track">
-              <div className="variant-progress-bar" style={{ width: '94%' }} />
+              <div className="variant-progress-bar" style={{ width: `${wardResolutionPct}%` }} />
             </div>
           </div>
         </div>
@@ -246,6 +210,15 @@ export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport })
           </div>
 
           <div className="timeline-items-list">
+            {wardReports.length === 0 && (
+              <div className="timeline-item-row">
+                <div className="timeline-item-body">
+                  <p className="timeline-item-loc">
+                    {lang === 'gu' ? 'આ વોર્ડમાં હજુ કોઈ ફરિયાદ નથી' : lang === 'hi' ? 'इस वार्ड में अभी कोई शिकायत नहीं' : 'No reports in this ward yet'}
+                  </p>
+                </div>
+              </div>
+            )}
             {wardReports.map((issue) => {
               const title = lang === 'gu' && issue.description_gu
                 ? issue.description_gu

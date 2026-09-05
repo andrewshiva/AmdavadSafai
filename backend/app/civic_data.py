@@ -40,10 +40,13 @@ def get_amc_civic_metrics(db: Session):
         "critical": db.query(func.count(models.Report.id)).filter(models.Report.severity == "critical").scalar() or 0,
     }
 
-    # Open-Source AMC SWM benchmark metrics (Simulated civic feed aggregated with crowdsourced data)
+    # Static AMC SWM benchmark snapshot (NOT live telemetry). Numbers below are
+    # planning estimates; only crowdsourced_analytics is computed from the DB.
     return {
         "amc_swm_feed": {
             "city": "Ahmedabad (અમદાવાદ)",
+            "source": "static_benchmark",
+            "note": "Planning estimates, not live AMC telemetry",
             "active_collection_vehicles": 842,
             "door_to_door_coverage_pct": 94.6,
             "daily_waste_collected_metric_tons": 4120.5,

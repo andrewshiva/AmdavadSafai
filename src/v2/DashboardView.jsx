@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
-import { TrendingUp, CheckCircle2, Truck, Image, AlertTriangle, Clock } from 'lucide-react';
+import { CheckCircle2, Image } from 'lucide-react';
 import MapView from '../components/MapView';
 import wardsData from '../data/wards.json';
 import { formatDateTime } from '../utils/dateTime';
@@ -26,9 +26,17 @@ export const DashboardView = ({ reports = [], onSelectReport, onOpenReport }) =>
     return list;
   }, [reports, selectedWardId, selectedZone, filteredWards]);
 
+  const totalCount = displayedReports.length;
+  const resolvedCount = displayedReports.filter((r) => r.status === 'resolved').length;
+  const openCount = totalCount - resolvedCount;
+  const resolutionPct = totalCount > 0 ? Math.round((resolvedCount / totalCount) * 100) : 0;
+
+  const zones = useMemo(() => [...new Set(wardsData.map((w) => w.zone_en))].sort(), []);
+  const zoneLabel = (z) => (lang === 'gu' ? (wardsData.find((w) => w.zone_en === z)?.zone_gu || z) : z);
+
   const liveFeeds = useMemo(() => {
     const dynamicItems = (reports || [])
-      .slice(0, 3)
+      .slice(0, 5)
       .map((r) => {
         const isResolved = r.status === 'resolved';
         const ward = wardsData.find((w) => w.id === r.ward_id);
@@ -51,50 +59,7 @@ export const DashboardView = ({ reports = [], onSelectReport, onOpenReport }) =>
         };
       });
 
-    const defaultFeeds = [
-      {
-        id: 'mock_1',
-        type: 'new_report',
-        icon: Image,
-        iconColor: '#FF6B35',
-        iconBg: '#FFF3EE',
-        title: lang === 'gu' ? 'નવો અહેવાલ: કચરાનો ઢગલો' : lang === 'hi' ? 'नई शिकायत: कचरे का ढेर' : 'NEW REPORT: GARBAGE PILE',
-        subtitle: lang === 'gu' ? 'વોર્ડ ૧૨, ઉસ્માનપુરા · હમણાં જ' : 'Ward 12, Usmanpura · Just now',
-        status: 'pending'
-      },
-      {
-        id: 'mock_2',
-        type: 'resolved',
-        icon: CheckCircle2,
-        iconColor: '#10B981',
-        iconBg: '#ECFDF5',
-        title: lang === 'gu' ? 'સમસ્યા ઉકેલાઈ ગઈ' : lang === 'hi' ? 'समस्या का समाधान हुआ' : 'ISSUE RESOLVED',
-        subtitle: lang === 'gu' ? 'મણિનગર પૂર્વ · ૪ મિ. પહેલાં' : 'Maninagar East · 4m ago',
-        status: 'resolved'
-      },
-      {
-        id: 'mock_3',
-        type: 'dispatch',
-        icon: Truck,
-        iconColor: '#3B82F6',
-        iconBg: '#EFF6FF',
-        title: lang === 'gu' ? 'સફાઈ વાહન રવાના' : lang === 'hi' ? 'सफाई वाहन रवाना' : 'VEHICLE DISPATCHED',
-        subtitle: lang === 'gu' ? 'સેટેલાઇટ વિસ્તાર · ૧૨ મિ. પહેલાં' : 'Satellite Area · 12m ago',
-        status: 'in_progress'
-      },
-      {
-        id: 'mock_4',
-        type: 'new_report',
-        icon: AlertTriangle,
-        iconColor: '#FF6B35',
-        iconBg: '#FFF3EE',
-        title: lang === 'gu' ? 'નવો અહેવાલ: ખુલ્લી ગટર' : lang === 'hi' ? 'नई शिकायत: खुला नाला' : 'NEW REPORT: OPEN DRAIN',
-        subtitle: lang === 'gu' ? 'બોપલ વોર્ડ · ૧૮ મિ. પહેલાં' : 'Bopal Ward · 18m ago',
-        status: 'pending'
-      }
-    ];
-
-    return [...dynamicItems, ...defaultFeeds].slice(0, 5);
+    return dynamicItems;
   }, [reports, lang]);
 
   return (
@@ -104,36 +69,35 @@ export const DashboardView = ({ reports = [], onSelectReport, onOpenReport }) =>
         {/* Metric 1 */}
         <div className="variant-slab-card variant-dash-metric-slab">
           <span className="dash-metric-label">
-            {lang === 'gu' ? 'આજની કુલ ફરિયાદો' : lang === 'hi' ? 'आज की कुल शिकायतें' : 'TOTAL REPORTS TODAY'}
+            {lang === 'gu' ? 'કુલ ફરિયાદો' : lang === 'hi' ? 'कुल शिकायतें' : 'TOTAL REPORTS'}
           </span>
-          <div className="dash-metric-val">{1200 + displayedReports.length}</div>
-          <div className="dash-metric-badge text-emerald">
-            <TrendingUp size={13} />
-            <span>{lang === 'gu' ? '+૧૨% ગઈકાલની સરખામણીમાં' : '+12% VS YESTERDAY'}</span>
-          </div>
+          <div className="dash-metric-val">{totalCount}</div>
+          <span className="dash-metric-sub">
+            {lang === 'gu' ? `${wardsData.length} વોર્ડ ટ્રેક કરેલા` : lang === 'hi' ? `${wardsData.length} वार्ड ट्रैक किए गए` : `${wardsData.length} WARDS TRACKED`}
+          </span>
         </div>
 
         {/* Metric 2 */}
         <div className="variant-slab-card variant-dash-metric-slab">
           <span className="dash-metric-label">
-            {lang === 'gu' ? 'સરેરાશ ઉકેલ સમય' : lang === 'hi' ? 'औसत प्रतिक्रिया समय' : 'AVG. RESPONSE TIME'}
+            {lang === 'gu' ? 'નિરાકરણ દર' : lang === 'hi' ? 'समाधान दर' : 'RESOLUTION RATE'}
           </span>
           <div className="dash-metric-val">
-            42<span className="unit">{lang === 'gu' ? 'મિ.' : 'm'}</span>
+            {resolutionPct}<span className="unit">%</span>
           </div>
           <span className="dash-metric-sub">
-            {lang === 'gu' ? 'સિસ્ટમ કાર્યક્ષમતા: ઉચ્ચ' : lang === 'hi' ? 'सिस्टम दक्षता: उच्च' : 'SYSTEM EFFICIENCY: HIGH'}
+            {resolvedCount} / {totalCount} {lang === 'gu' ? 'ઉકેલાયેલ' : lang === 'hi' ? 'समाधानित' : 'RESOLVED'}
           </span>
         </div>
 
         {/* Metric 3 */}
         <div className="variant-slab-card variant-dash-metric-slab">
           <span className="dash-metric-label">
-            {lang === 'gu' ? 'સક્રિય સફાઈ કર્મચારીઓ' : lang === 'hi' ? 'सक्रिय स्वच्छता कर्मचारी' : 'ACTIVE PERSONNEL'}
+            {lang === 'gu' ? 'ખુલ્લી ફરિયાદો' : lang === 'hi' ? 'खुली शिकायतें' : 'OPEN ISSUES'}
           </span>
-          <div className="dash-metric-val">842</div>
+          <div className="dash-metric-val">{openCount}</div>
           <span className="dash-metric-sub">
-            {lang === 'gu' ? '૪૮ વોર્ડમાં કાર્યરત' : lang === 'hi' ? '48 वार्डों में तैनात' : 'ACROSS 48 WARDS'}
+            {lang === 'gu' ? 'કાર્યવાહી બાકી' : lang === 'hi' ? 'कार्रवाई बाकी' : 'NEED ACTION'}
           </span>
         </div>
       </div>
@@ -162,10 +126,9 @@ export const DashboardView = ({ reports = [], onSelectReport, onOpenReport }) =>
                 }}
               >
                 <option value="ALL">{lang === 'gu' ? 'બધા ઝોન' : lang === 'hi' ? 'सभी जोन' : 'ALL ZONES'}</option>
-                <option value="West Zone">{lang === 'gu' ? 'પશ્ચિમ ઝોન' : lang === 'hi' ? 'पश्चिम जोन' : 'WEST ZONE'}</option>
-                <option value="North Zone">{lang === 'gu' ? 'ઉત્તર ઝોન' : lang === 'hi' ? 'उत्तर जोन' : 'NORTH ZONE'}</option>
-                <option value="Central Zone">{lang === 'gu' ? 'મધ્ય ઝોન' : lang === 'hi' ? 'मध्य जोन' : 'CENTRAL ZONE'}</option>
-                <option value="South Zone">{lang === 'gu' ? 'દક્ષિણ ઝોન' : lang === 'hi' ? 'दक्षिण जोन' : 'SOUTH ZONE'}</option>
+                {zones.map((z) => (
+                  <option key={z} value={z}>{zoneLabel(z)}</option>
+                ))}
               </select>
 
               <select
@@ -220,6 +183,15 @@ export const DashboardView = ({ reports = [], onSelectReport, onOpenReport }) =>
             </div>
 
             <div className="live-feed-list">
+              {liveFeeds.length === 0 && (
+                <div className="live-feed-item">
+                  <div className="live-feed-item-body">
+                    <span className="feed-item-sub">
+                      {lang === 'gu' ? 'હજુ કોઈ ફરિયાદ નથી' : lang === 'hi' ? 'अभी कोई शिकायत नहीं' : 'No reports yet'}
+                    </span>
+                  </div>
+                </div>
+              )}
               {liveFeeds.map((feed) => {
                 const IconComponent = feed.icon;
                 return (
@@ -251,10 +223,10 @@ export const DashboardView = ({ reports = [], onSelectReport, onOpenReport }) =>
               {lang === 'gu' ? 'ઉકેલ ગુણોત્તર' : lang === 'hi' ? 'समाधान अनुपात' : 'RESOLUTION METRIC'}
             </span>
             <div className="resolution-metric-val">
-              89% <span className="unit">{lang === 'gu' ? 'પૂર્ણ' : lang === 'hi' ? 'निस्तारित' : 'COMPLETION'}</span>
+              {resolutionPct}% <span className="unit">{lang === 'gu' ? 'પૂર્ણ' : lang === 'hi' ? 'निस्तारित' : 'COMPLETION'}</span>
             </div>
             <div className="variant-progress-track">
-              <div className="variant-progress-bar" style={{ width: '89%' }} />
+              <div className="variant-progress-bar" style={{ width: `${resolutionPct}%` }} />
             </div>
           </div>
         </div>

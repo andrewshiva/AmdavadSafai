@@ -5,7 +5,7 @@ from math import asin, cos, radians, sin, sqrt
 import uuid
 import random
 import models, schemas
-from image_storage import save_image_and_push_to_github
+from image_storage import save_image_local
 
 # Wards crud
 def get_wards(db: Session):
@@ -72,9 +72,9 @@ def create_report(db: Session, report: schemas.ReportCreate):
         raise ValueError(f"Location ({report.lat}, {report.lng}) is outside the Ahmedabad municipal jurisdiction area ({dist/1000:.1f} km away).")
     ward_id = ward.id
 
-    # Process and save uploaded image into public/uploads and push to GitHub repository
-    saved_image_url = save_image_and_push_to_github(report.image_url) if report.image_url else None
-    saved_verified_url = save_image_and_push_to_github(report.verified_image_url) if report.verified_image_url else None
+    # Process and save uploaded image into backend/uploads (local disk, served at /uploads)
+    saved_image_url = save_image_local(report.image_url) if report.image_url else None
+    saved_verified_url = save_image_local(report.verified_image_url) if report.verified_image_url else None
 
     # Generate official-standard AMC CCRS Ticket ID if not provided
     amc_id = report.amc_ticket_id or f"AMC-CCRS-2026-{random.randint(10000, 99999)}"
@@ -121,7 +121,7 @@ def verify_report_cleanup(db: Session, report_id: str, verified_image_url: str =
     report.amc_status = "Resolved by AMC SWM"
     report.resolved_at = datetime.datetime.utcnow()
     if verified_image_url:
-        saved_url = save_image_and_push_to_github(verified_image_url)
+        saved_url = save_image_local(verified_image_url)
         report.verified_image_url = saved_url
     db.commit()
     db.refresh(report)
@@ -146,7 +146,7 @@ def dispute_report_resolution(db: Session, report_id: str, dispute_image_url: st
     report.flag_reason = reason or "Citizen disputed false cleanup resolution"
     report.flagged = (report.flagged or 0) + 1
     if dispute_image_url:
-        saved_url = save_image_and_push_to_github(dispute_image_url)
+        saved_url = save_image_local(dispute_image_url)
         report.image_url = saved_url
         report.verified_image_url = None
     db.commit()

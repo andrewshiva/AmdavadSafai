@@ -30,6 +30,7 @@ export const HeaderV2 = ({
     reports: lang === 'gu' ? 'ફરિયાદો' : lang === 'hi' ? 'शिकायतें' : 'REPORTS',
     wards: lang === 'gu' ? 'વોર્ડ વિગતો' : lang === 'hi' ? 'वार्ड प्रोफाइल' : 'WARDS',
     drives: lang === 'gu' ? 'સફાઈ અભિયાન' : lang === 'hi' ? 'सफाई अभियान' : 'DRIVES',
+    stats: lang === 'gu' ? 'આંકડા' : lang === 'hi' ? 'आंकड़े' : 'STATISTICS',
     impact: lang === 'gu' ? 'ઇમ્પેક્ટ' : lang === 'hi' ? 'प्रभाव' : 'IMPACT',
     signin: lang === 'gu' ? 'સાઇન ઇન' : lang === 'hi' ? 'साइन इन' : 'SIGN IN',
   };
@@ -144,6 +145,14 @@ export const HeaderV2 = ({
           onClick={() => handleNavClick('impact')}
         >
           <span>{navLabels.impact}</span>
+        </button>
+
+        <button
+          type="button"
+          className={`variant-nav-link ${activeView === 'stats' ? 'active' : ''}`}
+          onClick={() => handleNavClick('stats')}
+        >
+          <span>{navLabels.stats}</span>
         </button>
       </nav>
 
@@ -431,6 +440,15 @@ export const HeaderV2 = ({
                 onClick={() => handleNavClick('impact')}
               >
                 <span>{lang === 'gu' ? 'સામુદાયિક પ્રભાવ ગેલેરી' : lang === 'hi' ? 'सामुदायिक प्रभाव गैलरी' : 'COMMUNITY IMPACT GALLERY'}</span>
+                <ChevronRight size={16} />
+              </button>
+
+              <button
+                type="button"
+                className={`mobile-nav-item ${activeView === 'stats' ? 'active' : ''}`}
+                onClick={() => handleNavClick('stats')}
+              >
+                <span>{lang === 'gu' ? 'લાઇવ આંકડા ડેશબોર્ડ' : lang === 'hi' ? 'लाइव सांख्यिकी डैशबोर्ड' : 'LIVE STATISTICS DASHBOARD'}</span>
                 <ChevronRight size={16} />
               </button>
 

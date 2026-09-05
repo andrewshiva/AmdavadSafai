@@ -1,10 +1,16 @@
 import React, { useRef } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
 import { ArrowRight, MapPin, Play, Camera, Zap, Truck, CheckCircle2, ShieldCheck, Clock, PhoneCall } from 'lucide-react';
+import wardsData from '../data/wards.json';
 
-export const AboutSection = ({ onOpenReport, onOpenEvents, onToggleStats, onOpenVideo, currentUser }) => {
+export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggleStats, onOpenVideo, currentUser }) => {
   const { lang } = useTranslation();
   const videoRef = useRef(null);
+  const wardCount = wardsData.length;
+  const totalReports = reports.length;
+  const resolvedReports = reports.filter((r) => r.status === 'resolved').length;
+  const openReports = totalReports - resolvedReports;
+  const successPct = totalReports > 0 ? ((resolvedReports / totalReports) * 100).toFixed(1) : '0.0';
 
   const handleSeek = (seconds) => {
     if (videoRef.current) {
@@ -48,8 +54,8 @@ export const AboutSection = ({ onOpenReport, onOpenEvents, onToggleStats, onOpen
     fact_sla_desc: lang === 'gu' ? 'સ્વચ્છતા મિશન સમયમર્યાદા' : lang === 'hi' ? 'स्वच्छता मिशन समय सीमा' : 'SWACHHATA RESOLUTION TARGET',
     fact_amc_title: lang === 'gu' ? 'AMC ૧૫૫૩૦૩ લિંક્ડ' : lang === 'hi' ? 'AMC 155303 से जुड़ा' : 'AMC 155303 LINKED',
     fact_amc_desc: lang === 'gu' ? 'સેન્ટ્રલ કંટ્રોલ રૂમ કનેક્ટ' : lang === 'hi' ? 'कंट्रोल रूम से सीधा समन्वय' : 'CENTRAL CONTROL ROOM SYNC',
-    fact_wards_title: lang === 'gu' ? '૪૮ વોર્ડ કવરેજ' : lang === 'hi' ? '48 वार्ड कवरेज' : '48 WARDS COVERED',
-    fact_wards_desc: lang === 'gu' ? 'અમદાવાદના તમામ વોર્ડમાં સક્રિય' : lang === 'hi' ? 'अहमदाबाद के सभी वार्डों में सक्रिय' : 'MONITORING ACROSS ALL 48 WARDS',
+    fact_wards_title: lang === 'gu' ? `${wardCount} વોર્ડ કવરેજ` : lang === 'hi' ? `${wardCount} वार्ड कवरेज` : `${wardCount} WARDS COVERED`,
+    fact_wards_desc: lang === 'gu' ? 'અમદાવાદના પાયલટ વોર્ડમાં સક્રિય' : lang === 'hi' ? 'अहमदाबाद के पायलट वार्डों में सक्रिय' : `MONITORING ACROSS ${wardCount} PILOT WARDS`,
 
     // Introduction Video Showcase
     video_tag: lang === 'gu' ? 'પ્લેટફોર્મ પરિચય વિડિઓ' : lang === 'hi' ? 'प्लेटफ़ॉर्म परिचय वीडियो' : 'PLATFORM INTRODUCTION VIDEO',
@@ -83,11 +89,11 @@ export const AboutSection = ({ onOpenReport, onOpenEvents, onToggleStats, onOpen
     stats_reports: lang === 'gu' ? 'કુલ ફરિયાદો' : lang === 'hi' ? 'कुल शिकायतें' : 'REPORTS FILED',
     stats_reports_sub: lang === 'gu' ? 'નોંધાયેલી સમસ્યાઓ' : lang === 'hi' ? 'दर्ज की गई समस्याएं' : 'RECORDED ISSUES',
     stats_success: lang === 'gu' ? 'સફળતા દર' : lang === 'hi' ? 'सफलता दर' : 'SUCCESS RATE',
-    stats_success_sub: lang === 'gu' ? '૧૧,૨૦૪ ઉકેલાયેલ કેસો' : lang === 'hi' ? '11,204 सुलझाए गए मामले' : '11,204 RESOLVED CASES',
-    stats_citizens: lang === 'gu' ? 'સક્રિય નાગરિકો' : lang === 'hi' ? 'सक्रिय नागरिक' : 'ACTIVE CITIZENS',
-    stats_citizens_sub: lang === 'gu' ? 'સ્વચ્છતા મંચ પર' : lang === 'hi' ? 'स्वच्छता नेटवर्क से जुड़े' : 'SWACHHATA ADVOCATES',
+    stats_success_sub: lang === 'gu' ? `${resolvedReports} ઉકેલાયેલ` : lang === 'hi' ? `${resolvedReports} समाधानित` : `${resolvedReports} RESOLVED`,
+    stats_citizens: lang === 'gu' ? 'ખુલ્લી ફરિયાદો' : lang === 'hi' ? 'खुली शिकायतें' : 'OPEN ISSUES',
+    stats_citizens_sub: lang === 'gu' ? 'કાર્યવાહી બાકી' : lang === 'hi' ? 'कार्रवाई बाकी' : 'NEED ACTION',
     stats_coverage: lang === 'gu' ? 'વોર્ડ કવરેજ' : lang === 'hi' ? 'वार्ड कवरेज' : 'WARD COVERAGE',
-    stats_coverage_sub: lang === 'gu' ? '૧૦૦% અમદાવાદ કવર' : lang === 'hi' ? '100% अहमदाबाद शामिल' : 'ALL 48 WARDS ACTIVE',
+    stats_coverage_sub: lang === 'gu' ? `${wardCount} પાયલટ વોર્ડ સક્રિય` : lang === 'hi' ? `${wardCount} पायलट वार्ड सक्रिय` : `${wardCount} PILOT WARDS LIVE`,
 
     // About Us & Governance
     about_tag: lang === 'gu' ? 'અમારા વિશે અને શાસન' : lang === 'hi' ? 'हमारे बारे में और सुशासन' : 'ABOUT US & GOVERNANCE',
@@ -367,28 +373,28 @@ export const AboutSection = ({ onOpenReport, onOpenEvents, onToggleStats, onOpen
           {/* Stat 1 */}
           <div className="variant-slab-card variant-stat-card">
             <span className="variant-stat-label">{content.stats_reports}</span>
-            <div className="variant-stat-number">12,480</div>
+            <div className="variant-stat-number">{totalReports}</div>
             <span className="variant-stat-sub">{content.stats_reports_sub}</span>
           </div>
 
           {/* Stat 2 */}
           <div className="variant-slab-card variant-stat-card">
             <span className="variant-stat-label">{content.stats_success}</span>
-            <div className="variant-stat-number">94.2%</div>
+            <div className="variant-stat-number">{successPct}%</div>
             <span className="variant-stat-sub">{content.stats_success_sub}</span>
           </div>
 
           {/* Stat 3 */}
           <div className="variant-slab-card variant-stat-card">
             <span className="variant-stat-label">{content.stats_citizens}</span>
-            <div className="variant-stat-number">45k+</div>
+            <div className="variant-stat-number">{openReports}</div>
             <span className="variant-stat-sub">{content.stats_citizens_sub}</span>
           </div>
 
           {/* Stat 4 */}
           <div className="variant-slab-card variant-stat-card">
             <span className="variant-stat-label">{content.stats_coverage}</span>
-            <div className="variant-stat-number">48/48</div>
+            <div className="variant-stat-number">{wardCount}</div>
             <span className="variant-stat-sub">{content.stats_coverage_sub}</span>
           </div>
         </div>

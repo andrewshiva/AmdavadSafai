@@ -6,6 +6,7 @@ import ReportPage from '../components/ReportPage';
 import MyReportsView from './MyReportsView';
 import ImpactGalleryView from './ImpactGalleryView';
 import DashboardView from './DashboardView';
+import StatisticsView from './StatisticsView';
 import WardsProfileView from './WardsProfileView';
 import CleanupDrivesView from './CleanupDrivesView';
 import LoginModal from './LoginModal';
@@ -165,6 +166,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
           />
         ) : activeView === 'about' ? (
           <AboutSection
+            reports={filteredReports}
             currentUser={currentUser}
             onOpenReport={handleRequireLoginOrReport}
             onOpenEvents={() => setIsEventsOpen(true)}
@@ -201,6 +203,8 @@ export const AppV2 = ({ onSwitchVersion }) => {
             onOpenEvents={() => setActiveView('drives')}
             onOpenReport={handleRequireLoginOrReport}
           />
+        ) : activeView === 'stats' ? (
+          <StatisticsView reports={filteredReports} />
         ) : (
           <DashboardView
             reports={filteredReports}

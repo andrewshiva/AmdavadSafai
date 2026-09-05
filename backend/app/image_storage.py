@@ -19,10 +19,12 @@ if os.path.exists(os.path.dirname(PUBLIC_UPLOADS_DIR)):
 # Maximum image upload size: 10 MB in characters (~7.5 MB raw image)
 MAX_BASE64_LENGTH = 10 * 1024 * 1024
 
-def save_image_and_push_to_github(image_data: str) -> str:
+def save_image_local(image_data: str) -> str:
     """
-    Saves a base64 image data string into uploads/ storage safely and without blocking the API thread.
+    Saves a base64 image data string into uploads/ storage (local disk only).
     Returns the relative URL path (/uploads/filename.ext).
+    Never pushes anywhere remote — see ADR-0003 for karma/auth scope and
+    backend-only local file serving via app.mount("/uploads").
     """
     if not image_data or not isinstance(image_data, str):
         return image_data
@@ -68,3 +70,9 @@ def save_image_and_push_to_github(image_data: str) -> str:
     except Exception as err:
         print(f"Error saving image: {err}")
         return image_data
+
+
+# Deprecated alias — kept for backward compatibility, never pushed to GitHub.
+def save_image_and_push_to_github(image_data: str) -> str:
+    """Deprecated: use save_image_local. Local disk only, no remote push."""
+    return save_image_local(image_data)

@@ -638,6 +638,11 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
             <span>{t('filter_critical')}</span>
           </div>
         </div>
+
+        {/* Approximate-boundaries footnote (ADR-0001) */}
+        <div style={{ borderTop: '1px solid var(--glass-border)', paddingTop: '6px', marginTop: '2px', fontSize: '10px', color: 'var(--color-text-secondary)' }}>
+          <span>{t('approx_boundaries')}</span>
+        </div>
       </div>
     </div>
   );
