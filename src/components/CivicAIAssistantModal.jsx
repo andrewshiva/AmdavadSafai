@@ -9,7 +9,6 @@ import {
   Sparkles,
   HelpCircle,
   Clock,
-  ShieldCheck,
   RefreshCw
 } from 'lucide-react';
 
@@ -28,10 +27,10 @@ export const CivicAIAssistantModal = ({ isOpen = false, onClose }) => {
       id: 'welcome',
       sender: 'bot',
       text: lang === 'gu'
-        ? 'નમસ્તે! હું અમદાવાદ મ્યુનિસિપલ કોર્પોરેશન (AMC) સફાઈ AI સહાયક છું (MiniMind-3 સંચાલિત). હું ફરિયાદ નોંધણી, વોર્ડ કોર્પોરેટર અને સ્વચ્છતા સંબંધિત પ્રશ્નોમાં તમારી મદદ કરી શકું છું. આપણું શહેર, આપણી જવાબદારી!'
+        ? 'નમસ્તે! હું અમદાવાદ સફાઈ AI સહાયક છું. હું ફરિયાદ નોંધણી, વોર્ડ કોર્પોરેટર અને સ્વચ્છતા સંબંધિત પ્રશ્નોમાં તમારી મદદ કરી શકું છું. આપણું શહેર, આપણી જવાબદારી!'
         : lang === 'hi'
-        ? 'नमस्ते! मैं अहमदाबाद म्युनिसिपल कॉर्पोरेशन (AMC) सफाई AI सहायक हूँ (MiniMind-3 संचालित)। मैं शिकायत पंजीकरण, वार्ड पार्षद और स्वच्छता नियमों में आपकी मदद कर सकता हूँ।'
-        : 'Namaste! I am AmdavadSafai AI Assistant, powered by MiniMind-3 and AMC Civic Knowledge Base. How can I assist you with garbage reporting, ward corporators, or civic services today?'
+        ? 'नमस्ते! मैं अहमदाबाद सफाई AI सहायक हूँ। मैं शिकायत पंजीकरण, वार्ड पार्षद और स्वच्छता नियमों में आपकी मदद कर सकता हूँ।'
+        : 'Namaste! I am AmdavadSafai AI Assistant. How can I assist you with garbage reporting, ward corporators, or civic services today?'
     }
   ]);
   const [inputText, setInputText] = useState('');
@@ -148,22 +147,9 @@ export const CivicAIAssistantModal = ({ isOpen = false, onClose }) => {
               <Sparkles size={20} color="#FFFFFF" />
             </div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <h3 style={{ fontSize: '15px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>
-                  AmdavadSafai AI Assistant
-                </h3>
-                <span style={{
-                  fontSize: '9.5px',
-                  fontWeight: 800,
-                  padding: '2px 6px',
-                  borderRadius: '999px',
-                  background: 'rgba(52, 211, 153, 0.2)',
-                  color: '#34D399',
-                  border: '1px solid rgba(52, 211, 153, 0.3)'
-                }}>
-                  MiniMind-3
-                </span>
-              </div>
+              <h3 style={{ fontSize: '15px', fontWeight: 800, margin: 0, color: '#FFFFFF' }}>
+                AmdavadSafai AI Assistant
+              </h3>
               <p style={{ fontSize: '11px', color: '#94A3B8', margin: '2px 0 0 0' }}>
                 Ahmedabad Civic Intelligence & Grievance Assistant
               </p>
@@ -239,21 +225,6 @@ export const CivicAIAssistantModal = ({ isOpen = false, onClose }) => {
                 boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
               }}>
                 <div style={{ whiteSpace: 'pre-wrap' }}>{m.text}</div>
-                {m.model && (
-                  <div style={{
-                    fontSize: '9.5px',
-                    color: '#94A3B8',
-                    marginTop: '6px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    borderTop: '1px solid rgba(255,255,255,0.08)',
-                    paddingTop: '4px'
-                  }}>
-                    <ShieldCheck size={11} color="#34D399" />
-                    <span>{m.model}</span>
-                  </div>
-                )}
               </div>
             </div>
           ))}
@@ -282,7 +253,7 @@ export const CivicAIAssistantModal = ({ isOpen = false, onClose }) => {
                 gap: '8px'
               }}>
                 <RefreshCw size={13} className="spin" />
-                <span>MiniMind-3 thinking...</span>
+                <span>AI Assistant is typing...</span>
               </div>
             </div>
           )}

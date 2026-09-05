@@ -422,7 +422,7 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                   />
                 </div>
 
-                {/* MiniMind-3 AI Smart Triage Assistant */}
+                {/* AI Smart Triage Assistant */}
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -435,7 +435,7 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Sparkles size={15} color="#EA580C" />
                     <span style={{ fontSize: '12px', fontWeight: 700, color: '#EA580C' }}>
-                      MiniMind-3 AI Auto-Triage
+                      AI Auto-Triage
                     </span>
                   </div>
 
@@ -494,7 +494,7 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 800 }}>
                       <CheckCircle2 size={13} color="#10B981" />
-                      <span>{triageResult.model}: {triageResult.predicted_department}</span>
+                      <span>AI Triage: {triageResult.predicted_department}</span>
                     </div>
                     <span style={{ color: '#047857' }}>{triageResult.summary}</span>
                   </div>

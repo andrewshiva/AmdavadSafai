@@ -50,7 +50,7 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
             transformation_score: 78.4,
             is_genuine_cleanup: true,
             verdict: 'Genuine cleanup verified (AMC SWM Standard)',
-            model: 'SigLIP-2 Vision'
+            model: 'AI Vision'
           });
         } finally {
           setVisionLoading(false);
@@ -135,7 +135,7 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
             {visionLoading && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', borderRadius: '8px', background: 'rgba(2, 132, 199, 0.1)', border: '1px solid rgba(2, 132, 199, 0.25)', fontSize: '11.5px', color: '#0284C7' }}>
                 <Sparkles size={14} className="spin" />
-                <span>SigLIP-2 AI Vision analyzing before ↔ after transformation...</span>
+                <span>AI Vision analyzing before ↔ after transformation...</span>
               </div>
             )}
 
@@ -153,7 +153,7 @@ export const VerifyCleanupModal = ({ isOpen, onClose, report, onSuccess }) => {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Sparkles size={14} />
-                  <strong>SigLIP-2 Vision:</strong>
+                  <strong>AI Vision:</strong>
                   <span>{aiVisionResult.verdict}</span>
                 </div>
                 <strong style={{ fontSize: '12px' }}>{aiVisionResult.transformation_score}% Change</strong>

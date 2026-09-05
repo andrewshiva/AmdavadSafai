@@ -162,7 +162,7 @@ def triage_civic_report(description: str, category: Optional[str] = None) -> Dic
         predicted_sev = "minor"
 
     summary = f"Identified as {predicted_cat.replace('_', ' ')} assigned to {predicted_dept} with {predicted_sev} urgency."
-    model_name = "MiniMind-3 (64M) / Civic Heuristic Engine"
+    model_name = "AmdavadSafai Civic AI"
 
     tokenizer, model = load_minimind()
     if model is not None and tokenizer is not None:
@@ -180,7 +180,7 @@ def triage_civic_report(description: str, category: Optional[str] = None) -> Dic
             generated = tokenizer.decode(outputs[0][inputs['input_ids'].shape[1]:], skip_special_tokens=True).strip()
             if generated and len(generated) > 10:
                 summary = generated.split("\n")[0]
-            model_name = "MiniMind-3 (64M Neural)"
+            model_name = "AmdavadSafai Civic AI"
         except Exception as e:
             print(f"[AI Service] MiniMind generation note: {e}")
 
@@ -221,14 +221,14 @@ def verify_cleanup_vision(before_url: str, after_url: str) -> Dict[str, Any]:
             transformation_pct = round(max(0.0, min(100.0, (1.0 - similarity) * 100)), 1)
             is_genuine = transformation_pct >= 25.0
 
-            verdict = "Genuine municipal cleanup verified by SigLIP-2 vision" if is_genuine else "Potential duplicate or uncleaned spot"
+            verdict = "Genuine municipal cleanup verified by AI vision" if is_genuine else "Potential duplicate or uncleaned spot"
 
             return {
                 "transformation_score": transformation_pct,
                 "similarity": round(similarity, 4),
                 "is_genuine_cleanup": is_genuine,
                 "verdict": verdict,
-                "model": "SigLIP-2 Vision (86M)",
+                "model": "AmdavadSafai Vision AI",
                 "status": "success"
             }
         except Exception as e:
@@ -239,7 +239,7 @@ def verify_cleanup_vision(before_url: str, after_url: str) -> Dict[str, Any]:
         "similarity": 0.216,
         "is_genuine_cleanup": True,
         "verdict": "Verified clean spot transformation (AMC SWM Certified)",
-        "model": "SigLIP-2 Civic Verification Engine",
+        "model": "AmdavadSafai Vision AI",
         "status": "success"
     }
 
@@ -287,7 +287,7 @@ def chat_civic_assistant(message: str, history: Optional[List[Dict[str, str]]] =
         if any(kw in msg_lower for kw in keywords):
             return {
                 "reply": response,
-                "model": "MiniMind-3 (64M) / Civic Knowledge Base",
+                "model": "AmdavadSafai Civic AI",
                 "status": "success"
             }
 
@@ -308,7 +308,7 @@ def chat_civic_assistant(message: str, history: Optional[List[Dict[str, str]]] =
             if reply:
                 return {
                     "reply": reply,
-                    "model": "MiniMind-3 (64M Neural)",
+                    "model": "AmdavadSafai Civic AI",
                     "status": "success"
                 }
         except Exception as err:
@@ -321,6 +321,6 @@ def chat_civic_assistant(message: str, history: Optional[List[Dict[str, str]]] =
     )
     return {
         "reply": fallback_reply,
-        "model": "MiniMind-3 (Civic Engine)",
+        "model": "AmdavadSafai Civic AI",
         "status": "success"
     }

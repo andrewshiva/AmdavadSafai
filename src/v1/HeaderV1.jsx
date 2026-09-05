@@ -124,7 +124,7 @@ export const HeaderV1 = ({
             type="button"
             className="header-action-btn"
             onClick={onOpenAIAssistant}
-            title="AmdavadSafai AI Assistant (MiniMind-3)"
+            title="AmdavadSafai AI Assistant"
             style={{
               display: 'inline-flex',
               alignItems: 'center',

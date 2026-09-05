@@ -177,7 +177,7 @@ export const HeaderV2 = ({
             type="button"
             className="variant-ai-btn header-desktop-only"
             onClick={onOpenAIAssistant}
-            title="AmdavadSafai AI Assistant (MiniMind-3)"
+            title="AmdavadSafai AI Assistant"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -446,7 +446,7 @@ export const HeaderV2 = ({
                 >
                   <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Sparkles size={16} />
-                    {lang === 'gu' ? 'સફાઈ AI સહાયક (MiniMind-3)' : lang === 'hi' ? 'सफाई AI सहायक (MiniMind-3)' : 'CIVIC AI ASSISTANT (MiniMind-3)'}
+                    {lang === 'gu' ? 'સફાઈ AI સહાયક' : lang === 'hi' ? 'सफाई AI सहायक' : 'CIVIC AI ASSISTANT'}
                   </span>
                   <ChevronRight size={16} />
                 </button>

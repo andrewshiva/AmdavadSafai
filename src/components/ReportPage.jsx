@@ -527,7 +527,7 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
                         }}
                       >
                         <Sparkles size={12} color="#EA580C" />
-                        <span>{triageLoading ? 'Triage...' : 'MiniMind-3 Auto-Triage ✨'}</span>
+                        <span>{triageLoading ? 'Triage...' : 'Auto-Triage ✨'}</span>
                       </button>
                     </div>
                     <textarea
@@ -554,7 +554,7 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
                     }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 800 }}>
                         <CheckCircle2 size={13} color="#10B981" />
-                        <span>{triageResult.model}: {triageResult.predicted_department}</span>
+                        <span>AI Triage: {triageResult.predicted_department}</span>
                       </div>
                       <span style={{ color: '#047857' }}>{triageResult.summary}</span>
                     </div>

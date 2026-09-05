@@ -228,29 +228,29 @@ def sync_citizen_karma(payload: dict):
     }
 
 
-# --- Live AI Model Endpoints (MiniMind-3 & SigLIP-2) ---
+# --- Live AI Model Endpoints (AmdavadSafai Civic AI) ---
 
 @app.get("/api/ai/status")
 def get_ai_status():
-    """Reports status of live neural models and compute availability."""
+    """Reports status of live AI models and compute availability."""
     return {
         "status": "active",
         "torch_available": ai_service.TORCH_AVAILABLE,
         "compute_device": ai_service.DEVICE,
         "models": {
-            "triage_and_chat": "MiniMind-3 (64M)",
-            "vision_verification": "SigLIP-2 Vision (86M)"
+            "triage_and_chat": "AmdavadSafai Civic AI",
+            "vision_verification": "AmdavadSafai Vision AI"
         }
     }
 
 @app.post("/api/ai/triage", response_model=schemas.AITriageResponse)
 def api_triage_report(payload: schemas.AITriageRequest):
-    """Automatically triage report text into AMC department, severity, and category using MiniMind-3."""
+    """Automatically triage report text into AMC department, severity, and category."""
     return ai_service.triage_civic_report(description=payload.description, category=payload.category)
 
 @app.post("/api/ai/verify-vision", response_model=schemas.AIVerifyVisionResponse)
 def api_verify_cleanup_vision(payload: schemas.AIVerifyVisionRequest):
-    """Calculates photographic transformation score between before and after cleanup photos using SigLIP-2."""
+    """Calculates photographic transformation score between before and after cleanup photos."""
     return ai_service.verify_cleanup_vision(before_url=payload.before_url, after_url=payload.after_url)
 
 @app.post("/api/ai/chat", response_model=schemas.AIChatResponse)

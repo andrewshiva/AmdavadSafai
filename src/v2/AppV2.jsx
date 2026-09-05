@@ -375,7 +375,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
         data={shareCardTarget}
       />
 
-      {/* MiniMind-3 Civic AI Assistant Modal */}
+      {/* Civic AI Assistant Modal */}
       <CivicAIAssistantModal
         isOpen={isAIAssistantOpen}
         onClose={() => setIsAIAssistantOpen(false)}
