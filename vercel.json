@@ -50,7 +50,7 @@
       "destination": "https://amdavadsafai.onrender.com/uploads/:path*"
     },
     {
-      "source": "/((?!api|uploads|guide|assets|.*\\..*).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
