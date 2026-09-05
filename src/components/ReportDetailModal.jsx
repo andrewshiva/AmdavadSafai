@@ -63,6 +63,7 @@ export const ReportDetailModal = ({
 
   const diffHours = report.reported_at ? Math.floor((new Date() - new Date(report.reported_at)) / (1000 * 60 * 60)) : 0;
   const isOverdue = report.status === 'unresolved' && diffHours >= 48;
+  const ticketId = getAmcTicketId(report);
 
   const handleVerify = () => {
     if (onVerifyClick) onVerifyClick(report);
@@ -362,7 +363,7 @@ export const ReportDetailModal = ({
                 {t('call_amc_control_room')}
               </a>
               <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Unresolved garbage complaint in Ward ${wardName}, Ahmedabad. Needs action @AHMAMC @AmdavadSafai ${window.location.origin}/#report=${report.id}`)}`}
+                href={`https://x.com/intent/tweet?text=${encodeURIComponent(`Unresolved civic complaint [Ticket: ${ticketId}] in Ward ${wardName}, Ahmedabad. Urgently needs action @AmdavadAMC @AmdavadSafai ${window.location.origin}/#report=${report.id}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -388,7 +389,6 @@ export const ReportDetailModal = ({
 
           {/* Official AMC CCRS & 311 Ticket Integration Card */}
           {(() => {
-            const ticketId = getAmcTicketId(report);
             const handleCopyTicketNum = () => {
               if (navigator.clipboard) {
                 navigator.clipboard.writeText(ticketId);
