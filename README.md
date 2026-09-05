@@ -24,7 +24,8 @@ A civic-tech full-stack web application that enables citizens to track, report, 
   - [8. AMC CCRS 311 & WhatsApp Chatbot Bridge](#8-amc-ccrs-311--whatsapp-chatbot-bridge)
   - [9. Before ↔ After Transformation Comparison Slider](#9-before--after-transformation-comparison-slider)
   - [10. Wall of Cleaned Spots & RWA Pilot Dashboard](#10-wall-of-cleaned-spots--rwa-pilot-dashboard)
-- [Data Model & Architecture](#data-model--architecture)
+- [System Architecture](#system-architecture)
+- [Data Model](#data-model)
 - [Getting Started](#getting-started)
 - [API Documentation](#api-documentation)
 - [License](#license)
@@ -141,7 +142,21 @@ Citizens can:
 
 ---
 
-## Data Model & Architecture
+## System Architecture
+
+![AmdavadSafai System Architecture](amdavad-safai-architecture.visual-check.2048x1320.dark.png)
+
+> 📐 **Interactive Architecture Diagram**: Explore the full interactive system architecture with component inspection and tracing in [amdavad-safai-architecture.html](amdavad-safai-architecture.html).
+
+### Architectural Highlights
+
+- **Citizen & Edge Tier**: Vercel Edge CDN hosting the React 19 Single Page Application, leveraging MapLibre GL for client-side GPU-accelerated vector mapping, dynamic GeoJSON ward boundary overlays, and instant trilingual localization (Gujarati, Hindi, English).
+- **Core Engine & Application Tier**: High-performance FastAPI (Python 3.12) REST API running on Render with SQLite & SQLAlchemy ORM configured in Write-Ahead Logging (WAL) mode for high-concurrency read/write operations, paired with proof photo verification storage.
+- **Municipal Integration & Civic Action Bridge**: Direct integration pipeline connecting citizen reports to the AMC CCRS 311 municipal portal, the official AMC WhatsApp Helpline (`+91 75678 55303`), and community-led Sunday Cleanup Drives.
+
+---
+
+## Data Model
 
 ```mermaid
 erDiagram
