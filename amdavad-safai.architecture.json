@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "AmdavadSafai System Architecture",
+    "subtitle": "Crowdsourced Garbage Reporting & Civic Action Platform for Ahmedabad",
+    "output": "amdavad-safai-architecture.html",
+    "visual_preset": "blueprint",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "viewBox": [1120, 620],
+    "views": [
+      {
+        "id": "reporting-pipeline",
+        "label": "Citizen Reporting Flow",
+        "focus": ["citizens", "vercel", "spa", "api", "db", "uploads"],
+        "note": "Citizen reports geo-tagged garbage with photos through Vercel and FastAPI into SQLite."
+      },
+      {
+        "id": "municipal-escalation",
+        "label": "AMC Municipal Escalation",
+        "focus": ["citizens", "spa", "amc_bot", "amc_ccrs", "api"],
+        "note": "Direct dispatch to AMC WhatsApp Helpline (+91 75678 55303) and CCRS 311 complaint tracking."
+      },
+      {
+        "id": "spatial-and-storage",
+        "label": "Map Tiles & Proof Storage",
+        "focus": ["spa", "tile_srv", "api", "uploads"],
+        "note": "MapLibre GL GPU rendering with vector tiles and before/after verification photo storage."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "citizens",
+      "type": "external",
+      "label": "Citizens & RWAs",
+      "sublabel": "Mobile / Web Browsers",
+      "tag": "Civic Users",
+      "pos": [36, 280],
+      "size": [136, 64]
+    },
+    {
+      "id": "vercel",
+      "type": "cloud",
+      "label": "Vercel Edge",
+      "sublabel": "CDN & HTTPS Proxy",
+      "brand": "vercel",
+      "tag": "Edge Layer",
+      "pos": [248, 280],
+      "size": [140, 64]
+    },
+    {
+      "id": "spa",
+      "type": "frontend",
+      "label": "React 19 Frontend",
+      "sublabel": "Vite + MapLibre + i18n",
+      "brand": "react",
+      "tag": "Client SPA",
+      "pos": [464, 280],
+      "size": [144, 64]
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "FastAPI Engine",
+      "sublabel": "Python 3.12 / Uvicorn",
+      "brand": "fastapi",
+      "tag": "REST API",
+      "pos": [684, 280],
+      "size": [144, 64]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "SQLite Database",
+      "sublabel": "SQLAlchemy ORM",
+      "brand": "sqlite",
+      "tag": "Durable State",
+      "pos": [904, 280],
+      "size": [136, 64]
+    },
+    {
+      "id": "tile_srv",
+      "type": "external",
+      "label": "Map Tile Provider",
+      "sublabel": "Carto / OSM Vector Tiles",
+      "tag": "Base Maps",
+      "pos": [464, 120],
+      "size": [144, 64]
+    },
+    {
+      "id": "uploads",
+      "type": "backend",
+      "label": "Proof Photo Store",
+      "sublabel": "/uploads Static Dir",
+      "tag": "Before/After Photos",
+      "pos": [684, 120],
+      "size": [144, 64]
+    },
+    {
+      "id": "amc_bot",
+      "type": "external",
+      "label": "AMC WhatsApp Bot",
+      "sublabel": "+91 75678 55303",
+      "brand": "whatsapp",
+      "tag": "Civic Helpline",
+      "pos": [464, 440],
+      "size": [144, 64]
+    },
+    {
+      "id": "amc_ccrs",
+      "type": "external",
+      "label": "AMC CCRS 311",
+      "sublabel": "Complaint Ticket Portal",
+      "tag": "Official Redressal",
+      "pos": [684, 440],
+      "size": [144, 64]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Vercel Cloud Edge",
+      "wraps": ["vercel", "spa"],
+      "pad": 16
+    },
+    {
+      "kind": "region",
+      "label": "Render Application Infrastructure",
+      "wraps": ["api", "db", "uploads"],
+      "pad": 16
+    }
+  ],
+  "connections": [
+    {
+      "id": "citizens-to-vercel",
+      "from": "citizens",
+      "to": "vercel",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "vercel-to-spa",
+      "from": "vercel",
+      "to": "spa",
+      "label": "bundle",
+      "variant": "emphasis"
+    },
+    {
+      "id": "spa-to-api",
+      "from": "spa",
+      "to": "api",
+      "label": "/api/* calls",
+      "variant": "emphasis"
+    },
+    {
+      "id": "api-to-db",
+      "from": "api",
+      "to": "db",
+      "label": "SQL queries",
+      "variant": "emphasis"
+    },
+    {
+      "id": "spa-to-tiles",
+      "from": "spa",
+      "to": "tile_srv",
+      "label": "vector tiles",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelDy": -48
+    },
+    {
+      "id": "api-to-uploads",
+      "from": "api",
+      "to": "uploads",
+      "label": "store media",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelDy": -48
+    },
+    {
+      "id": "spa-to-bot",
+      "from": "spa",
+      "to": "amc_bot",
+      "label": "dispatch alert",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 48
+    },
+    {
+      "id": "api-to-ccrs",
+      "from": "api",
+      "to": "amc_ccrs",
+      "label": "ticket sync",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 48
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Citizen & Edge Tier",
+      "items": [
+        "Vercel Global Edge serves React 19 SPA with zero-config SSL and edge rewrites",
+        "MapLibre GL JS renders 27 AMC ward boundaries with dynamic cleanliness heatmaps",
+        "Trilingual localization across Gujarati (ગુજરાતી), Hindi (हिंदी), and English"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "FastAPI Core & State",
+      "items": [
+        "FastAPI ASGI backend hosted on Render container platform with auto-seed",
+        "SQLite database with SQLAlchemy ORM and automatic schema migrations",
+        "Dedicated proof photo store handling before/after cleanup verification images"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Municipal 311 Bridge",
+      "items": [
+        "Pre-formatted WhatsApp dispatch to AMC official helpline (+91 75678 55303)",
+        "Automatic AMC-CCRS-2026-XXXXX 5-digit decimal ticket ID assignment",
+        "Sunday community cleanup drives (સફાઈ અભિયાન) with citizen karma rewards"
+      ]
+    }
+  ]
+}

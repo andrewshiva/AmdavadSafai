@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 from math import asin, cos, radians, sin, sqrt
 import uuid
+import random
 import models, schemas
 from image_storage import save_image_and_push_to_github
 

@@ -25,7 +25,7 @@ export const AboutModal = ({
   onOpenReport,
   onOpenEvents,
   onOpenCleanedSpots,
-  onOpenRWA
+  _onOpenRWA
 }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('overview');

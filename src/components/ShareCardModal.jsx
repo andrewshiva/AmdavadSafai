@@ -1,21 +1,20 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
-import { X, Share2, Download, Copy, Check, Sparkles, MessageCircle, Heart } from 'lucide-react';
+import { X, Share2, Download, Copy, Check, MessageCircle } from 'lucide-react';
 
 export const ShareCardModal = ({ isOpen, onClose, data }) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const canvasRef = useRef(null);
-  const [copied, setCopied] = useState(false);
   const [copiedText, setCopiedText] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
-  const reportOrEvent = data || {
+  const reportOrEvent = useMemo(() => data || {
     type: 'report',
     title: 'Garbage hotspot reported on Maninagar Canal Road',
     location: 'Maninagar, Ahmedabad',
     status: 'unresolved',
     severity: 'severe'
-  };
+  }, [data]);
 
   const rawLocation = reportOrEvent.location || reportOrEvent.location_name || 'Ahmedabad, Gujarat';
   const cleanLocation = rawLocation.replace(/\s*\(Ward\s+ward_\d+\)/gi, '').trim();
@@ -28,7 +27,7 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
     : `*AmdavadSafai — Cleanliness Action in Ahmedabad!* 🧹\n\n📍 *Location:* ${cleanLocation}\n${ticketRef}⚠️ *Status:* ${reportOrEvent.status === 'resolved' ? '✅ Resolved & Cleaned' : '⏳ Pending AMC Action'}\n\n🤝 *આપણું શહેર, આપણી જવાબદારી*\n👉 *Track live on map:* ${appUrl}`;
 
   // Draw Canvas Card
-  const drawCard = () => {
+  const drawCard = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -141,13 +140,14 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
     ctx.fillStyle = '#94A3B8';
     ctx.font = '13px sans-serif';
     ctx.fillText('Join the citizen movement to keep Amdavad spotless!', 40, 745);
-  };
+  }, [cleanLocation, isEvent, reportOrEvent]);
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(drawCard, 100);
+      const timer = setTimeout(drawCard, 100);
+      return () => clearTimeout(timer);
     }
-  }, [isOpen, reportOrEvent]);
+  }, [isOpen, drawCard]);
 
   if (!isOpen) return null;
 
@@ -171,12 +171,6 @@ export const ShareCardModal = ({ isOpen, onClose, data }) => {
     } finally {
       setDownloading(false);
     }
-  };
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(appUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
   };
 
   const handleCopyText = () => {

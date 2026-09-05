@@ -5,7 +5,7 @@ import { X, AlertTriangle, Camera, CheckCircle2, RefreshCw } from 'lucide-react'
 import { addKarmaPoints } from '../utils/gamification';
 
 export const DisputeResolutionModal = ({ isOpen, onClose, report, onSuccess }) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const [photo, setPhoto] = useState(null);
   const [reason, setReason] = useState('');
   const [submitting, setSubmitting] = useState(false);

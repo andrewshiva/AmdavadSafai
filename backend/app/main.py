@@ -38,10 +38,25 @@ def on_startup():
     except Exception as err:
         print(f"Startup seed notice: {err}")
 
-# CORS setup
+# Configured CORS origins (adheres to CORS spec with allow_credentials=True)
+ALLOWED_ORIGINS = [
+    "https://amdavad-safai-9i9g.vercel.app",
+    "https://amdavadsafai.onrender.com",
+    "http://localhost:5173",
+    "http://localhost:5180",
+    "http://localhost:5182",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5180",
+    "http://127.0.0.1:5182",
+]
+env_origins = os.getenv("ALLOWED_ORIGINS", "")
+if env_origins:
+    ALLOWED_ORIGINS.extend([o.strip() for o in env_origins.split(",") if o.strip()])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

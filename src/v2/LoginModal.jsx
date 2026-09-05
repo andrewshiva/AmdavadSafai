@@ -10,7 +10,7 @@ export const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [otpSent, setOtpSent] = useState(false);
+  const [_otpSent, setOtpSent] = useState(false);
 
   const inputRefs = useRef([]);
 

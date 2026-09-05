@@ -4,7 +4,7 @@ import { Image, MapPin, ChevronRight, FileText } from 'lucide-react';
 import wardsData from '../data/wards.json';
 
 export const MyReportsView = ({ reports = [], onSelectReport, onOpenReport }) => {
-  const { t, lang } = useTranslation();
+  const { lang } = useTranslation();
   const [filterTab, setFilterTab] = useState('all'); // 'all', 'pending', 'in_progress', 'resolved'
 
   // Combine prop reports with locally submitted reports

@@ -9,6 +9,7 @@
     "dev:v2": "vite --port 5182 --strictPort",
     "build": "vite build",
     "lint": "oxlint",
+    "test": "echo \"No automated tests configured yet\" && exit 0",
     "preview": "vite preview"
   },
   "dependencies": {

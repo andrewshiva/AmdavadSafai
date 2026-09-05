@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
 import { ChevronUp, ChevronDown, BarChart2, ShieldAlert, PieChart as PieIcon, Activity } from 'lucide-react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend } from 'recharts';
@@ -9,13 +9,13 @@ export const StatsPanel = ({ reports = [], isOpen: controlledIsOpen, onToggleOpe
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const isControlled = controlledIsOpen !== undefined;
   const isOpen = isControlled ? controlledIsOpen : internalIsOpen;
-  const setIsOpen = (next) => {
+  const setIsOpen = useCallback((next) => {
     if (onToggleOpen) {
       onToggleOpen(typeof next === 'function' ? next(isOpen) : next);
     } else {
       setInternalIsOpen(next);
     }
-  };
+  }, [isOpen, onToggleOpen]);
   const [displayedTotal, setDisplayedTotal] = useState(0);
   const [displayedUnresolved, setDisplayedUnresolved] = useState(0);
   const [statsData, setStatsData] = useState(null);
