@@ -34,6 +34,8 @@ __pycache__/
 *.sqlite
 *.sqlite3
 *.db-journal
+*.db-wal
+*.db-shm
 
 # Runtime uploads (user-generated, served from disk / object storage in prod)
 backend/uploads/
