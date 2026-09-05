@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from '../i18n/useTranslation';
-import { X, AlertCircle, MapPin, CheckCircle2, LocateFixed, Camera, Tag } from 'lucide-react';
+import { X, AlertCircle, MapPin, CheckCircle2, LocateFixed, Camera, Tag, Clock, Sparkles } from 'lucide-react';
 import { addKarmaPoints } from '../utils/gamification';
 import { generateAmcTicketId } from '../utils/amcTickets';
+import { formatDateTime } from '../utils/dateTime';
 
 export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, onOutofCity }) => {
   const { t, lang } = useTranslation();
@@ -20,6 +21,9 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
   const [locationMessage, setLocationMessage] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [submissionTimestamp, setSubmissionTimestamp] = useState(null);
+  const [triageLoading, setTriageLoading] = useState(false);
+  const [triageResult, setTriageResult] = useState(null);
 
   useEffect(() => {
     if (pickedCoords && pickedCoords.lat && pickedCoords.lng) {
@@ -118,6 +122,8 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
     const finalDescEn = descEn.trim() || descGu.trim();
     const finalDescGu = descGu.trim() || descEn.trim();
     const newAmcTicketId = generateAmcTicketId();
+    const nowIso = new Date().toISOString();
+    setSubmissionTimestamp(nowIso);
 
     setSubmitting(true);
     try {
@@ -183,7 +189,8 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
         flagged: 0,
         lat: parseFloat(lat),
         lng: parseFloat(lng),
-        reported_at: new Date().toISOString()
+        reported_at: nowIso,
+        created_at: nowIso
       };
       const stored = JSON.parse(localStorage.getItem('amdavad_safai_local_reports') || '[]');
       localStorage.setItem('amdavad_safai_local_reports', JSON.stringify([newReport, ...stored]));
@@ -221,7 +228,11 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
             {success ? (
               <div className="modal-success-message" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', padding: '32px 16px' }}>
                 <CheckCircle2 size={48} style={{ color: 'var(--color-minor)' }} />
-                <span>{t('report_success')}</span>
+                <span style={{ fontSize: '16px', fontWeight: 700 }}>{t('report_success')}</span>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12.5px', color: 'var(--color-text-secondary)', background: 'var(--color-bg)', padding: '6px 14px', borderRadius: '8px', border: '1px solid var(--glass-border)' }}>
+                  <Clock size={14} style={{ color: 'var(--color-primary)' }} />
+                  <span>{t('filing_timestamp') || 'Filing Date & Time'}: <strong style={{ color: 'var(--color-text-primary)' }}>{formatDateTime(submissionTimestamp || new Date().toISOString(), lang)}</strong></span>
+                </div>
               </div>
             ) : (
               <div className="modal-form-fields" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -410,6 +421,84 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                     style={{ resize: 'vertical' }}
                   />
                 </div>
+
+                {/* MiniMind-3 AI Smart Triage Assistant */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '8px 12px',
+                  borderRadius: '10px',
+                  background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.08), rgba(234, 88, 12, 0.12))',
+                  border: '1px solid rgba(249, 115, 22, 0.3)'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Sparkles size={15} color="#EA580C" />
+                    <span style={{ fontSize: '12px', fontWeight: 700, color: '#EA580C' }}>
+                      MiniMind-3 AI Auto-Triage
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      const text = descEn.trim() || descGu.trim();
+                      if (!text || triageLoading) return;
+                      setTriageLoading(true);
+                      try {
+                        const res = await fetch('/api/ai/triage', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ description: text, category })
+                        });
+                        if (res.ok) {
+                          const data = await res.json();
+                          setTriageResult(data);
+                          if (data.predicted_category) setCategory(data.predicted_category);
+                          if (data.predicted_severity) setSeverity(data.predicted_severity);
+                        }
+                      } catch (err) {
+                        console.error('AI Triage error:', err);
+                      } finally {
+                        setTriageLoading(false);
+                      }
+                    }}
+                    disabled={triageLoading || (!descEn.trim() && !descGu.trim())}
+                    style={{
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      padding: '4px 10px',
+                      borderRadius: '6px',
+                      background: (!descEn.trim() && !descGu.trim()) ? 'rgba(0,0,0,0.1)' : '#EA580C',
+                      color: (!descEn.trim() && !descGu.trim()) ? 'var(--color-text-muted)' : '#FFFFFF',
+                      border: 'none',
+                      cursor: (!descEn.trim() && !descGu.trim()) ? 'default' : 'pointer',
+                      transition: 'all 0.15s ease'
+                    }}
+                  >
+                    {triageLoading ? 'Analyzing...' : 'Auto-Route Department ✨'}
+                  </button>
+                </div>
+
+                {triageResult && (
+                  <div style={{
+                    fontSize: '11px',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    background: 'rgba(52, 211, 153, 0.1)',
+                    border: '1px solid rgba(52, 211, 153, 0.3)',
+                    color: '#065F46',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2px'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 800 }}>
+                      <CheckCircle2 size={13} color="#10B981" />
+                      <span>{triageResult.model}: {triageResult.predicted_department}</span>
+                    </div>
+                    <span style={{ color: '#047857' }}>{triageResult.summary}</span>
+                  </div>
+                )}
 
                 {/* Coordinates Picker Info & Inputs */}
                 <div className="input-group">

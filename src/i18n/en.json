@@ -30,6 +30,10 @@
   "days_ago": "days ago",
   "hours_ago": "hours ago",
   "minutes_ago": "minutes ago",
+  "reported_on": "Reported on",
+  "resolved_on": "Resolved on",
+  "report_date_time": "Date & Time",
+  "filing_timestamp": "Filing Date & Time",
   "resolved_badge": "Resolved",
   "unresolved_badge": "Unresolved",
   "reports_count": "reports",
@@ -239,5 +243,8 @@
   "about_amc_control_room": "AMC Central Control Room (079-25391811)",
   "about_swm_dept": "Solid Waste Management (SWM) Dept",
   "about_open_source_title": "100% Open Source & Privacy-First",
-  "about_open_source_desc": "Built with privacy in mind. No user tracking or mandatory account signup. Device identity is securely hashed on your browser."
+  "about_open_source_desc": "Built with privacy in mind. No user tracking or mandatory account signup. Device identity is securely hashed on your browser.",
+  "view_receipt": "View Receipt",
+  "resolution_receipt": "AMC Resolution Receipt",
+  "official_resolution_stamp": "Official Municipal Cleanliness Receipt & Certificate"
 }

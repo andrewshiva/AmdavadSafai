@@ -25,6 +25,8 @@ import BadgesModal from '../components/BadgesModal';
 import ShareCardModal from '../components/ShareCardModal';
 import WallOfCleanedModal from '../components/WallOfCleanedModal';
 import RWADashboardModal from '../components/RWADashboardModal';
+import ResolutionReceiptModal from '../components/ResolutionReceiptModal';
+import CivicAIAssistantModal from '../components/CivicAIAssistantModal';
 import { useFilter } from '../hooks/useFilter';
 import { Loader2 } from 'lucide-react';
 import { checkDailyVisitStreak } from '../utils/gamification';
@@ -44,6 +46,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
   });
 
   const [selectedReport, setSelectedReport] = useState(null);
+  const [selectedReceipt, setSelectedReceipt] = useState(null);
   const [pickedCoords, setPickedCoords] = useState(null);
   const [verifyingReport, setVerifyingReport] = useState(null);
   const [flaggingReport, setFlaggingReport] = useState(null);
@@ -56,6 +59,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
   const [shareCardTarget, setShareCardTarget] = useState(null);
   const [isStatsOpen, setIsStatsOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
 
   const {
     severity,
@@ -136,6 +140,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
         onOpenLogin={() => setIsLoginOpen(true)}
         onLogout={handleLogout}
         onOpenVideo={() => setIsVideoOpen(true)}
+        onOpenAIAssistant={() => setIsAIAssistantOpen(true)}
         onSwitchVersion={onSwitchVersion}
       />
 
@@ -170,6 +175,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
           <MyReportsView
             reports={filteredReports}
             onSelectReport={(report) => setSelectedReport(report)}
+            onViewReceipt={(report) => setSelectedReceipt(report)}
             onOpenReport={handleRequireLoginOrReport}
           />
         ) : activeView === 'wards' ? (
@@ -220,8 +226,13 @@ export const AppV2 = ({ onSwitchVersion }) => {
       {/* Report Detail Modal */}
       {selectedReport && (
         <ReportDetailModal
+          isOpen={Boolean(selectedReport)}
           report={selectedReport}
           onClose={() => setSelectedReport(null)}
+          onViewReceipt={(report) => {
+            setSelectedReport(null);
+            setSelectedReceipt(report);
+          }}
           onVerify={(report) => {
             setSelectedReport(null);
             if (!currentUser) {
@@ -248,6 +259,30 @@ export const AppV2 = ({ onSwitchVersion }) => {
           }}
           onShareCard={(report) => {
             setShareCardTarget(report);
+          }}
+        />
+      )}
+
+      {/* Official AMC Resolution Receipt & Cleanliness Certificate Modal */}
+      {selectedReceipt && (
+        <ResolutionReceiptModal
+          isOpen={Boolean(selectedReceipt)}
+          report={selectedReceipt}
+          onClose={() => setSelectedReceipt(null)}
+          onDispute={(report) => {
+            setSelectedReceipt(null);
+            if (!currentUser) {
+              setIsLoginOpen(true);
+            } else {
+              setDisputingReport(report);
+            }
+          }}
+          onShareCard={(report) => {
+            setShareCardTarget(report);
+          }}
+          onOpenReportDetail={(report) => {
+            setSelectedReceipt(null);
+            setSelectedReport(report);
           }}
         />
       )}
@@ -338,6 +373,12 @@ export const AppV2 = ({ onSwitchVersion }) => {
         isOpen={!!shareCardTarget}
         onClose={() => setShareCardTarget(null)}
         data={shareCardTarget}
+      />
+
+      {/* MiniMind-3 Civic AI Assistant Modal */}
+      <CivicAIAssistantModal
+        isOpen={isAIAssistantOpen}
+        onClose={() => setIsAIAssistantOpen(false)}
       />
 
       {/* Stats Drawer - Only visible after login in Version 2 */}

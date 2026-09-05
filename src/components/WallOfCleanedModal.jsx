@@ -4,6 +4,7 @@ import { X, Sparkles, CheckCircle2, Clock, MapPin, Building2 } from 'lucide-reac
 import { useTranslation } from '../i18n/useTranslation';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import { getAmcTicketId } from '../utils/amcTickets';
+import { formatDateTime } from '../utils/dateTime';
 
 export const WallOfCleanedModal = ({ isOpen, onClose, reports = [], wards = [] }) => {
   const { t, lang } = useTranslation();
@@ -144,9 +145,9 @@ export const WallOfCleanedModal = ({ isOpen, onClose, reports = [], wards = [] }
                           <CheckCircle2 size={13} />
                           <span>{report.amc_status || t('resolved_by_amc') || 'Resolved by AMC SWM'}</span>
                         </div>
-                        <div className="wall-spot-timing">
+                        <div className="wall-spot-timing" title={report.resolved_at ? formatDateTime(report.resolved_at, lang) : undefined}>
                           <Clock size={12} />
-                          <span>{t('turnaround_time') || 'Turnaround: 18h'}</span>
+                          <span>{report.resolved_at ? `${t('resolved_badge') || 'Resolved'}: ${formatDateTime(report.resolved_at, lang)}` : (t('turnaround_time') || 'Turnaround: 18h')}</span>
                         </div>
                       </div>
 

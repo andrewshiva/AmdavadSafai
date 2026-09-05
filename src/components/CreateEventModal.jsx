@@ -64,7 +64,7 @@ export const CreateEventModal = ({ isOpen, onClose, onEventCreated }) => {
 
       if (res.ok) {
         const created = await res.json();
-        addKarmaPoints('EVENT_CREATED', 100, { targetId: created.id, description: `Organized Cleanup Drive: ${title}` });
+        addKarmaPoints('EVENT_CREATED', 100, { targetId: created.id, description: `Organized Cleanup Drive: ${finalTitleEn}` });
         setSuccess(true);
         if (onEventCreated) onEventCreated(created);
         setTimeout(() => {
@@ -76,7 +76,7 @@ export const CreateEventModal = ({ isOpen, onClose, onEventCreated }) => {
       }
     } catch {
       // Optimistic offline fallback
-      addKarmaPoints('EVENT_CREATED', 100, { targetId: `event_local_${Date.now()}`, description: `Organized Cleanup Drive: ${title}` });
+      addKarmaPoints('EVENT_CREATED', 100, { targetId: `event_local_${Date.now()}`, description: `Organized Cleanup Drive: ${finalTitleEn}` });
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);

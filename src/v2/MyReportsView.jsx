@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
-import { Image, MapPin, ChevronRight, FileText } from 'lucide-react';
+import { Image, MapPin, ChevronRight, FileText, Clock } from 'lucide-react';
 import wardsData from '../data/wards.json';
+import { formatDateTime } from '../utils/dateTime';
 
-export const MyReportsView = ({ reports = [], onSelectReport, onOpenReport }) => {
+export const MyReportsView = ({ reports = [], onSelectReport, onOpenReport, onViewReceipt }) => {
   const { lang } = useTranslation();
   const [filterTab, setFilterTab] = useState('all'); // 'all', 'pending', 'in_progress', 'resolved'
 
@@ -40,18 +41,8 @@ export const MyReportsView = ({ reports = [], onSelectReport, onOpenReport }) =>
     ? resolvedReports
     : allReports;
 
-  const formatDate = (dateStr) => {
-    if (!dateStr) return 'Oct 12, 2024';
-    try {
-      const d = new Date(dateStr);
-      return d.toLocaleDateString(lang === 'gu' ? 'gu-IN' : lang === 'hi' ? 'hi-IN' : 'en-US', {
-        month: 'short',
-        day: '2-digit',
-        year: 'numeric'
-      });
-    } catch {
-      return 'Oct 12, 2024';
-    }
+  const formatReportDateTime = (dateStr) => {
+    return formatDateTime(dateStr, lang) || 'Just now';
   };
 
   const getWardName = (wardId) => {
@@ -163,7 +154,10 @@ export const MyReportsView = ({ reports = [], onSelectReport, onOpenReport }) =>
                   <div className="variant-report-meta-line">
                     <span className="meta-ticket">{ticketId}</span>
                     <span className="meta-dot">·</span>
-                    <span className="meta-date">{formatDate(item.created_at || item.reported_at)}</span>
+                    <span className="meta-date" title={formatReportDateTime(item.created_at || item.reported_at)} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                      <Clock size={12} style={{ color: '#FF6B35' }} />
+                      <span>{formatReportDateTime(item.created_at || item.reported_at)}</span>
+                    </span>
                   </div>
 
                   <h3 className="variant-report-item-title">
@@ -174,6 +168,13 @@ export const MyReportsView = ({ reports = [], onSelectReport, onOpenReport }) =>
                     <MapPin size={13} />
                     <span>{getWardName(item.ward_id)}</span>
                   </div>
+
+                  {statusType === 'resolved' && item.resolved_at && (
+                    <div style={{ fontSize: '11px', color: '#16A34A', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '4px', fontWeight: 600 }}>
+                      <span>✓ {lang === 'gu' ? 'ઉકેલાયું:' : lang === 'hi' ? 'समाधानित:' : 'Resolved:'}</span>
+                      <span>{formatReportDateTime(item.resolved_at)}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Right Status Pill & Chevron */}
@@ -200,7 +201,11 @@ export const MyReportsView = ({ reports = [], onSelectReport, onOpenReport }) =>
                       className="variant-view-receipt-link"
                       onClick={(e) => {
                         e.stopPropagation();
-                        if (onSelectReport) onSelectReport(item);
+                        if (onViewReceipt) {
+                          onViewReceipt(item);
+                        } else if (onSelectReport) {
+                          onSelectReport(item);
+                        }
                       }}
                     >
                       <FileText size={12} style={{ marginRight: '4px', verticalAlign: 'middle' }} />

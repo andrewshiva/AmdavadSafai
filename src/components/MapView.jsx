@@ -6,6 +6,7 @@ import wardsData from '../data/wards.json';
 import staticGeoJSON from '../data/ahmedabad_wards.json';
 import cityMaskGeoJSON from '../data/ahmedabad_city_mask.json';
 import defaultEventsData from '../data/events.json';
+import { formatDateTime } from '../utils/dateTime';
 
 export const MapView = ({ reports, events = defaultEventsData, onMapClick, onReportSelect, wardId }) => {
   const { t, lang } = useTranslation();
@@ -465,8 +466,8 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
                 ${t(`${report.status}_badge`)}
               </span>
               ${isOverdue ? `<span style="font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: #DC2626; color: white;">🔥 48h+ Overdue</span>` : ''}
-              <span class="popup-time" style="font-size: 11px; color: var(--color-text-muted);">
-                ${getRelativeTime(report.reported_at)}
+              <span class="popup-time" title="${formatDateTime(report.reported_at, lang)}" style="font-size: 11px; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 3px;">
+                🕒 ${formatDateTime(report.reported_at, lang) || getRelativeTime(report.reported_at)}
               </span>
             </div>
             <button

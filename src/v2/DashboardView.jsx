@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
-import { TrendingUp, CheckCircle2, Truck, Image, AlertTriangle } from 'lucide-react';
+import { TrendingUp, CheckCircle2, Truck, Image, AlertTriangle, Clock } from 'lucide-react';
 import MapView from '../components/MapView';
 import wardsData from '../data/wards.json';
+import { formatDateTime } from '../utils/dateTime';
 
 export const DashboardView = ({ reports = [], onSelectReport, onOpenReport }) => {
   const { lang } = useTranslation();
@@ -25,58 +26,76 @@ export const DashboardView = ({ reports = [], onSelectReport, onOpenReport }) =>
     return list;
   }, [reports, selectedWardId, selectedZone, filteredWards]);
 
-  const liveFeeds = [
-    {
-      id: 1,
-      type: 'new_report',
-      icon: Image,
-      iconColor: '#FF6B35',
-      iconBg: '#FFF3EE',
-      title: lang === 'gu' ? 'નવો અહેવાલ: કચરાનો ઢગલો' : lang === 'hi' ? 'नई शिकायत: कचरे का ढेर' : 'NEW REPORT: GARBAGE PILE',
-      subtitle: lang === 'gu' ? 'વોર્ડ ૧૨, ઉસ્માનપુરા · હમણાં જ' : 'Ward 12, Usmanpura · Just now',
-      status: 'pending'
-    },
-    {
-      id: 2,
-      type: 'resolved',
-      icon: CheckCircle2,
-      iconColor: '#10B981',
-      iconBg: '#ECFDF5',
-      title: lang === 'gu' ? 'સમસ્યા ઉકેલાઈ ગઈ' : lang === 'hi' ? 'समस्या का समाधान हुआ' : 'ISSUE RESOLVED',
-      subtitle: lang === 'gu' ? 'મણિનગર પૂર્વ · ૪ મિ. પહેલાં' : 'Maninagar East · 4m ago',
-      status: 'resolved'
-    },
-    {
-      id: 3,
-      type: 'dispatch',
-      icon: Truck,
-      iconColor: '#3B82F6',
-      iconBg: '#EFF6FF',
-      title: lang === 'gu' ? 'સફાઈ વાહન રવાના' : lang === 'hi' ? 'सफाई वाहन रवाना' : 'VEHICLE DISPATCHED',
-      subtitle: lang === 'gu' ? 'સેટેલાઇટ વિસ્તાર · ૧૨ મિ. પહેલાં' : 'Satellite Area · 12m ago',
-      status: 'in_progress'
-    },
-    {
-      id: 4,
-      type: 'new_report',
-      icon: AlertTriangle,
-      iconColor: '#FF6B35',
-      iconBg: '#FFF3EE',
-      title: lang === 'gu' ? 'નવો અહેવાલ: ખુલ્લી ગટર' : lang === 'hi' ? 'नई शिकायत: खुला नाला' : 'NEW REPORT: OPEN DRAIN',
-      subtitle: lang === 'gu' ? 'બોપલ વોર્ડ · ૧૮ મિ. પહેલાં' : 'Bopal Ward · 18m ago',
-      status: 'pending'
-    },
-    {
-      id: 5,
-      type: 'resolved',
-      icon: CheckCircle2,
-      iconColor: '#10B981',
-      iconBg: '#ECFDF5',
-      title: lang === 'gu' ? 'સમસ્યા ઉકેલાઈ ગઈ' : lang === 'hi' ? 'समस्या का समाधान हुआ' : 'ISSUE RESOLVED',
-      subtitle: lang === 'gu' ? 'પાલડી ચાર રસ્તા · ૨૪ મિ. પહેલાં' : 'Paldi Cross Roads · 24m ago',
-      status: 'resolved'
-    }
-  ];
+  const liveFeeds = useMemo(() => {
+    const dynamicItems = (reports || [])
+      .slice(0, 3)
+      .map((r) => {
+        const isResolved = r.status === 'resolved';
+        const ward = wardsData.find((w) => w.id === r.ward_id);
+        const wardName = ward
+          ? (lang === 'gu' ? ward.name_gu : lang === 'hi' ? ward.name_hi || ward.name_en : ward.name_en)
+          : (r.ward_id || 'Ahmedabad');
+        const formattedTime = formatDateTime(r.created_at || r.reported_at, lang);
+        return {
+          id: r.id,
+          report: r,
+          type: isResolved ? 'resolved' : 'new_report',
+          icon: isResolved ? CheckCircle2 : Image,
+          iconColor: isResolved ? '#10B981' : '#FF6B35',
+          iconBg: isResolved ? '#ECFDF5' : '#FFF3EE',
+          title: isResolved
+            ? (lang === 'gu' ? 'સમસ્યા ઉકેલાઈ ગઈ' : lang === 'hi' ? 'समस्या का समाधान हुआ' : 'ISSUE RESOLVED')
+            : (lang === 'gu' ? `નવો અહેવાલ: ${(r.category || 'કચરો').replace('_', ' ')}` : `NEW REPORT: ${(r.category || 'GARBAGE').toUpperCase().replace('_', ' ')}`),
+          subtitle: `${wardName} · ${formattedTime || 'Just now'}`,
+          status: isResolved ? 'resolved' : 'pending'
+        };
+      });
+
+    const defaultFeeds = [
+      {
+        id: 'mock_1',
+        type: 'new_report',
+        icon: Image,
+        iconColor: '#FF6B35',
+        iconBg: '#FFF3EE',
+        title: lang === 'gu' ? 'નવો અહેવાલ: કચરાનો ઢગલો' : lang === 'hi' ? 'नई शिकायत: कचरे का ढेर' : 'NEW REPORT: GARBAGE PILE',
+        subtitle: lang === 'gu' ? 'વોર્ડ ૧૨, ઉસ્માનપુરા · હમણાં જ' : 'Ward 12, Usmanpura · Just now',
+        status: 'pending'
+      },
+      {
+        id: 'mock_2',
+        type: 'resolved',
+        icon: CheckCircle2,
+        iconColor: '#10B981',
+        iconBg: '#ECFDF5',
+        title: lang === 'gu' ? 'સમસ્યા ઉકેલાઈ ગઈ' : lang === 'hi' ? 'समस्या का समाधान हुआ' : 'ISSUE RESOLVED',
+        subtitle: lang === 'gu' ? 'મણિનગર પૂર્વ · ૪ મિ. પહેલાં' : 'Maninagar East · 4m ago',
+        status: 'resolved'
+      },
+      {
+        id: 'mock_3',
+        type: 'dispatch',
+        icon: Truck,
+        iconColor: '#3B82F6',
+        iconBg: '#EFF6FF',
+        title: lang === 'gu' ? 'સફાઈ વાહન રવાના' : lang === 'hi' ? 'सफाई वाहन रवाना' : 'VEHICLE DISPATCHED',
+        subtitle: lang === 'gu' ? 'સેટેલાઇટ વિસ્તાર · ૧૨ મિ. પહેલાં' : 'Satellite Area · 12m ago',
+        status: 'in_progress'
+      },
+      {
+        id: 'mock_4',
+        type: 'new_report',
+        icon: AlertTriangle,
+        iconColor: '#FF6B35',
+        iconBg: '#FFF3EE',
+        title: lang === 'gu' ? 'નવો અહેવાલ: ખુલ્લી ગટર' : lang === 'hi' ? 'नई शिकायत: खुला नाला' : 'NEW REPORT: OPEN DRAIN',
+        subtitle: lang === 'gu' ? 'બોપલ વોર્ડ · ૧૮ મિ. પહેલાં' : 'Bopal Ward · 18m ago',
+        status: 'pending'
+      }
+    ];
+
+    return [...dynamicItems, ...defaultFeeds].slice(0, 5);
+  }, [reports, lang]);
 
   return (
     <div className="variant-dashboard-container">
@@ -204,7 +223,12 @@ export const DashboardView = ({ reports = [], onSelectReport, onOpenReport }) =>
               {liveFeeds.map((feed) => {
                 const IconComponent = feed.icon;
                 return (
-                  <div key={feed.id} className="live-feed-item">
+                  <div
+                    key={feed.id}
+                    className="live-feed-item"
+                    onClick={() => feed.report && onSelectReport && onSelectReport(feed.report)}
+                    style={feed.report ? { cursor: 'pointer' } : undefined}
+                  >
                     <div
                       className="live-feed-icon-wrap"
                       style={{ background: feed.iconBg, color: feed.iconColor }}

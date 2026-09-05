@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
 import { Download, Phone, Mail, Image, MapPin, CheckCircle2, Clock, ThumbsUp, Shield, User } from 'lucide-react';
 import wardsData from '../data/wards.json';
+import { formatDateTime } from '../utils/dateTime';
 
 export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport }) => {
   const { t, lang } = useTranslation();
@@ -272,8 +273,12 @@ export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport })
                     <h4 className="timeline-item-title">{title}</h4>
                     <p className="timeline-item-loc">{issue.location || `${currentWard.name_en} Ward area`}</p>
                     <div className="timeline-item-meta">
-                      <span className="meta-time">
-                        <Clock size={11} /> {issue.amc_ticket_id || 'AS-311'}
+                      <span className="meta-time" title={formatDateTime(issue.created_at || issue.reported_at, lang)} style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                        <Clock size={11} style={{ color: '#FF6B35' }} />
+                        <span>{formatDateTime(issue.created_at || issue.reported_at, lang) || 'Recent'}</span>
+                      </span>
+                      <span className="meta-ticket" style={{ fontSize: '11px', color: '#64748B', fontWeight: 600, marginLeft: '4px' }}>
+                        {issue.amc_ticket_id || 'AS-311'}
                       </span>
                       {issue.upvotes > 0 && (
                         <span className="meta-upvotes">

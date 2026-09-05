@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from '../i18n/useTranslation';
 import { Clock, CheckCircle2, AlertCircle } from 'lucide-react';
+import { formatDateTime } from '../utils/dateTime';
 
 export const ReportItem = ({ report, onClick }) => {
   const { t, lang } = useTranslation();
@@ -23,6 +24,7 @@ export const ReportItem = ({ report, onClick }) => {
   };
 
   const categoryKey = report.category ? `cat_${report.category}` : 'cat_mixed_waste';
+  const fullDateTime = formatDateTime(report.reported_at, lang);
 
   return (
     <div
@@ -54,9 +56,9 @@ export const ReportItem = ({ report, onClick }) => {
             {t(categoryKey)}
           </span>
         </div>
-        <div className="meta-right">
+        <div className="meta-right" title={`${t('reported_on') || 'Reported on'}: ${fullDateTime}`} style={{ display: 'inline-flex', alignItems: 'center' }}>
           <Clock size={12} style={{ marginRight: '4px' }} />
-          <span>{getRelativeTime(report.reported_at)}</span>
+          <span>{fullDateTime || getRelativeTime(report.reported_at)}</span>
         </div>
       </div>
     </div>

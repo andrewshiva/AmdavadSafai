@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from '../i18n/useTranslation';
-import { Menu, BookOpen, X, ChevronRight, LogOut, User, Mail, FileText } from 'lucide-react';
+import { Menu, BookOpen, X, ChevronRight, LogOut, User, Mail, FileText, Sparkles } from 'lucide-react';
 import SubscribeModal from '../components/SubscribeModal';
 import ChangelogModal from '../components/ChangelogModal';
 
@@ -15,6 +15,7 @@ export const HeaderV2 = ({
   onOpenLogin,
   onLogout,
   onOpenVideo,
+  onOpenAIAssistant,
   onSwitchVersion
 }) => {
   const { t, lang, setLanguage } = useTranslation();
@@ -169,6 +170,32 @@ export const HeaderV2 = ({
             EN
           </button>
         </div>
+
+        {/* AI Assistant Button */}
+        {onOpenAIAssistant && (
+          <button
+            type="button"
+            className="variant-ai-btn header-desktop-only"
+            onClick={onOpenAIAssistant}
+            title="AmdavadSafai AI Assistant (MiniMind-3)"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 12px',
+              borderRadius: '999px',
+              background: 'linear-gradient(135deg, #1E293B, #0F172A)',
+              border: '1px solid rgba(249, 115, 22, 0.4)',
+              color: '#F97316',
+              fontSize: '11.5px',
+              fontWeight: 800,
+              cursor: 'pointer'
+            }}
+          >
+            <Sparkles size={13} color="#F97316" />
+            <span>AI Assistant</span>
+          </button>
+        )}
 
         {/* Desktop Karma Points */}
         {currentUser && onOpenBadges && (
@@ -406,6 +433,24 @@ export const HeaderV2 = ({
                 <span>{lang === 'gu' ? 'સામુદાયિક પ્રભાવ ગેલેરી' : lang === 'hi' ? 'सामुदायिक प्रभाव गैलरी' : 'COMMUNITY IMPACT GALLERY'}</span>
                 <ChevronRight size={16} />
               </button>
+
+              {onOpenAIAssistant && (
+                <button
+                  type="button"
+                  className="mobile-nav-item"
+                  onClick={() => {
+                    setIsMobileDrawerOpen(false);
+                    onOpenAIAssistant();
+                  }}
+                  style={{ color: '#F97316' }}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Sparkles size={16} />
+                    {lang === 'gu' ? 'સફાઈ AI સહાયક (MiniMind-3)' : lang === 'hi' ? 'सफाई AI सहायक (MiniMind-3)' : 'CIVIC AI ASSISTANT (MiniMind-3)'}
+                  </span>
+                  <ChevronRight size={16} />
+                </button>
+              )}
 
               <button
                 type="button"

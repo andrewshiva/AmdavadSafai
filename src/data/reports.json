@@ -591,7 +591,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
     "rwa_partner": "Maninagar Vikas Mandal",
-    "description_hi": "Test garbage report creation by subagent"
+    "description_hi": "Test garbage report creation by subagent",
+    "resolved_at": "2026-08-04T15:21:23.200541"
   },
   {
     "ward_id": "ward_15",
@@ -635,7 +636,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "Solid Waste Management (SWM)",
     "rwa_partner": "Maninagar Vikas Mandal",
-    "description_hi": "Test: overflowing bin near market"
+    "description_hi": "Test: overflowing bin near market",
+    "resolved_at": "2026-08-03T17:27:23.995252"
   },
   {
     "ward_id": "ward_06",
@@ -679,7 +681,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
     "rwa_partner": "Maninagar Vikas Mandal",
-    "description_hi": "Overflowing public dustbin near Maninagar Railway Station"
+    "description_hi": "Overflowing public dustbin near Maninagar Railway Station",
+    "resolved_at": "2026-07-17T10:30:00"
   },
   {
     "ward_id": "ward_13",
@@ -745,7 +748,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "Solid Waste Management (SWM)",
     "rwa_partner": "Bopal-Ghuma Residents Welfare Society",
-    "description_hi": "Garbage burning near Bopal lake area causing heavy smoke"
+    "description_hi": "Garbage burning near Bopal lake area causing heavy smoke",
+    "resolved_at": "2026-07-17T06:00:00"
   },
   {
     "ward_id": "ward_12",
@@ -921,7 +925,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "Solid Waste Management (SWM) • Health Dept",
     "rwa_partner": "Danilimda Welfare Trust",
-    "description_hi": "Chemical packaging boxes left on Odhav GIDC main road side"
+    "description_hi": "Chemical packaging boxes left on Odhav GIDC main road side",
+    "resolved_at": "2026-07-16T08:00:00"
   },
   {
     "ward_id": "ward_09",
@@ -1229,7 +1234,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "Solid Waste Management (SWM) • Health Dept",
     "rwa_partner": "Bopal-Ghuma Residents Welfare Society",
-    "description_hi": "Construction debris left on Bopal-Ambli main road"
+    "description_hi": "Construction debris left on Bopal-Ambli main road",
+    "resolved_at": "2026-07-13T12:30:00"
   },
   {
     "ward_id": "ward_02",
@@ -1251,7 +1257,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "AMC Drainage & Health Dept",
     "rwa_partner": "Navrangpura Civic Forum",
-    "description_hi": "Commercial food waste outside restaurants on HL Commerce College road"
+    "description_hi": "Commercial food waste outside restaurants on HL Commerce College road",
+    "resolved_at": "2026-07-12T19:00:00"
   },
   {
     "ward_id": "ward_15",
@@ -1273,7 +1280,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "Solid Waste Management (SWM)",
     "rwa_partner": "Thaltej & SBR Citizen Council",
-    "description_hi": "Commercial plastics and waste cleaned up outside Bapunagar market area"
+    "description_hi": "Commercial plastics and waste cleaned up outside Bapunagar market area",
+    "resolved_at": "2026-07-12T09:00:00"
   },
   {
     "ward_id": "ward_01",
@@ -1295,7 +1303,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "Solid Waste Management (SWM) • Health Dept",
     "rwa_partner": "Maninagar Vikas Mandal",
-    "description_hi": "Plastic bags scattered outside Kankaria Lake Gate 3"
+    "description_hi": "Plastic bags scattered outside Kankaria Lake Gate 3",
+    "resolved_at": "2026-07-11T13:50:00"
   },
   {
     "ward_id": "ward_11",
@@ -1317,7 +1326,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "AMC Drainage & Health Dept",
     "rwa_partner": "Ellisbridge & Law Garden Civic Society",
-    "description_hi": "Plastic debris in the park lawns of Vastrapur Lake"
+    "description_hi": "Plastic debris in the park lawns of Vastrapur Lake",
+    "resolved_at": "2026-07-11T10:30:00"
   },
   {
     "ward_id": "ward_05",
@@ -1339,7 +1349,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "Solid Waste Management (SWM)",
     "rwa_partner": "Gota Ward Resident Council",
-    "description_hi": "Dry leaves and household waste piled up near Gota cross roads"
+    "description_hi": "Dry leaves and household waste piled up near Gota cross roads",
+    "resolved_at": "2026-07-10T15:10:00"
   },
   {
     "ward_id": "ward_04",
@@ -1361,7 +1372,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "AMC Drainage & Health Dept",
     "rwa_partner": "Bopal-Ghuma Residents Welfare Society",
-    "description_hi": "Cleared illegal dump near South Bopal residential apartments"
+    "description_hi": "Cleared illegal dump near South Bopal residential apartments",
+    "resolved_at": "2026-07-09T07:30:00"
   },
   {
     "ward_id": "ward_20",
@@ -1383,7 +1395,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "Solid Waste Management (SWM)",
     "rwa_partner": "Vejalpur & Jivraj Park Citizen Front",
-    "description_hi": "Cleared and cleaned open plot space in Vejalpur residential block"
+    "description_hi": "Cleared and cleaned open plot space in Vejalpur residential block",
+    "resolved_at": "2026-07-08T09:30:00"
   },
   {
     "ward_id": "ward_10",
@@ -1405,7 +1418,8 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
     "rwa_partner": "Vastrapur Resident Welfare Association",
-    "description_hi": "Dry garbage pile behind Acropolis Mall in Thaltej"
+    "description_hi": "Dry garbage pile behind Acropolis Mall in Thaltej",
+    "resolved_at": "2026-07-07T12:30:00"
   },
   {
     "ward_id": "ward_07",
@@ -1427,6 +1441,7 @@
     "amc_status": "Resolved by AMC SWM Inspector",
     "amc_department": "AMC Engineering Dept (C&D Waste Unit)",
     "rwa_partner": "Naroda Citizens Forum",
-    "description_hi": "Resolved waste dumping spot cleaned up in Naroda village center"
+    "description_hi": "Resolved waste dumping spot cleaned up in Naroda village center",
+    "resolved_at": "2026-07-06T06:30:00"
   }
 ]

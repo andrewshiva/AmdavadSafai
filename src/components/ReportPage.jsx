@@ -16,10 +16,13 @@ import {
   LocateFixed,
   Loader2,
   Check,
-  X
+  X,
+  Clock,
+  Sparkles
 } from 'lucide-react';
 import { generateAmcTicketId } from '../utils/amcTickets';
 import { addKarmaPoints } from '../utils/gamification';
+import { formatDateTime } from '../utils/dateTime';
 import wardsData from '../data/wards.json';
 
 export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
@@ -45,6 +48,9 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [submittedTicket, setSubmittedTicket] = useState(null);
+  const [submittedTime, setSubmittedTime] = useState(null);
+  const [triageLoading, setTriageLoading] = useState(false);
+  const [triageResult, setTriageResult] = useState(null);
 
   useEffect(() => {
     if (pickedCoords && pickedCoords.lat && pickedCoords.lng) {
@@ -216,6 +222,8 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
     setSubmitting(true);
     const amcTicket = generateAmcTicketId(wardId || 'ward_01');
     const assignedDept = getAmcDepartmentForCategory(category);
+    const nowIso = new Date().toISOString();
+    setSubmittedTime(nowIso);
 
     const reportData = {
       id: `rpt_local_${Date.now()}`,
@@ -234,7 +242,8 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
       lat: parseFloat(lat) || 23.0225,
       lng: parseFloat(lng) || 72.5714,
       upvotes: 1,
-      reported_at: new Date().toISOString()
+      reported_at: nowIso,
+      created_at: nowIso
     };
 
     // Save report to local storage so it reflects immediately across MyReportsView and Dashboard
@@ -288,6 +297,11 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
             <div className="variant-ticket-badge">
               <span className="ticket-label">AMC TICKET ID</span>
               <span className="ticket-id">{submittedTicket}</span>
+            </div>
+
+            <div className="variant-time-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#F8FAFC', border: '1px solid #E2E8F0', padding: '8px 16px', borderRadius: '8px', margin: '10px 0', fontSize: '13px', color: '#334155' }}>
+              <Clock size={15} style={{ color: '#FF6B35' }} />
+              <span>{lang === 'gu' ? 'નોંધણી તારીખ અને સમય' : lang === 'hi' ? 'पंजीकरण तारीख और समय' : 'Registration Date & Time'}: <strong style={{ color: '#0F172A' }}>{formatDateTime(submittedTime || new Date().toISOString(), lang)}</strong></span>
             </div>
 
             <div className="variant-karma-reward-pill">
@@ -472,7 +486,50 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
                   <h3 className="variant-card-heading">ISSUE DETAILS & SEVERITY</h3>
 
                   <div className="variant-form-group">
-                    <label className="variant-form-label">DESCRIPTION</label>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                      <label className="variant-form-label" style={{ margin: 0 }}>DESCRIPTION</label>
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          if (!description.trim() || triageLoading) return;
+                          setTriageLoading(true);
+                          try {
+                            const res = await fetch('/api/ai/triage', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ description: description.trim(), category })
+                            });
+                            if (res.ok) {
+                              const data = await res.json();
+                              setTriageResult(data);
+                              if (data.predicted_category) setCategory(data.predicted_category);
+                              if (data.predicted_severity) setSeverity(data.predicted_severity);
+                            }
+                          } catch (err) {
+                            console.error('AI Triage error:', err);
+                          } finally {
+                            setTriageLoading(false);
+                          }
+                        }}
+                        disabled={triageLoading || !description.trim()}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          background: 'rgba(249, 115, 22, 0.1)',
+                          border: '1px solid rgba(249, 115, 22, 0.3)',
+                          color: '#EA580C',
+                          borderRadius: '6px',
+                          padding: '3px 8px',
+                          fontSize: '11px',
+                          fontWeight: 700,
+                          cursor: description.trim() ? 'pointer' : 'default'
+                        }}
+                      >
+                        <Sparkles size={12} color="#EA580C" />
+                        <span>{triageLoading ? 'Triage...' : 'MiniMind-3 Auto-Triage ✨'}</span>
+                      </button>
+                    </div>
                     <textarea
                       className="variant-form-textarea"
                       rows={3}
@@ -481,6 +538,27 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
+
+                  {triageResult && (
+                    <div style={{
+                      fontSize: '11px',
+                      padding: '8px 12px',
+                      borderRadius: '8px',
+                      background: 'rgba(52, 211, 153, 0.1)',
+                      border: '1px solid rgba(52, 211, 153, 0.3)',
+                      color: '#065F46',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '2px',
+                      marginBottom: '10px'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 800 }}>
+                        <CheckCircle2 size={13} color="#10B981" />
+                        <span>{triageResult.model}: {triageResult.predicted_department}</span>
+                      </div>
+                      <span style={{ color: '#047857' }}>{triageResult.summary}</span>
+                    </div>
+                  )}
 
                   <div className="variant-form-group">
                     <label className="variant-form-label">SEVERITY LEVEL</label>
@@ -543,6 +621,13 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
                     <div className="variant-review-row">
                       <span className="review-label">Severity:</span>
                       <span className="review-val uppercase">{severity}</span>
+                    </div>
+                    <div className="variant-review-row">
+                      <span className="review-label">{lang === 'gu' ? 'તારીખ અને સમય:' : lang === 'hi' ? 'तारीख और समय:' : 'Date & Time:'}</span>
+                      <span className="review-val font-bold" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                        <Clock size={13} style={{ color: '#FF6B35' }} />
+                        {formatDateTime(new Date().toISOString(), lang)}
+                      </span>
                     </div>
                     <div className="variant-review-row">
                       <span className="review-label">Coordinates:</span>

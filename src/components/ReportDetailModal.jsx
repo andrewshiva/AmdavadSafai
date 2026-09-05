@@ -16,22 +16,30 @@ import {
   Copy,
   Check,
   AlertTriangle,
-  Users
+  Users,
+  Clock,
+  FileText
 } from 'lucide-react';
 import wardsData from '../data/wards.json';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import { getAmcTicketId } from '../utils/amcTickets';
 import { addKarmaPoints } from '../utils/gamification';
+import { formatDateTime } from '../utils/dateTime';
 
 export const ReportDetailModal = ({
-  isOpen,
+  isOpen = true,
   onClose,
   report,
   onVerifyClick,
   onFlagClick,
   onDisputeClick,
   onUpvoteSuccess,
-  onOpenShareCard
+  onOpenShareCard,
+  onViewReceipt,
+  onVerify,
+  onFlag,
+  onDispute,
+  onShareCard
 }) => {
   const { t, lang } = useTranslation();
   const [upvotes, setUpvotes] = useState(report?.upvotes || 0);
@@ -39,7 +47,7 @@ export const ReportDetailModal = ({
   const [copied, setCopied] = useState(false);
   const [copiedTicket, setCopiedTicket] = useState(false);
 
-  if (!isOpen || !report) return null;
+  if ((isOpen !== undefined && !isOpen) || !report) return null;
 
   const ward = wardsData.find((w) => w.id === report.ward_id);
   const wardName = ward ? (lang === 'gu' ? ward.name_gu : ward.name_en) : '';
@@ -55,6 +63,26 @@ export const ReportDetailModal = ({
 
   const diffHours = report.reported_at ? Math.floor((new Date() - new Date(report.reported_at)) / (1000 * 60 * 60)) : 0;
   const isOverdue = report.status === 'unresolved' && diffHours >= 48;
+
+  const handleVerify = () => {
+    if (onVerifyClick) onVerifyClick(report);
+    else if (onVerify) onVerify(report);
+  };
+
+  const handleFlag = () => {
+    if (onFlagClick) onFlagClick(report);
+    else if (onFlag) onFlag(report);
+  };
+
+  const handleDispute = () => {
+    if (onDisputeClick) onDisputeClick(report);
+    else if (onDispute) onDispute(report);
+  };
+
+  const handleShareCard = (data) => {
+    if (onOpenShareCard) onOpenShareCard(data);
+    else if (onShareCard) onShareCard(data);
+  };
 
   const handleUpvote = async () => {
     if (hasUpvoted) return;
@@ -159,6 +187,20 @@ export const ReportDetailModal = ({
               {lang === 'gu' ? report.description_gu : report.description_en}
             </h3>
 
+            {/* Date & Time Timestamp Badges */}
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '12px', color: 'var(--color-text-secondary)', background: 'var(--color-bg)', padding: '4px 9px', borderRadius: '6px', border: '1px solid var(--glass-border)' }}>
+                <Clock size={13} style={{ color: 'var(--color-primary)' }} />
+                <span>{t('reported_on') || 'Reported on'}: <strong style={{ color: 'var(--color-text-primary)' }}>{formatDateTime(report.reported_at, lang) || 'Recent'}</strong></span>
+              </div>
+              {report.status === 'resolved' && report.resolved_at && (
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '12px', color: '#166534', background: '#F0FDF4', padding: '4px 9px', borderRadius: '6px', border: '1px solid #BBF7D0' }}>
+                  <CheckCircle2 size={13} style={{ color: '#16A34A' }} />
+                  <span>{t('resolved_on') || 'Resolved on'}: <strong style={{ color: '#14532D' }}>{formatDateTime(report.resolved_at, lang)}</strong></span>
+                </div>
+              )}
+            </div>
+
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--color-text-secondary)' }}>
               <Tag size={14} style={{ color: 'var(--color-primary)' }} />
               <span>{t('category_label')}: <strong style={{ color: 'var(--color-text-primary)' }}>{categoryLabel}</strong></span>
@@ -207,12 +249,12 @@ export const ReportDetailModal = ({
               {t('get_directions')}
             </a>
 
-            {onOpenShareCard && (
+            {(onOpenShareCard || onShareCard) && (
               <button
                 type="button"
                 onClick={() => {
                   onClose();
-                  onOpenShareCard({
+                  handleShareCard({
                     type: 'report',
                     title: description,
                     location: ward ? `${wardName} (${zoneName || 'Ahmedabad'})` : 'Ahmedabad',
@@ -396,6 +438,11 @@ export const ReportDetailModal = ({
                   </span>
                 </div>
 
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11.5px', color: 'rgba(255,255,255,0.7)', margin: '6px 0 2px 0' }}>
+                  <Clock size={12} style={{ color: '#FDBA74' }} />
+                  <span>{t('filing_timestamp') || 'Filing Date & Time'}: <strong style={{ color: '#FFFFFF' }}>{formatDateTime(report.reported_at, lang) || 'Recorded'}</strong></span>
+                </div>
+
                 <p className="amc-dept-sub">
                   🏢 {report.amc_department || 'Solid Waste Management (SWM) • Health Dept'}
                 </p>
@@ -450,6 +497,76 @@ export const ReportDetailModal = ({
             </div>
           )}
 
+          {/* Official AMC Resolution Receipt Banner if Resolved */}
+          {report.status === 'resolved' && (
+            <div
+              className="report-receipt-banner"
+              style={{
+                background: 'linear-gradient(135deg, rgba(22, 163, 74, 0.08) 0%, rgba(16, 185, 129, 0.12) 100%)',
+                border: '1px solid #86EFAC',
+                borderRadius: '10px',
+                padding: '12px 14px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '12px',
+                flexWrap: 'wrap'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div
+                  style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '8px',
+                    background: '#16A34A',
+                    color: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}
+                >
+                  <FileText size={20} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: '#14532D' }}>
+                    {lang === 'gu' ? 'સત્તાવાર સફાઈ નિરાકરણ રસીદ' : lang === 'hi' ? 'आधिकारिक सफाई समाधान रसीद' : 'Official Resolution Receipt'}
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#166534' }}>
+                    {lang === 'gu' ? 'AMC CCRS સફાઈ પ્રમાણપત્ર અને ઓડિટ' : lang === 'hi' ? 'AMC CCRS स्वच्छता प्रमाणपत्र एवं ऑडिट' : 'AMC CCRS Cleanliness Certificate & SLA Audit'}
+                  </div>
+                </div>
+              </div>
+              {onViewReceipt && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onViewReceipt(report);
+                  }}
+                  style={{
+                    background: '#16A34A',
+                    color: 'white',
+                    border: 'none',
+                    padding: '8px 14px',
+                    borderRadius: '6px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    boxShadow: '0 2px 6px rgba(22, 163, 74, 0.3)'
+                  }}
+                >
+                  <FileText size={14} />
+                  <span>{lang === 'gu' ? 'રસીદ જુઓ' : lang === 'hi' ? 'रसीद देखें' : 'View Receipt'}</span>
+                </button>
+              )}
+            </div>
+          )}
+
           {/* Society WhatsApp Mobilization Action */}
           {(() => {
             const ticketId = getAmcTicketId(report);
@@ -490,7 +607,7 @@ export const ReportDetailModal = ({
             {report.status === 'resolved' ? (
               <button
                 type="button"
-                onClick={() => onDisputeClick && onDisputeClick(report)}
+                onClick={handleDispute}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -512,7 +629,7 @@ export const ReportDetailModal = ({
             ) : (
               <button
                 type="button"
-                onClick={() => onVerifyClick(report)}
+                onClick={handleVerify}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -535,7 +652,7 @@ export const ReportDetailModal = ({
 
             <button
               type="button"
-              onClick={() => onFlagClick(report)}
+              onClick={handleFlag}
               style={{
                 display: 'flex',
                 alignItems: 'center',

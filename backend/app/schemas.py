@@ -166,3 +166,40 @@ class JoinEventOut(BaseModel):
     id: str
     volunteers_joined: int
     message: str
+
+# --- AI Model Service Schemas ---
+class AITriageRequest(BaseModel):
+    description: str
+    category: Optional[str] = "mixed_waste"
+    image_url: Optional[str] = None
+
+class AITriageResponse(BaseModel):
+    predicted_department: str
+    predicted_severity: str
+    predicted_category: str
+    summary: str
+    model: str
+    confidence: float
+
+class AIVerifyVisionRequest(BaseModel):
+    before_url: str
+    after_url: str
+
+class AIVerifyVisionResponse(BaseModel):
+    transformation_score: float
+    similarity: float
+    is_genuine_cleanup: bool
+    verdict: str
+    model: str
+    status: str
+
+class AIChatRequest(BaseModel):
+    message: str
+    history: Optional[List[dict]] = None
+    lang: Optional[str] = "en"
+
+class AIChatResponse(BaseModel):
+    reply: str
+    model: str
+    status: str
+

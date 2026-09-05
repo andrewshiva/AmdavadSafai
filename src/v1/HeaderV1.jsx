@@ -10,6 +10,7 @@ export const HeaderV1 = ({
   onOpenBadges,
   onOpenCleanedSpots,
   onOpenRWA,
+  onOpenAIAssistant,
   onSwitchVersion
 }) => {
   const { t, lang, setLanguage } = useTranslation();
@@ -118,6 +119,31 @@ export const HeaderV1 = ({
       </div>
 
       <div className="header-right">
+        {onOpenAIAssistant && (
+          <button
+            type="button"
+            className="header-action-btn"
+            onClick={onOpenAIAssistant}
+            title="AmdavadSafai AI Assistant (MiniMind-3)"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              padding: '5px 12px',
+              borderRadius: '999px',
+              background: 'linear-gradient(135deg, #1E293B, #0F172A)',
+              border: '1px solid rgba(249, 115, 22, 0.4)',
+              color: '#F97316',
+              fontSize: '11px',
+              fontWeight: 800,
+              cursor: 'pointer'
+            }}
+          >
+            <Sparkles size={12} color="#F97316" />
+            <span>AI Assistant</span>
+          </button>
+        )}
+
         {/* 3-Way Language Segmented Control */}
         <div className="trilingual-toggle">
           <button

@@ -13,11 +13,11 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 
 try:
-    import models, schemas, crud, geojson_data, civic_data
+    import models, schemas, crud, geojson_data, civic_data, ai_service
     from database import engine, get_db, apply_sqlite_migrations
     from seed import seed_database
 except ImportError:
-    from app import models, schemas, crud, geojson_data, civic_data
+    from app import models, schemas, crud, geojson_data, civic_data, ai_service
     from app.database import engine, get_db, apply_sqlite_migrations
     from app.seed import seed_database
 
@@ -226,5 +226,37 @@ def sync_citizen_karma(payload: dict):
         "acknowledged_points": points,
         "streak_days": streak_days
     }
+
+
+# --- Live AI Model Endpoints (MiniMind-3 & SigLIP-2) ---
+
+@app.get("/api/ai/status")
+def get_ai_status():
+    """Reports status of live neural models and compute availability."""
+    return {
+        "status": "active",
+        "torch_available": ai_service.TORCH_AVAILABLE,
+        "compute_device": ai_service.DEVICE,
+        "models": {
+            "triage_and_chat": "MiniMind-3 (64M)",
+            "vision_verification": "SigLIP-2 Vision (86M)"
+        }
+    }
+
+@app.post("/api/ai/triage", response_model=schemas.AITriageResponse)
+def api_triage_report(payload: schemas.AITriageRequest):
+    """Automatically triage report text into AMC department, severity, and category using MiniMind-3."""
+    return ai_service.triage_civic_report(description=payload.description, category=payload.category)
+
+@app.post("/api/ai/verify-vision", response_model=schemas.AIVerifyVisionResponse)
+def api_verify_cleanup_vision(payload: schemas.AIVerifyVisionRequest):
+    """Calculates photographic transformation score between before and after cleanup photos using SigLIP-2."""
+    return ai_service.verify_cleanup_vision(before_url=payload.before_url, after_url=payload.after_url)
+
+@app.post("/api/ai/chat", response_model=schemas.AIChatResponse)
+def api_chat_civic_assistant(payload: schemas.AIChatRequest):
+    """Interactive conversational civic assistant answering citizen questions on Ahmedabad civic services."""
+    return ai_service.chat_civic_assistant(message=payload.message, history=payload.history, lang=payload.lang)
+
 
 
