@@ -122,33 +122,39 @@ export const WardsProfileView = ({ reports = [], onSelectReport, onOpenReport })
       {/* TOP 3 STATS SLABS */}
       <div className="variant-ward-stats-grid">
         <div className="variant-slab-card variant-ward-stat-slab">
-          <span className="ward-stat-label">
-            {lang === 'gu' ? 'સક્રિય ફરિયાદો' : lang === 'hi' ? 'सक्रिय शिकायतें' : 'ACTIVE'}
-          </span>
+          <div className="ward-stat-text-wrap">
+            <span className="ward-stat-label">
+              {lang === 'gu' ? 'સક્રિય ફરિયાદો' : lang === 'hi' ? 'सक्रिय शिकायतें' : 'ACTIVE'}
+            </span>
+            <span className="ward-stat-sub">
+              {lang === 'gu' ? 'અનિરાકૃત સમસ્યાઓ' : lang === 'hi' ? 'लंबित मुद्दे' : 'OPEN ISSUES'}
+            </span>
+          </div>
           <div className="ward-stat-val">{activeIssuesCount}</div>
-          <span className="ward-stat-sub">
-            {lang === 'gu' ? 'અનિરાકૃત સમસ્યાઓ' : lang === 'hi' ? 'लंबित मुद्दे' : 'OPEN ISSUES'}
-          </span>
         </div>
 
         <div className="variant-slab-card variant-ward-stat-slab">
-          <span className="ward-stat-label">
-            {lang === 'gu' ? 'ઉકેલાયેલ' : lang === 'hi' ? 'हल की गई' : 'SOLVED'}
-          </span>
+          <div className="ward-stat-text-wrap">
+            <span className="ward-stat-label">
+              {lang === 'gu' ? 'ઉકેલાયેલ' : lang === 'hi' ? 'हल की गई' : 'SOLVED'}
+            </span>
+            <span className="ward-stat-sub">
+              {lang === 'gu' ? 'કુલ ઉકેલાયેલ' : lang === 'hi' ? 'कुल समाधानित' : 'TOTAL RESOLVED'}
+            </span>
+          </div>
           <div className="ward-stat-val">{resolvedIssuesCount}</div>
-          <span className="ward-stat-sub">
-            {lang === 'gu' ? 'કુલ ઉકેલાયેલ' : lang === 'hi' ? 'कुल समाधानित' : 'TOTAL RESOLVED'}
-          </span>
         </div>
 
         <div className="variant-slab-card variant-ward-stat-slab">
-          <span className="ward-stat-label">
-            {lang === 'gu' ? 'કુલ' : lang === 'hi' ? 'कुल' : 'TOTAL'}
-          </span>
+          <div className="ward-stat-text-wrap">
+            <span className="ward-stat-label">
+              {lang === 'gu' ? 'કુલ' : lang === 'hi' ? 'कुल' : 'TOTAL'}
+            </span>
+            <span className="ward-stat-sub">
+              {lang === 'gu' ? 'નોંધાયેલી ફરિયાદો' : lang === 'hi' ? 'दर्ज शिकायतें' : 'RECORDED REPORTS'}
+            </span>
+          </div>
           <div className="ward-stat-val">{wardReports.length}</div>
-          <span className="ward-stat-sub">
-            {lang === 'gu' ? 'નોંધાયેલી ફરિયાદો' : lang === 'hi' ? 'दर्ज शिकायतें' : 'RECORDED REPORTS'}
-          </span>
         </div>
       </div>
 
