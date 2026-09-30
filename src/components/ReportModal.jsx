@@ -323,11 +323,12 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                     onChange={(e) => {
                       const selectedId = e.target.value;
                       setWardId(selectedId);
-                      if (selectedId && !pickedCoords) {
-                        const selectedWard = wards.find((w) => w.id === selectedId);
+                      if (selectedId) {
+                        const selectedWard = wards && wards.find((w) => w.id === selectedId);
                         if (selectedWard) {
                           setLat(selectedWard.lat.toFixed(5));
                           setLng(selectedWard.lng.toFixed(5));
+                          setError('');
                         }
                       }
                     }}
@@ -543,10 +544,21 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                     <div>
                       <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>Latitude</span>
                       <input
-                        type="number"
-                        step="0.00001"
+                        type="text"
+                        inputMode="decimal"
+                        pattern="[0-9]*[.,]?[0-9]*"
                         value={lat}
-                        onChange={(e) => setLat(e.target.value)}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setLat(val);
+                          const parsedLat = parseFloat(val);
+                          const parsedLng = parseFloat(lng);
+                          if (!isNaN(parsedLat) && !isNaN(parsedLng)) {
+                            const v = validateAhmedabadCoords(parsedLat, parsedLng, lang);
+                            if (v.valid && v.ward) setWardId(v.ward.id);
+                          }
+                        }}
+                        placeholder="23.0225"
                         className="modal-input"
                         style={{ width: '100%' }}
                         required
@@ -555,10 +567,21 @@ export const ReportModal = ({ isOpen, onClose, wards, onSuccess, pickedCoords, o
                     <div>
                       <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>Longitude</span>
                       <input
-                        type="number"
-                        step="0.00001"
+                        type="text"
+                        inputMode="decimal"
+                        pattern="[0-9]*[.,]?[0-9]*"
                         value={lng}
-                        onChange={(e) => setLng(e.target.value)}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setLng(val);
+                          const parsedLat = parseFloat(lat);
+                          const parsedLng = parseFloat(val);
+                          if (!isNaN(parsedLat) && !isNaN(parsedLng)) {
+                            const v = validateAhmedabadCoords(parsedLat, parsedLng, lang);
+                            if (v.valid && v.ward) setWardId(v.ward.id);
+                          }
+                        }}
+                        placeholder="72.5714"
                         className="modal-input"
                         style={{ width: '100%' }}
                         required

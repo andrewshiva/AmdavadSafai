@@ -4631,6 +4631,75 @@ button, select, input, textarea {
   color: #475569;
 }
 
+.variant-coords-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.variant-coord-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.variant-coord-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+}
+
+.variant-coord-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.variant-coord-input {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 12px;
+  border: 1.5px solid #CBD5E1;
+  background: #FFFFFF;
+  font-size: 13.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  color: #0F172A;
+  transition: all 0.15s ease;
+}
+
+.variant-coord-input:focus {
+  outline: none;
+  border-color: #FF5722;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.15);
+}
+
+.variant-reset-coord-btn {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #FF6B35;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+}
+
+.variant-reset-coord-btn:hover {
+  color: #E85A24;
+  text-decoration: underline;
+}
+
 .variant-severity-pills {
   display: flex;
   gap: 10px;

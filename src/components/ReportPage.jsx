@@ -24,6 +24,7 @@ import { generateAmcTicketId } from '../utils/amcTickets';
 import { addKarmaPoints, getOrCreateDeviceId } from '../utils/gamification';
 import wardsData from '../data/wards.json';
 import { validateAhmedabadCoords, cleanseStoredReports } from '../utils/geofence';
+import LocationPickerMap from './LocationPickerMap';
 
 export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
   const { lang } = useTranslation();
@@ -168,9 +169,59 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
     setIsDragging(false);
   };
 
+  const handleMapCoordChange = ({ lat: nextLat, lng: nextLng, ward, valid, error: valError }) => {
+    setLat(nextLat);
+    setLng(nextLng);
+    if (!valid) {
+      setError(valError || 'Location outside Ahmedabad municipal limits.');
+      setLocationMessage('');
+    } else {
+      setError('');
+      if (ward) {
+        setWardId(ward.id);
+        setLocationMessage(`${lang === 'gu' ? ward.name_gu : ward.name_en} (${lang === 'gu' ? ward.zone_gu : ward.zone_en})`);
+      }
+    }
+  };
+
+  const handleManualCoordChange = (nextLat, nextLng) => {
+    setLat(nextLat);
+    setLng(nextLng);
+    const parsedLat = parseFloat(nextLat);
+    const parsedLng = parseFloat(nextLng);
+    if (!isNaN(parsedLat) && !isNaN(parsedLng)) {
+      const v = validateAhmedabadCoords(parsedLat, parsedLng, lang);
+      if (v.valid) {
+        setError('');
+        if (v.ward) {
+          setWardId(v.ward.id);
+          setLocationMessage(`${lang === 'gu' ? v.ward.name_gu : v.ward.name_en} (${lang === 'gu' ? v.ward.zone_gu : v.ward.zone_en})`);
+        }
+      } else {
+        setError(v.error);
+        setLocationMessage('');
+      }
+    }
+  };
+
+  const handleWardChange = (newWardId) => {
+    setWardId(newWardId);
+    const w = wardsData.find((item) => item.id === newWardId);
+    if (w && w.lat && w.lng) {
+      setLat(w.lat.toFixed(5));
+      setLng(w.lng.toFixed(5));
+      setError('');
+      setLocationMessage(`${lang === 'gu' ? w.name_gu : w.name_en} (${lang === 'gu' ? w.zone_gu : w.zone_en})`);
+    }
+  };
+
   const useCurrentLocation = () => {
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by your browser.');
+      return;
+    }
+    if (window.isSecureContext === false && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      setError('GPS requires HTTPS on mobile devices. Please tap on the map or enter coordinates below.');
       return;
     }
     setError('');
@@ -220,10 +271,23 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
           setLocating(false);
         }
       },
-      () => {
+      (geoErr) => {
         setLocating(false);
         setLocationMessage('');
-        setError('Location permission denied or unavailable.');
+        let msg = 'Location permission denied or unavailable.';
+        if (geoErr && geoErr.code === 1) {
+          msg = 'Location permission denied. You can tap on the map or enter coordinates below.';
+        } else if (geoErr && geoErr.code === 2) {
+          msg = 'GPS signal unavailable. You can tap on the map or enter coordinates below.';
+        } else if (geoErr && geoErr.code === 3) {
+          msg = 'GPS request timed out. You can tap on the map or enter coordinates below.';
+        }
+        setError(msg);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 30000
       }
     );
   };
@@ -504,24 +568,18 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
             {step === 2 && (
               <>
                 <div className="variant-slab-card">
-                  <h3 className="variant-card-heading">LOCATION & WARD</h3>
+                  <h3 className="variant-card-heading">
+                    {lang === 'gu' ? 'સ્થાન અને વોર્ડ' : lang === 'hi' ? 'स्थान और वार्ड' : 'LOCATION & WARD'}
+                  </h3>
 
                   <div className="variant-form-group">
-                    <label className="variant-form-label">SELECT WARD</label>
+                    <label className="variant-form-label">
+                      {lang === 'gu' ? 'વોર્ડ પસંદ કરો' : lang === 'hi' ? 'वार्ड चुनें' : 'SELECT WARD'}
+                    </label>
                     <select
                       className="variant-form-select"
                       value={wardId}
-                      onChange={(e) => {
-                        const newWardId = e.target.value;
-                        setWardId(newWardId);
-                        if (newWardId && !pickedCoords) {
-                          const w = wardsData.find((item) => item.id === newWardId);
-                          if (w && w.lat && w.lng) {
-                            setLat(w.lat.toFixed(5));
-                            setLng(w.lng.toFixed(5));
-                          }
-                        }
-                      }}
+                      onChange={(e) => handleWardChange(e.target.value)}
                     >
                       {wardsData.map((w) => (
                         <option key={w.id} value={w.id}>
@@ -539,22 +597,71 @@ export const ReportPage = ({ onCancel, onSuccess, pickedCoords }) => {
                       disabled={locating}
                     >
                       {locating ? <Loader2 size={16} className="animate-spin" /> : <LocateFixed size={16} />}
-                      <span>USE CURRENT GPS LOCATION</span>
+                      <span>
+                        {lang === 'gu' ? 'વર્તમાન જીપીએસ લોકેશન વાપરો' : lang === 'hi' ? 'वर्तमान जीपीएस स्थान का उपयोग करें' : 'USE CURRENT GPS LOCATION'}
+                      </span>
                     </button>
                     {locationMessage && (
-                      <span className="variant-location-status">{locationMessage}</span>
+                      <span className="variant-location-status">✓ {locationMessage}</span>
                     )}
                   </div>
 
-                  <div className="variant-coords-row">
-                    <div className="variant-coord-badge">
-                      <MapPin size={12} />
-                      <span>Lat: {lat}</span>
+                  {/* Interactive Map Pin Selector */}
+                  <LocationPickerMap
+                    lat={lat}
+                    lng={lng}
+                    onChange={handleMapCoordChange}
+                    lang={lang}
+                    height="210px"
+                  />
+
+                  {/* Touch-Friendly Editable Lat / Lng Inputs */}
+                  <div className="variant-coords-input-grid">
+                    <div className="variant-coord-field">
+                      <label className="variant-coord-label">
+                        <MapPin size={11} /> {lang === 'gu' ? 'અક્ષાંશ (LATITUDE)' : lang === 'hi' ? 'अक्षांश (LAT)' : 'LATITUDE'}
+                      </label>
+                      <div className="variant-coord-input-wrap">
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          pattern="[0-9]*[.,]?[0-9]*"
+                          value={lat}
+                          onChange={(e) => handleManualCoordChange(e.target.value, lng)}
+                          placeholder="23.0225"
+                          className="variant-coord-input"
+                          aria-label="Latitude"
+                        />
+                      </div>
                     </div>
-                    <div className="variant-coord-badge">
-                      <MapPin size={12} />
-                      <span>Lng: {lng}</span>
+                    <div className="variant-coord-field">
+                      <label className="variant-coord-label">
+                        <MapPin size={11} /> {lang === 'gu' ? 'રેખાંશ (LONGITUDE)' : lang === 'hi' ? 'देशांतर (LNG)' : 'LONGITUDE'}
+                      </label>
+                      <div className="variant-coord-input-wrap">
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          pattern="[0-9]*[.,]?[0-9]*"
+                          value={lng}
+                          onChange={(e) => handleManualCoordChange(lat, e.target.value)}
+                          placeholder="72.5714"
+                          className="variant-coord-input"
+                          aria-label="Longitude"
+                        />
+                      </div>
                     </div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
+                    <button
+                      type="button"
+                      className="variant-reset-coord-btn"
+                      onClick={() => handleWardChange(wardId)}
+                      title="Reset coordinates and pin to ward center"
+                    >
+                      ↺ {lang === 'gu' ? 'વોર્ડ કેન્દ્ર પર રીસેટ કરો' : lang === 'hi' ? 'वार्ड केंद्र पर रीसेट करें' : 'Reset pin to Ward Center'}
+                    </button>
                   </div>
 
                   {error && (
