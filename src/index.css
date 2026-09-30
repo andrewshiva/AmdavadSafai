@@ -6782,6 +6782,42 @@ button, select, input, textarea {
   .variant-ward-profile-header {
     flex-direction: column;
   }
+
+  .variant-map-card-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .variant-map-filter-pills {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+
+  .variant-zone-pill-select {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .ward-selector-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-v1 .karma-pill-btn {
+    display: none !important;
+  }
+  .header-v1 .version-switch-pill {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+  .header-v1 .logo-title {
+    font-size: 14px;
+  }
 }
 
 /* ==========================================================================

@@ -122,7 +122,7 @@ export const HeaderV1 = ({
         {onOpenAIAssistant && (
           <button
             type="button"
-            className="header-action-btn"
+            className="header-action-btn header-desktop-only"
             onClick={onOpenAIAssistant}
             title="AmdavadSafai AI Assistant"
             style={{
@@ -187,6 +187,7 @@ export const HeaderV1 = ({
             onClose={() => setIsSocialOpen(false)}
             onOpenSubscribe={() => setIsSubscribeOpen(true)}
             onOpenChangelog={() => setIsChangelogOpen(true)}
+            onOpenAIAssistant={onOpenAIAssistant}
           />
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from '../i18n/useTranslation';
 import HeaderV2 from './HeaderV2';
 import AboutSection from '../components/AboutSection';
 import ReportPage from '../components/ReportPage';
@@ -10,9 +9,6 @@ import StatisticsView from './StatisticsView';
 import WardsProfileView from './WardsProfileView';
 import CleanupDrivesView from './CleanupDrivesView';
 import VideoModal from '../components/VideoModal';
-import FilterBar from '../components/FilterBar';
-import MapView from '../components/MapView';
-import ListView from '../components/ListView';
 import WelcomeOverlay from '../components/WelcomeOverlay';
 import ReportDetailModal from '../components/ReportDetailModal';
 import VerifyCleanupModal from '../components/VerifyCleanupModal';
@@ -27,11 +23,9 @@ import RWADashboardModal from '../components/RWADashboardModal';
 import ResolutionReceiptModal from '../components/ResolutionReceiptModal';
 import CivicAIAssistantModal from '../components/CivicAIAssistantModal';
 import { useFilter } from '../hooks/useFilter';
-import { Loader2 } from 'lucide-react';
 import { checkDailyVisitStreak } from '../utils/gamification';
 
 export const AppV2 = ({ onSwitchVersion }) => {
-  const { t, lang } = useTranslation();
   const [activeView, setActiveView] = useState('about'); // 'about', 'dashboard', 'reports', 'wards', 'impact', 'report'
 
   const [selectedReport, setSelectedReport] = useState(null);
@@ -50,20 +44,7 @@ export const AppV2 = ({ onSwitchVersion }) => {
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
 
   const {
-    severity,
-    setSeverity,
-    status,
-    setStatus,
-    category,
-    setCategory,
-    wardId,
-    setWardId,
-    search,
-    setSearch,
     filteredReports,
-    loading,
-    isFiltered,
-    resetFilters,
     refetch
   } = useFilter();
 

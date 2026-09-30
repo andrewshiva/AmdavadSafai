@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import AppV1 from './v1/AppV1';
 import AppV2 from './v2/AppV2';
+import { cleanseStoredReports } from './utils/geofence';
 
 export const App = () => {
+  useEffect(() => {
+    cleanseStoredReports();
+  }, []);
+
   const [version, setVersion] = useState(() => {
     // 1. Check URL query param ?v=1 or ?v=2
     if (typeof window !== 'undefined') {

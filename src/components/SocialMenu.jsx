@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from '../i18n/useTranslation';
-import { Mail, Info, BookOpen } from 'lucide-react';
+import { Mail, Info, BookOpen, Sparkles } from 'lucide-react';
 
-export const SocialMenu = ({ isOpen, onClose, onOpenSubscribe, onOpenChangelog, onOpenAbout }) => {
+export const SocialMenu = ({ isOpen, onClose, onOpenSubscribe, onOpenChangelog, onOpenAbout, onOpenAIAssistant }) => {
   const menuRef = useRef();
   const { t } = useTranslation();
 
@@ -24,6 +24,20 @@ export const SocialMenu = ({ isOpen, onClose, onOpenSubscribe, onOpenChangelog, 
 
   return (
     <div className="social-menu" ref={menuRef}>
+      {onOpenAIAssistant && (
+        <button
+          type="button"
+          className="social-menu-item mobile-only-menu-item"
+          onClick={() => {
+            onClose();
+            onOpenAIAssistant();
+          }}
+        >
+          <Sparkles size={16} color="#F97316" />
+          <span>{t('ai_assistant_title') || 'Civic AI Assistant'}</span>
+        </button>
+      )}
+
       {onOpenAbout && (
         <button
           type="button"

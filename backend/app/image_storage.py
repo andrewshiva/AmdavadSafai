@@ -1,7 +1,6 @@
 import base64
 import os
 import uuid
-import subprocess
 
 # Primary uploads directory is backend/uploads (served by FastAPI app.mount("/uploads"))
 BACKEND_UPLOADS_DIR = os.path.abspath(

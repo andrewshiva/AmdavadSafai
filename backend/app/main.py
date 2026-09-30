@@ -197,7 +197,7 @@ def read_escalations(db: Session = Depends(get_db)):
 @app.get("/api/digest/wards")
 def read_ward_digest(db: Session = Depends(get_db)):
     """Machine-readable ward digest for the weekly authority mailer (no email sent)."""
-    return {"generated_at": datetime.datetime.utcnow().isoformat(), "wards": crud.get_ward_digest(db)}
+    return {"generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(), "wards": crud.get_ward_digest(db)}
 
 @app.post("/api/subscribe", response_model=schemas.SubscriptionOut)
 def create_subscription(subscription: schemas.SubscriptionCreate, db: Session = Depends(get_db)):

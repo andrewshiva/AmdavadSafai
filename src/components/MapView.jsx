@@ -9,7 +9,7 @@ import defaultEventsData from '../data/events.json';
 import { formatDateTime } from '../utils/dateTime';
 import { isWithinAhmedabad } from '../utils/geofence';
 
-export const MapView = ({ reports, events = defaultEventsData, onMapClick, onReportSelect, wardId }) => {
+export const MapView = ({ reports = [], events = defaultEventsData, onMapClick, onReportSelect, wardId }) => {
   const { t, lang } = useTranslation();
   const [isLegendOpen, setIsLegendOpen] = useState(false);
   const [mapWarning, setMapWarning] = useState('');
@@ -22,10 +22,16 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
   const onMapClickRef = useRef(onMapClick);
   const onReportSelectRef = useRef(onReportSelect);
   const suppressNextMapClick = useRef(false);
+  const reportsRef = useRef(reports);
+  const langRef = useRef(lang);
+  const tRef = useRef(t);
 
   // Keep refs in sync with latest props without triggering map re-init
   useEffect(() => { onMapClickRef.current = onMapClick; }, [onMapClick]);
   useEffect(() => { onReportSelectRef.current = onReportSelect; }, [onReportSelect]);
+  useEffect(() => { reportsRef.current = reports; }, [reports]);
+  useEffect(() => { langRef.current = lang; }, [lang]);
+  useEffect(() => { tRef.current = t; }, [t]);
 
   // Autofocus/fly to ward when wardId filter changes
   useEffect(() => {
@@ -228,27 +234,31 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
             map.setFilter('wards-highlight', ['==', ['get', 'id'], hoveredWardId]);
           }
 
-          const name = lang === 'gu'
+          const currentLang = langRef.current;
+          const currentReports = reportsRef.current || [];
+          const currentT = tRef.current;
+
+          const name = currentLang === 'gu'
             ? feature.properties.name_gu || feature.properties.name_en
             : feature.properties.name_en;
-          const zone = lang === 'gu'
+          const zone = currentLang === 'gu'
             ? feature.properties.zone_gu || feature.properties.zone_en
             : feature.properties.zone_en;
           const ward = wardsData.find((w) => w.id === newHoveredId);
           const corporator = ward
-            ? (lang === 'gu' ? ward.corporator_gu : ward.corporator_en)
+            ? (currentLang === 'gu' ? ward.corporator_gu : ward.corporator_en)
             : '';
           
           // Re-calculate report counts dynamically
-          const totalReports = reports.filter((r) => r.ward_id === newHoveredId).length;
-          const unresolvedReports = reports.filter((r) => r.ward_id === newHoveredId && r.status === 'unresolved').length;
+          const totalReports = currentReports.filter((r) => r.ward_id === newHoveredId).length;
+          const unresolvedReports = currentReports.filter((r) => r.ward_id === newHoveredId && r.status === 'unresolved').length;
 
           tooltip.setLngLat(e.lngLat)
             .setHTML(`
               <div class="nk-tooltip">
                 <div class="nk-tooltip-name">${name}</div>
-                <div class="nk-tooltip-zone">${zone} · ${t('corporator')}: ${corporator}</div>
-                <div class="nk-tooltip-reports" style="color: #DC2626; font-weight: 700;">${unresolvedReports} ${t('unresolved_badge')} · ${totalReports} ${t('reports_count')}</div>
+                <div class="nk-tooltip-zone">${zone} · ${currentT('corporator')}: ${corporator}</div>
+                <div class="nk-tooltip-reports" style="color: #DC2626; font-weight: 700;">${unresolvedReports} ${currentT('unresolved_badge')} · ${totalReports} ${currentT('reports_count')}</div>
               </div>
             `)
             .addTo(map);
@@ -283,10 +293,11 @@ export const MapView = ({ reports, events = defaultEventsData, onMapClick, onRep
       // Check if clicked point is within Ahmedabad municipal jurisdiction
       const isInside = isWithinAhmedabad(e.lngLat.lat, e.lngLat.lng);
       if (!isInside) {
+        const curLang = langRef.current;
         setMapWarning(
-          lang === 'gu'
+          curLang === 'gu'
             ? '📍 આ સ્થાન અમદાવાદ મ્યુનિસિપલ હદની બહાર છે — કૃપા કરીને શહેરની અંદર ક્લિક કરો.'
-            : lang === 'hi'
+            : curLang === 'hi'
             ? '📍 यह स्थान अहमदाबाद नगर निगम सीमा के बाहर है — कृपया शहर के भीतर क्लिक करें।'
             : '📍 Selected location is outside Ahmedabad municipal limits. Please click inside the city.'
         );

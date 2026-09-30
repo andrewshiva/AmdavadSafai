@@ -111,12 +111,19 @@ def inside_official_limits(lat: float, lng: float) -> bool:
     return False
 
 
+_real_features = None
+
+
 def _load_real_features():
+    global _real_features
+    if _real_features is not None:
+        return _real_features
     try:
         with open(REAL_WARDS_PATH, encoding="utf-8") as f:
-            return json.load(f).get("features", [])
+            _real_features = json.load(f).get("features", [])
     except Exception:
-        return []
+        _real_features = []
+    return _real_features
 
 
 # Synthetic fallback: realistic polygon around ward lat/lng centers
