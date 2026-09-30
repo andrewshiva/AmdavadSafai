@@ -76,9 +76,9 @@ export const LocationPickerMap = ({
       const nextLat = pos.lat.toFixed(5);
       const nextLng = pos.lng.toFixed(5);
       isInternalUpdate.current = true;
-      if (onChange) {
-        const val = validateAhmedabadCoords(pos.lat, pos.lng, lang);
-        onChange({ lat: nextLat, lng: nextLng, ward: val.ward, valid: val.valid, error: val.error });
+      if (onChangeRef.current) {
+        const val = validateAhmedabadCoords(pos.lat, pos.lng, langRef.current);
+        onChangeRef.current({ lat: nextLat, lng: nextLng, ward: val.ward, valid: val.valid, error: val.error });
       }
     });
 
@@ -88,9 +88,9 @@ export const LocationPickerMap = ({
       const nextLng = e.lngLat.lng.toFixed(5);
       marker.setLngLat(e.lngLat);
       isInternalUpdate.current = true;
-      if (onChange) {
-        const val = validateAhmedabadCoords(e.lngLat.lat, e.lngLat.lng, lang);
-        onChange({ lat: nextLat, lng: nextLng, ward: val.ward, valid: val.valid, error: val.error });
+      if (onChangeRef.current) {
+        const val = validateAhmedabadCoords(e.lngLat.lat, e.lngLat.lng, langRef.current);
+        onChangeRef.current({ lat: nextLat, lng: nextLng, ward: val.ward, valid: val.valid, error: val.error });
       }
     });
 
@@ -109,6 +109,8 @@ export const LocationPickerMap = ({
         mapRef.current = null;
       }
     };
+    // Map initializes once with initial coords; subsequent updates handled below
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Sync external coordinate changes (typing in inputs, ward select, GPS)
