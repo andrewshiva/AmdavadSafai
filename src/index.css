@@ -4192,53 +4192,6 @@ button, select, input, textarea {
   line-height: 1.45;
 }
 
-/* Team Grid */
-.variant-team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-
-.variant-team-card {
-  text-align: center;
-  padding: 32px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.variant-team-avatar {
-  width: 100px;
-  height: 100px;
-  background: #FFFFFF;
-  border-radius: 18px;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  font-weight: 900;
-  color: #0F172A;
-  margin-bottom: 18px;
-}
-
-.variant-member-name {
-  font-size: 13.5px;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  color: #0F172A;
-  margin: 0 0 4px 0;
-}
-
-.variant-member-role {
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  color: #94A3B8;
-  text-transform: uppercase;
-}
-
 /* CTA Section */
 .variant-cta-card {
   text-align: center;
@@ -4844,8 +4797,7 @@ button, select, input, textarea {
   .variant-report-grid {
     grid-template-columns: 1fr;
   }
-  .variant-stats-grid,
-  .variant-team-grid {
+  .variant-stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .variant-center-nav {
@@ -4864,8 +4816,7 @@ button, select, input, textarea {
   .variant-cta-title {
     font-size: 24px;
   }
-  .variant-stats-grid,
-  .variant-team-grid {
+  .variant-stats-grid {
     grid-template-columns: 1fr;
   }
   .variant-slab-card {
@@ -6037,24 +5988,6 @@ button, select, input, textarea {
   .variant-stat-number {
     font-size: 26px;
     margin: 6px 0 2px 0;
-  }
-  .variant-team-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .variant-team-card {
-    padding: 18px 12px;
-  }
-  .team-avatar-box {
-    width: 56px;
-    height: 56px;
-    font-size: 18px;
-    border-radius: 14px;
-    margin-bottom: 12px;
-  }
-  .team-name {
-    font-size: 12px;
   }
   .variant-how-list {
     display: flex;

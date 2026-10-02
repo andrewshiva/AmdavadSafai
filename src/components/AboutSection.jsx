@@ -115,13 +115,6 @@ export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggl
     gov_ccrs_title: lang === 'gu' ? 'સામુદાયિક ટ્રેકિંગ' : lang === 'hi' ? 'सामुदायिक ट्रैकिंग' : 'COMMUNITY TRACKING',
     gov_ccrs_desc: lang === 'gu' ? 'દરેક ફરિયાદને સામુદાયિક ટ્રેકિંગ સંદર્ભ મળે છે; સત્તાવાર ફરિયાદ ૧૫૫૩૦૩ પર.' : lang === 'hi' ? 'प्रत्येक शिकायत को सामुदायिक ट्रैकिंग संदर्भ मिलता है; आधिकारिक शिकायत 155303 पर।' : 'Every complaint gets a community tracking ref; official filing via 155303.',
 
-    // Leadership Team
-    team_tag: lang === 'gu' ? 'સંચાલન મંડળ' : lang === 'hi' ? 'प्रबंधन टीम' : 'LEADERSHIP TEAM',
-    team_title: lang === 'gu' ? 'આપણા શહેરના સફાઈ સંયોજકો' : lang === 'hi' ? 'शहर के स्वच्छता समन्वयक' : 'THE TEAM BEHIND AMDAVAD SAFAI',
-    role_director: lang === 'gu' ? 'પ્રોજેક્ટ ડિરેક્ટર' : lang === 'hi' ? 'परियोजना निदेशक' : 'PROJECT DIRECTOR',
-    role_health: lang === 'gu' ? 'મુખ્ય આરોગ્ય અધિકારી' : lang === 'hi' ? 'मुख्य स्वास्थ्य अधिकारी' : 'CHIEF HEALTH OFFICER',
-    role_tech: lang === 'gu' ? 'ટેકનોલોજી લીડ' : lang === 'hi' ? 'तकनीकी प्रमुख' : 'CIVIC TECH LEAD',
-    role_outreach: lang === 'gu' ? 'સમુદાય સંયોજક' : lang === 'hi' ? 'आउटरीच प्रमुख' : 'COMMUNITY OUTREACH',
 
     // CTA
     cta_tag: lang === 'gu' ? 'સાથે મળીએ' : lang === 'hi' ? 'शामिल हों' : 'JOIN THE MOVEMENT',
@@ -444,57 +437,7 @@ export const AboutSection = ({ reports = [], onOpenReport, onOpenEvents, onToggl
       </section>
 
       {/* =========================================================================
-          SECTION 6: LEADERSHIP & WARD SANITATION GOVERNANCE TEAM
-          ========================================================================= */}
-      <section className="variant-team-section">
-        <div className="variant-tag" style={{ textAlign: 'left', marginBottom: '8px' }}>
-          <span>{content.team_tag}</span>
-        </div>
-        <h2 className="variant-section-title" style={{ textAlign: 'left', marginBottom: '24px' }}>
-          {content.team_title}
-        </h2>
-
-        <div className="variant-team-grid">
-          {/* Team Member 1 */}
-          <div className="variant-slab-card variant-team-card">
-            <div className="variant-team-avatar">
-              <span>DR</span>
-            </div>
-            <h4 className="variant-member-name">DEEPAK RAJPOOT</h4>
-            <span className="variant-member-role">{content.role_director}</span>
-          </div>
-
-          {/* Team Member 2 */}
-          <div className="variant-slab-card variant-team-card">
-            <div className="variant-team-avatar">
-              <span>AP</span>
-            </div>
-            <h4 className="variant-member-name">ANANYA PATEL</h4>
-            <span className="variant-member-role">{content.role_health}</span>
-          </div>
-
-          {/* Team Member 3 */}
-          <div className="variant-slab-card variant-team-card">
-            <div className="variant-team-avatar">
-              <span>RK</span>
-            </div>
-            <h4 className="variant-member-name">RAJESH KUMAR</h4>
-            <span className="variant-member-role">{content.role_tech}</span>
-          </div>
-
-          {/* Team Member 4 */}
-          <div className="variant-slab-card variant-team-card">
-            <div className="variant-team-avatar">
-              <span>SM</span>
-            </div>
-            <h4 className="variant-member-name">SONAL MEHTA</h4>
-            <span className="variant-member-role">{content.role_outreach}</span>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 7: CLOSING CALL TO ACTION (CTA)
+          SECTION 6: CLOSING CALL TO ACTION (CTA)
           ========================================================================= */}
       <section className="variant-cta-section">
         <div className="variant-slab-card variant-cta-card">

@@ -18,7 +18,7 @@ AmdavadSafai supports 3 official languages with native typography:
 
 The top navigation bar provides access to 6 specialized civic views:
 
-1. **ABOUT US**: Interactive platform introduction, 2-minute walkthrough video with chapter markers, 4-step workflow, Citizen Charter resolution SLAs, and municipal leadership governance.
+1. **ABOUT US**: Interactive platform introduction, 2-minute walkthrough video with chapter markers, 4-step workflow, and Citizen Charter resolution SLAs.
 2. **DASHBOARD**: Real-time GIS heatmap of city-wide reports, intensity scale (Low to Critical), scrolling live municipal feed, and resolution completion metrics.
 3. **REPORTS**: Personal and community complaint tracking with status filters (*All*, *Pending*, *In Progress*, *Resolved*).
 4. **WARDS**: Comprehensive profiles for all 48 Ahmedabad wards, featuring elected Corporators, MLAs, MPs, active garbage truck fleet counts, resolution performance ratings, and CSV report export.
